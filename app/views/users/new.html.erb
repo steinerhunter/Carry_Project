@@ -1,0 +1,28 @@
+<% provide(:title, 'Sign up') %>
+<h1>Go ahead, join us!</h1>
+
+<div class="row">
+  <div class="span6">
+    <%= form_for(@user) do |f| %>
+        <%=  render 'shared/error_messages', object: f.object  %>
+        <fieldset>
+          <legend>Your Name</legend>
+          <%= f.label :name, "What's your name?" %>
+          <%= f.text_field :name %>
+        </fieldset>
+        <fieldset>
+            <%= f.label :email, "What's your email address?" %>
+            <%= f.text_field :email  %>
+        </fieldset>
+        <fieldset>
+            <%= f.label :password, "Pick your password:" %>
+            <%= f.password_field :password  %>
+        </fieldset>
+         <fieldset>
+            <%= f.label :password_confirmation, "Confirm your password:" %>
+            <%= f.password_field :password_confirmation %>
+            <%= f.submit "Join Us!", class: "btn btn-large btn-primary" %>
+           </fieldset>
+    <% end  %>
+  </div>
+</div>

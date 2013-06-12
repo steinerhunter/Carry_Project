@@ -5,4 +5,10 @@
             $("#new_user").formToWizard()
         });
     </script>
+ <% elsif controller.controller_name == 'static_pages' && controller.action_name == 'home' %>
+    <script type="text/javascript">
+        $(document).ready(function(){
+            $("#new_request_delivery").formToWizard()
+        });
+    </script>
 <% end %>

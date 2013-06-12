@@ -1,15 +1,9 @@
 <% if signed_in? %>
-    <div class="row">
-      <aside class="span4">
-        <section>
-          <%= render 'shared/user_info' %>
-        </section>
-      </aside>
-    </div>
+    <%= render 'shared/request_delivery_form' %>
 <% else  %>
     <div class="center hero-unit">
-      <h1>BeAMate</h1>
-      <h2> This is BeAMate Home.</h2>
+      <h1>The Carry Project</h1>
+      <h2> This is The Carry Project Home.</h2>
       <%= link_to "Sign up now!", signup_path, class: "btn btn-large btn-primary" %>
     </div>
 <% end %>

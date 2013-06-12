@@ -1,6 +1,10 @@
 class RequestDeliveriesController < ApplicationController
   before_filter :signed_in_user, only: [:create, :destroy]
 
+  def new
+    @request_delivery = current_user.request_deliveries.build if signed_in?
+  end
+
   def create
     @request_delivery = current_user.request_deliveries.build(params[:request_delivery])
     if @request_delivery.save

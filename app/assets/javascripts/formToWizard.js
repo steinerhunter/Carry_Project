@@ -14,10 +14,10 @@
         $(submitButtonName).hide();
 
         // 2
-        $(element).before("<ul id='steps'></ul>");
+        $(element).after("<ul id='steps'></ul>");
 
         steps.each(function(i) {
-            $(this).wrap("<div id='step" + i + "'></div>");
+            $(this).wrap("<div class= 'step_class' id='step" + i + "'></div>");
             $(this).append("<p id='step" + i + "commands'></p>");
 
             // 2

@@ -1,24 +1,27 @@
-<%= form_for(@request_delivery) do |f| %>
-    <%=  render 'shared/error_messages', object: f.object  %>
-    <fieldset>
-      <legend>Origin</legend>
-      <%= f.label :from, "Where would you like to deliver from?" %>
-      <%= f.text_field :from %>
-    </fieldset>
-    <fieldset>
-      <legend>Destination</legend>
-      <%= f.label :to, "Where would you like your delivery to arrive to?" %>
-      <%= f.text_field :to  %>
-    </fieldset>
-    <fieldset>
-      <legend>Time of Delivery</legend>
-      <%= f.label :when, "When would you like your delivery to ship?" %>
-      <%= f.text_field :when  %>
-    </fieldset>
-    <fieldset>
-      <legend>Additional Details</legend>
-      <%= f.label :more_details, "Please provide some more details:" %>
-      <%= f.text_field :more_details %>
-      <%= f.submit "Post!!", class: "btn btn-large btn-primary" %>
-    </fieldset>
-<% end  %>
+<div class="new_delivery_request_class">
+  <%= form_for(@request_delivery) do |f| %>
+      <%=  render 'shared/error_messages', object: f.object  %>
+      <fieldset>
+        <legend>Origin</legend>
+        <%= f.label :from, "Where would you like to deliver from?" %>
+        <%= f.text_field :from %>
+      </fieldset>
+      <fieldset>
+        <legend>Destination</legend>
+        <%= f.label :to, "Where would you like your delivery to arrive to?" %>
+        <%= f.text_field :to  %>
+      </fieldset>
+      <fieldset>
+        <legend>Time of Delivery</legend>
+        <%= f.label :when, "When would you like your delivery to ship?" %>
+        <%= f.text_field :when  %>
+      </fieldset>
+      <fieldset>
+        <legend>Additional Details</legend>
+        <%= f.label :more_details, "Please provide some more details:" %>
+        <%= f.text_field :more_details %>
+        <%= f.submit "Post!!", class: "btn btn-large btn-primary" %>
+      </fieldset>
+  <% end  %>
+</div>
+

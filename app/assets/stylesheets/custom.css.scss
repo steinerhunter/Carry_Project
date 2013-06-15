@@ -105,7 +105,9 @@ footer {
 }
 
 fieldset {
-  border:none; width:320px;
+  border:none;
+  width:320px;
+  text-align: center;
 }
 
 legend {
@@ -120,41 +122,46 @@ label {
   display:block;
   margin:15px 0 5px;
   font-size: 2.8em;
-  margin-bottom: 15px;
+  margin-bottom: 35px;
   text-align: center;
+  width: 800px;
 }
+
 input[type=text], input[type=password] { 
-  width:700px;
+  width:600px;
   padding:12px;
   font-size: 1.5em;
   border:solid 1px #000;
 }
 
-.prev, .next { 
-  background-color:#b0232a;
+.prev, .next, .finish {
+  background-color: #3a6bb0;
+  border: 1px solid #00002a;
+  border-radius:7px;
   padding:5px 10px;
+  margin-left: 10px;
   color:#fff;
+  font-size: 2.4em;
   text-decoration:none;
 }
 
-.prev:hover, .next:hover {
-  background-color:#000;
+.prev:hover, .next:hover, .finish:hover {
+  background-color: #1d2953;
+  color: #fff;
   text-decoration:none;
-}
-
-.prev { 
-  float:left;
-}
-
-.next { 
-  float:right;
 }
 
 .step_class {
-  width: 700px;
+  width: 800px;
   margin-left: auto;
   margin-right: auto;
 }
+
+.step_command {
+  float: center;
+  margin-top: 35px;
+}
+
 #steps { 
   list-style:none;
   width:400px;

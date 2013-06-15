@@ -3,12 +3,12 @@
       <%=  render 'shared/error_messages', object: f.object  %>
       <fieldset>
         <legend>Origin</legend>
-        <%= f.label :from, "Where would you like to deliver from?" %>
+        <%= f.label :from, "Where do you want to deliver from?" %>
         <%= f.text_field :from %>
       </fieldset>
       <fieldset>
         <legend>Destination</legend>
-        <%= f.label :to, "Where would you like your delivery to arrive to?" %>
+        <%= f.label :to, "Where do you want your delivery to reach?" %>
         <%= f.text_field :to  %>
       </fieldset>
       <fieldset>
@@ -20,7 +20,9 @@
         <legend>Additional Details</legend>
         <%= f.label :more_details, "Please provide some more details:" %>
         <%= f.text_field :more_details %>
-        <%= f.submit "Post!!", class: "btn btn-large btn-primary" %>
+        <div class="form_submit">
+            <%= f.submit "Finish", class: "finish" %>
+        </div>
       </fieldset>
   <% end  %>
 </div>

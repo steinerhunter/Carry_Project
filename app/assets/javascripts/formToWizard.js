@@ -14,11 +14,11 @@
         $(submitButtonName).hide();
 
         // 2
-        $(element).after("<ul id='steps'></ul>");
+        $(element).before("<ul id='steps'></ul>");
 
         steps.each(function(i) {
             $(this).wrap("<div class= 'step_class' id='step" + i + "'></div>");
-            $(this).append("<p id='step" + i + "commands'></p>");
+            $(this).append("<div class='step_command' id='step" + i + "commands'></div>");
 
             // 2
             var name = $(this).find("legend").html();
@@ -31,6 +31,7 @@
             else if (i == count - 1) {
                 $("#step" + i).hide();
                 createPrevButton(i);
+                createFinishButton(i);
             }
             else {
                 $("#step" + i).hide();
@@ -41,11 +42,11 @@
 
         function createPrevButton(i) {
             var stepName = "step" + i;
-            $("#" + stepName + "commands").append("<a href='#' id='" + stepName + "Prev' class='prev'>< Back</a>");
+            $("#" + stepName + "commands").append("<a href='#' id='" + stepName + "Prev' class='prev'>Back</a>");
 
             $("#" + stepName + "Prev").bind("click", function(e) {
-                $("#" + stepName).hide();
-                $("#step" + (i - 1)).show();
+                $("#" + stepName).fadeOut();
+                $("#step" + (i - 1)).delay(800).fadeIn();
                 $(submitButtonName).hide();
                 selectStep(i - 1);
             });
@@ -53,11 +54,26 @@
 
         function createNextButton(i) {
             var stepName = "step" + i;
-            $("#" + stepName + "commands").append("<a href='#' id='" + stepName + "Next' class='next'>Next ></a>");
+            $("#" + stepName + "commands").append("<a href='#' id='" + stepName + "Next' class='next'>Next</a>");
 
             $("#" + stepName + "Next").bind("click", function(e) {
-                $("#" + stepName).hide();
-                $("#step" + (i + 1)).show();
+                $("#" + stepName).fadeOut();
+                $("#step" + (i + 1)).delay(800).fadeIn();
+                if (i + 2 == count)
+                    $(submitButtonName).show();
+                selectStep(i + 1);
+            });
+        }
+
+        function createFinishButton(i) {
+
+            var stepName = "step" + i;
+            $("#" + stepName + "commands").append($(".finish").clone()).html();
+            $(".form_submit").remove();
+
+            $("#" + stepName + "Next").bind("click", function(e) {
+                $("#" + stepName).fadeOut();
+                $("#step" + (i + 1)).delay(800).fadeIn();
                 if (i + 2 == count)
                     $(submitButtonName).show();
                 selectStep(i + 1);

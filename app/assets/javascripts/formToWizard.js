@@ -55,10 +55,9 @@
 
         function createNextButton(i) {
             var stepName = "step" + i;
-            var valid = true;
             $("#" + stepName + "commands").append("<a href='#' id='" + stepName + "Next' class='next'>Next</a>");
-
             $("#" + stepName + "Next").bind("click", function(e) {
+                var valid = true;
                 $('[data-validate]:input:visible').each(function() {
                     var settings = window.ClientSideValidations.forms[this.form.id]
                     if (!$(this).isValid(settings.validators)) {

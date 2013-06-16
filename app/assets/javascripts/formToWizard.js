@@ -4,9 +4,10 @@
     $.fn.formToWizard = function(options) {
         options = $.extend({  
             submitButton: "" 
-        }, options); 
-        
+        }, options);
+
         var element = this;
+        $(element).enableClientSideValidations();
 
         var steps = $(element).find("fieldset");
         var count = steps.size();
@@ -54,14 +55,24 @@
 
         function createNextButton(i) {
             var stepName = "step" + i;
+            var valid = true;
             $("#" + stepName + "commands").append("<a href='#' id='" + stepName + "Next' class='next'>Next</a>");
 
             $("#" + stepName + "Next").bind("click", function(e) {
-                $("#" + stepName).fadeOut();
-                $("#step" + (i + 1)).delay(800).fadeIn();
-                if (i + 2 == count)
-                    $(submitButtonName).show();
-                selectStep(i + 1);
+                $('[data-validate]:input:visible').each(function() {
+                    var settings = window.ClientSideValidations.forms[this.form.id]
+                    if (!$(this).isValid(settings.validators)) {
+                        valid = false
+                    }
+                });
+                if(valid){
+                    $("#" + stepName).fadeOut();
+                    $("#step" + (i + 1)).delay(800).fadeIn();
+                    if (i + 2 == count)
+                        $(submitButtonName).show();
+                    selectStep(i + 1);
+                }
+                return valid;
             });
         }
 

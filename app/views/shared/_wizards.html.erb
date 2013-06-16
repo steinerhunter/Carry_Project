@@ -3,12 +3,14 @@
     <script type="text/javascript">
         $(document).ready(function(){
             $("#new_user").formToWizard()
+            $("#new_user").enableClientSideValidations();
         });
     </script>
  <% elsif controller.controller_name == 'request_deliveries' && controller.action_name == 'new' %>
     <script type="text/javascript">
         $(document).ready(function(){
             $("#new_request_delivery").formToWizard()
+            $("#new_request_delivery").enableClientSideValidations();
         });
     </script>
 <% end %>

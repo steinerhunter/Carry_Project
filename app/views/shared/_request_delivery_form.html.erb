@@ -1,6 +1,6 @@
 <div class="new_delivery_request_class">
-  <%= form_for(@request_delivery) do |f| %>
-      <%=  render 'shared/error_messages', object: f.object  %>
+  <%= form_for(@request_delivery, :validate => true ) do |f| %>
+
       <fieldset>
         <legend>Origin</legend>
         <%= f.label :from, "Where do you want to deliver from?" %>

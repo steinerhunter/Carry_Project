@@ -1,0 +1,20 @@
+class SuggestDeliveriesController < ApplicationController
+  before_filter :signed_in_user, only: [:create, :destroy]
+
+  def new
+    @suggest_delivery = current_user.suggest_deliveries.build if signed_in?
+  end
+
+  def create
+    @suggest_delivery = current_user.suggest_deliveries.build(params[:suggest_delivery])
+    if @suggest_delivery.save
+      flash[:success] = "Delivery Suggestion created!"
+      redirect_to root_url
+    else
+      render 'static_pages/home'
+    end
+  end
+
+  def destroy
+  end
+end

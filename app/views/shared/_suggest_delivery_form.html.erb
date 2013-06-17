@@ -1,23 +1,18 @@
-<div class="new_delivery_request_class">
-  <%= form_for(@request_delivery, :validate => true ) do |f| %>
+<div class="new_delivery_suggest_class">
+  <%= form_for(@suggest_delivery, :validate => true ) do |f| %>
       <fieldset>
         <legend>Origin</legend>
-        <%= f.label :from, "Where do you want to deliver from?" %>
+        <%= f.label :from, "What's your starting point?" %>
         <%= f.text_field :from, :placeholder => "Type origin address..." %>
       </fieldset>
       <fieldset>
         <legend>Destination</legend>
-        <%= f.label :to, "Where do you want your delivery to reach?" %>
+        <%= f.label :to, "Where are you getting to?" %>
         <%= f.text_field :to, :placeholder => "Type destination address..."   %>
       </fieldset>
       <fieldset>
-        <legend>Delivery Contents</legend>
-        <%= f.label :what, "What is it that you want to deliver?" %>
-        <%= f.text_field :what, :placeholder => "Type delivery contents..."   %>
-      </fieldset>
-      <fieldset>
         <legend>Time of Delivery</legend>
-        <%= f.label :when, "When would you like your delivery to ship?" %>
+        <%= f.label :when, "When are taking your trip?" %>
         <%= f.text_field :when, :placeholder => "Need to replace this with proper date"   %>
       </fieldset>
       <fieldset>

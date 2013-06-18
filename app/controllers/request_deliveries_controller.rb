@@ -15,6 +15,10 @@ class RequestDeliveriesController < ApplicationController
     end
   end
 
+  def index
+    @request_feed_items = RequestDelivery.all
+  end
+
   def destroy
   end
 end

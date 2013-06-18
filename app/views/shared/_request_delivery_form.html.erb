@@ -13,7 +13,9 @@
       <fieldset>
         <legend>Delivery Contents</legend>
         <%= f.label :what, "What is it that you want to deliver?" %>
-        <%= f.text_field :what, :placeholder => "Type delivery contents..."   %>
+        <%= f.text_field :what, :placeholder => "Type delivery contents..."   %><br><br><br>
+        <%= f.label :more_details, "Please provide some more details:" %>
+        <%= f.text_area :more_details, :placeholder => "Add any detail that might be important...", :rows => 2 %>
       </fieldset>
       <fieldset>
         <legend>Time of Delivery</legend>
@@ -21,9 +23,9 @@
         <%= f.text_field :when, :placeholder => "Need to replace this with proper date"   %>
       </fieldset>
       <fieldset>
-        <legend>Additional Details</legend>
-        <%= f.label :more_details, "Please provide some more details:" %>
-        <%= f.text_area :more_details, :placeholder => "Add any detail that might be important...", :rows => 2  %>
+        <legend>Payment</legend>
+        <%= f.label :cost, "How much will you pay for the delivery?" %>
+        <%= f.text_field :cost, :placeholder => "Type an amount in NIS..."   %>
         <div class="form_submit">
             <%= f.submit "Finish", class: "finish" %>
         </div>

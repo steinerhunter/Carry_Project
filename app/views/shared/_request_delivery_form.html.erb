@@ -13,7 +13,22 @@
       <fieldset>
         <legend>Delivery Contents</legend>
         <%= f.label :what, "What is it that you want to deliver?" %>
-        <%= f.text_field :what, :placeholder => "Type delivery contents..."   %><br><br><br>
+        <%= f.text_field :what, :placeholder => "Type delivery contents..."   %>
+        <%= f.label :size, "How big is your delivery?" %>
+        <div class="radio_buttons">
+          <div class="radio_button" style="text-align:left">
+            <%= f.radio_button(:size, "Small") %>
+            <%= f.label(:size_small, "Small") %>
+          </div>
+          <div class="radio_button" style="text-align:left">
+            <%= f.radio_button(:size, "Medium") %>
+            <%= f.label(:size_small, "Medium") %>
+          </div>
+          <div class="radio_button" style="text-align:left">
+            <%= f.radio_button(:size, "Large") %>
+            <%= f.label(:size_small, "Large") %>
+          </div>
+        </div>
         <%= f.label :more_details, "Please provide some more details:" %>
         <%= f.text_area :more_details, :placeholder => "Add any detail that might be important...", :rows => 2 %>
       </fieldset>

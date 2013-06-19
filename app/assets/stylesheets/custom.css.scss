@@ -138,6 +138,19 @@ textarea {
   width: 600px;
 }
 
+.radio_buttons {
+  width: 600px;
+  margin-right: auto;
+  margin-left: auto;
+  margin-bottom: 5%;
+  margin-top: 2%;
+}
+
+.radio_button label {
+  font-size: 1em;
+  display: inline;
+}
+
 .prev, .next, .finish {
   background-color: #3a6bb0;
   border: 1px solid #00002a;

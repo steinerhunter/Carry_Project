@@ -1,0 +1,5 @@
+<div id="suggestposts">
+  <% if @suggest_feed_items.any? %>
+      <%= render partial: 'shared/suggest_feed_item', collection: @suggest_feed_items %>
+  <% end  %>
+</div>

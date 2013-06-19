@@ -16,7 +16,9 @@ BeAMateRails::Application.routes.draw do
 
   match '/request', to:'request_deliveries#new'
   match '/requests', to:'request_deliveries#index'
+
   match '/suggest', to:'suggest_deliveries#new'
+  match '/suggestions', to:'suggest_deliveries#index'
 
   # The priority is based upon order of creation:
   # first created -> highest priority.

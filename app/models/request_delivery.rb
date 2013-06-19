@@ -1,5 +1,5 @@
 class RequestDelivery < ActiveRecord::Base
-  attr_accessible :from, :to, :what, :when, :more_details, :cost
+  attr_accessible :from, :to, :what, :when, :more_details, :cost, :size
   belongs_to :user
 
   validates :user_id, presence: true

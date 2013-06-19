@@ -15,6 +15,10 @@ class SuggestDeliveriesController < ApplicationController
     end
   end
 
+  def index
+    @suggest_feed_items = SuggestDelivery.all
+  end
+  
   def destroy
   end
 end

@@ -1,5 +1,5 @@
 def full_title(page_title)
-  base_title = "BeAMate"
+  base_title = "TheCarryProject"
   if page_title.empty?
     base_title
   else

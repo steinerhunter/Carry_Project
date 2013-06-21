@@ -1,4 +1,4 @@
-BeAMateRails::Application.routes.draw do
+TheCarryProject::Application.routes.draw do
   resources :users
   resources :sessions, only: [:new, :create, :destroy]
   resources :request_deliveries, only: [:create, :destroy]

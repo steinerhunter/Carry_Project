@@ -1,4 +1,5 @@
 <div class="feed_item">
-  <h4><%= suggest_feed_item.from %> to <%= suggest_feed_item.to %></h4>
+  <h4><%= link_to suggest_feed_item.from + " to " +suggest_feed_item.to, suggest_delivery_path(suggest_feed_item) %></h4>
+  Can help with <b><%= suggest_feed_item.size %></b> sized deliveries <br>
   Only for: <%= suggest_feed_item.cost %> NIS
 </div>

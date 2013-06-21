@@ -1,5 +1,5 @@
 <div class="feed_item">
-  <h4><%= request_feed_item.what %></h4>
+  <h4><%= link_to request_feed_item.what, request_delivery_path(request_feed_item)  %></h4>
   From: <%= request_feed_item.from %><br>
   To: <%= request_feed_item.to %><br>
   Delivery Size: <%= request_feed_item.size %>   <br>

@@ -1,8 +1,8 @@
 TheCarryProject::Application.routes.draw do
   resources :users
   resources :sessions, only: [:new, :create, :destroy]
-  resources :request_deliveries, only: [:create, :destroy]
-  resources :suggest_deliveries, only: [:create, :destroy]
+  resources :request_deliveries, only: [:create, :show, :destroy]
+  resources :suggest_deliveries, only: [:create, :show, :destroy]
 
   root to: 'static_pages#home'
 

@@ -1,0 +1,8 @@
+<div class="show_request_delivery">
+  <h3><%= @request_delivery.what %></h3>
+  <h4>Requested by:<%= @request_delivery.user.name %></h4><br>
+  Delivery Origin: <%= @request_delivery.from %><br>
+  Delivery Destination : <%= @request_delivery.to %><br>
+  Delivery Size: <%= @request_delivery.size %>   <br>
+  You can earn: <%= @request_delivery.cost %> NIS
+</div>

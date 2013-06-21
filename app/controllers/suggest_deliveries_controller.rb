@@ -1,6 +1,10 @@
 class SuggestDeliveriesController < ApplicationController
   before_filter :signed_in_user, only: [:create, :destroy]
 
+  def show
+    @suggest_delivery = SuggestDelivery.find(params[:id])
+  end
+
   def new
     @suggest_delivery = current_user.suggest_deliveries.build if signed_in?
   end

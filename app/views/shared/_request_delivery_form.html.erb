@@ -3,12 +3,12 @@
       <fieldset>
         <legend>Origin</legend>
         <%= f.label :from, "Where do you want to deliver from?" %>
-        <%= f.text_field :from, :placeholder => "Type origin address..." %>
+        <%= f.text_field :from, :placeholder => "Type origin address...", :class => "address_field" %>
       </fieldset>
       <fieldset>
         <legend>Destination</legend>
         <%= f.label :to, "Where do you want your delivery to reach?" %>
-        <%= f.text_field :to, :placeholder => "Type destination address..."   %>
+        <%= f.text_field :to, :placeholder => "Type destination address...", :class => "address_field"   %>
       </fieldset>
       <fieldset>
         <legend>Delivery Contents</legend>

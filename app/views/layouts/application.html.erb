@@ -3,10 +3,11 @@
 <head>
   <title><%= full_title(yield(:title)) %></title>
   <%= stylesheet_link_tag    "application", media: "all" %>
+  <script src="https://maps.googleapis.com/maps/api/js?v=3.exp&sensor=false&libraries=places"></script>
   <%= javascript_include_tag "application" %>
   <%= javascript_include_tag "formToWizard" %>
-  <script src="https://maps.googleapis.com/maps/api/js?v=3.exp&sensor=false&libraries=places"></script>
   <%= render 'shared/wizards' %>
+  <%= render 'shared/maps' %>
   <%= csrf_meta_tags %>
   <%= render 'layouts/shim' %>
 </head>

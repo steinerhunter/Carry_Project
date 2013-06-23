@@ -1,4 +1,5 @@
 <div class="show_request_delivery">
+  <div id="current-delivery-map"></div>
   <h3><%= @request_delivery.what %></h3>
   <h4>Requested by:<%= @request_delivery.user.name %></h4><br>
   Delivery Origin: <%= @request_delivery.from %><br>
@@ -7,4 +8,5 @@
   You can earn: <%= @request_delivery.cost %> NIS <br>
   The details: <br>
   <%= @request_delivery.more_details %>
+
 </div>

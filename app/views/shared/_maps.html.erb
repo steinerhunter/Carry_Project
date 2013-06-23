@@ -20,8 +20,8 @@
 
         function calcRoute() {
             var request = {
-                origin:myLatlng,
-                destination:"Jerusalem, Israel",
+                origin:"<%= @request_delivery.from %>",
+                destination:"<%= @request_delivery.to %>",
                 travelMode: google.maps.DirectionsTravelMode.DRIVING,
             };
             directionsService.route(request, function(response, status) {

@@ -57,7 +57,11 @@ p {
 
 #current-delivery-map {
   height: 400px;
-  width: 800px;}
+  width: 800px;
+  img {
+     max-width: none;
+  }
+}
 
 #logo {
   float: left;

@@ -8,6 +8,7 @@ html {
 
 body {
   padding-top: 60px;
+  font-family: Arial, Helvetica, sans-serif ;
 }
 
 section {
@@ -39,15 +40,6 @@ h1 {
   text-align: center;
 }
 
-h2 {
-  font-size: 1.7em;
-  letter-spacing: -1px;
-  margin-bottom: 30px;
-  text-align: center;
-  font-weight: normal;
-  color: #999;
-}
-
 p {
   font-size: 1.1em;
   line-height: 1.7em;
@@ -55,9 +47,43 @@ p {
 
 /* header */
 
+.show_request_delivery {
+  display: block;
+  width:900px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.below_map {
+  background-color: #1d79e2;
+  -moz-box-shadow: 5px 5px 5px #333333;; /* Old Firefox */
+  box-shadow: 5px 5px 5px #333333;
+  border:1px solid;
+  border-radius:1px;
+  -moz-border-radius:10px; /* Old Firefox */
+  padding-left: 10px;
+  padding-right: 10px;
+  padding-top: 0px;
+  padding-bottom: 10px;
+  color: #ffffff;
+  border-color: #000000;
+}
+
+.the_what_and_who {
+  b {
+    color: #334dff
+  }
+}
+
 #current-delivery-map {
-  height: 400px;
-  width: 800px;
+  height: 350px;
+  width: 100%;
+  -moz-box-shadow: 5px 5px 5px #333333;; /* Old Firefox */
+  box-shadow: 5px 5px 5px #333333;
+  border:1px solid;
+  border-radius:1px;
+  -moz-border-radius:10px; /* Old Firefox */
+  margin-bottom: 20px;
   img {
      max-width: none;
   }
@@ -278,6 +304,9 @@ aside {
 .gravatar {
   float: left;
   margin-right: 10px;
+  margin-top: 10px;
+  border: 1px solid #111111;
+
 }
 
 /* forms */
@@ -318,33 +347,5 @@ input {
     &:last-child {
       border-bottom: 1px solid $grayLighter;
     }
-  }
-}
-
-/* microposts */
-
-.microposts {
-  list-style: none;
-  margin: 10px 0 0 0;
-
-  li {
-    padding: 10px 0;
-    border-top: 1px solid #e8e8e8;
-  }
-}
-.content {
-  display: block;
-}
-.timestamp {
-  color: $grayLight;
-}
-.gravatar {
-  float: left;
-  margin-right: 10px;
-}
-aside {
-  textarea {
-    height: 100px;
-    margin-bottom: 5px;
   }
 }

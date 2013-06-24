@@ -16,7 +16,7 @@
             });
 
         $('.datepicker').datepicker({
-            format: 'mm/dd/yyyy'
+            format: 'dd/mm/yyyy'
         });
 
         var element = this;

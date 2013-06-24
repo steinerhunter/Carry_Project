@@ -15,6 +15,10 @@
                 }
             });
 
+        $('.datepicker').datepicker({
+            format: 'mm/dd/yyyy'
+        });
+
         var element = this;
         $(element).enableClientSideValidations();
 

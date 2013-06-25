@@ -59,7 +59,7 @@ p {
   -moz-box-shadow: 5px 5px 5px #333333;; /* Old Firefox */
   box-shadow: 5px 5px 5px #333333;
   border:1px solid;
-  border-radius:1px;
+  border-radius:2px;
   -moz-border-radius:10px; /* Old Firefox */
   padding-left: 10px;
   padding-right: 10px;
@@ -71,8 +71,69 @@ p {
 
 .the_what_and_who {
   b {
-    color: #334dff
+    color: #8bceff
   }
+}
+
+.the_what_and_who {
+  width: 700px;
+}
+
+.the_what {
+  h2 {
+    font-size:2.8em;
+  }
+
+
+}
+
+.the_who {
+
+}
+
+.the_from_and_to {
+  width: 750px;
+  margin-bottom: 10px;
+  line-height: 30px;
+}
+
+.the_from {
+  font-size:1.8em;
+  width: 350px;
+  margin-right: 20px;
+  float:left;
+  text-align: center;
+  background-color: #10529b;
+  border:1px solid;
+  border-radius:4px;
+  -moz-border-radius:10px; /* Old Firefox */
+  padding: 5px;
+  color: #ffffff;
+  border-color: #000000;
+}
+
+.the_to {
+  float: left;
+  font-size:1.8em;
+  width: 350px;
+  text-align: center;
+  background-color: #10529b;
+  border:1px solid;
+  border-radius:4px;
+  -moz-border-radius:10px; /* Old Firefox */
+  padding: 5px;
+  color: #ffffff;
+  border-color: #000000;
+}
+
+.the_details {
+  font-size:1.8em;
+  width: 750px;
+  text-align: center;
+  padding: 5px;
+  color: #ffffff;
+  margin-top: 90px;
+  line-height: 25px;
 }
 
 #current-delivery-map {
@@ -81,7 +142,7 @@ p {
   -moz-box-shadow: 5px 5px 5px #333333;; /* Old Firefox */
   box-shadow: 5px 5px 5px #333333;
   border:1px solid;
-  border-radius:1px;
+  border-radius:2px;
   -moz-border-radius:10px; /* Old Firefox */
   margin-bottom: 20px;
   img {

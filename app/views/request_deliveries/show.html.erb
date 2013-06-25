@@ -5,15 +5,33 @@
       <%=  link_to gravatar_for(@request_delivery.user), @request_delivery.user  %>
     </div>
     <div class="the_what_and_who">
-      <h2>"I need to deliver <b><%= @request_delivery.what %></b>."</h2>
-      <h3>Requested by: <%= @request_delivery.user.name %></h3>
+      <div class="the_what">
+        <h2>"I need to deliver <b><%= @request_delivery.what %></b>."</h2>
+      </div>
+      <div class="the_who">
+        <h3>Requested by <b><%= @request_delivery.user.name %></b> on <%= @request_delivery.created_at.strftime("%d/%m/%Y")%></h3><br>
+      </div>
     </div>
-    Delivery Origin: <%= @request_delivery.from %><br>
-    Delivery Destination : <%= @request_delivery.to %><br>
-    Delivery Size: <%= @request_delivery.size %>   <br>
+    <div class="the_date_and_money">
+
+    </div>
+    <div class="the_from_and_to">
+      <div class="the_from">
+        Delivery Origin<br> <b><%= @request_delivery.from %><br></b>
+      </div>
+      <div class="the_to">
+        Delivery Destination<br> <b><%= @request_delivery.to %><br></b>
+      </div>
+    </div>
+    <div class="the_size_and_details">
+      <div class="the_details">
+        The details: <br> "<%= @request_delivery.more_details %>."
+      </div>
+      <div class="the_size">
+        Delivery Size: <%= @request_delivery.size %>   <br>
+      </div>
+    </div>
     You can earn: <%= @request_delivery.cost %> NIS <br>
-    The details: <br>
-    <%= @request_delivery.more_details %>
     <%= @request_delivery.when.strftime("%d/%m/%Y")   %>
   </div>
 </div>

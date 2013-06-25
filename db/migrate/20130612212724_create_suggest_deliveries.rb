@@ -3,7 +3,7 @@ class CreateSuggestDeliveries < ActiveRecord::Migration
     create_table :suggest_deliveries do |t|
       t.string :from
       t.string :to
-      t.string :when
+      t.datetime :when
       t.string :more_details
       t.integer :user_id
 

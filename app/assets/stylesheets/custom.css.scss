@@ -70,13 +70,10 @@ p {
 }
 
 .the_what_and_who {
+  width:100%;
   b {
     color: #8bceff
-  }
 }
-
-.the_what_and_who {
-  width: 700px;
 }
 
 .the_what {
@@ -92,16 +89,29 @@ p {
 }
 
 .the_from_and_to {
-  width: 750px;
+  width: 100%;
+  margin-top: 10px;
   margin-bottom: 10px;
   line-height: 30px;
+  text-align: center;
+  margin-right: auto;
+  margin-left: auto;
+  b {
+    color: #8bceff
+  }
+}
+
+.section_title {
+  text-align: left;
+  font-size: 2.8em;
+  margin-bottom: 10px;
 }
 
 .the_from {
+  display: inline-block;
   font-size:1.8em;
   width: 350px;
   margin-right: 20px;
-  float:left;
   text-align: center;
   background-color: #10529b;
   border:1px solid;
@@ -113,7 +123,7 @@ p {
 }
 
 .the_to {
-  float: left;
+  display: inline-block;
   font-size:1.8em;
   width: 350px;
   text-align: center;
@@ -126,15 +136,98 @@ p {
   border-color: #000000;
 }
 
-.the_details {
+.the_size_and_more_info {
+  width: 100%;
+  margin-bottom: 10px;
+  line-height: 30px;
+  text-align: center;
+  margin-right: auto;
+  margin-left: auto;
+  b {
+    color: #8bceff
+  }
+}
+
+.more_info {
+  display: inline-block;
+  background-color: #10529b;
+  border:1px solid;
+  border-radius:4px;
+  -moz-border-radius:10px; /* Old Firefox */
   font-size:1.8em;
-  width: 750px;
+  width: 500px;
   text-align: center;
   padding: 5px;
   color: #ffffff;
-  margin-top: 90px;
-  line-height: 25px;
+  margin-top: 15px;
+  line-height: 30px;
+  border-color: #000000;
 }
+
+.the_size {
+  display: inline-block;
+  font-size:1.8em;
+  width: 200px;
+  margin-right: 20px;
+  text-align: center;
+  background-color: #10529b;
+  border:1px solid;
+  border-radius:4px;
+  -moz-border-radius:10px; /* Old Firefox */
+  padding: 5px;
+  color: #ffffff;
+  border-color: #000000;
+}
+
+.the_deadline_and_money {
+  margin-top: 20px;
+  width: 100%;
+  margin-bottom: 10px;
+  line-height: 35px;
+  text-align: center;
+  margin-right: auto;
+  margin-left: auto;
+  b {
+    color: #8bceff
+  }
+}
+
+.the_deadline {
+  display: inline-block;
+  font-size:1.8em;
+  width: 250px;
+  text-align: center;
+  background-color: #10529b;
+  border:1px solid;
+  border-radius:4px;
+  -moz-border-radius:10px; /* Old Firefox */
+  padding: 5px;
+  color: #ffffff;
+  border-color: #000000;
+  b {
+    color: #8bceff
+  }
+}
+
+.the_money {
+  display: inline-block;
+  font-size:1.8em;
+  width: 450px;
+  margin-right: 20px;
+  text-align: center;
+  background-color: #257b2a;
+  border:1px solid;
+  border-radius:4px;
+  -moz-border-radius:10px; /* Old Firefox */
+  padding: 5px;
+  color: #ffffff;
+  border-color: #000000;
+  b {
+    font-size: 1.8em;
+    color: #ffffff;
+  }
+}
+
 
 #current-delivery-map {
   height: 350px;

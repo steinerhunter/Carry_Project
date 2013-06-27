@@ -6,7 +6,9 @@ class RequestDelivery < ActiveRecord::Base
   validates :from, :presence => { :message => "We're going to need your delivery's origin..."}
   validates :to, :presence => { :message => "It seems you didn't tell us about your delivery's destination..."}
   validates :what, :presence => { :message => "You do want to deliver something, right...?"}
+  validates :what, :length => { maximum: 20, :message => "Surely it can be described in less than 20 chars."}
   validates :more_details, :presence => { :message => "How about you elaborate a little?"}
+  validates :more_details, :length => { maximum: 50, :message => "Surely it can be described in less than 50 chars."}
   validates :cost, :presence => { :message => "We need to know how much you will pay..."}
   validates :cost, :numericality => { :only_integer => true, :message => "Only whole numbers please..." }
 

@@ -12,26 +12,29 @@
         <h3>Requested by <b><%= @request_delivery.user.name %></b> on <%= @request_delivery.created_at.strftime("%d/%m/%Y")%></h3><br>
       </div>
     </div>
-    <div class="the_date_and_money">
-
-    </div>
     <div class="the_from_and_to">
       <div class="the_from">
-        Delivery Origin<br> <b><%= @request_delivery.from %><br></b>
+        Delivery Origin<br><b><%= @request_delivery.from %><br></b>
       </div>
       <div class="the_to">
-        Delivery Destination<br> <b><%= @request_delivery.to %><br></b>
+        Delivery Destination<br><b><%= @request_delivery.to %><br></b>
       </div>
     </div>
-    <div class="the_size_and_details">
-      <div class="the_details">
-        The details: <br> "<%= @request_delivery.more_details %>."
-      </div>
+    <div class="the_size_and_more_info">
       <div class="the_size">
-        Delivery Size: <%= @request_delivery.size %>   <br>
+        Delivery Size<br><b><%= @request_delivery.size %></b>   <br>
+      </div>
+      <div class="more_info">
+        More Info<br><b>"<%= @request_delivery.more_details %>."</b>
       </div>
     </div>
-    You can earn: <%= @request_delivery.cost %> NIS <br>
-    <%= @request_delivery.when.strftime("%d/%m/%Y")   %>
+    <div class="the_deadline_and_money">
+      <div class="the_money">
+        Delivery Reward<br><b><%= @request_delivery.cost %> NIS</b>
+      </div>
+      <div class="the_deadline">
+        Delivery Needed By<br><b><%= @request_delivery.when.strftime("%d/%m/%Y")   %></b>
+      </div>
+    </div>
   </div>
 </div>

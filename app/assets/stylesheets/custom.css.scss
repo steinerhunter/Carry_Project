@@ -293,16 +293,21 @@ footer {
 }
 
 fieldset {
-  border:none;
-  width:320px;
   text-align: center;
+  background-color: #1d79e2;
+  -moz-box-shadow: 5px 5px 5px #333333;; /* Old Firefox */
+  box-shadow: 5px 5px 5px #333333;
+  border:solid 1px #000;
+  border-radius:3px;
+  -moz-border-radius:10px; /* Old Firefox */
+  padding-left: 10px;
+  padding-right: 10px;
+  padding-bottom: 10px;
+  color: #ffffff;
+  border-color: #000000;
 }
 
 legend {
-  font-size:18px;
-  margin:0px;
-  padding:10px 0px;
-  color:#b0232a; font-weight:bold;
   visibility:hidden;
 }
 
@@ -339,21 +344,40 @@ textarea {
   display: inline;
 }
 
-.prev, .next, .finish {
+.prev, .next {
   background-color: #3a6bb0;
   border: 1px solid #00002a;
   border-radius:7px;
-  padding:5px 10px;
+  padding-left:10px;
+  padding-right: 10px;
+  padding-top: 5px;
+  padding-bottom: 5px;
   margin-left: 10px;
   color:#fff;
   font-size: 2.4em;
-  text-decoration:none;
+}
+
+.finish {
+  background-color: #388c3e;
+  border: 1px solid #00002a;
+  border-radius:7px;
+  padding-left:10px;
+  padding-right: 10px;
+  padding-top: 15px;
+  padding-bottom: 15px;
+  margin-left: 10px;
+  color:#fff;
+  font-size: 2.7em;
 }
 
 .prev:hover, .next:hover, .finish:hover {
   background-color: #1d2953;
   color: #fff;
   text-decoration:none;
+}
+
+button::-moz-focus-inner {
+  padding: 0;
 }
 
 .step_class {
@@ -365,11 +389,13 @@ textarea {
 .step_command {
   float: center;
   margin-top: 35px;
+  margin-bottom: 15px;
 }
 
 #steps {
   list-style:none;
   width:500px;
+  text-align: center;
   overflow:hidden;
   margin-left: auto;
   margin-right: auto;
@@ -378,7 +404,7 @@ textarea {
 
 #steps li {
   font-size:24px;
-  float:left;
+  display:inline-block;
   padding:10px;
   color:#b0b1b3;
 }
@@ -395,15 +421,19 @@ textarea {
 .field_with_errors label {
   display:block;
   font-size: 2.8em;
-  margin-top: -5px;
-  margin-bottom: 35px;
   text-align: center;
   width: 800px;
-  color:#000000;
+  color: #ffffff;
 }
 
 .field_with_errors .message {
-  color: #ff0000;
+  width: 50%;
+  margin: 0 auto;
+  line-height: 30px;
+  width: 600px;
+  background-color: #c80000;
+  border: 1px solid #111111;
+  color: #ffffff;
   font-size: 22px;
   margin-top: 10px;
 }
@@ -467,7 +497,6 @@ aside {
 
 input, textarea, select, .uneditable-input {
   border: 1px solid #bbb;
-  padding: 10px;
   margin-bottom: 15px;
   @include box_sizing;
 }
@@ -482,11 +511,6 @@ input {
     list-style: none;
     margin: 0 0 18px 0;
   }
-}
-
-.field_with_errors {
-  @extend .control-group;
-  @extend .error;
 }
 
 /* users index */

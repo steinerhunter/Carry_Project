@@ -1,48 +1,58 @@
 <div class="new_delivery_request_class">
   <%= form_for(@request_delivery, :validate => true ) do |f| %>
       <fieldset>
-        <legend>Origin</legend>
-        <%= f.label :from, "Where do you want to deliver from?" %>
-        <%= f.text_field :from, :placeholder => "Type origin address...", :class => "address_field" %>
-      </fieldset>
-      <fieldset>
-        <legend>Destination</legend>
-        <%= f.label :to, "Where do you want your delivery to reach?" %>
-        <%= f.text_field :to, :placeholder => "Type destination address...", :class => "address_field"   %>
-      </fieldset>
-      <fieldset>
-        <legend>Delivery Contents</legend>
-        <%= f.label :what, "What is it that you want to deliver?" %>
-        <%= f.text_field :what, :placeholder => "Type delivery contents..."   %>
-        <%= f.label :size, "How big is your delivery?" %>
-        <div class="radio_buttons">
-          <div class="radio_button" style="text-align:left">
-            <%= f.radio_button(:size, "Small") %>
-            <%= f.label(:size_small, "Small") %>
-          </div>
-          <div class="radio_button" style="text-align:left">
-            <%= f.radio_button(:size, "Medium") %>
-            <%= f.label(:size_small, "Medium") %>
-          </div>
-          <div class="radio_button" style="text-align:left">
-            <%= f.radio_button(:size, "Large") %>
-            <%= f.label(:size_small, "Large") %>
-          </div>
+        <div class="single_step">
+          <legend>Origin</legend>
+          <%= f.label :from, "Where do you want to deliver from?" %>
+          <%= f.text_field :from, :placeholder => "Type origin address...", :class => "address_field" %>
         </div>
-        <%= f.label :more_details, "Please provide some more details:" %>
-        <%= f.text_area :more_details, :placeholder => "Add any detail that might be important...", :rows => 2 %>
       </fieldset>
       <fieldset>
-        <legend>Time of Delivery</legend>
-        <%= f.label :when, "When would you like your delivery to ship?" %>
-        <%= f.text_field :when, :placeholder => "mm/dd/yyyy", :class => "datepicker" %>
+        <div class="single_step">
+          <legend>Destination</legend>
+          <%= f.label :to, "Where do you want your delivery to reach?" %>
+          <%= f.text_field :to, :placeholder => "Type destination address...", :class => "address_field"   %>
+        </div>
       </fieldset>
       <fieldset>
-        <legend>Payment</legend>
-        <%= f.label :cost, "How much will you pay for the delivery?" %>
-        <%= f.text_field :cost, :placeholder => "Type an amount in NIS..."   %>
-        <div class="form_submit">
+        <div class="single_step">
+          <legend>Delivery Contents</legend>
+          <%= f.label :what, "What is it that you want to deliver?" %>
+          <%= f.text_field :what, :placeholder => "Type delivery contents..."   %>
+          <%= f.label :size, "How big is your delivery?" %>
+          <div class="radio_buttons">
+            <div class="radio_button" style="text-align:left">
+              <%= f.radio_button(:size, "Small") %>
+              <%= f.label(:size_small, "Small") %>
+            </div>
+            <div class="radio_button" style="text-align:left">
+              <%= f.radio_button(:size, "Medium") %>
+              <%= f.label(:size_small, "Medium") %>
+            </div>
+            <div class="radio_button" style="text-align:left">
+              <%= f.radio_button(:size, "Large") %>
+              <%= f.label(:size_small, "Large") %>
+            </div>
+          </div>
+          <%= f.label :more_details, "Please provide some more details:" %>
+          <%= f.text_area :more_details, :placeholder => "Add any detail that might be important...", :rows => 2 %>
+        </div>
+      </fieldset>
+      <fieldset>
+        <div class="single_step">
+          <legend>Time of Delivery</legend>
+          <%= f.label :when, "When would you like your delivery to ship?" %>
+          <%= f.text_field :when, :placeholder => "mm/dd/yyyy", :class => "datepicker" %>
+        </div>
+      </fieldset>
+      <fieldset>
+        <div class="single_step">
+          <legend>Payment</legend>
+          <%= f.label :cost, "How much will you pay for the delivery?" %>
+          <%= f.text_field :cost, :placeholder => "Type an amount in NIS..."   %>
+          <div class="form_submit">
             <%= f.submit "Finish", class: "finish" %>
+          </div>
         </div>
       </fieldset>
   <% end  %>

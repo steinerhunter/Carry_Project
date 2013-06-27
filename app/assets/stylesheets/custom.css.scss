@@ -46,12 +46,37 @@ p {
 }
 
 /* header */
+.navbar {
+  .navbar-inner {
+    vertical-align: middle;
+    border: 1px solid #000000;
+    background-color: #1d79e2;
+    background-image: none;
 
-.show_request_delivery {
-  display: block;
-  width:900px;
-  margin-left: auto;
-  margin-right: auto;
+    .dropdown .dropdown-toggle {
+      height: 23px;
+    }
+
+    .dropdown .dropdown-menu::before,
+    .dropdown .dropdown-menu::after {
+      border: none;
+      content: none;
+    }
+
+    .dropdown .dropdown-menu {
+      border: 1px solid #000000;
+      border-radius: 2px;
+      background-color: #1d79e2;
+      .divider {
+        border: black;
+        background-color: black;
+      }
+    }
+  }
+  .border{
+    border-right: 1px solid black;
+    height: 43px;
+  }
 }
 
 .below_map {
@@ -228,7 +253,6 @@ p {
   }
 }
 
-
 #current-delivery-map {
   height: 350px;
   width: 100%;
@@ -267,9 +291,9 @@ footer {
   border-top: 1px solid #eaeaea;
   color: #999;
   a {
-    color: #555;
+    color: #ededed;
     &:hover {
-      color: #222;
+      color: #cccccc;
     }
   }
   small {

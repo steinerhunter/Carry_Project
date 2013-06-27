@@ -1,10 +1,40 @@
 <div class="show_suggest_delivery">
   <div id="current-delivery-map"></div>
   <div class="below_map">
-    <h3><%= @suggest_delivery.from %> to <%= @suggest_delivery.to %></h3>
-    <h4>Suggested by:<%= @suggest_delivery.user.name %></h4><br>
-    Delivery Size: <%= @suggest_delivery.size %>   <br>
-    You can earn: <%= @suggest_delivery.cost %> NIS <br>
-    The details: <%= @suggest_delivery.more_details %>
+    <div class="user_image">
+      <%=  link_to gravatar_for(@suggest_delivery.user), @suggest_delivery.user  %>
+    </div>
+    <div class="the_what_and_who">
+      <div class="the_what">
+        <h2>"I can deliver <b><%= @suggest_delivery.size %></b> sized deliveries."</h2>
+      </div>
+      <div class="the_who">
+        <h3>Suggested by <b><%= @suggest_delivery.user.name %></b> on <%= @suggest_delivery.created_at.strftime("%d/%m/%Y")%></h3><br>
+      </div>
+    </div>
+    <div class="the_from_and_to">
+      <div class="the_from">
+        Starting Point<br><b><%= @suggest_delivery.from %><br></b>
+      </div>
+      <div class="the_to">
+        End Point<br><b><%= @suggest_delivery.to %><br></b>
+      </div>
+    </div>
+    <div class="the_size_and_more_info">
+      <div class="the_size">
+        Delivery Size<br><b><%= @suggest_delivery.size %></b>   <br>
+      </div>
+      <div class="more_info">
+        More Info<br><b>"<%= @suggest_delivery.more_details %>."</b>
+      </div>
+    </div>
+    <div class="the_deadline_and_money">
+      <div class="the_money">
+        Delivery Cost<br><b><%= @suggest_delivery.cost %> NIS</b>
+      </div>
+      <div class="the_deadline">
+        Time of Delivery<br><b><%= @suggest_delivery.when.strftime("%d/%m/%Y")   %></b>
+      </div>
+    </div>
   </div>
 </div>

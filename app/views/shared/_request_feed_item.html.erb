@@ -1,7 +1,14 @@
 <div class="feed_item">
-  <h4><%= link_to request_feed_item.what, request_delivery_path(request_feed_item)  %></h4>
-  From: <%= request_feed_item.from %><br>
-  To: <%= request_feed_item.to %><br>
-  Delivery Size: <%= request_feed_item.size %>   <br>
-  You can earn: <%= request_feed_item.cost %> NIS
+  <div class="feed_item_info">
+    <div class="feed_item_title">
+      <%= link_to request_feed_item.what, request_delivery_path(request_feed_item)  %>
+    </div>
+    From: <%= request_feed_item.from %><br>
+    To: <%= request_feed_item.to %><br>
+    Delivery Size: <%= request_feed_item.size %>   <br>
+    You can earn: <%= request_feed_item.cost %> NIS
+  </div>
+  <div class="feed_item_map">
+    <img src="http://maps.google.com/maps/api/staticmap?size=150x150&maptype=roadmap&sensor=false&markers=color:green|label:A|<%= request_feed_item.from %>&markers=color:green|label:B|<%= request_feed_item.to %>" alt="Static, Marked Map of Chicago, Illinois and Hammond, Indiana with no Center and Zoom"></img>
+  </div>
 </div>

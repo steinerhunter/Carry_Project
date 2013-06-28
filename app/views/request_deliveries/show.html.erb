@@ -12,6 +12,14 @@
         <h3>Requested by <b><%= @request_delivery.user.name %></b> on <%= @request_delivery.created_at.strftime("%d/%m/%Y")%></h3><br>
       </div>
     </div>
+    <div class="the_deadline_and_money">
+      <div class="the_money">
+        Delivery Reward<br><b><%= @request_delivery.cost %> NIS</b>
+      </div>
+      <div class="the_deadline">
+        Delivery Needed By<br><b><%= @request_delivery.when.strftime("%d/%m/%Y")   %></b>
+      </div>
+    </div>
     <div class="the_from_and_to">
       <div class="the_from">
         Delivery Origin<br><b><%= @request_delivery.from %><br></b>
@@ -26,14 +34,6 @@
       </div>
       <div class="more_info">
         More Info<br><b>"<%= @request_delivery.more_details %>."</b>
-      </div>
-    </div>
-    <div class="the_deadline_and_money">
-      <div class="the_money">
-        Delivery Reward<br><b><%= @request_delivery.cost %> NIS</b>
-      </div>
-      <div class="the_deadline">
-        Delivery Needed By<br><b><%= @request_delivery.when.strftime("%d/%m/%Y")   %></b>
       </div>
     </div>
   </div>

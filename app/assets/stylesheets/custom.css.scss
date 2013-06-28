@@ -462,8 +462,95 @@ button::-moz-focus-inner {
   margin-top: 10px;
 }
 
+.requestposts {
+  width: 600px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.suggestposts {
+  width: 600px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+
 .feed_item {
+  height: 185px;
+  width: 600px;
+  background-color: #1d79e2;
+  -moz-box-shadow: 5px 5px 5px #333333;; /* Old Firefox */
+  box-shadow: 5px 5px 5px #333333;
+  border:1px solid;
+  border-radius:2px;
+  -moz-border-radius:10px; /* Old Firefox */
+  padding-left: 10px;
+  padding-right: 10px;
+  padding-top: 0px;
+  padding-bottom: 10px;
+  color: #ffffff;
+  border-color: #000000;
   margin-bottom: 5%;
+  position:relative;
+}
+
+.feed_request_title {
+  margin-top: 10px;
+  a {
+    color: #ffffff;
+    font-size: 2.4em;
+  }
+}
+
+.feed_suggest_title {
+  margin-top: 10px;
+  a {
+    color: #ffffff;
+    font-size: 1.7em;
+  }
+}
+
+.feed_from_and_to {
+  margin-top: 5%;
+  font-size: 1.2em;
+}
+
+.feed_can_deliver {
+  margin-top: 5%;
+  font-size: 1.2em;
+}
+
+.feed_item_money {
+  text-align: center;
+  width: 390px;
+  position:absolute;
+  bottom:0;
+  left:0;
+  margin-bottom: 10px;
+  margin-left: 10px;
+  background-color: #257b2a;
+  border:1px solid;
+  border-radius:2px;
+  -moz-border-radius:10px; /* Old Firefox */
+  padding-left: 10px;
+  padding-right: 10px;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  color: #ffffff;
+  border-color: #000000;
+  font-size: 1.8em;
+  a {
+    color: #ffffff;
+    font-size: 1.1em;
+  }
+}
+
+.feed_item_map {
+  margin-top:8px;
+  border:1px solid;
+  border-color: #000000;
+  float:right;
+
 }
 
 /* mixins, variables, etc. */
@@ -514,7 +601,6 @@ aside {
   margin-right: 10px;
   margin-top: 10px;
   border: 1px solid #111111;
-
 }
 
 /* forms */

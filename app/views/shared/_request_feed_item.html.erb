@@ -1,14 +1,17 @@
-<div class="feed_item">
-  <div class="feed_item_info">
-    <div class="feed_item_title">
-      <%= link_to request_feed_item.what, request_delivery_path(request_feed_item)  %>
-    </div>
-    From: <%= request_feed_item.from %><br>
-    To: <%= request_feed_item.to %><br>
-    Delivery Size: <%= request_feed_item.size %>   <br>
-    You can earn: <%= request_feed_item.cost %> NIS
-  </div>
+<div class="feed_item" xmlns="http://www.w3.org/1999/html">
   <div class="feed_item_map">
-    <img src="http://maps.google.com/maps/api/staticmap?size=150x150&maptype=roadmap&sensor=false&markers=color:green|label:A|<%= request_feed_item.from %>&markers=color:green|label:B|<%= request_feed_item.to %>" alt="Static, Marked Map of Chicago, Illinois and Hammond, Indiana with no Center and Zoom"></img>
+    <img src="http://maps.google.com/maps/api/staticmap?size=175x175&maptype=roadmap&sensor=false&markers=color:green|label:A|<%= request_feed_item.from %>&markers=color:green|label:B|<%= request_feed_item.to %>" alt="Static, Marked Map of Chicago, Illinois and Hammond, Indiana with no Center and Zoom"></img>
+  </div>
+  <div class="feed_item_info">
+    <div class="feed_request_title">
+      <b><%= link_to "\"" + request_feed_item.what + ".\"", request_delivery_path(request_feed_item)  %></b>
+    </div>
+    <div class="feed_from_and_to">
+      From: <b><%= request_feed_item.from %></b><br>
+      To:<b><%= request_feed_item.to %></b><br>
+    </div>
+    <div class="feed_item_money">
+      <b><%= link_to "Delivery Reward: " + request_feed_item.cost + "NIS", request_delivery_path(request_feed_item)  %></b>
+    </div>
   </div>
 </div>

@@ -316,6 +316,13 @@ footer {
   margin-right: auto;
 }
 
+.new_delivery_suggest_class {
+  margin-top: 7%;
+  width:900px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
 fieldset {
   text-align: center;
   background-color: #1d79e2;
@@ -366,38 +373,6 @@ textarea {
 .radio_button label {
   font-size: 1em;
   display: inline;
-}
-
-.prev, .next {
-  background-color: #3a6bb0;
-  border: 1px solid #00002a;
-  border-radius:7px;
-  padding-left:10px;
-  padding-right: 10px;
-  padding-top: 5px;
-  padding-bottom: 5px;
-  margin-left: 10px;
-  color:#fff;
-  font-size: 2.4em;
-}
-
-.finish {
-  background-color: #388c3e;
-  border: 1px solid #00002a;
-  border-radius:7px;
-  padding-left:10px;
-  padding-right: 10px;
-  padding-top: 15px;
-  padding-bottom: 15px;
-  margin-left: 10px;
-  color:#fff;
-  font-size: 2.7em;
-}
-
-.prev:hover, .next:hover, .finish:hover {
-  background-color: #1d2953;
-  color: #fff;
-  text-decoration:none;
 }
 
 button::-moz-focus-inner {
@@ -476,7 +451,7 @@ button::-moz-focus-inner {
 
 
 .feed_item {
-  height: 185px;
+  height: 160px;
   width: 600px;
   background-color: #1d79e2;
   -moz-box-shadow: 5px 5px 5px #333333;; /* Old Firefox */
@@ -510,8 +485,13 @@ button::-moz-focus-inner {
   }
 }
 
-.feed_from_and_to {
+.feed_from_and_to_request {
   margin-top: 5%;
+  font-size: 1.2em;
+}
+
+.feed_from_and_to_suggest {
+  margin-top: 3%;
   font-size: 1.2em;
 }
 
@@ -606,8 +586,6 @@ aside {
 /* forms */
 
 input, textarea, select, .uneditable-input {
-  border: 1px solid #bbb;
-  margin-bottom: 15px;
   @include box_sizing;
 }
 

@@ -56,7 +56,7 @@
 
         function createPrevButton(i) {
             var stepName = "step" + i;
-            $("#" + stepName + "commands").append("<a href='#' id='" + stepName + "Prev' class='prev'>Back</a>");
+            $("#" + stepName + "commands").append("<a href='#' id='" + stepName + "Prev' class='prev'><img src=\"assets/Back.png\" alt=\"back button\"></a>");
 
             $("#" + stepName + "Prev").bind("click", function(e) {
                 $("#" + stepName).fadeOut();
@@ -68,7 +68,7 @@
 
         function createNextButton(i) {
             var stepName = "step" + i;
-            $("#" + stepName + "commands").append("<a href='#' id='" + stepName + "Next' class='next'>Next</a>");
+            $("#" + stepName + "commands").append("<a href='#' id='" + stepName + "Next' class='next'><img src=\"assets/Next.png\" alt=\"next button\"></a>");
             $("#" + stepName + "Next").bind("click", function(e) {
                 var valid = true;
                 $('[data-validate]:input:visible').each(function() {

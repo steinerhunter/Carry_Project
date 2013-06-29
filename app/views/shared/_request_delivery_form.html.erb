@@ -51,7 +51,7 @@
           <%= f.label :cost, "How much will you pay for the delivery?" %>
           <%= f.text_field :cost, :placeholder => "Type an amount in NIS..."   %>
           <div class="form_submit">
-            <%= f.submit "Finish", class: "finish" %>
+            <%= f.submit "Finish", :type => :image, :src => "assets/Finish.png", :class => "finish" %>
           </div>
         </div>
       </fieldset>

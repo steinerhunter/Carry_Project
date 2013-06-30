@@ -18,13 +18,17 @@ class User < ActiveRecord::Base
   before_save { |user| user.email = email.downcase }
   before_save :create_remember_token
 
-  validates :name,    presence: true, length: {maximum: 50 }
+  validates :name, :presence => { :message => "OOPS! Looks like you didn't tell us your name..."}
+  validates :name, :length => { maximum: 30 , :message => "OOPS! Your name seems a bit too long..."}
+
   VALID_EMAIL_REGEX = /\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i
-  validates :email, presence: true,
-                                       format: { with: VALID_EMAIL_REGEX },
-                                       uniqueness: { case_sensitive: false }
-  validates :password, presence: true, length: { minimum: 8 }
-  validates :password_confirmation, presence: true
+  validates :email, :presence => { :message => "OOPS! We're going to need your email address..."}
+  validates :email, :format => { with: VALID_EMAIL_REGEX, :message => "OOPS! Email address should be like 'user@example.com'..." }
+  validates :email, :uniqueness => { case_sensitive: false, :message => "OOPS! Looks like someone has already registered with this address..." }
+
+  validates :password, :presence => { :message => "OOPS! Looks like you didn't pick a password..."}
+  validates :password, :length => { minimum: 8, :message => "OOPS! Looks like your password is a bit too short..."}
+  validates :password_confirmation, :presence => { :message => "OOPS! Looks like you didn't confirm your password..."}
 
   private
 

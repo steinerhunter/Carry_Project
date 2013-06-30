@@ -1,28 +1,23 @@
-<% provide(:title, 'Sign up') %>
-<h1>Go ahead, join us!</h1>
-
-<div class="row">
-  <div class="span6">
-    <%= form_for(@user, :validate => true) do |f| %>
+<div class="form_class">
+  <h1>Go ahead, join us!</h1>
+  <%= form_for(@user, :remote => true) do |f| %>
         <%=  render 'shared/error_messages', object: f.object  %>
-        <fieldset>
-          <legend>Your Name</legend>
-          <%= f.label :name, "What's your name?" %>
+        <div class="myfield_signup">
+          <%= f.label :name, "Name" %>
           <%= f.text_field :name %>
-        </fieldset>
-        <fieldset>
-            <%= f.label :email, "What's your email address?" %>
-            <%= f.text_field :email  %>
-        </fieldset>
-        <fieldset>
-            <%= f.label :password, "Pick your password:" %>
-            <%= f.password_field :password  %>
-        </fieldset>
-         <fieldset>
-            <%= f.label :password_confirmation, "Confirm your password:" %>
-            <%= f.password_field :password_confirmation %>
-            <%= f.submit "Join Us!", class: "btn btn-large btn-primary" %>
-           </fieldset>
-    <% end  %>
-  </div>
+        </div>
+      <div class="myfield_signup">
+          <%= f.label :email, "Email" %>
+          <%= f.text_field :email  %>
+        </div>
+      <div class="myfield_signup">
+          <%= f.label :password, "Password" %>
+          <%= f.password_field :password  %>
+        </div>
+      <div class="myfield_signup">
+          <%= f.label :password_confirmation, "Confirm Password" %>
+          <%= f.password_field :password_confirmation %>
+        </div>
+        <%=  f.submit "Join Us!", :type => :image, :src => "../assets/JoinUsSubmit.png"  %>
+  <% end  %>
 </div>

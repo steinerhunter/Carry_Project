@@ -3,8 +3,8 @@ var form = $('#new_user');
 <% if @user.errors.any? %>
 
 // Delete errors from previous submission
-if ($(".errors")[0]){
-    $('.errors').remove();
+if ($(".signup_errors")[0]){
+    $('.signup_errors').remove();
 }
 
 // Create a list of errors
@@ -23,7 +23,7 @@ var errors = $('<ul />');
 <% end %>
 
 // Display errors before the form
-$('<div />').addClass('errors').html(errors).appendTo("#new_user").hide().fadeIn('slow');
+$('<div />').addClass('signup_errors').html(errors).appendTo("#new_user").hide().fadeIn('slow');
 
 <% else %>
 

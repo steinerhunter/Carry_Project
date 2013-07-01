@@ -1,15 +1,20 @@
-<div class="form_class">
-  <h1>Sign in</h1>
+<div class="signin_form_class">
+  <div class="form_title">
+    Sign In
+  </div>
   <%= form_for(:session, url: sessions_path, :remote => true, :html => { :id => "new_session" } ) do |f|  %>
-        <div class="myfield_session">
+      <div class="signin_fields">
+        <div class="myfield_signin">
           <%=  f.label :email, "Email"   %>
           <%=  f.text_field :email  %>
         </div>
-      <div class="myfield_session">
-        <%=  f.label :password, "Password"  %>
-        <%=  f.password_field :password  %>
+        <div class="myfield_signin">
+          <%=  f.label :password, "Password"  %>
+          <%=  f.password_field :password  %>
+        </div>
       </div>
-      <%=  f.submit "Sign in", class: "btn btn-large btn-primary" %>
+        <div class="button_signin">
+          <%=  f.submit "Sign in", :type => :image, :src => "../assets/Signin.png" %>
+        </div>
   <% end  %>
-  <p> Not registered yet? <%= link_to "Sign up now!", signup_path  %></p>
 </div>

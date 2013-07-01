@@ -86,9 +86,25 @@ header {
   }
 }
 
-.form_class {
+.signup_form_class {
   width: 700px;
   height: 350px;
+  text-align: center;
+  background-color: #1d79e2;
+  -moz-box-shadow: 5px 5px 5px #333333;; /* Old Firefox */
+  box-shadow: 5px 5px 5px #333333;
+  border:solid 3px;
+  border-radius:10px;
+  -moz-border-radius:10px; /* Old Firefox */
+  color: #ffffff;
+  border-color: #18212e;
+  margin-right: auto;
+  margin-left: auto;
+}
+
+.signin_form_class {
+  width: 600px;
+  height: 250px;
   text-align: center;
   background-color: #1d79e2;
   -moz-box-shadow: 5px 5px 5px #333333;; /* Old Firefox */
@@ -115,19 +131,19 @@ header {
 }
 
 
-.myfield_session label, .myfield_session input {
+.myfield_signin label, .myfield_session input {
   display:inline-block;
 }
 
-.myfield_session input {
-  width:200px;
+.myfield_signin input {
+  width:230px;
 }
 
-.myfield_session label {
+.myfield_signin label {
   text-align: left;
   vertical-align: middle;
-  width: 200px;
-  font-size: 2.8em;
+  width: 170px;
+  font-size: 2.0em;
 }
 
 .myfield_signup {
@@ -144,8 +160,16 @@ header {
 }
 
 .signup_fields {
+   width: 550px;
+   height: 200px;
+   margin-right: auto;
+   margin-left: auto;
+   margin-top: 20px;
+ }
+
+.signin_fields {
   width: 550px;
-  height: 200px;
+  height: 100px;
   margin-right: auto;
   margin-left: auto;
   margin-top: 20px;
@@ -447,10 +471,6 @@ textarea {
   display: inline;
 }
 
-button::-moz-focus-inner {
-  padding: 0;
-}
-
 .step_class {
   width: 800px;
   margin-left: auto;
@@ -509,14 +529,28 @@ button::-moz-focus-inner {
   margin-top: 10px;
 }
 
-.errors {
-  width: 100%;
+.signup_errors {
   margin: 0 auto;
-  margin-top: 5%;
+  margin-top: 6%;
   padding: 5px;
   padding-top:12px;
   line-height: 30px;
   width: 600px;
+  background-color: #c80000;
+  border: 1px solid #111111;
+  border-radius:5px;
+  color: #ffffff;
+  font-size: 17px;
+  text-align: left;
+}
+
+.signin_errors {
+  margin: 0 auto;
+  margin-top: 8%;
+  padding: 5px;
+  padding-left: 10px;
+  line-height: 30px;
+  width: 500px;
   background-color: #c80000;
   border: 1px solid #111111;
   border-radius:5px;

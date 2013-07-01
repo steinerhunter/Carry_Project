@@ -1,8 +1,6 @@
-<div class="form_class">
+<div class="signup_form_class">
   <div class="form_title">
-    <div class="actual_form_title">
-      Create Your Account
-    </div>
+    Create Your Account
   </div>
   <%= form_for(@user, :remote => true) do |f| %>
       <%=  render 'shared/error_messages', object: f.object  %>
@@ -13,11 +11,11 @@
         </div>
         <div class="myfield_signup">
           <%= f.label :email, "What's your Email Address?" %>
-          <%= f.text_field :email  %>
+          <%= f.text_field :email, :placeholder => "someone@example.com" %>
         </div>
-        <div class="myfield_signup" style="  margin-right: 50px;">
+        <div class="myfield_signup" style="margin-right:50px;">
           <%= f.label :password, "Choose a Password:" %>
-          <%= f.password_field :password  %>
+          <%= f.password_field :password, :placeholder => "At least 8 characters"  %>
         </div>
         <div class="myfield_signup">
           <%= f.label :password_confirmation, "Confirm your Password:" %>

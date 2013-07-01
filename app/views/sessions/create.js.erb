@@ -3,15 +3,15 @@ var form = $('#new_session');
 <% if !(@session) %>
 
 // Delete errors from previous submission
-if ($(".errors")[0]){
-    $('.errors').remove();
+if ($(".signin_errors")[0]){
+    $('.signin_errors').remove();
 }
 
 // Create a list of errors
 var errors = 'Sorry, no account matches this Email/Password combination... '
 
 // Display errors before the form
-$('<div />').addClass('errors').html(errors).prependTo("#new_session");
+$('<div />').addClass('signin_errors').html(errors).appendTo("#new_session").hide().fadeIn('slow');;
 
 <% else %>
 

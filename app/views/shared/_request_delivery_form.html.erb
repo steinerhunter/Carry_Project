@@ -2,21 +2,21 @@
   <%= form_for(@request_delivery, :validate => true ) do |f| %>
       <fieldset>
         <div class="single_step">
-          <legend>Origin</legend>
+          <legend><b>Origin</b></legend>
           <%= f.label :from, "Where do you want to deliver from?" %>
           <%= f.text_field :from, :placeholder => "Type origin address...", :class => "address_field" %>
         </div>
       </fieldset>
       <fieldset>
         <div class="single_step">
-          <legend>Destination</legend>
+          <legend><b>Destination</b></legend>
           <%= f.label :to, "Where do you want your delivery to reach?" %>
           <%= f.text_field :to, :placeholder => "Type destination address...", :class => "address_field"   %>
         </div>
       </fieldset>
       <fieldset>
         <div class="single_step">
-          <legend>Delivery Contents</legend>
+          <legend><b>Delivery Contents</b></legend>
           <%= f.label :what, "What is it that you want to deliver?" %>
           <%= f.text_field :what, :placeholder => "Type delivery contents..."   %>
           <%= f.label :size, "How big is your delivery?" %>
@@ -40,14 +40,14 @@
       </fieldset>
       <fieldset>
         <div class="single_step">
-          <legend>Time of Delivery</legend>
+          <legend><b>Time of Delivery</b></legend>
           <%= f.label :when, "When would you like your delivery to ship?" %>
           <%= f.text_field :when, :placeholder => "mm/dd/yyyy", :class => "datepicker" %>
         </div>
       </fieldset>
       <fieldset>
         <div class="single_step">
-          <legend>Payment</legend>
+          <legend><b>Payment</b></legend>
           <%= f.label :cost, "How much will you pay for the delivery?" %>
           <%= f.text_field :cost, :placeholder => "Type an amount in NIS..."   %>
           <div class="form_submit">

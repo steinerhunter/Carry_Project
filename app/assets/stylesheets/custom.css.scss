@@ -87,23 +87,33 @@ header {
 }
 
 .form_class {
-  h1 {
-    font-size: 3.2em;
-    margin-bottom: 20px;
-  }
+  width: 700px;
+  height: 350px;
   text-align: center;
   background-color: #1d79e2;
   -moz-box-shadow: 5px 5px 5px #333333;; /* Old Firefox */
   box-shadow: 5px 5px 5px #333333;
-  border:solid 1px #000;
-  border-radius:3px;
+  border:solid 3px;
+  border-radius:10px;
   -moz-border-radius:10px; /* Old Firefox */
-  padding-left: 10px;
-  padding-right: 10px;
-  padding-bottom: 10px;
   color: #ffffff;
-  border-color: #000000;
+  border-color: #18212e;
+  margin-right: auto;
+  margin-left: auto;
 }
+
+.form_title {
+  height:40px;
+  padding-top:14px;
+  font-size: 3.2em;
+  border-bottom:solid 2px;
+  border-color: #18212e;
+  background:#00008b;
+  -moz-border-radius: 0px;
+  -webkit-border-radius: 3px 3px 0px 0px;
+  border-radius: 3px 3px 0px 0px;
+}
+
 
 .myfield_session label, .myfield_session input {
   display:inline-block;
@@ -120,20 +130,25 @@ header {
   font-size: 2.8em;
 }
 
-.myfield_signup label, .myfield_signup input {
-  display:inline-block;
-}
-
-.myfield_signup input {
-  width:200px;
-}
-
-.myfield_signup label {
+.myfield_signup {
+  margin-bottom: 30px;
   text-align: left;
-  vertical-align: middle;
-  width: 200px;
-  font-size: 2.8em;
-  line-height: 30px;
+  float: left;
+  input {
+    width: 250px;
+  }
+  label {
+    width: 200px;
+    font-size: 1.1em;
+  }
+}
+
+.signup_fields {
+  width: 550px;
+  height: 200px;
+  margin-right: auto;
+  margin-left: auto;
+  margin-top: 20px;
 }
 
 .below_map {
@@ -399,7 +414,7 @@ legend {
   visibility:hidden;
 }
 
-label { 
+fieldset label {
   display:block;
   margin:15px 0 5px;
   font-size: 2.8em;
@@ -408,7 +423,7 @@ label {
   width: 800px;
 }
 
-input[type=text], input[type=password] { 
+fieldset input[type=text] {
   width:600px;
   padding:12px;
   font-size: 1.5em;
@@ -497,13 +512,17 @@ button::-moz-focus-inner {
 .errors {
   width: 100%;
   margin: 0 auto;
+  margin-top: 5%;
+  padding: 5px;
+  padding-top:12px;
   line-height: 30px;
   width: 600px;
   background-color: #c80000;
   border: 1px solid #111111;
+  border-radius:5px;
   color: #ffffff;
-  font-size: 22px;
-  margin-bottom: 10px;
+  font-size: 17px;
+  text-align: left;
 }
 
 .requestposts {
@@ -655,14 +674,6 @@ input {
   height: auto !important;
 }
 
-#error_explanation {
-  color: #f00;
-  ul {
-    list-style: none;
-    margin: 0 0 18px 0;
-  }
-}
-
 /* users index */
 
 .users {
@@ -670,7 +681,6 @@ input {
   margin: 0;
   li {
     overflow: auto;
-    padding: 10px 0;
     border-top: 1px solid $grayLighter;
     &:last-child {
       border-bottom: 1px solid $grayLighter;

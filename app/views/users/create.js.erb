@@ -23,7 +23,7 @@ var errors = $('<ul />');
 <% end %>
 
 // Display errors before the form
-$('<div />').addClass('errors').html(errors).prependTo("#new_user");
+$('<div />').addClass('errors').html(errors).appendTo("#new_user").hide().fadeIn('slow');
 
 <% else %>
 

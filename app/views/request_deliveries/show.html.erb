@@ -1,23 +1,22 @@
 <div class="show_request_delivery">
-  <div id="current-delivery-map"></div>
-  <div class="below_map">
-    <div class="user_image">
-      <%=  link_to gravatar_for(@request_delivery.user), @request_delivery.user  %>
+  <div class="right_side">
+    <div id="current-delivery-map"></div>
+    <div class="show_dates">
+      <div class="show_dates_title">
+        <b>Delivery Needed By</b>
+      </div>
+      <div class="show_dates_data">
+        <b><%= @request_delivery.when.strftime("%B #{@request_delivery.when.day.ordinalize}, %Y")%></b>
+      </div>
     </div>
-    <div class="the_what_and_who">
-      <div class="the_what">
-        <h2>"I need to deliver <b><%= @request_delivery.what %></b>."</h2>
-      </div>
-      <div class="the_who">
-        <h3>Requested by <b><%= @request_delivery.user.name %></b> on <%= @request_delivery.created_at.strftime("%d/%m/%Y")%></h3><br>
-      </div>
+  </div>
+  <div class="show_data">
+    <div class="show_title">
+      <b><%= @request_delivery.what %></b>
     </div>
     <div class="the_deadline_and_money">
       <div class="the_money">
-        Delivery Reward<br><b><%= @request_delivery.cost %> NIS</b>
-      </div>
-      <div class="the_deadline">
-        Delivery Needed By<br><b><%= @request_delivery.when.strftime("%d/%m/%Y")   %></b>
+        Delivery Bounty<br><b><%= @request_delivery.cost %> NIS</b>
       </div>
     </div>
     <div class="the_from_and_to">
@@ -29,12 +28,29 @@
       </div>
     </div>
     <div class="the_size_and_more_info">
-      <div class="the_size">
+      <% if @request_delivery.size == "Large" %>
+      <div class="the_size"  style="background-image: url('../assets/Large.png');">
+      <% elsif @request_delivery.size == "Medium" %>
+      <div class="the_size"  style="background-image: url('../assets/Medium.png');">
+      <% elsif @request_delivery.size == "Small" %>
+      <div class="the_size"  style="background-image: url('../assets/Small.png');">
+      <% end %>
         Delivery Size<br><b><%= @request_delivery.size %></b>   <br>
       </div>
       <div class="more_info">
-        More Info<br><b>"<%= @request_delivery.more_details %>."</b>
+        More Info<br>
+        <div class="more_info_data">
+          <b>"<%= @request_delivery.more_details%>."</b>
+        </div>
       </div>
     </div>
+      <div class="the_sender_and_receiver">
+        <div class="the_sender">
+          Sending Person<br><b>Omer Salomon<br></b>
+        </div>
+        <div class="the_receiver">
+          Receiving Person<br><b>Omer Salomon<br></b>
+        </div>
+      </div>
   </div>
 </div>

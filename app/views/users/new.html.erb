@@ -1,6 +1,6 @@
 <div class="signup_form_class">
   <div class="form_title">
-    Create Your Account
+    <b>Create Your Account</b>
   </div>
   <%= form_for(@user, :remote => true) do |f| %>
       <%=  render 'shared/error_messages', object: f.object  %>

@@ -215,6 +215,26 @@ header {
   width: 40%;
 }
 
+.challenge_accepted {
+  width: 100%;
+  text-align: center;
+  background-image: url('challenge_accepted.png');
+  background-color: #257b2a;
+  background-repeat: no-repeat;
+  background-position: bottom left;
+  -moz-box-shadow: 5px 5px 5px #333333;; /* Old Firefox */
+  box-shadow: 5px 5px 5px #333333;
+  border:solid 3px;
+  border-radius:8px;
+  -moz-border-radius:10px; /* Old Firefox */
+  color: #ffffff;
+  border-color: #000000;
+  padding-top:14px;
+  padding-bottom: 14px;
+  margin-bottom: 20px;
+  font-size: 2.6em;
+}
+
 .show_dates {
   width: 100%;
   background-color: #1d79e2;
@@ -423,7 +443,7 @@ header {
 .the_sender {
   display: inline-block;
   font-size:1.4em;
-  width: 215px;
+  width: 212px;
   text-align: center;
   background-image: url('SendingPerson.png');
   background-color: #10529b;
@@ -442,7 +462,7 @@ header {
 .the_receiver {
   display: inline-block;
   font-size:1.4em;
-  width: 215px;
+  width: 212px;
   text-align: center;
   background-image: url('ReceivingPerson.png');
   background-color: #10529b;

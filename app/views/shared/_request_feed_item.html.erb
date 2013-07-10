@@ -4,7 +4,7 @@
   </div>
   <div class="feed_item_info">
     <div class="feed_request_title">
-      <b><%= link_to "\"" + request_feed_item.what + ".\"", request_delivery_path(request_feed_item)  %></b>
+      <b><%= link_to request_feed_item.what, request_delivery_path(request_feed_item)  %></b>
     </div>
     <div class="feed_from_and_to_request">
       From: <b><%= request_feed_item.from %></b><br>

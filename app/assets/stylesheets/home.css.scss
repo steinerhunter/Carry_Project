@@ -1,0 +1,71 @@
+.home_top_container {
+  position: relative;
+}
+
+.two_main_buttons {
+  line-height:340px;
+  position: absolute;
+  margin-top: 30px;
+  font-size: 2.6em;
+  width: 850px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.two_pass_buttons {
+  line-height:360px;
+  display: none;
+  position: absolute;
+  margin-top: 30px;
+  font-size: 1.8em;
+  width: 850px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.two_send_buttons {
+  line-height:360px;
+  display: none;
+  position: absolute;
+  margin-top: 30px;
+  font-size: 1.8em;
+  width: 850px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.left_button {
+  text-align: center;
+  width: 400px;
+  height: 200px;
+  background-image: url('pass_something.png');
+  background-color: #1d79e2;
+  background-repeat: no-repeat;
+  background-position: bottom center;
+  -moz-box-shadow: 5px 5px 5px #333333;; /* Old Firefox */
+  box-shadow: 5px 5px 5px #333333;
+  border:solid 3px;
+  border-radius:10px;
+  -moz-border-radius:10px; /* Old Firefox */
+  color: #ffffff;
+  border-color: #000000;
+}
+
+.right_button {
+  float:right;
+  text-align: center;
+  width: 400px;
+  height: 200px;
+  background-image: url('send_something.png');
+  background-color: #1d79e2;
+  background-repeat: no-repeat;
+  background-position: bottom center;
+  -moz-box-shadow: 5px 5px 5px #333333;; /* Old Firefox */
+  box-shadow: 5px 5px 5px #333333;
+  border:solid 3px;
+  border-radius:10px;
+  -moz-border-radius:10px; /* Old Firefox */
+  color: #ffffff;
+  border-color: #000000;
+}
+

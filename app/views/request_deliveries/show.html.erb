@@ -31,6 +31,42 @@
       </div>
     </div>
     <div class="the_size_and_more_info">
+      <div class="posted_by">
+        <%=  link_to gravatar_for(@request_delivery.user), @request_delivery.user  %>
+        Posted By <b><%= link_to @request_delivery.user.name, @request_delivery.user  %></b>
+        <div class="verified_details">
+          <div class="verified_item">
+            <div class="bubbleInfo">
+              <%= image_tag("VerifiedEmail.png", :class => "trigger") %>
+              <div class="popup">
+                <b><%=@request_delivery.user.name %></b> has verified his/her Email Address.
+                <div id="tail1"></div>
+                <div id="tail2"></div>
+              </div>
+            </div>
+          </div>
+          <div class="verified_item">
+            <div class="bubbleInfo">
+              <%= image_tag("VerifiedPhone.png", :class => "trigger")%>
+              <div class="popup">
+                <b><%=@request_delivery.user.name %></b> has verified his/her Phone Number.
+                <div id="tail1"></div>
+                <div id="tail2"></div>
+              </div>
+            </div>
+          </div>
+          <div class="verified_item">
+            <div class="bubbleInfo">
+            <%= image_tag("VerifiedPhoto.png", :class => "trigger")%>
+              <div class="popup">
+                <b><%=@request_delivery.user.name %></b> has uploaded a photo.
+                <div id="tail1"></div>
+                <div id="tail2"></div>
+              </div>
+              </div>
+          </div>
+        </div>
+      </div>
       <% if @request_delivery.size == "Large" %>
       <div class="the_size"  style="background-image: url('../assets/Large.png');">
       <% elsif @request_delivery.size == "Medium" %>

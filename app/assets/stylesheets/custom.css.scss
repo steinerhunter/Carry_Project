@@ -80,6 +80,7 @@ header {
 
   a {
     color: #ffffff;
+
     &:hover {
       text-decoration:underline;
     }
@@ -181,99 +182,6 @@ header {
   margin-top: 20px;
 }
 
-.show_data {
-  width: 57%;
-  background-color: #1d79e2;
-  -moz-box-shadow: 5px 5px 5px #333333;; /* Old Firefox */
-  box-shadow: 5px 5px 5px #333333;
-  border:solid 3px;
-  border-radius:10px;
-  -moz-border-radius:10px; /* Old Firefox */
-  color: #ffffff;
-  border-color: #000000;
-}
-
-.show_title {
-  text-align: left;
-  height:40px;
-  padding-top:14px;
-  font-size: 3.2em;
-  border-bottom:solid 2px;
-  border-color: #18212e;
-  background-image: url('box.png');
-  background-color:#00008b;
-  background-repeat: no-repeat;
-  background-position: bottom left;
-  -moz-border-radius: 0px;
-  -webkit-border-radius: 3px 3px 0px 0px;
-  border-radius: 3px 3px 0px 0px;
-  b {
-    padding-left: 70px;
-  }
-}
-
-.right_side {
-  float:right;
-  width: 40%;
-}
-
-.challenge_accepted {
-  width: 100%;
-  text-align: center;
-  background-image: url('challenge_accepted.png');
-  background-color: #257b2a;
-  background-repeat: no-repeat;
-  background-position: bottom left;
-  -moz-box-shadow: 5px 5px 5px #333333;; /* Old Firefox */
-  box-shadow: 5px 5px 5px #333333;
-  border:solid 3px;
-  border-radius:8px;
-  -moz-border-radius:10px; /* Old Firefox */
-  color: #ffffff;
-  border-color: #000000;
-  padding-top:14px;
-  padding-bottom: 14px;
-  margin-bottom: 20px;
-  font-size: 2.6em;
-}
-
-.show_dates {
-  width: 100%;
-  background-color: #1d79e2;
-  -moz-box-shadow: 5px 5px 5px #333333;; /* Old Firefox */
-  box-shadow: 5px 5px 5px #333333;
-  border:solid 3px;
-  border-radius:10px;
-  -moz-border-radius:10px; /* Old Firefox */
-  color: #ffffff;
-  border-color: #000000;
-}
-
-.show_dates_title {
-  text-align: right;
-  padding-top:11px;
-  padding-bottom: 10px;
-  font-size: 2.2em;
-  border-bottom:solid 2px;
-  border-color: #18212e;
-  background-image: url('Calendar.png');
-  background-color:#00008b;
-  background-repeat: no-repeat;
-  background-position: bottom left;
-  -moz-border-radius: 0px;
-  -webkit-border-radius: 3px 3px 0px 0px;
-  border-radius: 3px 3px 0px 0px;
-  b {
-    padding-right: 30px;
-  }
-}
-
-.show_dates_data {
-  text-align: center;
-  margin: 10px;
-  font-size: 2em;
-}
-
 .the_what_and_who {
   width:100%;
   b {
@@ -291,208 +199,12 @@ header {
   }
 }
 
-.the_from_and_to {
-  width: 100%;
-  margin-top: 10px;
-  margin-bottom: 30px;
-  line-height: 30px;
-  text-align: center;
-  margin-right: auto;
-  margin-left: auto;
-  b {
-    color: #8bceff
-  }
-}
+
 
 .section_title {
   text-align: left;
   font-size: 2.8em;
   margin-bottom: 10px;
-}
-
-.the_from {
-  display: inline-block;
-  font-size:1.8em;
-  width: 450px;
-  text-align: center;
-  background-image: url('LocationA.png');
-  background-color: #10529b;
-  background-repeat: no-repeat;
-  background-position: bottom left;
-  border:1px solid;
-  border-radius:4px;
-  -moz-border-radius:10px; /* Old Firefox */
-  padding: 5px;
-  color: #ffffff;
-  border-color: #000000;
-  margin-bottom: 10px;
-}
-
-.the_to {
-  display: inline-block;
-  font-size:1.8em;
-  width: 450px;
-  text-align: center;
-  background-image: url('LocationB.png');
-  background-color: #10529b;
-  background-repeat: no-repeat;
-  background-position: bottom left;
-  border:1px solid;
-  border-radius:4px;
-  -moz-border-radius:10px; /* Old Firefox */
-  padding: 5px;
-  color: #ffffff;
-  border-color: #000000;
-}
-
-.the_size_and_more_info {
-  width: 100%;
-  margin-bottom: 10px;
-  line-height: 30px;
-  text-align: center;
-  margin-right: auto;
-  margin-left: auto;
-}
-
-.more_info {
-  display: inline-block;
-  background-image: url('Info.png');
-  background-color: #10529b;
-  background-repeat: no-repeat;
-  background-position: top left;
-  border:1px solid;
-  border-radius:4px;
-  -moz-border-radius:10px; /* Old Firefox */
-  font-size:1.8em;
-  width: 450px;
-  text-align: center;
-  padding: 5px;
-  color: #ffffff;
-  margin-top: 10px;
-  line-height: 30px;
-  border-color: #000000;
-}
-
-.more_info_data {
-  text-align: left;
-  font-size: 0.8em;
-  padding-left: 55px;
-  color: #8bceff;
-}
-
-.the_size {
-  display: inline-block;
-  font-size:1.8em;
-  width: 450px;
-  text-align: center;
-  background-color: #10529b;
-  background-repeat: no-repeat;
-  background-position: bottom left;
-  border:1px solid;
-  border-radius:4px;
-  -moz-border-radius:10px; /* Old Firefox */
-  padding: 5px;
-  color: #ffffff;
-  border-color: #000000;
-  b {
-    color: #8bceff;
-  }
-}
-
-.the_deadline_and_money {
-  margin-top: 20px;
-  width: 100%;
-  margin-bottom: 10px;
-  line-height: 35px;
-  text-align: center;
-  margin-right: auto;
-  margin-left: auto;
-  b {
-    color: #8bceff
-  }
-}
-
-.the_money {
-  display: inline-block;
-  font-size:1.8em;
-  width: 450px;
-  text-align: center;
-  background-image: url('bounty.png');
-  background-color: #257b2a;
-  background-repeat: no-repeat;
-  background-position: bottom left;
-  border:1px solid;
-  border-radius:4px;
-  -moz-border-radius:10px; /* Old Firefox */
-  padding: 5px;
-  color: #ffffff;
-  border-color: #000000;
-  b {
-    font-size: 1.8em;
-    color: #ffffff;
-  }
-}
-
-.the_sender_and_receiver {
-  width: 100%;
-  margin-top: 10px;
-  margin-bottom: 30px;
-  line-height: 30px;
-  text-align: center;
-  margin-right: auto;
-  margin-left: auto;
-  b {
-    color: #8bceff
-  }
-}
-
-.the_sender {
-  display: inline-block;
-  font-size:1.4em;
-  width: 212px;
-  text-align: center;
-  background-image: url('SendingPerson.png');
-  background-color: #10529b;
-  background-repeat: no-repeat;
-  background-position: bottom left;
-  border:1px solid;
-  border-radius:4px;
-  -moz-border-radius:10px; /* Old Firefox */
-  padding: 5px;
-  color: #ffffff;
-  border-color: #000000;
-  margin-bottom: 10px;
-  margin-right: 10px;
-}
-
-.the_receiver {
-  display: inline-block;
-  font-size:1.4em;
-  width: 212px;
-  text-align: center;
-  background-image: url('ReceivingPerson.png');
-  background-color: #10529b;
-  background-repeat: no-repeat;
-  background-position: bottom left;
-  border:1px solid;
-  border-radius:4px;
-  -moz-border-radius:10px; /* Old Firefox */
-  padding: 5px;
-  color: #ffffff;
-  border-color: #000000;
-}
-
-#current-delivery-map {
-  height: 500px;
-  -moz-box-shadow: 5px 5px 5px #333333;; /* Old Firefox */
-  box-shadow: 5px 5px 5px #333333;
-  border:1px solid;
-  border-radius:2px;
-  -moz-border-radius:10px; /* Old Firefox */
-  margin-bottom: 20px;
-  img {
-     max-width: none;
-  }
 }
 
 #logo {
@@ -839,7 +551,6 @@ aside {
 .gravatar {
   float: left;
   margin-right: 10px;
-  margin-top: 10px;
   border: 1px solid #111111;
 }
 

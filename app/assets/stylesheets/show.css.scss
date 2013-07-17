@@ -36,7 +36,7 @@
   font-size: 2.6em;
 }
 
-.show_dates {
+.extra_info {
   width: 100%;
   background-color: #1d79e2;
   -moz-box-shadow: 5px 5px 5px #333333;; /* Old Firefox */
@@ -48,26 +48,26 @@
   border-color: #000000;
 }
 
-.show_dates_title {
-  text-align: right;
-  padding-top:11px;
-  padding-bottom: 10px;
-  font-size: 2.2em;
+.extra_info_title {
+  padding-top:14px;
+  padding-bottom: 15px;
+  line-height: 20px;
+  font-size: 2.8em;
   border-bottom:solid 2px;
   border-color: #18212e;
-  background-image: url('Calendar.png');
+  background-image: url('Info.png');
   background-color:#00008b;
   background-repeat: no-repeat;
-  background-position: bottom left;
+  background-position: top left;
   -moz-border-radius: 0px;
   -webkit-border-radius: 3px 3px 0px 0px;
   border-radius: 3px 3px 0px 0px;
   b {
-    padding-right: 30px;
+    padding-left: 55px;
   }
 }
 
-.show_dates_data {
+.extra_info_data {
   text-align: center;
   margin: 10px;
   font-size: 2em;
@@ -233,9 +233,31 @@
 
 .the_size {
   display: inline-block;
-  font-size:1.8em;
-  width: 450px;
+  width: 300px;
+  font-size:18px;
+  margin-top: 10px;
   text-align: center;
+  background-color: #10529b;
+  background-repeat: no-repeat;
+  background-position: bottom left;
+  border:1px solid;
+  border-radius:4px;
+  -moz-border-radius:10px; /* Old Firefox */
+  padding: 5px;
+  color: #ffffff;
+  border-color: #000000;
+  b {
+    color: #8bceff;
+  }
+}
+
+.the_deadline {
+  display: inline-block;
+  width: 300px;
+  font-size:18px;
+  margin-top: 10px;
+  text-align: center;
+  background-image: url('Calendar.png');
   background-color: #10529b;
   background-repeat: no-repeat;
   background-position: bottom left;
@@ -252,19 +274,9 @@
 
 .more_info {
   display: inline-block;
-  background-image: url('Info.png');
-  background-color: #10529b;
-  background-repeat: no-repeat;
-  background-position: top left;
-  border:1px solid;
-  border-radius:4px;
-  -moz-border-radius:10px; /* Old Firefox */
-  font-size:1.8em;
-  width: 450px;
+  font-size:20px;
   text-align: center;
-  padding: 5px;
   color: #ffffff;
-  margin-top: 10px;
   line-height: 30px;
   border-color: #000000;
 }

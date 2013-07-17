@@ -1,15 +1,26 @@
 <div class="show_request_delivery">
   <div class="right_side">
     <div id="current-delivery-map"></div>
-    <div class="challenge_accepted" onclick="location.href='#'">
-      <b>Take The Job!</b>
-    </div>
-    <div class="show_dates">
-      <div class="show_dates_title">
-        <b>Delivery Needed By</b>
+    <div class="extra_info">
+      <div class="extra_info_title">
+        <b>Extra Info</b>
       </div>
-      <div class="show_dates_data">
-        <b><%= @request_delivery.when.strftime("%B #{@request_delivery.when.day.ordinalize}, %Y")%></b>
+      <div class="extra_info_data">
+        <div class="more_info">
+          <b>"<%= @request_delivery.more_details%>."</b>
+        </div>
+        <div class="the_deadline">
+          Delivery Needed By<br><b><%= @request_delivery.when.strftime("%B #{@request_delivery.when.day.ordinalize}, %Y")%></b>
+        </div>
+        <% if @request_delivery.size == "Large" %>
+            <div class="the_size"  style="background-image: url('../assets/Large.png');">
+        <% elsif @request_delivery.size == "Medium" %>
+            <div class="the_size"  style="background-image: url('../assets/Medium.png');">
+        <% elsif @request_delivery.size == "Small" %>
+            <div class="the_size"  style="background-image: url('../assets/Small.png');">
+        <% end %>
+        Delivery Size<br><b><%= @request_delivery.size %></b>   <br>
+        </div>
       </div>
     </div>
   </div>
@@ -67,22 +78,6 @@
           </div>
         </div>
       </div>
-      <% if @request_delivery.size == "Large" %>
-      <div class="the_size"  style="background-image: url('../assets/Large.png');">
-      <% elsif @request_delivery.size == "Medium" %>
-      <div class="the_size"  style="background-image: url('../assets/Medium.png');">
-      <% elsif @request_delivery.size == "Small" %>
-      <div class="the_size"  style="background-image: url('../assets/Small.png');">
-      <% end %>
-        Delivery Size<br><b><%= @request_delivery.size %></b>   <br>
-      </div>
-      <div class="more_info">
-        More Info<br>
-        <div class="more_info_data">
-          <b>"<%= @request_delivery.more_details%>."</b>
-        </div>
-      </div>
-    </div>
       <div class="the_sender_and_receiver">
         <div class="the_sender">
           Sending Person<br><b>Omer Salomon<br></b>
@@ -91,5 +86,6 @@
           Receiving Person<br><b>Omer Salomon<br></b>
         </div>
       </div>
+    </div>
   </div>
 </div>

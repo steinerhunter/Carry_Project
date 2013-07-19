@@ -12,15 +12,18 @@
   border-radius:7px;
   border-color: #000;
   border:1px solid;
+  b {
+    font-size: 13px;
+  }
 }
 
 .triangle-isosceles.left {
-  margin-left:50px;
+  margin-left:13px;
   background:#9fd1ff;
 }
 
 .triangle-isosceles.right {
-  margin-right:50px;
+  margin-right:25px;
   background:#9fd1ff;
 }
 
@@ -44,6 +47,7 @@
   bottom:auto;
   border-width:6px 20px 6px 0;
   border-color:transparent #9fd1ff;
+
 }
 
 .triangle-isosceles.right:after {
@@ -53,4 +57,13 @@
   left:auto;
   border-width:6px 0 6px 20px;
   border-color:transparent #9fd1ff;
+}
+
+.comment_item {
+  margin-bottom: 5px;
+}
+
+.comment_posted {
+  font-size: 11px;
+  text-align: right;
 }

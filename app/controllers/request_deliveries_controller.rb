@@ -3,6 +3,9 @@ class RequestDeliveriesController < ApplicationController
 
   def show
     @request_delivery = RequestDelivery.find(params[:id])
+    @commentable = @request_delivery
+    @comments = @commentable.comments
+    @comment = Comment.new
   end
 
   def new

@@ -343,3 +343,15 @@
   color: #ffffff;
   border-color: #000000;
 }
+
+.show_comments {
+  padding: 5px;
+
+}
+
+.comments_form {
+  text-align: center;
+  input[type="text"],  textarea {
+    width: 81%;
+  }
+}

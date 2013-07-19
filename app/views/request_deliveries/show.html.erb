@@ -6,9 +6,6 @@
         <b>Extra Info</b>
       </div>
       <div class="extra_info_data">
-        <div class="more_info">
-          <b>"<%= @request_delivery.more_details%>."</b>
-        </div>
         <div class="the_deadline">
           Delivery Needed By<br><b><%= @request_delivery.when.strftime("%B #{@request_delivery.when.day.ordinalize}, %Y")%></b>
         </div>
@@ -92,6 +89,8 @@
         <div class="show_title" style="background-image: url('../assets/contact.png');font-size: 2.6em;height:35px;">
           <b>Contact <%= link_to @request_delivery.user.name, @request_delivery.user  %></b>
         </div>
-        BLAH BLAH
+        <div class="show_comments">
+          <%= render 'shared/comments' %>
+        </div>
       </div>
     </div>

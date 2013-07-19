@@ -16,7 +16,7 @@ section {
 }
 
 textarea {
-  resize: vertical;
+  resize: none;
 }
 
 .center {
@@ -29,6 +29,8 @@ p {
   font-size: 1.1em;
   line-height: 1.7em;
 }
+
+.nav li {display:inline;}
 
 /* header */
 

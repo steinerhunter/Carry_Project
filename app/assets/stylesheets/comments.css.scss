@@ -1,0 +1,56 @@
+.triangle-isosceles {
+  display: inline-block;
+  max-width:60%;
+  position:relative;
+  padding:5px;
+  margin:0.5em 0 1em;
+  color:#000;
+  background: #9fd1ff; /* default background for browsers without gradient support */
+  /* css3 */
+  -webkit-border-radius:7px;
+  -moz-border-radius:7px;
+  border-radius:7px;
+  border-color: #000;
+  border:1px solid;
+}
+
+.triangle-isosceles.left {
+  margin-left:50px;
+  background:#9fd1ff;
+}
+
+.triangle-isosceles.right {
+  margin-right:50px;
+  background:#9fd1ff;
+}
+
+/* creates triangle */
+.triangle-isosceles:after {
+  content:"";
+  position:absolute;
+  bottom:-15px; /* value = - border-top-width - border-bottom-width */
+  left:50px; /* controls horizontal position */
+  border-width:15px 15px 0; /* vary these values to change the angle of the vertex */
+  border-style:solid;
+  border-color:#9fd1ff transparent;
+  /* reduce the damage in FF3.0 */
+  display:block;
+  width:0;
+}
+
+.triangle-isosceles.left:after {
+  top:10px; /* controls vertical position */
+  left:-20px; /* value = - border-left-width - border-right-width */
+  bottom:auto;
+  border-width:6px 20px 6px 0;
+  border-color:transparent #9fd1ff;
+}
+
+.triangle-isosceles.right:after {
+  top:10px; /* controls vertical position */
+  right:-20px; /* value = - border-left-width - border-right-width */
+  bottom:auto;
+  left:auto;
+  border-width:6px 0 6px 20px;
+  border-color:transparent #9fd1ff;
+}

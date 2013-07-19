@@ -1,0 +1,36 @@
+<div class="comments_data">
+  <div class="comment_item" style="text-align: left;">
+    <div class="triangle-isosceles left">
+      "<%= @request_delivery.more_details %>. Feel free to ask me questions for more info."
+    </div>
+  </div>
+  <% @comments.each do |comment| %>
+      <% if current_user.id == @commentable.user.id %>
+          <% if comment.user_id == @commentable.user.id %>
+              <div class="comment_item" style="text-align: left;">
+                <div class="triangle-isosceles left">
+                  "<%= comment.content %>"
+                </div>
+              </div>
+          <% else %>
+              <div class="comment_item" style="text-align: right;">
+                <div class="triangle-isosceles right">
+                  "<%= comment.content %>"
+                </div>
+              </div>
+          <% end  %>
+      <% elsif (comment.user_id == current_user.id) %>
+          <div class="comment_item" style="text-align: right;">
+            <div class="triangle-isosceles right">
+              "<%= comment.content %>"
+            </div>
+          </div>
+      <% end %>
+  <% end %>
+</div>
+<div class="comments_form">
+  <%= form_for [@commentable, @comment] do |f| %>
+      <%= f.text_area :content, :placeholder => "Type your question here..." , :rows => 1 %>
+      <%= f.submit "Add", :type => :image, :src => "../assets/add.png" %>
+  <% end %>
+</div>

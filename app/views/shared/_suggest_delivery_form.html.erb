@@ -2,21 +2,21 @@
   <%= form_for(@suggest_delivery, :validate => true ) do |f| %>
       <fieldset>
         <div class="single_step">
-          <legend><b>Origin</b></legend>
+          <legend  style="background-image: url('../assets/1.png');"><b>Origin</b></legend>
           <%= f.label :from, "What's your starting point?" %>
           <%= f.text_field :from, :placeholder => "Type origin address...", :class => "address_field" %>
         </div>
       </fieldset>
       <fieldset>
         <div class="single_step">
-          <legend><b>Destination</b></legend>
+          <legend  style="background-image: url('../assets/2.png');"><b>Destination</b></legend>
           <%= f.label :to, "Where are you getting to?" %>
           <%= f.text_field :to, :placeholder => "Type destination address...", :class => "address_field"   %>
         </div>
       </fieldset>
       <fieldset>
         <div class="single_step">
-          <legend><b>Content of Delivery</b></legend>
+          <legend  style="background-image: url('../assets/3.png');"><b>Content of Delivery</b></legend>
           <%= f.label :size, "How big a package can you deliver?" %>
           <div class="radio_buttons">
             <div class="radio_button" style="text-align:left">
@@ -38,14 +38,14 @@
       </fieldset>
       <fieldset>
         <div class="single_step">
-          <legend><b>Time of Delivery</b></legend>
+          <legend  style="background-image: url('../assets/4.png');"><b>Time of Delivery</b></legend>
           <%= f.label :when, "When are taking your trip?" %>
           <%= f.text_field :when, :placeholder => "mm/dd/yyyy", :class => "datepicker" %>
         </div>
       </fieldset>
       <fieldset>
         <div class="single_step">
-          <legend><b>Payment</b></legend>
+          <legend  style="background-image: url('../assets/5.png');"><b>Payment</b></legend>
           <%= f.label :cost, "How much will you charge for the delivery?" %>
           <%= f.text_field :cost, :placeholder => "Type an amount in NIS..."   %>
           <div class="form_submit">

@@ -286,13 +286,15 @@ legend {
   font-size: 3.2em;
   border-bottom:solid 2px;
   border-color: #18212e;
-  background:#00008b;
+  background-color:#00008b;
+  background-repeat: no-repeat;
+  background-position: bottom left;
   -moz-border-radius: 0px;
   -webkit-border-radius: 3px 3px 0px 0px;
   border-radius: 3px 3px 0px 0px;
   color: #ffffff;
   b {
-    padding-left: 15px;
+    padding-left: 60px;
   }
 }
 

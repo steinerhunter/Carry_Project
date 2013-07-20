@@ -1,4 +1,6 @@
 class CommentsController < ApplicationController
+  respond_to :html, :js
+
   def index
     @commentable = find_commentable
     @comments = @commentable.comments
@@ -9,11 +11,15 @@ class CommentsController < ApplicationController
     @comment = @commentable.comments.new(params[:comment])
     @comment.user_id = current_user.id
     if @comment.save
-      flash[:notice] = "Successfully created comment."
-      redirect_to @commentable, notice: "Comment created."
-    else
-      render :action => 'new'
+      respond_with @commentable, :location => @commentable
     end
+  end
+
+  def destroy
+    @commentable = find_commentable
+    @comment = Comment.find(params[:id])
+    @comment.destroy
+    respond_with @commentable, :location => @commentable
   end
 
   private

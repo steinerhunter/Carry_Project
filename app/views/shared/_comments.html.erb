@@ -10,50 +10,65 @@
       </div>
     </div>
   </div>
-  <% @comments.each do |comment| %>
-      <% if current_user.id == @commentable.user.id %>
-          <% if comment.user_id == @commentable.user.id %>
-              <div class="comment_item" style="text-align: left;">
-                <div class="chat_gravatar">
-                  <%=  link_to chat_gravatar_for(comment.user), comment.user  %>
-                </div>
-                <div class="triangle-isosceles left">
-                  <b>"<%= comment.content %>"</b>
-                  <div class="comment_posted">
-                    Posted <%=  time_ago_in_words(comment.created_at) %> ago.
+  <div id="comments">
+    <% @comments.each do |comment| %>
+        <% if current_user.id == @commentable.user.id %>
+            <% if comment.user_id == @commentable.user.id %>
+                <div class="comment_item" style="text-align: left;" id=<%= dom_id(comment) %>>
+                  <div class="chat_gravatar">
+                    <%=  link_to chat_gravatar_for(comment.user), comment.user  %>
+                  </div>
+                  <div class="triangle-isosceles left">
+                    <div class="delete_comment">
+                      <%= link_to image_tag("delete_comment.png"), [@commentable, comment], :method => :delete, :remote => true %>
+                    </div>
+                    <div class="comment_content">
+                      <b>"<%= comment.content %>"</b>
+                    </div>
+                    <div class="comment_posted">
+                      Posted <%=  time_ago_in_words(comment.created_at) %> ago.
+                    </div>
                   </div>
                 </div>
-              </div>
-          <% else %>
-              <div class="comment_item" style="text-align: right;">
-                <div class="chat_gravatar" style="float:right">
-                  <%=  link_to chat_gravatar_for(comment.user), comment.user  %>
-                </div>
-                <div class="triangle-isosceles right">
-                  <b>"<%= comment.content %>"</b>
-                  <div class="comment_posted">
-                    Posted <%=  time_ago_in_words(comment.created_at) %> ago.
+            <% else %>
+                <div class="comment_item" style="text-align: right;" id=<%= dom_id(comment) %>>
+                  <div class="chat_gravatar" style="float:right">
+                    <%=  link_to chat_gravatar_for(comment.user), comment.user  %>
+                  </div>
+                  <div class="triangle-isosceles right">
+                    <div class="comment_content">
+                      <b>"<%= comment.content %>"</b>
+                    </div>
+                    <div class="comment_posted">
+                      Posted <%=  time_ago_in_words(comment.created_at) %> ago.
+                    </div>
                   </div>
                 </div>
+            <% end  %>
+        <% elsif (comment.user_id == current_user.id) %>
+            <div class="comment_item" style="text-align: right;" id=<%= dom_id(comment) %>>
+              <div class="chat_gravatar" style="float:right">
+                <%=  link_to chat_gravatar_for(comment.user), comment.user  %>
               </div>
-          <% end  %>
-      <% elsif (comment.user_id == current_user.id) %>
-          <div class="comment_item" style="text-align: right;">
-            <div class="chat_gravatar" style="float:right">
-              <%=  link_to chat_gravatar_for(comment.user), comment.user  %>
-            </div>
-            <div class="triangle-isosceles right">
-              <b>"<%= comment.content %>"</b>
-              <div class="comment_posted">
-                Posted <%=  time_ago_in_words(comment.created_at) %> ago.
+              <div class="triangle-isosceles right">
+                <div class="delete_comment">
+                  <%= link_to image_tag("delete_comment.png"), [@commentable, comment], :method => :delete, :remote => true %>
+                </div>
+                <div class="comment_content">
+                  <b>"<%= comment.content %>"</b>
+                </div>
+                <div class="comment_posted">
+                  Posted <%=  time_ago_in_words(comment.created_at) %> ago.
+                </div>
               </div>
             </div>
-          </div>
-      <% end %>
-  <% end %>
+        <% end %>
+    <% end %>
+  </div>
 </div>
+
 <div class="comments_form">
-  <%= form_for [@commentable, @comment] do |f| %>
+  <%= form_for [@commentable, @comment], :remote => true do |f| %>
       <%= f.text_area :content, :placeholder => "Type your question here..." , :rows => 1 %>
       <%= f.submit "Add", :type => :image, :src => "../assets/add.png" %>
   <% end %>

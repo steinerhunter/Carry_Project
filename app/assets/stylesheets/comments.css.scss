@@ -63,7 +63,16 @@
   margin-bottom: 5px;
 }
 
+.comment_content {
+  text-align: left;
+}
+
 .comment_posted {
   font-size: 11px;
   text-align: right;
+}
+
+.delete_comment {
+  float:right;
+  margin-left: 5px;
 }

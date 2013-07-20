@@ -5,6 +5,7 @@ gem 'bootstrap-sass', '2.1'
 gem "client_side_validations", "~> 3.2.5"
 gem 'jquery-validation-rails'
 gem 'bcrypt-ruby', '~> 3.0.0'
+gem 'coffee-rails', '3.2.2'
 
 group :development, :test do
   gem 'sqlite3', '1.3.5'
@@ -18,7 +19,6 @@ end
 # in production environments by default.
 group :assets do
   gem 'sass-rails',   '3.2.5'
-  gem 'coffee-rails', '3.2.2'
   gem 'uglifier', '1.2.3'
 end
 

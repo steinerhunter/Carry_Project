@@ -4,7 +4,7 @@
       <%=  link_to chat_gravatar_for(@commentable.user), @commentable.user  %>
     </div>
     <div class="triangle-isosceles left">
-      <b>"<%= @request_delivery.more_details %>. Feel free to ask me questions for more info."</b>
+      <b>"<%= @commentable.more_details %>. Feel free to ask me questions for more info."</b>
       <div class="comment_posted">
         Posted <%=  time_ago_in_words(@commentable.created_at) %> ago.
       </div>

@@ -4,7 +4,9 @@ TheCarryProject::Application.routes.draw do
   resources :request_deliveries, only: [:create, :show, :destroy] do
     resources :comments
   end
-  resources :suggest_deliveries, only: [:create, :show, :destroy]
+  resources :suggest_deliveries, only: [:create, :show, :destroy] do
+    resources :comments
+  end
 
   root to: 'static_pages#home'
 

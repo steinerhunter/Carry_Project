@@ -3,6 +3,9 @@ class SuggestDeliveriesController < ApplicationController
 
   def show
     @suggest_delivery = SuggestDelivery.find(params[:id])
+    @commentable = @suggest_delivery
+    @comments = @commentable.comments
+    @comment = Comment.new
   end
 
   def new

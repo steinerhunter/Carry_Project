@@ -1,5 +1,6 @@
 class SuggestDelivery < ActiveRecord::Base
   attr_accessible :from, :to, :when, :more_details, :size, :cost
+  has_many :comments, :as => :commentable
   belongs_to :user
 
   validates :user_id, presence: true

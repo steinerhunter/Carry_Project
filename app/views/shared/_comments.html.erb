@@ -68,7 +68,7 @@
 </div>
 
 <div class="comments_form">
-  <%= form_for [@commentable, @comment], :remote => true do |f| %>
+  <%= form_for [@commentable, @comment] do |f| %>
       <%= f.text_area :content, :placeholder => "Type your question here..." , :rows => 1 %>
       <%= f.submit "Add", :type => :image, :src => "../assets/add.png" %>
   <% end %>

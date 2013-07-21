@@ -241,14 +241,6 @@ footer {
   small {
     float: left;
   }
-  ul {
-    float: right;
-    list-style: none;
-    li {
-      float: left;
-      margin-left: 10px;
-    }
-  }
 }
 
 .new_delivery_request_class {
@@ -388,6 +380,24 @@ textarea {
   color: #ffffff;
   font-size: 22px;
   margin-top: 10px;
+}
+
+.errors {
+  width: 50%;
+  height: 30px;
+  margin: 0 auto;
+  padding-top: 7px;
+  line-height: 30px;
+  text-align: center;
+  line-height: 30px;
+  background-color: #c80000;
+  border: 1px solid #111111;
+  color: #ffffff;
+  font-size: 16px;
+  margin-bottom: 10px;
+  ul li {
+    list-style: none;
+  }
 }
 
 .signup_errors {

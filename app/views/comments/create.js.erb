@@ -1,0 +1,28 @@
+var form = $('#new_comment');
+
+<% if @comment.errors.any? %>
+
+if ($(".errors")[0]){
+    $('.errors').remove();
+}
+
+// Create a list of errors
+var errors = $('<ul />');
+
+<% @comment.errors.full_messages.each do |error| %>
+errors.append('<li><%= escape_javascript(error) %></li>');
+<% end %>
+
+// Display errors before the form
+$('<div />').addClass('errors').html(errors).prependTo("#new_comment");
+
+<% else %>
+
+if ($(".errors")[0]){
+    $('.errors').remove();
+}
+
+// Add the new comment to the beginning of the #comment division
+$("#comments").append('<%= j(render(:partial => "comment", :object => @comment))%>').fadeIn(1500);
+
+<% end %>

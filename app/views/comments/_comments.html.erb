@@ -1,0 +1,25 @@
+<div class="comments_data">
+  <div class="comment_item" style="text-align: left;">
+    <div class="chat_gravatar">
+      <%=  link_to chat_gravatar_for(@commentable.user), @commentable.user  %>
+    </div>
+    <div class="triangle-isosceles left">
+      <b>"<%= @commentable.more_details %>. Feel free to ask me questions for more info."</b>
+      <div class="comment_posted">
+        Posted <%=  time_ago_in_words(@commentable.created_at) %> ago.
+      </div>
+    </div>
+  </div>
+  <div id="comments">
+    <% @comments.each do |comment| %>
+    <%= render comment %>
+    <% end %>
+  </div>
+</div>
+
+<div class="comments_form">
+  <%= form_for [@commentable, @comment], :remote => true do |f| %>
+      <%= f.text_area :content, :placeholder => "Type your question here..." , :rows => 1 %>
+      <%= f.submit "Add", :type => :image, :src => "../assets/add.png" %>
+  <% end %>
+</div>

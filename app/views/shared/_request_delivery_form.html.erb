@@ -5,6 +5,8 @@
           <legend  style="background-image: url('../assets/1.png');"><b>Origin</b></legend>
           <%= f.label :from, "Where do you want to deliver from?" %>
           <%= f.text_field :from, :placeholder => "Type origin address...", :class => "address_field" %>
+          <%= f.label :sending_person, "Who is giving the package away?" %>
+          <%= f.text_field :sending_person, :value => "#{@request_delivery.user.name}" %>
         </div>
       </fieldset>
       <fieldset>
@@ -12,6 +14,8 @@
           <legend  style="background-image: url('../assets/2.png');"><b>Destination</b></legend>
           <%= f.label :to, "Where do you want your delivery to reach?" %>
           <%= f.text_field :to, :placeholder => "Type destination address...", :class => "address_field"   %>
+          <%= f.label :receiving_person, "Who is accepting the package in the end?" %>
+          <%= f.text_field :receiving_person, :value => "#{@request_delivery.user.name}" %>
         </div>
       </fieldset>
       <fieldset>

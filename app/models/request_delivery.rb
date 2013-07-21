@@ -1,5 +1,5 @@
 class RequestDelivery < ActiveRecord::Base
-  attr_accessible :from, :to, :what, :when, :more_details, :cost, :size
+  attr_accessible :from, :to, :what, :when, :more_details, :cost, :size, :sending_person, :receiving_person
   has_many :comments, :as => :commentable
   belongs_to :user
 
@@ -12,6 +12,8 @@ class RequestDelivery < ActiveRecord::Base
   validates :more_details, :length => { maximum: 200, :message => "Surely it can be described in less than 200 chars."}
   validates :cost, :presence => { :message => "We need to know how much you will pay..."}
   validates :cost, :numericality => { :only_integer => true, :message => "Only whole numbers please..." }
+  validates :sending_person, :presence => { :message => "Who is in charge of giving the package away?"}
+  validates :receiving_person, :presence => { :message => "Who is in charge of accepting the package?"}
 
   default_scope order: 'request_deliveries.created_at DESC'
 end

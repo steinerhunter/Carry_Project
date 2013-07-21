@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130719095837) do
+ActiveRecord::Schema.define(:version => 20130720214307) do
 
   create_table "comments", :force => true do |t|
     t.text     "content"
@@ -27,14 +27,16 @@ ActiveRecord::Schema.define(:version => 20130719095837) do
   create_table "request_deliveries", :force => true do |t|
     t.string   "from"
     t.string   "to"
-    t.datetime "when",         :limit => 255
+    t.datetime "when",             :limit => 255
     t.string   "more_details"
     t.integer  "user_id"
-    t.datetime "created_at",                  :null => false
-    t.datetime "updated_at",                  :null => false
+    t.datetime "created_at",                      :null => false
+    t.datetime "updated_at",                      :null => false
     t.string   "what"
     t.string   "cost"
     t.string   "size"
+    t.string   "sending_person"
+    t.string   "receiving_person"
   end
 
   add_index "request_deliveries", ["user_id", "created_at"], :name => "index_request_deliveries_on_user_id_and_created_at"

@@ -22,6 +22,8 @@ if ($(".errors")[0]){
     $('.errors').remove();
 }
 
+$('#new_comment')[0].reset()
+
 // Add the new comment to the beginning of the #comment division
 $("#comments").append('<%= j(render(:partial => "comment", :object => @comment))%>').fadeIn(1500);
 

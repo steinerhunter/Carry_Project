@@ -1,8 +1,20 @@
 <div class="feed_item" xmlns="http://www.w3.org/1999/html">
+  <% if current_user?(request_feed_item.user) %>
+      <div class="delete_post">
+        <div class="bubbleInfo">
+          <%=  link_to image_tag("delete_post.png"), request_feed_item, method: :delete, class: "trigger" %>
+          <div class="popup" style="height:20px; width:190px; margin-top:55px">
+            <b>Delete</b> your delivery request.
+            <div id="tail1" style="left:32px"></div>
+            <div id="tail2" style="left:32px"></div>
+          </div>
+        </div>
+      </div>
+  <% end %>
   <div class="feed_item_map">
     <img src="http://maps.google.com/maps/api/staticmap?size=150x150&maptype=roadmap&sensor=false&markers=color:green|label:A|<%= request_feed_item.from %>&markers=color:green|label:B|<%= request_feed_item.to %>" alt="Static, Marked Map of Chicago, Illinois and Hammond, Indiana with no Center and Zoom"></img>
   </div>
-  <div class="feed_item_info">
+    <div class="feed_item_info">
     <div class="feed_request_title">
       <b><%= link_to request_feed_item.what, request_delivery_path(request_feed_item)  %></b>
     </div>
@@ -13,5 +25,6 @@
     <div class="feed_item_money">
       <b><%= link_to "Delivery Reward: " + request_feed_item.cost + "NIS", request_delivery_path(request_feed_item)  %></b>
     </div>
+
   </div>
 </div>

@@ -1,5 +1,6 @@
 class RequestDeliveriesController < ApplicationController
   before_filter :signed_in_user, only: [:create, :destroy]
+  before_filter :correct_user,   only: :destroy
 
   def show
     @request_delivery = RequestDelivery.find(params[:id])
@@ -27,5 +28,16 @@ class RequestDeliveriesController < ApplicationController
   end
 
   def destroy
+    @request_delivery = RequestDelivery.find(params[:id])
+    @request_delivery.destroy
+    redirect_to root_url
   end
+
+  private
+
+  def correct_user
+    @request_delivey = current_user.request_deliveries.find_by_id(params[:id])
+    redirect_to root_url if @request_delivey.nil?
+  end
+
 end

@@ -4,7 +4,7 @@ TheCarryProject::Application.routes.draw do
   resources :request_deliveries, only: [:create, :show, :edit, :update, :destroy] do
     resources :comments
   end
-  resources :suggest_deliveries, only: [:create, :show, :destroy] do
+  resources :suggest_deliveries, only: [:create, :show, :edit, :update, :destroy] do
     resources :comments
   end
 

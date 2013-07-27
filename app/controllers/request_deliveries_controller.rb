@@ -29,12 +29,13 @@ class RequestDeliveriesController < ApplicationController
 
   def edit
     @request_delivery = RequestDelivery.find(params[:id])
+    session[:return_to] ||= request.referer
   end
 
   def update
     @request_delivery = RequestDelivery.find(params[:id])
     if @request_delivery.update_attributes( params[:request_delivery])
-      redirect_to request_delivery_path
+      redirect_to session.delete(:return_to)
     else
       render 'edit'
     end
@@ -50,7 +51,7 @@ class RequestDeliveriesController < ApplicationController
 
   def correct_user
     @request_delivey = current_user.request_deliveries.find_by_id(params[:id])
-    redirect_to root_url if @request_delivey.nil?
+    redirect_to root_url if @request_delivey.nil? && !current_user.try(:admin?)
   end
 
 end

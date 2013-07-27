@@ -1,4 +1,26 @@
 <div class="feed_item">
+  <% if (current_user?(suggest_feed_item.user)) || (current_user.try(:admin?)) %>
+      <div class="delete_post">
+        <div class="bubbleInfo">
+          <%=  link_to image_tag("delete_post.png"), suggest_feed_item, method: :delete, class: "trigger" %>
+          <div class="popup" style="height:20px; width:215px; margin-top:57px;">
+            <b style="color:#FF0523;">Delete</b> your delivery suggestion.
+            <div id="tail1" style="left:37px"></div>
+            <div id="tail2" style="left:37px"></div>
+          </div>
+        </div>
+      </div>
+      <div class="edit_post">
+        <div class="bubbleInfo">
+          <%=  link_to image_tag("edit_post.png"), edit_suggest_delivery_path(suggest_feed_item), class: "trigger" %>
+          <div class="popup" style="height:20px; width:195px; margin-top:57px;">
+            <b style="color:#ff9054">Edit</b> your delivery suggestion.
+            <div id="tail1" style="left:35px"></div>
+            <div id="tail2" style="left:35px"></div>
+          </div>
+        </div>
+      </div>
+  <% end %>
   <div class="feed_item_map">
     <img src="http://maps.google.com/maps/api/staticmap?size=150x150&maptype=roadmap&sensor=false&markers=color:green|label:A|<%= suggest_feed_item.from %>&markers=color:green|label:B|<%= suggest_feed_item.to %>" alt="Static, Marked Map of Chicago, Illinois and Hammond, Indiana with no Center and Zoom"></img>
   </div>

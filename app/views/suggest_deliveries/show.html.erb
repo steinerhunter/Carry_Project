@@ -23,7 +23,29 @@
       </div>
       <div class="show_data">
         <div class="show_title" style="font-size: 1.9em">
-          <b style="padding-left: 70px;">"I can deliver <%= @suggest_delivery.size %> sized items."</b>
+          <% if (current_user?(@suggest_delivery.user)) || (current_user.try(:admin?)) %>
+              <div class="delete_post_big">
+                <div class="bubbleInfo">
+                  <%=  link_to image_tag("delete_post_big.png"), @suggest_delivery, method: :delete, class: "trigger" %>
+                  <div class="popup" style="height:20px; width:215px; margin-top:57px;">
+                    <b style="color:#FF0523">Delete</b> your delivery suggestion.
+                    <div id="tail1" style="left:37px"></div>
+                    <div id="tail2" style="left:37px"></div>
+                  </div>
+                </div>
+              </div>
+              <div class="edit_post_big">
+                <div class="bubbleInfo">
+                  <%=  link_to image_tag("edit_post_big.png"), edit_suggest_delivery_path(@suggest_delivery), class: "trigger" %>
+                  <div class="popup" style="height:20px; width:195px; margin-top:57px;">
+                    <b style="color:#ff9054">Edit</b> your delivery suggestion.
+                    <div id="tail1" style="left:37px"></div>
+                    <div id="tail2" style="left:37px"></div>
+                  </div>
+                </div>
+              </div>
+          <% end %>
+          <b style="padding-left: 70px;">Delivery of <%= @suggest_delivery.size %> sized items</b>
         </div>
         <div class="the_deadline_and_money">
           <% if @suggest_delivery.currency == "NIS" %>
@@ -79,14 +101,6 @@
                   </div>
                 </div>
               </div>
-            </div>
-          </div>
-          <div class="the_sender_and_receiver">
-            <div class="the_sender">
-              Sending Person<br><b>Omer Salomon<br></b>
-            </div>
-            <div class="the_receiver">
-              Receiving Person<br><b>Omer Salomon<br></b>
             </div>
           </div>
         </div>

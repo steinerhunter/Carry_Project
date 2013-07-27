@@ -29,7 +29,7 @@
               Receiving Person<br><%= f.text_field :receiving_person  %>
             </div>
             <div class="edit_deadline">
-              Delivery Needed By<br><%= f.text_field :when, :placeholder => "mm/dd/yyyy", :class => "datepicker" %>
+              Delivery Needed By<br><%= f.text_field :when, :placeholder => "mm/dd/yyyy", :class => "datepicker", :value => "#{@request_delivery.when.strftime("%d/%m/%Y")}" %>
             </div>
             <div class="edit_size">
               Delivery Size<br><%= f.select :size, options_for_select(%w[Small Medium Large]) %>

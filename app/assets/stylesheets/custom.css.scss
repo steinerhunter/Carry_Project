@@ -396,6 +396,7 @@ textarea {
 }
 
 .field_with_errors .message {
+  position:absolute;
   width: 50%;
   margin: 0 auto;
   line-height: 30px;

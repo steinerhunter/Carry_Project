@@ -174,7 +174,7 @@
 .the_from {
   display: inline-block;
   font-size:1.6em;
-  width: 450px;
+  width: 390px;
   text-align: center;
   background-image: url('LocationA.png');
   background-color: #10529b;
@@ -184,6 +184,7 @@
   border-radius:4px;
   -moz-border-radius:10px; /* Old Firefox */
   padding: 5px;
+  padding-left:60px;
   color: #ffffff;
   border-color: #000000;
   margin-bottom: 10px;
@@ -195,16 +196,17 @@
 .the_to {
   display: inline-block;
   font-size:1.6em;
-  width: 450px;
+  width: 390px;
   text-align: center;
   background-image: url('LocationB.png');
   background-color: #10529b;
   background-repeat: no-repeat;
-  background-position: bottom left;
+  background-position: top left;
   border:1px solid;
   border-radius:4px;
   -moz-border-radius:10px; /* Old Firefox */
   padding: 5px;
+  padding-left:60px;
   color: #ffffff;
   border-color: #000000;
   b {

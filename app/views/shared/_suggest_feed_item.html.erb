@@ -12,7 +12,7 @@
       Delivery Date: <b><%= suggest_feed_item.when.strftime("%d/%m/%Y") %></b>
     </div>
     <div class="feed_item_money">
-      <b><%= link_to "Delivery Cost: " + suggest_feed_item.cost + "NIS", suggest_delivery_path(suggest_feed_item)  %></b>
+      <b><%= link_to "Delivery Cost: " + suggest_feed_item.cost + " " + suggest_feed_item.currency, suggest_delivery_path(suggest_feed_item)  %></b>
     </div>
   </div>
 </div>

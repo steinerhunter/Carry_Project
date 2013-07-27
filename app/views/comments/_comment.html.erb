@@ -1,5 +1,5 @@
-<% if current_user.id == @commentable.user.id %>
-    <% if comment.user_id == @commentable.user.id %>
+<% if current_user == @commentable.user %>
+    <% if comment.user == @commentable.user %>
         <div class="comment_item" style="text-align: left;" id=<%= dom_id(comment) %>>
           <div class="chat_gravatar">
             <%=  link_to chat_gravatar_for(comment.user), comment.user  %>
@@ -31,14 +31,14 @@
           </div>
         </div>
     <% end  %>
-<% elsif (comment.user_id == current_user.id) %>
+<% elsif (comment.user == current_user) %>
     <div class="comment_item" style="text-align: right;" id=<%= dom_id(comment) %>>
       <div class="chat_gravatar" style="float:right">
         <%=  link_to chat_gravatar_for(comment.user), comment.user  %>
       </div>
       <div class="triangle-isosceles right">
         <div class="delete_comment">
-          <%= link_to image_tag("delete_comment.png"), [@commentable, comment], :method => :delete, :remote => true %>
+            <%= link_to image_tag("delete_comment.png"), [@commentable, comment], :method => :delete, :remote => true %>
         </div>
         <div class="comment_content">
           <b>"<%= comment.content %>"</b>

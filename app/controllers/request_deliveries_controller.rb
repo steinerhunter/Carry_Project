@@ -27,10 +27,23 @@ class RequestDeliveriesController < ApplicationController
     @request_feed_items = RequestDelivery.all
   end
 
+  def edit
+    @request_delivery = RequestDelivery.find(params[:id])
+  end
+
+  def update
+    @request_delivery = RequestDelivery.find(params[:id])
+    if @request_delivery.update_attributes( params[:request_delivery])
+      redirect_to request_delivery_path
+    else
+      render 'edit'
+    end
+  end
+
   def destroy
     @request_delivery = RequestDelivery.find(params[:id])
     @request_delivery.destroy
-    redirect_to root_url
+    redirect_to requests_path
   end
 
   private

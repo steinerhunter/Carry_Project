@@ -23,11 +23,39 @@
   </div>
   <div class="show_data">
     <div class="show_title">
-      <b><%= @request_delivery.what %></b>
+      <% if (current_user?(@request_delivery.user)) || (current_user.try(:admin?)) %>
+          <div class="delete_post_big">
+            <div class="bubbleInfo">
+              <%=  link_to image_tag("delete_post_big.png"), @request_delivery, method: :delete, class: "trigger" %>
+              <div class="popup" style="height:20px; width:190px; margin-top:57px;">
+                <b style="color:#FF0523">Delete</b> your delivery request.
+                <div id="tail1" style="left:37px"></div>
+                <div id="tail2" style="left:37px"></div>
+              </div>
+            </div>
+          </div>
+          <div class="edit_post_big">
+            <div class="bubbleInfo">
+              <%=  link_to image_tag("edit_post_big.png"), edit_request_delivery_path(@request_delivery), class: "trigger" %>
+              <div class="popup" style="height:20px; width:170px; margin-top:57px;">
+                <b style="color:#ff9054">Edit</b> your delivery request.
+                <div id="tail1" style="left:37px"></div>
+                <div id="tail2" style="left:37px"></div>
+              </div>
+            </div>
+          </div>
+      <% end %>
+      <b style="padding-left: 70px;"><%= @request_delivery.what %></b>
     </div>
     <div class="the_deadline_and_money">
-      <div class="the_money">
-        Delivery Bounty<br><b><%= @request_delivery.cost %> NIS</b>
+      <% if @request_delivery.currency == "NIS" %>
+          <div class="the_money"  style="background-image: url('../assets/nis.png');">
+      <% elsif @request_delivery.currency == "Euro" %>
+          <div class="the_money"  style="background-image: url('../assets/euro.png');">
+      <% elsif @request_delivery.currency == "USD" %>
+          <div class="the_money"  style="background-image: url('../assets/usd.png');">
+      <% end %>
+        Delivery Bounty<br><b><%= @request_delivery.cost %> <%= @request_delivery.currency %></b>
       </div>
     </div>
     <div class="the_from_and_to">
@@ -87,7 +115,7 @@
   </div>
       <div class="show_data" style="margin-top: 15px;">
         <div class="show_title" style="background-image: url('../assets/contact.png');font-size: 2.6em;height:35px;">
-          <b>Contact <%= link_to @request_delivery.user.name, @request_delivery.user  %></b>
+          <b style="padding-left: 70px;">Contact <%= link_to @request_delivery.user.name, @request_delivery.user  %></b>
         </div>
         <div class="show_comments">
           <%= render 'comments/comments' %>

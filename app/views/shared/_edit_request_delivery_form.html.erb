@@ -1,0 +1,48 @@
+<div class="edit_request_delivery">
+  <%= form_for(@request_delivery, :validate => true ) do |f| %>
+      <div class="edit_data">
+        <div class="edit_title">
+          <b style="padding-left: 60px;font-size: 36px;">Edit Delivery Request</b>
+        </div>
+        <div class="edit_what_and_money">
+          <div class="edit_what">
+            What do you need to deliver?<br><%= f.text_field :what  %>
+          </div>
+          <div class="edit_money">
+            How much will you pay?<br><%= f.text_field :cost  %><%= f.select :currency, options_for_select(%w[NIS USD Euro]) %>
+          </div>
+        </div>
+        <div class="edit_from_and_to">
+          <div class="edit_from">
+            Delivery Origin<br><%= f.text_field :from, :class => "address_field" %>
+          </div>
+          <div class="edit_to">
+            Delivery Destination<br><%= f.text_field :to, :class => "address_field" %>
+          </div>
+        </div>
+        <div class="the_size_and_more_info">
+          <div class="edit_sender_and_receiver">
+            <div class="the_sender">
+              Sending Person<br><%= f.text_field :sending_person  %>
+            </div>
+            <div class="the_receiver">
+              Receiving Person<br><%= f.text_field :receiving_person  %>
+            </div>
+            <div class="edit_deadline">
+              Delivery Needed By<br><%= f.text_field :when, :placeholder => "mm/dd/yyyy", :class => "datepicker" %>
+            </div>
+            <div class="edit_size">
+              Delivery Size<br><%= f.select :size, options_for_select(%w[Small Medium Large]) %>
+            </div>
+          </div>
+          <div class="edit_more_info">
+            Some More Info<br><%= f.text_area :more_details, :rows => 2 %>
+          </div>
+          <div class="edit_update">
+            <%= f.submit "Update", :type => :image, :src => "../../assets/Update.png" %>
+          </div>
+        </div>
+      </div>
+  <% end  %>
+  </div>
+

@@ -17,20 +17,9 @@
       <fieldset>
         <div class="single_step">
           <legend  style="background-image: url('../assets/3.png');"><b>Content of Delivery</b></legend>
-          <%= f.label :size, "How big a package can you deliver?" %>
-          <div class="radio_buttons">
-            <div class="radio_button" style="text-align:left">
-              <%= f.radio_button(:size, "Small") %>
-              <%= f.label(:size_small, "Small") %>
-            </div>
-            <div class="radio_button" style="text-align:left">
-              <%= f.radio_button(:size, "Medium") %>
-              <%= f.label(:size_small, "Medium") %>
-            </div>
-            <div class="radio_button" style="text-align:left">
-              <%= f.radio_button(:size, "Large") %>
-              <%= f.label(:size_small, "Large") %>
-            </div>
+          <div class="new_size">
+            <%= f.label :size, "Which package size can you deliver?" %>
+            <%= f.select :size, options_for_select(%w[Small Medium Large]), :include_blank => "Pick Size..." %>
           </div>
           <%= f.label :more_details, "Please provide some more details:" %>
           <%= f.text_area :more_details, :placeholder => "Add any detail that might be important...", :rows => 2  %>
@@ -39,15 +28,22 @@
       <fieldset>
         <div class="single_step">
           <legend  style="background-image: url('../assets/4.png');"><b>Time of Delivery</b></legend>
-          <%= f.label :when, "When are taking your trip?" %>
-          <%= f.text_field :when, :placeholder => "mm/dd/yyyy", :class => "datepicker" %>
+          <div class="new_deadline">
+            <%= f.label :when, "When are taking your trip?" %>
+            <%= f.text_field :when, :placeholder => "mm/dd/yyyy", :class => "datepicker" %>
+          </div>
         </div>
       </fieldset>
       <fieldset>
         <div class="single_step">
           <legend  style="background-image: url('../assets/5.png');"><b>Payment</b></legend>
-          <%= f.label :cost, "How much will you charge for the delivery?" %>
-          <%= f.text_field :cost, :placeholder => "Type an amount in NIS..."   %>
+          <div class="new_money">
+            <%= f.label :cost, "How much will you charge for the delivery?" %>
+            <%= f.text_field :cost, :placeholder => "Type an amount..."   %>
+            <div class="currency_select">
+              <%= f.select :currency, options_for_select(%w[NIS USD Euro]), :include_blank => "Pick Currency..." %>
+            </div>
+          </div>
           <div class="form_submit">
             <%= f.submit "Finish", :type => :image, :src => "assets/Finish.png", :class => "finish" %>
           </div>

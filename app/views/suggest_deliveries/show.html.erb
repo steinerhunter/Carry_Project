@@ -26,8 +26,14 @@
           <b>"I can deliver <%= @suggest_delivery.size %> sized items."</b>
         </div>
         <div class="the_deadline_and_money">
-          <div class="the_money">
-            Delivery Cost<br><b><%= @suggest_delivery.cost %> NIS</b>
+          <% if @suggest_delivery.currency == "NIS" %>
+              <div class="the_money"  style="background-image: url('../assets/nis.png');">
+          <% elsif @suggest_delivery.currency == "Euro" %>
+              <div class="the_money"  style="background-image: url('../assets/euro.png');">
+          <% elsif @suggest_delivery.currency == "USD" %>
+              <div class="the_money"  style="background-image: url('../assets/usd.png');">
+          <% end %>
+            Delivery Cost<br><b><%= @suggest_delivery.cost %> <%= @suggest_delivery.currency %></b>
           </div>
         </div>
         <div class="the_from_and_to">

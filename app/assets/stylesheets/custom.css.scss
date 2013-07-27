@@ -7,7 +7,7 @@ html {
 }
 
 body {
-  padding-top: 60px;
+  padding-top: 0px;
   font-family: Arial, Helvetica, sans-serif ;
 }
 
@@ -201,7 +201,44 @@ header {
   }
 }
 
+.single_step label {
+  margin-right:auto;
+  margin-left:auto;
+  font-size:30px;
+}
 
+.new_size select {
+  width:175px;
+  height:45px;
+  padding-top:7px;
+  font-size: 1.5em;
+  border:solid 1px #000;
+}
+
+.new_size label {
+  width:600px;
+}
+
+.new_deadline label {
+  margin-right:auto;
+  margin-left:auto;
+}
+
+.new_deadline input[type=text] {
+  width: 250px;
+}
+
+.new_money input[type=text] {
+  width: 185px;
+}
+
+.new_money select {
+  width:185px;
+  height:45px;
+  padding-top:7px;
+  font-size: 1.5em;
+  border:solid 1px #000;
+}
 
 .section_title {
   text-align: left;
@@ -244,15 +281,15 @@ footer {
 }
 
 .new_delivery_request_class {
-  margin-top: 7%;
-  width:900px;
+  margin-top: 1%;
+  width:700px;
   margin-left: auto;
   margin-right: auto;
 }
 
 .new_delivery_suggest_class {
-  margin-top: 7%;
-  width:900px;
+  margin-top: 1%;
+  width:700px;
   margin-left: auto;
   margin-right: auto;
 }
@@ -294,46 +331,34 @@ fieldset label {
   display:block;
   margin:15px 0 5px;
   font-size: 2.8em;
-  margin-top: 50px;
-  margin-bottom: 35px;
+  margin-top: 30px;
+  margin-bottom: 20px;
   text-align: center;
-  width: 800px;
+  width: 600px;
 }
 
 fieldset input[type=text] {
-  width:600px;
-  padding:12px;
+  width:480px;
+  padding:8px;
   font-size: 1.5em;
   border:solid 1px #000;
 }
 
 textarea {
-  width: 600px;
-}
-
-.radio_buttons {
-  width: 600px;
-  margin-right: auto;
-  margin-left: auto;
-  margin-bottom: 5%;
-  margin-top: 2%;
-}
-
-.radio_button label {
-  font-size: 1em;
-  display: inline;
+  width: 500px;
+  border:solid 1px #000;
 }
 
 .step_class {
-  width: 800px;
+  width: 700px;
   margin-left: auto;
   margin-right: auto;
 }
 
 .step_command {
   float: center;
-  margin-top: 35px;
-  margin-bottom: 15px;
+  margin-top: 15px;
+  margin-bottom: 10px;
 }
 
 #steps {
@@ -364,9 +389,9 @@ textarea {
 
 .field_with_errors label {
   display:block;
-  font-size: 2.8em;
+  font-size: 30px;
   text-align: center;
-  width: 800px;
+  width: 600px;
   color: #ffffff;
 }
 
@@ -374,12 +399,13 @@ textarea {
   width: 50%;
   margin: 0 auto;
   line-height: 30px;
-  width: 600px;
+  width: 460px;
   background-color: #c80000;
   border: 1px solid #111111;
   color: #ffffff;
-  font-size: 22px;
+  font-size: 18px;
   margin-top: 10px;
+  margin-bottom: 10px;
 }
 
 .errors {

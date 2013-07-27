@@ -9,7 +9,7 @@
             What do you need to deliver?<br><%= f.text_field :what  %>
           </div>
           <div class="edit_money">
-            How much will you pay?<br><%= f.text_field :cost  %><%= f.select :currency, options_for_select(%w[NIS USD Euro]) %>
+            How much will you pay?<br><%= f.text_field :cost  %><%= f.select :currency, options_for_select(%w[NIS USD Euro], :selected => @request_delivery.currency) %>
           </div>
         </div>
         <div class="edit_from_and_to">
@@ -29,14 +29,20 @@
               Receiving Person<br><%= f.text_field :receiving_person  %>
             </div>
             <div class="edit_deadline">
-              Delivery Needed By<br><%= f.text_field :when, :placeholder => "mm/dd/yyyy", :class => "datepicker", :value => "#{@request_delivery.when.strftime("%d/%m/%Y")}" %>
+              Delivery By<br><%= f.text_field :when, :placeholder => "mm/dd/yyyy", :class => "datepicker", :value => "#{@request_delivery.when.strftime("%d/%m/%Y")}" %>
             </div>
-            <div class="edit_size">
-              Delivery Size<br><%= f.select :size, options_for_select(%w[Small Medium Large]) %>
+            <% if @request_delivery.size == "Large" %>
+                <div class="edit_size"  style="background-image: url('../../assets/edit_Large.png');">
+            <% elsif @request_delivery.size == "Medium" %>
+                <div class="edit_size"  style="background-image: url('../../assets/edit_Medium.png');">
+            <% elsif @request_delivery.size == "Small" %>
+                <div class="edit_size"  style="background-image: url('../../assets/edit_Small.png');">
+            <% end %>
+              Delivery Size<br><%= f.select :size, options_for_select(%w[Small Medium Large], :selected => @request_delivery.size) %>
             </div>
           </div>
           <div class="edit_more_info">
-            Some More Info<br><%= f.text_area :more_details, :rows => 2 %>
+            More Details <br><%= f.text_area :more_details, :rows => 2 %>
           </div>
           <div class="edit_update">
             <%= f.submit "Update", :type => :image, :src => "../../assets/Update.png" %>

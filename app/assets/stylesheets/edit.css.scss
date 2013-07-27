@@ -145,7 +145,7 @@
   font-size:1.6em;
   width: 450px;
   text-align: center;
-  background-image: url('box.png');
+  background-image: url('box_large.png');
   background-color: #10529b;
   background-repeat: no-repeat;
   background-position: bottom left;
@@ -167,7 +167,7 @@
   font-size:1.6em;
   width: 450px;
   text-align: center;
-  background-image: url('bounty.png');
+  background-image: url('money.png');
   background-color: #10529b;
   background-repeat: no-repeat;
   background-position: bottom left;
@@ -298,19 +298,22 @@
   font-size:1.6em;
   width: 450px;
   text-align: center;
+  background-image: url('Info_small.png');
   background-color: #10529b;
   background-repeat: no-repeat;
-  background-position: bottom left;
+  background-position: top left;
   border:1px solid;
   border-radius:4px;
   -moz-border-radius:10px; /* Old Firefox */
   padding: 5px;
+  padding-top:0px;
   color: #ffffff;
   border-color: #000000;
   b {
     font-size: 0.8em;
   }
   textarea {
+    margin-top:5px;
     width:430px;
   }
 }
@@ -390,10 +393,9 @@
   font-size:1.4em;
   width: 212px;
   text-align: center;
-  background-image: url('SendingPerson.png');
   background-color: #10529b;
   background-repeat: no-repeat;
-  background-position: bottom left;
+  background-position: middle left;
   border:1px solid;
   border-radius:4px;
   -moz-border-radius:10px; /* Old Firefox */
@@ -402,7 +404,7 @@
   border-color: #000000;
   margin-bottom: 10px;
   select {
-    width:170px;
+    width:150px;
     margin-right:10px;
     float:right;
   }
@@ -413,7 +415,7 @@
   font-size:1.4em;
   width: 212px;
   text-align: center;
-  background-image: url('ReceivingPerson.png');
+  background-image: url('edit_Calendar.png');
   background-color: #10529b;
   background-repeat: no-repeat;
   background-position: bottom left;
@@ -424,6 +426,9 @@
   color: #ffffff;
   border-color: #000000;
   margin-right: 10px;
+  input[type=text] {
+    width: 150px;
+  }
 }
 
 .edit_update {

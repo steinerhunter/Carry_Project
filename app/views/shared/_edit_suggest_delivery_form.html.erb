@@ -36,7 +36,7 @@
             More Details <br><%= f.text_area :more_details, :rows => 2 %>
           </div>
           <div class="edit_update">
-            <%= link_to image_tag("Cancel.png"),  suggest_delivery_path(@suggest_delivery) %>
+            <%= link_to image_tag("Cancel.png"),  :back %>
             <%= f.submit "Update", :type => :image, :src => "../../assets/Update.png" %>
           </div>
         </div>

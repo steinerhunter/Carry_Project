@@ -23,7 +23,7 @@
       </div>
       <div class="show_data">
         <div class="show_title" style="font-size: 1.9em">
-          <b>"I can deliver <%= @suggest_delivery.size %> sized items."</b>
+          <b style="padding-left: 70px;">"I can deliver <%= @suggest_delivery.size %> sized items."</b>
         </div>
         <div class="the_deadline_and_money">
           <% if @suggest_delivery.currency == "NIS" %>
@@ -93,7 +93,7 @@
       </div>
       <div class="show_data" style="margin-top: 15px;">
         <div class="show_title" style="background-image: url('../assets/contact.png');font-size: 2.6em;height:35px;">
-          <b>Contact <%= link_to @suggest_delivery.user.name, @suggest_delivery.user  %></b>
+          <b style="padding-left: 70px;">Contact <%= link_to @suggest_delivery.user.name, @suggest_delivery.user  %></b>
         </div>
         <div class="show_comments">
           <%= render 'comments/comments' %>

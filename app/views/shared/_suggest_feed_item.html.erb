@@ -21,17 +21,23 @@
         </div>
       </div>
   <% end %>
-  <div class="feed_item_map">
-    <img src="http://maps.google.com/maps/api/staticmap?size=150x150&maptype=roadmap&sensor=false&markers=color:green|label:A|<%= suggest_feed_item.from %>&markers=color:green|label:B|<%= suggest_feed_item.to %>" alt="Static, Marked Map of Chicago, Illinois and Hammond, Indiana with no Center and Zoom"></img>
+  <div class="right_index">
+    <div class="feed_item_map">
+      <img src="http://maps.google.com/maps/api/staticmap?size=150x150&maptype=roadmap&sensor=false&markers=color:green|label:A|<%= suggest_feed_item.from %>&markers=color:green|label:B|<%= suggest_feed_item.to %>" alt="Static, Marked Map of Chicago, Illinois and Hammond, Indiana with no Center and Zoom"></img>
+    </div>
+    <div class="feed_date" style="background-image: url('../assets/calendar.png');">
+      Happens On: <b><%= suggest_feed_item.when.strftime("%d/%m/%Y") %></b>
+    </div>
   </div>
   <div class="feed_item_info">
-    <div class="feed_suggest_title">
-      <b><%= link_to "\"I can deliver " + suggest_feed_item.size + " sized items.\"", suggest_delivery_path(suggest_feed_item) %></b>
+    <div class="feed_title" style="background-image: url('../assets/car.png');">
+      <b><%= link_to suggest_feed_item.size + " sized items.", suggest_delivery_path(suggest_feed_item) %></b>
     </div>
-    <div class="feed_from_and_to_suggest">
-      From: <b><%= suggest_feed_item.from %></b><br>
-      To: <b><%= suggest_feed_item.to %></b><br>
-      Delivery Date: <b><%= suggest_feed_item.when.strftime("%d/%m/%Y") %></b>
+    <div class="feed_from_and_to" style="background-image: url('../assets/index_LocationA.png');">
+      From: <b><%= suggest_feed_item.from %></b>
+    </div>
+    <div class="feed_from_and_to" style="background-image: url('../assets/index_LocationB.png');">
+      To: <b><%= suggest_feed_item.to %></b>
     </div>
     <div class="feed_item_money">
       <b><%= link_to "Delivery Cost: " + suggest_feed_item.cost + " " + suggest_feed_item.currency, suggest_delivery_path(suggest_feed_item)  %></b>

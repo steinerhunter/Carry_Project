@@ -12,43 +12,49 @@
 
 .feed_item {
   position: relative;
-  height: 160px;
   width: 600px;
   background-color: #1d79e2;
   -moz-box-shadow: 5px 5px 5px #333333;; /* Old Firefox */
   box-shadow: 5px 5px 5px #333333;
   border:1px solid;
   border-radius:2px;
-  -moz-border-radius:10px; /* Old Firefox */
-  padding-left: 10px;
-  padding-right: 10px;
+  -moz-border-radius: 0px;
+  -webkit-border-radius: 10px 10px 10px 10px;
+  border-radius: 10px 10px 10px 10px;
   padding-top: 0px;
   padding-bottom: 10px;
   color: #ffffff;
   border-color: #000000;
   margin-bottom: 5%;
+}
+
+.feed_title {
   position:relative;
-}
-
-.feed_request_title {
-  margin-top: 10px;
+  text-align: left;
+  height:37px;
+  padding-top:14px;
+  font-size: 2.4em;
+  border-bottom:solid 2px;
+  border-color: #18212e;
+  background-color:#00008b;
+  background-repeat: no-repeat;
+  background-position: bottom left;
+  -moz-border-radius: 0px;
+  -webkit-border-radius: 10px 10px 0px 0px;
+  border-radius: 10px 10px 0px 0px;
   a {
+    padding-left:70px;
     color: #ffffff;
-    font-size: 2.4em;
+    text-decoration: none;
+    &:hover {
+      color: #f2ff5e;
+    }
   }
 }
 
-.feed_suggest_title {
-  margin-top: 10px;
-  a {
-    color: #ffffff;
-    font-size: 1.7em;
-  }
-}
-
-.feed_from_and_to_request {
-  margin-top: 5%;
-  font-size: 1.2em;
+.feed_request_data {
+  padding-right:10px;
+  padding-left:10px;
 }
 
 .feed_from_and_to_suggest {
@@ -63,10 +69,7 @@
 
 .feed_item_money {
   text-align: center;
-  width: 390px;
-  position:absolute;
-  bottom:0;
-  left:0;
+  width: 380px;
   margin-bottom: 10px;
   margin-left: 10px;
   background-color: #257b2a;
@@ -82,16 +85,72 @@
   font-size: 1.8em;
   a {
     color: #ffffff;
-    font-size: 1.1em;
+    text-decoration: none;
+    &:hover {
+      color: #f2ff5e;
+    }
   }
+}
+
+.feed_from_and_to {
+  text-align: center;
+  width: 330px;
+  bottom:0;
+  left:0;
+  margin-bottom: 10px;
+  margin-left: 10px;
+  background-color: #10529b;
+  background-repeat: no-repeat;
+  background-position: top left;
+  border:1px solid;
+  border-radius:2px;
+  -moz-border-radius:10px; /* Old Firefox */
+  padding-left: 60px;
+  padding-right: 10px;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  margin-top:10px;
+  color: #ffffff;
+  border-color: #000000;
+  font-size: 1.2em;
+  b {
+    color:#f2ff5e;
+  }
+}
+
+.feed_date {
+  position:absolute;
+  text-align: center;
+  width: 140px;
+  right:10px;
+  top:160px;
+  background-color: #10529b;
+  background-repeat: no-repeat;
+  background-position: top left;
+  border:1px solid;
+  border-radius:2px;
+  -moz-border-radius:10px; /* Old Firefox */
+  padding:5px;
+  margin-top:10px;
+  color: #ffffff;
+  border-color: #000000;
+  font-size: 1.2em;
+  b {
+    color:#f2ff5e;
+  }
+}
+
+.right_index {
+  position:relative;
 }
 
 .feed_item_map {
   position:absolute;
   right:10px;
-  margin-top:8px;
+  margin-top:10px;
   border:1px solid;
   border-color: #000000;
+  z-index: 9;
 }
 
 .delete_post {

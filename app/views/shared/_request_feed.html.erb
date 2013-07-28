@@ -2,4 +2,7 @@
   <% if @request_feed_items.any? %>
       <%= render partial: 'shared/request_feed_item', collection: @request_feed_items %>
   <% end  %>
+  <div class="go_back">
+    <%= link_to image_tag("Back.png"),  :back %>
+  </div>
 </div>

@@ -1,6 +1,9 @@
 <div class="requestposts">
   <% if @request_feed_items.any? %>
+      <h3>Available delivery requests</h3>
       <%= render partial: 'shared/request_feed_item', collection: @request_feed_items %>
+  <% else  %>
+      <h3>No delivery requests available at the moment!</h3>
   <% end  %>
   <div class="go_back">
     <%= link_to image_tag("Back.png"),  :back %>

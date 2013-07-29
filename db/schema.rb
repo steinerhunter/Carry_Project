@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130726071030) do
+ActiveRecord::Schema.define(:version => 20130729204845) do
 
   create_table "comments", :force => true do |t|
     t.text     "content"
@@ -30,14 +30,15 @@ ActiveRecord::Schema.define(:version => 20130726071030) do
     t.datetime "when",             :limit => 255
     t.string   "more_details"
     t.integer  "user_id"
-    t.datetime "created_at",                      :null => false
-    t.datetime "updated_at",                      :null => false
+    t.datetime "created_at",                                          :null => false
+    t.datetime "updated_at",                                          :null => false
     t.string   "what"
     t.string   "cost"
     t.string   "size"
     t.string   "sending_person"
     t.string   "receiving_person"
     t.string   "currency"
+    t.string   "status",                          :default => "Open"
   end
 
   add_index "request_deliveries", ["user_id", "created_at"], :name => "index_request_deliveries_on_user_id_and_created_at"
@@ -48,11 +49,12 @@ ActiveRecord::Schema.define(:version => 20130726071030) do
     t.datetime "when",         :limit => 255
     t.string   "more_details"
     t.integer  "user_id"
-    t.datetime "created_at",                  :null => false
-    t.datetime "updated_at",                  :null => false
+    t.datetime "created_at",                                      :null => false
+    t.datetime "updated_at",                                      :null => false
     t.string   "size"
     t.string   "cost"
     t.string   "currency"
+    t.string   "status",                      :default => "Open"
   end
 
   add_index "suggest_deliveries", ["user_id", "created_at"], :name => "index_suggest_deliveries_on_user_id_and_created_at"

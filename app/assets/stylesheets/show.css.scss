@@ -300,6 +300,27 @@
   }
 }
 
+.task_status {
+  display: inline-block;
+  width: 300px;
+  font-size:18px;
+  margin-top: 10px;
+  text-align: center;
+  background-image: url('status_Open.png');
+  background-color: #10529b;
+  background-repeat: no-repeat;
+  background-position: bottom left;
+  border:1px solid;
+  border-radius:4px;
+  -moz-border-radius:10px; /* Old Firefox */
+  padding: 5px;
+  color: #ffffff;
+  border-color: #000000;
+  b {
+    color: #8bceff;
+  }
+}
+
 .more_info {
   display: inline-block;
   font-size:20px;

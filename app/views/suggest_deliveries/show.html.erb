@@ -16,7 +16,12 @@
         <% elsif @suggest_delivery.size == "Small" %>
             <div class="the_size"  style="background-image: url('../assets/Small.png');">
         <% end %>
-        Delivery Size<br><b><%= @suggest_delivery.size %></b>   <br>
+        Delivery Size<br><b><%= @suggest_delivery.size %></b>
+        </div>
+        <div class="task_status">
+          <% if @suggest_delivery.status == "Open" %>
+              Suggestion Status<br><b style="color: #20d62c;"><%= @suggest_delivery.status %></b>
+          <% end %>
         </div>
         </div>
         </div>
@@ -84,6 +89,16 @@
               <div class="verified_item">
                 <div class="bubbleInfo">
                   <%= image_tag("VerifiedPhone.png", :class => "trigger")%>
+                  <div class="popup">
+                    <b><%=@suggest_delivery.user.name %></b> has verified his/her Phone Number.
+                    <div id="tail1"></div>
+                    <div id="tail2"></div>
+                  </div>
+                </div>
+              </div>
+              <div class="verified_item">
+                <div class="bubbleInfo">
+                  <%= image_tag("VerifiedPaypal.png", :class => "trigger")%>
                   <div class="popup">
                     <b><%=@suggest_delivery.user.name %></b> has verified his/her Phone Number.
                     <div id="tail1"></div>

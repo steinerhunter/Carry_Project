@@ -16,7 +16,12 @@
         <% elsif @request_delivery.size == "Small" %>
             <div class="the_size"  style="background-image: url('../assets/Small.png');">
         <% end %>
-        Delivery Size<br><b><%= @request_delivery.size %></b>   <br>
+        Delivery Size<br><b><%= @request_delivery.size %></b>
+        </div>
+        <div class="task_status">
+          <% if @request_delivery.status == "Open" %>
+            Request Status<br><b style="color: #20d62c;"><%= @request_delivery.status %></b>
+           <% end %>
         </div>
       </div>
     </div>
@@ -76,8 +81,8 @@
               <%= image_tag("VerifiedEmail.png", :class => "trigger") %>
               <div class="popup">
                 <b><%=@request_delivery.user.name %></b> has verified his/her Email Address.
-                <div id="tail1"></div>
-                <div id="tail2"></div>
+                <div id="tail1" style="left:47px;"></div>
+                <div id="tail2" style="left:47px;"></div>
               </div>
             </div>
           </div>
@@ -86,8 +91,18 @@
               <%= image_tag("VerifiedPhone.png", :class => "trigger")%>
               <div class="popup">
                 <b><%=@request_delivery.user.name %></b> has verified his/her Phone Number.
-                <div id="tail1"></div>
-                <div id="tail2"></div>
+                <div id="tail1" style="left:47px;"></div>
+                <div id="tail2" style="left:47px;"></div>
+              </div>
+            </div>
+          </div>
+          <div class="verified_item">
+            <div class="bubbleInfo">
+              <%= image_tag("VerifiedPaypal.png", :class => "trigger")%>
+              <div class="popup">
+                <b><%=@request_delivery.user.name %></b> has verified his/her Paypal account.
+                <div id="tail1" style="left:47px;"></div>
+                <div id="tail2" style="left:47px;"></div>
               </div>
             </div>
           </div>
@@ -95,9 +110,9 @@
             <div class="bubbleInfo">
             <%= image_tag("VerifiedPhoto.png", :class => "trigger")%>
               <div class="popup">
-                <b><%=@request_delivery.user.name %></b> has uploaded a photo.
-                <div id="tail1"></div>
-                <div id="tail2"></div>
+                <b><%=@request_delivery.user.name %></b> has uploaded a profile picture.
+                <div id="tail1" style="left:47px;"></div>
+                <div id="tail2" style="left:47px;"></div>
               </div>
               </div>
           </div>

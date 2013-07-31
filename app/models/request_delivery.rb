@@ -1,6 +1,8 @@
 class RequestDelivery < ActiveRecord::Base
   attr_accessible :from, :to, :what, :when, :more_details, :cost, :currency, :size, :sending_person, :receiving_person
   has_many :comments, :as => :commentable
+  has_many :accepted_requests # just the 'relationships'
+  has_many :accepted_by, through: :accepted_requests, source: :user
   belongs_to :user
 
   validates :user_id, presence: true

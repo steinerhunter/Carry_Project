@@ -14,6 +14,8 @@ class User < ActiveRecord::Base
   has_secure_password
   has_many :request_deliveries, dependent: :destroy
   has_many :suggest_deliveries, dependent: :destroy
+  has_many :accepted_requests
+  has_many :accepts, through: :accepted_requests, source: :request_delivery
 
   before_save { |user| user.email = email.downcase }
   before_save :create_remember_token

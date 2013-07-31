@@ -4,7 +4,7 @@
 }
 
 #current-delivery-map {
-  height: 555px;
+  height: 485px;
   -moz-box-shadow: 5px 5px 5px #333333;; /* Old Firefox */
   box-shadow: 5px 5px 5px #333333;
   border:1px solid;
@@ -34,6 +34,42 @@
   padding-bottom: 14px;
   margin-bottom: 20px;
   font-size: 2.6em;
+  a {
+    padding-left: 30px;
+    color: #ffffff;
+    text-decoration: none;
+    &:hover {
+      color: #f2ff5e;
+    }
+  }
+}
+
+.challenge_cancelled {
+  width: 100%;
+  text-align: center;
+  background-image: url('challenge_cancelled.png');
+  background-color: #d67a31;
+  background-repeat: no-repeat;
+  background-position: bottom left;
+  -moz-box-shadow: 5px 5px 5px #333333;; /* Old Firefox */
+  box-shadow: 5px 5px 5px #333333;
+  border:solid 3px;
+  border-radius:8px;
+  -moz-border-radius:10px; /* Old Firefox */
+  color: #ffffff;
+  border-color: #000000;
+  padding-top:14px;
+  padding-bottom: 14px;
+  margin-bottom: 20px;
+  font-size: 2.6em;
+  a {
+    padding-left: 30px;
+    color: #ffffff;
+    text-decoration: none;
+    &:hover {
+      color: #f2ff5e;
+    }
+  }
 }
 
 .extra_info {
@@ -306,7 +342,6 @@
   font-size:18px;
   margin-top: 10px;
   text-align: center;
-  background-image: url('status_Open.png');
   background-color: #10529b;
   background-repeat: no-repeat;
   background-position: bottom left;

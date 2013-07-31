@@ -4,6 +4,7 @@ class RequestDeliveriesController < ApplicationController
 
   def show
     @request_delivery = RequestDelivery.find(params[:id])
+    @accepted_request = AcceptedRequest.find_by_user_id_and_request_delivery_id(current_user.id,@request_delivery.id)
     @commentable = @request_delivery
     @comments = @commentable.comments
     @comment = Comment.new
@@ -45,6 +46,24 @@ class RequestDeliveriesController < ApplicationController
     @request_delivery = RequestDelivery.find(params[:id])
     @request_delivery.destroy
     redirect_to requests_path
+  end
+
+  def accept
+    @request_delivery = RequestDelivery.find(params[:id])
+    type = params[:type]
+    if current_user != @request_delivery.user
+      if type == "accept"
+        current_user.accepts << @request_delivery
+        redirect_to :back
+      elsif type == "cancel"
+        current_user.accepts.delete(@request_delivery)
+        redirect_to :back
+      else
+        redirect_to :back
+      end
+    else
+      redirect_to :back
+    end
   end
 
   private

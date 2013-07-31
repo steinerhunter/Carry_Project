@@ -1,5 +1,14 @@
 <div class="show_request_delivery">
   <div class="right_side">
+    <% if @accepted_request.blank? %>
+        <div class="challenge_accepted">
+          <b><%= link_to "Accept Request",   accept_request_delivery_path(@request_delivery, type: "accept"), method: :put %></b>
+        </div>
+    <% else  %>
+        <div class="challenge_cancelled">
+          <b style="font-size:33px"><%= link_to "Cancel Acceptance", accept_request_delivery_path(@request_delivery, type: "cancel"), method: :put %></b>
+        </div>
+    <% end %>
     <div id="current-delivery-map"></div>
     <div class="extra_info">
       <div class="extra_info_title">
@@ -18,12 +27,17 @@
         <% end %>
         Delivery Size<br><b><%= @request_delivery.size %></b>
         </div>
-        <div class="task_status">
-          <% if @request_delivery.status == "Open" %>
-            Request Status<br><b style="color: #20d62c;"><%= @request_delivery.status %></b>
-           <% end %>
+        <% if !@accepted_request.blank? %>
+            <div class="task_status" style="background-image: url('../assets/status_Pending.png');">
+              Request Status<br><b style="color: #d67a31;">Pending Confirmation</b>
+            </div>
+        <% elsif @request_delivery.status == "Open" %>
+            <div class="task_status" style="background-image: url('../assets/status_Open.png');">
+              Request Status<br><b style="color: #20d62c;"><%= @request_delivery.status %></b>
+            </div>
+        <% end %>
+
         </div>
-      </div>
     </div>
   </div>
   <div class="show_data">

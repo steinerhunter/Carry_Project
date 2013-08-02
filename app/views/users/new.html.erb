@@ -5,7 +5,7 @@
   <%= form_for(@user, :remote => true) do |f| %>
       <%=  render 'shared/error_messages', object: f.object  %>
       <div class="signup_fields">
-        <div class="myfield_signup" style="  margin-right: 50px;">
+        <div class="myfield_signup">
           <%= f.label :name, "What's your name?" %>
           <%= f.text_field :name %>
         </div>
@@ -13,7 +13,7 @@
           <%= f.label :email, "What's your Email Address?" %>
           <%= f.text_field :email, :placeholder => "someone@example.com" %>
         </div>
-        <div class="myfield_signup" style="margin-right:50px;">
+        <div class="myfield_signup">
           <%= f.label :password, "Choose a Password:" %>
           <%= f.password_field :password, :placeholder => "At least 8 characters"  %>
         </div>

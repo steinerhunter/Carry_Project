@@ -55,14 +55,19 @@ class RequestDeliveriesController < ApplicationController
       if type == "accept"
         current_user.accepts << @request_delivery
         redirect_to :back
+        flash[:accept] = "You've chosen to accept <br><b>#{@request_delivery.what}</b><br> delivery request!<br>
+                                              <div class='sub_flash_text'><b>#{@request_delivery.user.name}</b>, the creator of the request, will be notified. <br>
+                                              Please allow <b>#{@request_delivery.user.name}</b> some time to get back to you.</div>".html_safe
       elsif type == "cancel"
         current_user.accepts.delete(@request_delivery)
         redirect_to :back
+        flash[:cancel] = "You've chosen to cancel the request."
       else
         redirect_to :back
       end
     else
       redirect_to :back
+      flash[:your_own] = "You cannot accept <br> your own delivery requests!".html_safe
     end
   end
 

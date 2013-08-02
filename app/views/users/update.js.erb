@@ -1,0 +1,33 @@
+var form = $('.edit_user');
+
+<% if @user.errors.any? %>
+
+// Delete errors from previous submission
+if ($(".signup_errors")[0]){
+    $('.signup_errors').remove();
+}
+
+// Create a list of errors
+var errors = $('<ul />');
+
+// Delete password_digest error is such exists
+<% if @user.errors.has_key?(:password_digest) %>
+    <% @user.errors.delete(:password_digest) %>
+<% end %>
+
+// Display only first error for each field
+<% @user.errors.each do |attribute, message| %>
+    <% if @user.errors[attribute].first == message %>
+        errors.append('<li><%= escape_javascript(message) %></li>');
+    <% end %>
+<% end %>
+
+// Display errors before the form
+$('<div />').addClass('signup_errors').html(errors).appendTo(".edit_user").hide().fadeIn('slow');
+
+<% else %>
+
+// On successful creation of new user, redirect to main page
+window.location.href = "/"
+
+<% end %>

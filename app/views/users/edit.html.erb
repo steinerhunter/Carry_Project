@@ -1,27 +1,29 @@
-<% provide(:title, 'Edit user')%>
-<h1>Update your profile</h1>
-
-<div class="row">
-  <div class="span6 offset3">
-    <%= form_for(@user) do |f| %>
-        <%=  render 'shared/error_messages', object: f.object  %>
-
-        <%= f.label :name %>
-        <%= f.text_field :name %>
-
-        <%= f.label :email  %>
-        <%= f.text_field :email %>
-
-        <%= f.label :password  %>
-        <%= f.password_field :password %>
-
-        <%= f.label :password_confirmation, "Confirm Password"  %>
-        <%= f.password_field  :password_confirmation%>
-
-        <%= f.submit "Save Changes", class: "btn btn-large btn-primary" %>
-    <% end %>
-
-    <%=  gravatar_for @user  %>
-    <a href="http://gravatar.com/emails">Change picture</a>
+<div class="signup_form_class">
+  <div class="form_title" style="background-image: url('../../assets/edit_post_really_big.png');">
+    <b>Edit Your Details</b>
   </div>
+  <%= form_for(@user, :remote => true) do |f| %>
+      <%=  render 'shared/error_messages', object: f.object  %>
+      <div class="signup_fields">
+        <div class="myfield_signup">
+          <%= f.label :name, "What's your name?" %>
+          <%= f.text_field :name %>
+        </div>
+        <div class="myfield_signup">
+          <%= f.label :email, "What's your Email Address?" %>
+          <%= f.text_field :email, :placeholder => "someone@example.com" %>
+        </div>
+        <div class="myfield_signup">
+          <%= f.label :password, "Choose a Password:" %>
+          <%= f.password_field :password, :placeholder => "At least 8 characters"  %>
+        </div>
+        <div class="myfield_signup">
+          <%= f.label :password_confirmation, "Confirm your Password:" %>
+          <%= f.password_field :password_confirmation %>
+        </div>
+      </div>
+      <div class="button_signup">
+        <%=  f.submit "Update!", :type => :image, :src => "../../assets/Update.png"  %>
+      </div>
+  <% end  %>
 </div>

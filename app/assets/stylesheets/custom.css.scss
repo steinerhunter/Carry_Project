@@ -91,7 +91,7 @@ header {
 
 .signup_form_class {
   width: 700px;
-  height: 350px;
+  height: 310px;
   text-align: center;
   background-color: #1d79e2;
   -moz-box-shadow: 5px 5px 5px #333333;; /* Old Firefox */
@@ -123,7 +123,7 @@ header {
 
 .form_title {
   text-align: left;
-  height:35px;
+  height:37px;
   padding-top:14px;
   font-size: 3.2em;
   border-bottom:solid 2px;
@@ -140,7 +140,7 @@ header {
 }
 
 
-.myfield_signin label, .myfield_session input {
+.myfield_signin label, .myfield_signin input {
   display:inline-block;
 }
 
@@ -155,22 +155,25 @@ header {
   font-size: 2.0em;
 }
 
-.myfield_signup {
-  margin-bottom: 30px;
+.myfield_signup label, .myfield_signup input {
+  display:inline-block;
+}
+
+.myfield_signup input {
+  width:250px;
+}
+
+.myfield_signup label {
   text-align: left;
-  float: left;
-  input {
-    width: 250px;
-  }
-  label {
-    width: 200px;
-    font-size: 1.1em;
-  }
+  vertical-align: middle;
+  width: 370px;
+  font-size: 2.0em;
+  padding-bottom:8px;
 }
 
 .signup_fields {
-   width: 550px;
-   height: 200px;
+   width: 700px;
+   height: 170px;
    margin-right: auto;
    margin-left: auto;
    margin-top: 20px;

@@ -37,9 +37,7 @@ class UsersController < ApplicationController
        if @user.update_attributes( params[:user])
       flash[:success] = "Profile successfully updated!"
       sign_in @user
-      redirect_to root_path
-    else
-      render 'edit'
+      respond_with(@user, :location => user_path(@user))
     end
   end
 

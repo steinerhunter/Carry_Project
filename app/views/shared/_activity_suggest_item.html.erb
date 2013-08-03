@@ -1,0 +1,27 @@
+<div class="activity_feed_item">
+  <% if (current_user?(activity_request_item.user)) || (current_user.try(:admin?)) %>
+      <div class="delete_post">
+        <div class="bubbleInfo">
+          <%=  link_to image_tag("delete_post.png"), activity_request_item, method: :delete, class: "trigger" %>
+          <div class="popup" style="height:20px; width:190px; margin-top:57px;">
+            <b style="color:#FF0523;">Delete</b> your delivery request.
+            <div id="tail1" style="left:37px"></div>
+            <div id="tail2" style="left:37px"></div>
+          </div>
+        </div>
+      </div>
+      <div class="edit_post">
+        <div class="bubbleInfo">
+          <%=  link_to image_tag("edit_post.png"), edit_request_delivery_path(activity_request_item), class: "trigger" %>
+          <div class="popup" style="height:20px; width:170px; margin-top:57px;">
+            <b style="color:#ff9054">Edit</b> your delivery request.
+            <div id="tail1" style="left:35px"></div>
+            <div id="tail2" style="left:35px"></div>
+          </div>
+        </div>
+      </div>
+  <% end %>
+  <div class="activity_feed_item_info">
+      <%= link_to activity_request_item.what, request_delivery_path(activity_request_item)  %>
+  </div>
+</div>

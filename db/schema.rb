@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130730201950) do
+ActiveRecord::Schema.define(:version => 20130803211121) do
 
   create_table "accepted_requests", :force => true do |t|
     t.integer  "request_delivery_id"
@@ -23,6 +23,17 @@ ActiveRecord::Schema.define(:version => 20130730201950) do
   add_index "accepted_requests", ["request_delivery_id", "user_id"], :name => "index_accepted_requests_on_request_delivery_id_and_user_id", :unique => true
   add_index "accepted_requests", ["request_delivery_id"], :name => "index_accepted_requests_on_request_delivery_id"
   add_index "accepted_requests", ["user_id"], :name => "index_accepted_requests_on_user_id"
+
+  create_table "accepted_suggests", :force => true do |t|
+    t.integer  "suggest_delivery_id"
+    t.integer  "user_id"
+    t.datetime "created_at",          :null => false
+    t.datetime "updated_at",          :null => false
+  end
+
+  add_index "accepted_suggests", ["suggest_delivery_id", "user_id"], :name => "index_accepted_suggests_on_suggest_delivery_id_and_user_id", :unique => true
+  add_index "accepted_suggests", ["suggest_delivery_id"], :name => "index_accepted_suggests_on_suggest_delivery_id"
+  add_index "accepted_suggests", ["user_id"], :name => "index_accepted_suggests_on_user_id"
 
   create_table "comments", :force => true do |t|
     t.text     "content"

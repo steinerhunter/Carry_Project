@@ -1,5 +1,14 @@
 <div class="show_suggest_delivery">
   <div class="right_side">
+    <% if @accepted_suggest.blank? %>
+        <div class="challenge_accepted" style="font-size:2.4em">
+          <b><%= link_to "Accept Suggestion",   accept_suggest_delivery_path(@suggest_delivery, type: "accept"), method: :put %></b>
+        </div>
+    <% else  %>
+        <div class="challenge_cancelled">
+          <b style="font-size:33px"><%= link_to "Cancel Acceptance", accept_suggest_delivery_path(@suggest_delivery, type: "cancel"), method: :put %></b>
+        </div>
+    <% end %>
     <div id="current-delivery-map"></div>
     <div class="extra_info">
       <div class="extra_info_title">

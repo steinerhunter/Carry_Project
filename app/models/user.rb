@@ -13,9 +13,13 @@ class User < ActiveRecord::Base
   attr_accessible :name, :email, :password, :password_confirmation
   has_secure_password
   has_many :request_deliveries, dependent: :destroy
-  has_many :suggest_deliveries, dependent: :destroy
   has_many :accepted_requests
   has_many :accepts, through: :accepted_requests, source: :request_delivery
+
+  has_many :suggest_deliveries, dependent: :destroy
+  has_many :accepted_suggests
+  has_many :accepts, through: :accepted_suggests, source: :suggest_delivery
+
 
   before_save { |user| user.email = email.downcase }
   before_save :create_remember_token
@@ -32,20 +36,12 @@ class User < ActiveRecord::Base
   validates :password, :length => { minimum: 8, :message => "OOPS! Looks like your password is a bit too short..."}
   validates :password_confirmation, :presence => { :message => "OOPS! Looks like you didn't confirm your password..."}
 
-  def all_request_items
-    RequestDelivery.all
-  end
-
   def user_request_feed
     RequestDelivery.where("user_id = ?", id)
   end
 
   def user_suggest_feed
     SuggestDelivery.where("user_id = ?", id)
-  end
-
-  def user_accepted_request_feed
-    AcceptedRequest.where("user_id = ?", id)
   end
 
   private

@@ -19,9 +19,13 @@
         <div class="sub_activity_title">
           Others' Delivery Suggestions
         </div>
-        <div class="no_active">
-          No active delivery suggestions by others.
-        </div>
+        <% if @accepted_suggest_feed_items.any? %>
+            <%= render partial: 'shared/activity_suggest_item', collection: @accepted_suggest_feed_items %>
+        <% else  %>
+            <div class="no_active">
+              No active delivery suggestions by others.
+            </div>
+        <% end  %>
       </div>
     </div>
 

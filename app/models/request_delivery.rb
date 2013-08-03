@@ -20,4 +20,13 @@ class RequestDelivery < ActiveRecord::Base
   validates :receiving_person, :presence => { :message => "Who is in charge of accepting the package?"}
 
   default_scope order: 'request_deliveries.created_at DESC'
+
+  def accept_request
+    self.update_attribute(:status, "Pending Confirmation")
+  end
+
+  def cancel_request
+    self.update_attribute(:status, "Open")
+  end
+
 end

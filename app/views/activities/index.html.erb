@@ -1,0 +1,38 @@
+<div class="index_activity">
+    <div class="activity_data" style="float:right">
+      <div class="activity_title" style="background-image: url('../assets/car.png');">
+        <b style="padding-left: 70px;">Delivery Suggestions</b>
+      </div>
+      <div class="sub_activity">
+        <div class="sub_activity_title">
+          My Delivery Suggestions
+        </div>
+        <%= render partial: 'shared/activity_suggest_item', collection: @suggest_feed_items %>
+      </div>
+      <div class="sub_activity">
+        <div class="sub_activity_title">
+          Others' Delivery Suggestions
+        </div>
+        Still workin on it
+      </div>
+    </div>
+
+  <div class="activity_data">
+    <div class="activity_title" style="background-image: url('../assets/box.png');">
+      <b style="padding-left: 70px;">Delivery Requests</b>
+    </div>
+    <div class="sub_activity">
+      <div class="sub_activity_title">
+        My Delivery Requests
+      </div>
+      <%= render partial: 'shared/activity_request_item', collection: @request_feed_items %>
+    </div>
+    <div class="sub_activity">
+      <div class="sub_activity_title">
+        Others' Delivery Requests
+      </div>
+      <%= render partial: 'shared/activity_request_item', collection: @accepted_request_feed_items %>
+    </div>
+  </div>
+</div>
+

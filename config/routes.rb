@@ -25,6 +25,8 @@ TheCarryProject::Application.routes.draw do
   match '/suggest', to:'suggest_deliveries#new'
   match '/suggestions', to:'suggest_deliveries#index'
 
+  match '/activity', to:'activities#index'
+
   # The priority is based upon order of creation:
   # first created -> highest priority.
 

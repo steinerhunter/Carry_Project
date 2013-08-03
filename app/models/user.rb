@@ -32,6 +32,22 @@ class User < ActiveRecord::Base
   validates :password, :length => { minimum: 8, :message => "OOPS! Looks like your password is a bit too short..."}
   validates :password_confirmation, :presence => { :message => "OOPS! Looks like you didn't confirm your password..."}
 
+  def all_request_items
+    RequestDelivery.all
+  end
+
+  def user_request_feed
+    RequestDelivery.where("user_id = ?", id)
+  end
+
+  def user_suggest_feed
+    SuggestDelivery.where("user_id = ?", id)
+  end
+
+  def user_accepted_request_feed
+    AcceptedRequest.where("user_id = ?", id)
+  end
+
   private
 
     def create_remember_token

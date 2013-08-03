@@ -53,14 +53,14 @@ class SuggestDeliveriesController < ApplicationController
     type = params[:type]
     if current_user != @suggest_delivery.user
       if type == "accept"
-        current_user.accepts << @suggest_delivery
+        current_user.suggest_accepts << @suggest_delivery
         @suggest_delivery.accept_suggest
         redirect_to :back
         flash[:accept] = "You've chosen to accept <br><b>#{@suggest_delivery.size} sized items</b><br> delivery suggestion!<br>
                                               <div class='sub_flash_text'><b>#{@suggest_delivery.user.name}</b>, the creator of the suggestion, will be notified. <br>
                                               Please allow <b>#{@suggest_delivery.user.name}</b> some time to get back to you.</div>".html_safe
       elsif type == "cancel"
-        current_user.accepts.delete(@suggest_delivery)
+        current_user.suggest_accepts.delete(@suggest_delivery)
         redirect_to :back
         @suggest_delivery.cancel_suggest
         flash[:cancel] = "You've chosen to cancel the suggestion."

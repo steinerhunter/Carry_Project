@@ -32,6 +32,11 @@
             Status: <b style="color:#20D62C"><%= activity_suggest_item.status %></b>
         <% elsif activity_suggest_item.status == "Pending Confirmation" %>
             Status: <b style="color:#d67a31"><%= activity_suggest_item.status %></b>
+            <% if activity_suggest_item.user == current_user  %>
+                (from <b style="color:#f2ff5e">you</b>)
+            <% else  %>
+                (from <b style="color:#f2ff5e"><%= activity_suggest_item.user.name %></b>)
+            <% end  %>
         <% end  %>
       </div>
     </div>

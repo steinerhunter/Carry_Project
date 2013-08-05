@@ -35,7 +35,7 @@
             <% if activity_suggest_item.user == current_user  %>
                 (from <b style="color:#f2ff5e">you</b>)
             <% else  %>
-                (from <b style="color:#f2ff5e"><%= activity_suggest_item.user.name %></b>)
+                (from <b style="color:#f2ff5e"><%= link_to activity_suggest_item.user.name, activity_suggest_item.user  %></b>)
             <% end  %>
         <% end  %>
       </div>

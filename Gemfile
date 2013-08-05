@@ -6,6 +6,7 @@ gem "client_side_validations", "~> 3.2.5"
 gem 'jquery-validation-rails'
 gem 'bcrypt-ruby', '~> 3.0.0'
 gem 'coffee-rails', '3.2.2'
+gem 'mailboxer'
 
 group :development, :test do
   gem 'sqlite3', '1.3.5'

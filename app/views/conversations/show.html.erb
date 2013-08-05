@@ -1,0 +1,29 @@
+<div class ="message_wrapper">
+  <div class="feed_item" style="width:500px">
+    <div class="user_message">
+      <div class="message_title">
+        <% conversation.mark_as_read(current_user) %>
+        <h1><%= conversation.subject %></h1>
+      </div>
+      <ul>
+        <%= content_tag_for(:li, conversation.receipts_for(current_user)) do |receipt| %>
+            <% message = receipt.message %>
+            <% if (message.sender.name == current_user.name) %>
+                <b>You wrote:</b><br>
+            <% else  %>
+                <b><%= message.sender.name %> wrote:</b><br>
+            <% end  %>
+            "<%= message.body %>"<br>
+            <div class="timestamp">
+              (Sent <%=  time_ago_in_words(message.created_at) %> ago)
+            </div>
+        <% end %>
+      </ul>
+      <div class="message_reply">
+        <%= render 'messages_form', conversation: conversation %>
+      </div>
+
+    </div>
+
+  </div>
+</div>

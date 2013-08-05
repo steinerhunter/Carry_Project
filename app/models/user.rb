@@ -12,6 +12,7 @@
 class User < ActiveRecord::Base
   attr_accessible :name, :email, :password, :password_confirmation
   has_secure_password
+  acts_as_messageable
   has_many :request_deliveries, dependent: :destroy
   has_many :accepted_requests
   has_many :request_accepts, through: :accepted_requests, source: :request_delivery
@@ -42,6 +43,10 @@ class User < ActiveRecord::Base
 
   def user_suggest_feed
     SuggestDelivery.where("user_id = ?", id)
+  end
+
+  def mailboxer_email(message)
+    email
   end
 
   private

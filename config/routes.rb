@@ -10,6 +10,14 @@ TheCarryProject::Application.routes.draw do
     resources :comments
   end
 
+  resources :conversations, only: [:index, :show, :new, :create] do
+    member do
+      post :reply
+      post :trash
+      post :untrash
+    end
+  end
+
   root to: 'static_pages#home'
 
   match '/signup', to: 'users#new'

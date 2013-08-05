@@ -1,0 +1,21 @@
+var form = $('#new_conversation');
+
+<% if conversation.errors.any? %>
+
+// Delete errors from previous submission
+if ($(".new_message_errors")[0]){
+    $('.new_message_errors').remove();
+}
+
+// Create a list of errors
+var errors = 'Sorry, you cannot send blank messages... '
+
+// Display errors before the form
+$('<div />').addClass('new_message_errors').html(errors).appendTo("#new_conversation").hide().fadeIn('slow');;
+
+<% else %>
+
+// On successful creation of new conversation, redirect to main page
+window.location.href = "/"
+
+<% end %>

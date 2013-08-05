@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta content="text/html; charset=UTF-8" http-equiv="Content-Type" />
+  </head>
+  <body>
+    <%= link_to image_tag("https://thawing-cliffs-5599-assets.s3.amazonaws.com/assets/LogoMail.png"), root_url %>
+    <h2>Hi there <%= @message.recipients.first.name %> - we've got news for you!</h2>
+    <h3>It seems <%= @message.sender.name  %> has replied to one of your messages!</h3>
+    <h3>Why don't you go to <%= link_to "www.beamate.com", root_url %> and see for yourself?</h3>
+    <p>
+        <h3>Yours, firstmate</h3>
+    </p>
+  </body>
+</html>

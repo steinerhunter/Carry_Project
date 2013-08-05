@@ -29,7 +29,7 @@
     color: #f2ff5e;
     text-decoration: none;
     &:hover {
-      color: #cccccc;
+      color: #ffffff;
     }
   }
 }
@@ -113,4 +113,41 @@
 .no_active {
   padding:10px;
   text-align: center;
+}
+
+.send_messages_to_users {
+  position:relative;
+  margin-top:5px;
+  height:30px;
+}
+
+.needs_to_confirm {
+  display:inline-block;
+}
+
+.send_a_message {
+  display:inline-block;
+  text-align: right;
+  position: absolute;
+  right: 5px;
+  bottom:5px;
+  width: 34%;
+  background-image: url('send_message.png');
+  background-repeat: no-repeat;
+  background-position: bottom left;
+  background-color: #2496f5;
+  border:1px solid;
+  border-radius:2px;
+  -moz-border-radius: 0px;
+  -webkit-border-radius: 3px 3px 3px 3px;
+  border-radius: 3px 3px 3px 3px;
+  padding-top: 2px;
+  padding-bottom: 2px;
+  padding-left:5px;
+  padding-right: 5px;
+  color: #ffffff;
+  border-color: #000000;
+  b {
+    font-size:0.8em;
+  }
 }

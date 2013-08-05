@@ -1,0 +1,28 @@
+<div class="index_activity">
+  <div class="activity_data" style="margin-left:auto; margin-right:auto;">
+    <div class="activity_title" style="background-image: url('../assets/contact.png');margin-bottom:15px;">
+      <b style="padding-left: 70px;">My Conversations</b>
+    </div>
+    <%= render (mailbox.inbox + mailbox.sentbox).sort_by { |conversation| conversation.last_message.created_at }.reverse.uniq %>
+  </div>
+</div>
+
+<% if !(mailbox.trash.empty?) %>
+    <div class="Trash">
+      <%= image_tag("Trash.png")%>
+    </div>
+<% end %>
+<% mailbox.trash.each do |conversation| %>
+    <% if (conversation.receipts_for(current_user).where("deleted = ?", true).empty?) %>
+        <%= render conversation %>
+    <% else  %>
+
+    <% end %>
+<% end %>
+<% if !(mailbox.trash.empty?) %>
+    <div class="EmptyTrash">
+      <%= link_to image_tag("EmptyTrash.png"), 'empty_trash', :confirm => 'Empty trash?'%>
+    </div>
+<% end  %>
+
+

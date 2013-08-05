@@ -1,0 +1,22 @@
+<div class="new_message">
+  <div class="form_title" style="font-size: 2.2em;background-image: url('../../assets/send_message_big.png');">
+    <b>Send <%= @recipient.name %> a message</b>
+  </div>
+  <%= form_for :conversation, url: :conversations, :remote => true, :html => { :id => "new_conversation" } do |f| %>
+      <div class="field">
+        <%= f.hidden_field :recipients, :value => @recipient.email %>
+      </div>
+      <div class="field">
+        <% if !@request_delivery.blank? %>
+            <%= f.hidden_field :subject, :value => "Regarding \"#{@request_delivery.what}\"" %>
+        <% elsif !@suggest_delivery.blank?  %>
+            <%= f.hidden_field :subject, :value => "Regarding \"#{@suggest_delivery.size}sized items\"" %>
+        <% end  %>
+      </div>
+      <div class="field" style="margin-top:20px;">
+        <%= f.text_area :body, "rows" => 3, :placeholder => "Type your message here..."   %>
+      </div>
+      <%= link_to image_tag("Cancel.png"),  :back %>
+      <%= f.submit "Send Message!", :type => :image, :src => "../assets/Send.png"  %>
+  <% end %>
+</div>

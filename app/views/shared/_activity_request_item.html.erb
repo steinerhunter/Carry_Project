@@ -35,7 +35,18 @@
             <% if activity_request_item.user == current_user  %>
                 (from <b style="color:#f2ff5e">you</b>)
             <% else  %>
-                (from <b style="color:#f2ff5e"><%= activity_request_item.user.name %></b>)
+               <br>
+                <div class="send_messages_to_users">
+                  <div class="needs_to_confirm">
+                    <b style="color:#f2ff5e"><%= link_to activity_request_item.user.name, activity_request_item.user  %></b> needs to confirm.
+                  </div>
+                  <div class="send_a_message">
+                    <b><%= link_to "Send a message",  {:controller => "conversations",
+                                                       :action => "new",
+                                                       :recipient_id => activity_request_item.user.id,
+                                                       :request_delivery_id => activity_request_item.id  } %></b>
+                  </div>
+                </div>
             <% end  %>
         <% end  %>
       </div>

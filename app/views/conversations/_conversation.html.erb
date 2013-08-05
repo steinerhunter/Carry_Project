@@ -1,0 +1,21 @@
+<% if conversation.is_unread?(current_user)  %>
+    <div  class="conversation_item" style="background-color:#6796e3;background-image: url('../assets/message_unread.png');">
+<% else %>
+    <div  class="conversation_item" style="background-color:#1a28e2;background-image: url('../assets/message_read.png');">
+<% end  %>
+<div class="conversation_title">
+  <b><%= link_to conversation.subject, conversation %></b>
+</div>
+    <% if  conversation.last_sender.name == current_user.name %>
+        Last message sent by you <%=  time_ago_in_words(conversation.last_message.created_at) %> ago<br>
+        Originally initiated by you <%=  time_ago_in_words(conversation.created_at) %> ago
+    <% else  %>
+        Last message sent by <%= link_to conversation.last_sender.name, conversation.last_sender %> <%=  time_ago_in_words(conversation.last_message.created_at) %> ago<br>
+        Originally initiated by <%= link_to conversation.originator.name, conversation.originator %> <%=  time_ago_in_words(conversation.created_at) %> ago
+    <% end  %>
+    <% if conversation.is_completely_trashed?(current_user) %>
+        <center><%= link_to image_tag("RestoreConversation.png"), [:untrash, conversation], method: :post %></center>
+    <% else %>
+        <center><%= link_to image_tag("MoveToTrash.png"), [:trash, conversation], method: :post %></center>
+    <% end %>
+</div>

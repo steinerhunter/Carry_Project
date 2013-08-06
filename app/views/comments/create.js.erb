@@ -2,24 +2,20 @@ var form = $('#new_comment');
 
 <% if @comment.errors.any? %>
 
-if ($(".errors")[0]){
-    $('.errors').remove();
+if ($(".comment_errors")[0]){
+    $('.comment_errors').remove();
 }
 
 // Create a list of errors
-var errors = $('<ul />');
-
-<% @comment.errors.full_messages.each do |error| %>
-errors.append('<li><%= escape_javascript(error) %></li>');
-<% end %>
+var errors = 'Sorry, you must write something... '
 
 // Display errors before the form
-$('<div />').addClass('errors').html(errors).prependTo("#new_comment");
+$('<div />').addClass('comment_errors').html(errors).appendTo("#new_comment").hide().fadeIn('slow');;
 
 <% else %>
 
-if ($(".errors")[0]){
-    $('.errors').remove();
+if ($(".comment_errors")[0]){
+    $('.comment_errors').remove();
 }
 
 $('#new_comment')[0].reset()

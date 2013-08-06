@@ -80,3 +80,21 @@
   top:3px;
   z-index: 10;
 }
+
+.comment_errors {
+  position: absolute;
+  width: 250px;
+  margin: 0 auto;
+  line-height: 30px;
+  text-align: center;
+  line-height: 30px;
+  background-color: #c80000;
+  border: 1px solid #000000;
+  border-radius:5px;
+  color: #ffffff;
+  font-size: 16px;
+  margin-bottom: 10px;
+  bottom:-20px;
+  left:50%;
+  margin-left: -125px;
+}

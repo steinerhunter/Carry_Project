@@ -1,21 +1,44 @@
 <% if conversation.is_unread?(current_user)  %>
     <div  class="conversation_item" style="background-color:#6796e3;background-image: url('../assets/message_unread.png');">
-<% else %>
+<% elsif conversation.is_completely_trashed?(current_user) %>
+    <div  class="conversation_item" style="background-color:#8a8a8a;background-image: url('../assets/message_read.png');">
+<% else  %>
     <div  class="conversation_item" style="background-color:#1a28e2;background-image: url('../assets/message_read.png');">
 <% end  %>
 <div class="conversation_title">
   <b><%= link_to conversation.subject, conversation %></b>
 </div>
-    <% if  conversation.last_sender.name == current_user.name %>
-        Last message sent by you <%=  time_ago_in_words(conversation.last_message.created_at) %> ago<br>
-        Originally initiated by you <%=  time_ago_in_words(conversation.created_at) %> ago
-    <% else  %>
-        Last message sent by <%= link_to conversation.last_sender.name, conversation.last_sender %> <%=  time_ago_in_words(conversation.last_message.created_at) %> ago<br>
-        Originally initiated by <%= link_to conversation.originator.name, conversation.originator %> <%=  time_ago_in_words(conversation.created_at) %> ago
-    <% end  %>
-    <% if conversation.is_completely_trashed?(current_user) %>
-        <center><%= link_to image_tag("RestoreConversation.png"), [:untrash, conversation], method: :post %></center>
-    <% else %>
-        <center><%= link_to image_tag("MoveToTrash.png"), [:trash, conversation], method: :post %></center>
-    <% end %>
+<% if conversation.is_completely_trashed?(current_user) %>
+    <div class="delete_post">
+      <div class="bubbleInfo">
+        <%= link_to image_tag("restore_conversation.png"), [:untrash, conversation], method: :post, class:"trigger" %>
+        <div class="popup" style="height:20px; width:150px; margin-top:57px;">
+          <b style="color:#3a9930;">Restore</b> conversation.
+          <div id="tail1" style="left:32px"></div>
+          <div id="tail2" style="left:32px"></div>
+        </div>
+      </div>
+    </div>
+    <center></center>
+<% else %>
+    <div class="delete_post">
+      <div class="bubbleInfo">
+        <%=  link_to image_tag("delete_conversation.png"), [:trash, conversation], method: :post, class: "trigger" %>
+        <div class="popup" style="height:20px; width:190px; margin-top:57px;">
+          Move conversation to <b style="color:#FF0523;">Trash</b>.
+          <div id="tail1" style="left:32px"></div>
+          <div id="tail2" style="left:32px"></div>
+        </div>
+      </div>
+    </div>
+<% end %>
+<div class="conversation_other_details"><b>
+  <% if  conversation.last_sender.name == current_user.name %>
+      Last message sent by you <%=  time_ago_in_words(conversation.last_message.created_at) %> ago<br>
+      Originally initiated by you <%=  time_ago_in_words(conversation.created_at) %> ago
+  <% else  %>
+      Last message sent by <%= link_to conversation.last_sender.name, conversation.last_sender %> <%=  time_ago_in_words(conversation.last_message.created_at) %> ago<br>
+      Originally initiated by <%= link_to conversation.originator.name, conversation.originator %> <%=  time_ago_in_words(conversation.created_at) %> ago
+  <% end  %></b>
+</div>
 </div>

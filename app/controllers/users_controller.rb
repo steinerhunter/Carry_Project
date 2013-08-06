@@ -45,6 +45,13 @@ class UsersController < ApplicationController
     @users = User.all
   end
 
+  def empty_trash
+    current_user.mailbox.trash.each do |conversation|
+      conversation.receipts_for(current_user).update_all(:deleted => true)
+    end
+    redirect_to conversations_path
+  end
+
   private
 
     def correct_user

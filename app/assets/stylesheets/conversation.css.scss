@@ -1,6 +1,5 @@
-.new_message {
+.conversation_wrapper {
   width: 600px;
-  height: 230px;
   text-align: center;
   background-color: #1d79e2;
   -moz-box-shadow: 5px 5px 5px #333333;; /* Old Firefox */
@@ -30,6 +29,7 @@
 }
 
 .conversation_item {
+  position: relative;
   width:91%;
   border:1px solid;
   border-radius:5px;
@@ -53,5 +53,19 @@
 
 .conversation_title {
   font-size:1.5em;
-  margin-bottom:5px;
+  margin-bottom:25px;
+}
+
+.conversation_other_details {
+  font-size:0.9em;
+}
+
+.EmptyTrash {
+  text-align: center;
+}
+
+.no_active_conversations {
+  text-align: center;
+  font-size: 1.4em;
+  margin:10px;
 }

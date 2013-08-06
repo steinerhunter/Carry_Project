@@ -36,6 +36,8 @@ TheCarryProject::Application.routes.draw do
 
   match '/activity', to:'activities#index'
 
+  match "empty_trash" => "users#empty_trash"
+
   # The priority is based upon order of creation:
   # first created -> highest priority.
 

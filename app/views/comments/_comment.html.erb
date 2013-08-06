@@ -32,7 +32,7 @@
         </div>
     <% end  %>
 <% elsif (comment.user == current_user) %>
-    <div class="comment_item" style="text-align: right;" id=<%= dom_id(comment) %>>
+    <div class="comment_item" style="text-align: right;" id=<%= dom_id(comment) %>
       <div class="chat_gravatar" style="float:right">
         <%=  link_to chat_gravatar_for(comment.user), comment.user  %>
       </div>

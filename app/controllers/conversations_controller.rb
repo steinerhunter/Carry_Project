@@ -26,6 +26,11 @@ class ConversationsController < ApplicationController
     end
   end
 
+  def index
+    @my_conversations = Receipt.where(:deleted => false).where(:trashed => false).where(:receiver_id => current_user.id)
+    @trashed = Receipt.where(:deleted => false).where(:trashed => true)
+  end
+
   def reply
     current_user.reply_to_conversation(conversation, *message_params(:body, :subject))
     redirect_to conversation

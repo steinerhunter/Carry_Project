@@ -1,29 +1,41 @@
-<div class ="message_wrapper">
-  <div class="feed_item" style="width:500px">
-    <div class="user_message">
-      <div class="message_title">
-        <% conversation.mark_as_read(current_user) %>
-        <h1><%= conversation.subject %></h1>
-      </div>
-      <ul>
-        <%= content_tag_for(:li, conversation.receipts_for(current_user)) do |receipt| %>
-            <% message = receipt.message %>
-            <% if (message.sender.name == current_user.name) %>
-                <b>You wrote:</b><br>
-            <% else  %>
-                <b><%= message.sender.name %> wrote:</b><br>
-            <% end  %>
-            "<%= message.body %>"<br>
-            <div class="timestamp">
-              (Sent <%=  time_ago_in_words(message.created_at) %> ago)
+<div class ="conversation_wrapper">
+  <% conversation.mark_as_read(current_user) %>
+  <div class="form_title" style="font-size: 2.2em;background-image: url('../../assets/send_message_big.png');margin-bottom:10px;">
+    <b><%= conversation.subject %></b>
+  </div>
+  <%= content_tag_for(:li, conversation.receipts_for(current_user)) do |receipt| %>
+      <% message = receipt.message %>
+      <% if (message.sender.id == current_user.id) %>
+          <div class="comment_item" style="text-align: left;margin-left:10px" id=<%= dom_id(message) %>>
+            <div class="chat_gravatar">
+              <%=  link_to chat_gravatar_for(current_user), current_user  %>
             </div>
-        <% end %>
-      </ul>
-      <div class="message_reply">
-        <%= render 'messages_form', conversation: conversation %>
-      </div>
-
-    </div>
-
+            <div class="triangle-isosceles left">
+              <div class="comment_content">
+                <b>"<%= message.body %>"</b>
+              </div>
+              <div class="comment_posted">
+                Posted <%=  time_ago_in_words(message.created_at) %> ago.
+              </div>
+            </div>
+          </div>
+      <% else  %>
+          <div class="comment_item" style="text-align: right;" id=<%= dom_id(message) %>>
+            <div class="chat_gravatar" style="float:right">
+              <%=  link_to chat_gravatar_for(message.sender), message.sender  %>
+            </div>
+            <div class="triangle-isosceles right">
+              <div class="comment_content">
+                <b>"<%= message.body %>"</b>
+              </div>
+              <div class="comment_posted">
+                Posted <%=  time_ago_in_words(message.created_at) %> ago.
+              </div>
+            </div>
+          </div>
+      <% end  %>
+  <% end %>
+  <div class="conversation_reply">
+    <%= render 'messages_form', conversation: conversation %>
   </div>
 </div>

@@ -1,12 +1,6 @@
 <%= form_for :message, url: [:reply, conversation] do |f| %>
-    <div class="field">
-      <%= f.hidden_field :subject, :value => "Reply" %>
-    </div>
-    <div class="field">
-      <%= f.label :body, "Write a reply:" %>
-      <%= f.text_field :body %>
-    </div>
-    <fieldset class="actions">
-      <%= f.submit "Send Reply!", :type => :image, :src => "../assets/SendReplySubmit.png"  %>
-    </fieldset>
+    <%= f.hidden_field :subject, :value => "Reply" %>
+    <%= f.text_area :body, :rows => 3, :placeholder => "Type your message here..."    %>
+    <%= link_to image_tag("Cancel.png"),  :back %>
+    <%= f.submit "Reply", :type => :image, :src => "../assets/Reply.png"  %>
 <% end %>

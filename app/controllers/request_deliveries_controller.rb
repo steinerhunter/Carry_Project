@@ -1,6 +1,7 @@
 class RequestDeliveriesController < ApplicationController
   before_filter :signed_in_user, only: [:create, :destroy]
   before_filter :correct_user,   only: :destroy
+  respond_to :html, :js
 
   def show
     @request_delivery = RequestDelivery.find(params[:id])
@@ -17,10 +18,12 @@ class RequestDeliveriesController < ApplicationController
   def create
     @request_delivery = current_user.request_deliveries.build(params[:request_delivery])
     if @request_delivery.save
-      flash[:success] = "Delivery Request created!"
-      redirect_to root_url
-    else
-      render 'static_pages/home'
+      flash[:request_created] = "Your request was added successfully!<br>
+                                                              <div class='sub_flash_text'>There are some missing details though.<br>
+                                                              Go to <b style=\"color:#ff9054\">Edit</b> <img src=\"../assets/edit_post_big.png\"> and add them to attract more transporters!</div>".html_safe
+      respond_with(@request_delivery) do |format|
+        format.html { redirect_to request_delivery_url(@request_delivery)}
+      end
     end
   end
 
@@ -30,21 +33,22 @@ class RequestDeliveriesController < ApplicationController
 
   def edit
     @request_delivery = RequestDelivery.find(params[:id])
-    session[:return_to] ||= request.referer
   end
 
   def update
     @request_delivery = RequestDelivery.find(params[:id])
     if @request_delivery.update_attributes( params[:request_delivery])
-      redirect_to session.delete(:return_to)
-    else
-      render 'edit'
+      flash[:request_updated] = "Your request was updated successfully!"
+      respond_with(@request_delivery) do |format|
+        format.html { redirect_to request_delivery_url(@request_delivery)}
+        end
     end
   end
 
   def destroy
     @request_delivery = RequestDelivery.find(params[:id])
     @request_delivery.destroy
+    flash[:request_deleted] = "Your request was successfully deleted!"
     redirect_to requests_path
   end
 

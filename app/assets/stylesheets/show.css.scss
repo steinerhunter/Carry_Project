@@ -108,6 +108,7 @@
 }
 
 .extra_info_data {
+  position:relative;
   text-align: center;
   margin: 10px;
   font-size: 2em;
@@ -151,6 +152,13 @@
   top:3px;
   margin-right: 3px;
   z-index: 11;
+}
+
+.missing_detail {
+  position:absolute;
+  right:2px;
+  top: 2px;
+  z-index: 13;
 }
 
 .show_data {
@@ -301,6 +309,7 @@
 
 .the_size {
   display: inline-block;
+  position:relative;
   width: 300px;
   font-size:18px;
   margin-top: 10px;
@@ -320,6 +329,7 @@
 }
 
 .the_deadline {
+  position:relative;
   display: inline-block;
   width: 300px;
   font-size:18px;
@@ -390,6 +400,7 @@
 }
 
 .the_sender {
+  position:relative;
   display: inline-block;
   font-size:1.4em;
   width: 212px;
@@ -409,6 +420,7 @@
 }
 
 .the_receiver {
+  position: relative;
   display: inline-block;
   font-size:1.4em;
   width: 212px;

@@ -5,45 +5,18 @@
       <nav>
         <ul class="nav pull-right" id="header_items">
           <% if signed_in?  %>
-              <li id="fat-menu" class="dropdown">
-                <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                  Request Delivery <b class="caret"></b>
-                </a>
-                <ul class="dropdown-menu">
-                  <li><%= link_to "New Request", request_path  %></li>
-                  <li><%= link_to "Browse Suggestions", suggestions_path  %></li>
-                </ul>
-              </li>
-              <li id="fat-menu" class="dropdown">
-                <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                  Suggest Delivery <b class="caret"></b>
-                </a>
-                <ul class="dropdown-menu">
-                  <li><%= link_to "New Suggestion", suggest_path  %></li>
-                  <li><%= link_to "Browse Requests", requests_path  %></li>
-                </ul>
-              </li>
-              <li><%= link_to "My Conversations", conversations_path %></li>
-              <li><%= link_to "My Activity", activity_path %></li>
-              <li><%= link_to "How it works", '#' %></li>
-              <li id="fat-menu" class="dropdown">
-                <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                  <%= current_user.name %> <b class="caret"></b>
-                </a>
-                <ul class="dropdown-menu">
-                  <li><%= link_to "Profile", current_user  %></li>
-                  <li><%= link_to "Settings", edit_user_path(current_user)  %></li>
-                  <li class="divider"></li>
-                  <li>
-                    <%= link_to "Sign out", signout_path, method: "delete"  %>
-                  </li>
-                </ul>
-              </li>
+              <li><%= link_to "Find Transporters", suggestions_path  %></li>
+              <li><%= link_to "Browse Senders", requests_path  %></li>
+              <li><%= link_to "Messages", conversations_path %></li>
+              <li><%= link_to "Activity", activity_path %></li>
+              <li><%= link_to current_user.name, current_user  %></li>
           <% else  %>
-            <li><%= link_to "FAQ", '#' %></li>
-            <li><%= link_to "Sign in", signin_path %></li>
-            <li><%= link_to "Sign up", signup_path %></li>
-         <% end %>
+              <li><%= link_to "Find Transporters", suggestions_path  %></li>
+              <li><%= link_to "Browse Senders", requests_path  %></li>
+              <li><%= link_to "How it works", '#' %></li>
+              <li><%= link_to "Sign in", signin_path %></li>
+              <li><%= link_to "Register", signup_path %></li>
+          <% end %>
         </ul>
       </nav>
     </div>

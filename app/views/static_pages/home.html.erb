@@ -1,43 +1,13 @@
-<% if signed_in? %>
-    <div class="home_top_container">
-      <div class="top_tagline">
-        <b>Going places? Get paid for it.</b>
-      </div>
-      <div class="two_main_buttons" id="main_div">
-        <div class="right_button"  onclick="location.href='#'" id="SendSomething">
-          <b>Send With Someone.</b>
-        </div>
-        <div class="left_button" onclick="location.href='#'" id="PassSomething">
-          <b>Deliver For Someone.</b>
-        </div>
-      </div>
-      <div class="two_pass_buttons" id="pass_div">
-        <div class="right_button"  onclick="location.href='/requests'" style="background-image: url('../assets/send_browse.png');">
-          <b>Browse Our Delivery Requests.</b>
-        </div>
-        <div class="left_button" onclick="location.href='/suggest'" style="background-image: url('../assets/pass_new.png');">
-          <b>Post Your Delivery Suggestion.</b>
-        </div>
-        <div class="back_button">
-          <%= link_to image_tag("Back.png"), '#', :id => "back_pass_id" %>
-        </div>
-      </div>
-      <div class="two_send_buttons" id="send_div">
-        <div class="right_button"  onclick="location.href='/suggestions'" style="background-image: url('../assets/pass_browse.png');">
-          <b>Browse Our Delivery Suggestions.</b>
-        </div>
-        <div class="left_button" onclick="location.href='/request'" style="background-image: url('../assets/send_new.png');">
-          <b>Post Your Delivery Request.</b>
-        </div>
-        <div class="back_button">
-          <%= link_to image_tag("Back.png"), '#', :id => "back_send_id" %>
-        </div>
-      </div>
+<div class="home_top_container">
+  <div class="top_tagline">
+    <b>Going places? Get paid for it.</b>
+  </div>
+  <div class="two_main_buttons" id="main_div">
+    <div class="right_button"  onclick="location.href='/request'">
+      <b>Send With Someone.</b>
     </div>
-<% else  %>
-    <div class="center hero-unit">
-      <h1>The Carry Project</h1>
-      <h2> This is The Carry Project Home.</h2>
-      <%= link_to "Sign up now!", signup_path, class: "btn btn-large btn-primary" %>
+    <div class="left_button" onclick="location.href='/suggest'">
+      <b>Transport Something.</b>
     </div>
-<% end %>
+  </div>
+</div>

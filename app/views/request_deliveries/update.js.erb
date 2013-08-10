@@ -1,0 +1,28 @@
+var form = $('.edit_request_delivery');
+
+<% if @request_delivery.errors.any? %>
+
+// Delete errors from previous submission
+if ($(".request_delivery_errors")[0]){
+    $('.request_delivery_errors').remove();
+}
+
+// Create a list of errors
+var errors = $('<ul />');
+
+// Display only first error for each field
+<% @request_delivery.errors.each do |attribute, message| %>
+    <% if @request_delivery.errors[attribute].first == message %>
+        errors.append('<li><%= escape_javascript(message) %></li>');
+    <% end %>
+<% end %>
+
+// Display errors before the form
+$('<div />').addClass('request_delivery_errors').html(errors).appendTo(".edit_request_delivery").hide().fadeIn('slow');
+
+<% else %>
+
+// On successful creation of new user, redirect to main page
+window.location.href = "<%=request_delivery_url(@request_delivery) %>"
+
+<% end %>

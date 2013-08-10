@@ -25,9 +25,6 @@
     <div class="feed_item_map">
       <img src="http://maps.google.com/maps/api/staticmap?size=150x150&maptype=roadmap&sensor=false&markers=color:green|label:A|<%= request_feed_item.from %>&markers=color:green|label:B|<%= request_feed_item.to %>" alt="Static, Marked Map of Chicago, Illinois and Hammond, Indiana with no Center and Zoom"></img>
     </div>
-    <div class="feed_date" style="background-image: url('../assets/calendar.png');">
-      Needed By: <b><%= request_feed_item.when.strftime("%d/%m/%Y") %></b>
-    </div>
   </div>
   <div class="feed_item_info">
     <div class="feed_title" style="background-image: url('../assets/box.png');">

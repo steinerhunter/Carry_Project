@@ -1,56 +1,18 @@
 <div class="new_delivery_request_class">
-  <%= form_for(@request_delivery, :validate => true ) do |f| %>
+  <%= form_for(@request_delivery, :remote => true) do |f| %>
       <fieldset>
         <div class="single_step">
-          <legend  style="background-image: url('../assets/1.png');"><b>Origin</b></legend>
+          <legend style="background-image: url('../assets/box.png');"><b>What's that you're sending?</b></legend>
+          <%= f.label :what, "What would you like to deliver?" %>
+          <%= f.text_field :what, :placeholder => "Type delivery contents..."   %>
           <%= f.label :from, "Where do you want to deliver from?" %>
           <%= f.text_field :from, :placeholder => "Type origin address...", :class => "address_field" %>
-          <%= f.label :sending_person, "Who is giving the package away?" %>
-          <%= f.text_field :sending_person, :value => "#{@request_delivery.user.name}" %>
-        </div>
-      </fieldset>
-      <fieldset>
-        <div class="single_step">
-          <legend  style="background-image: url('../assets/2.png');"><b>Destination</b></legend>
           <%= f.label :to, "Where do you want your delivery to reach?" %>
           <%= f.text_field :to, :placeholder => "Type destination address...", :class => "address_field"   %>
-          <%= f.label :receiving_person, "Who is accepting the package in the end?" %>
-          <%= f.text_field :receiving_person, :value => "#{@request_delivery.user.name}" %>
-        </div>
-      </fieldset>
-      <fieldset>
-        <div class="single_step">
-          <legend  style="background-image: url('../assets/3.png');"><b>Delivery Contents</b></legend>
-          <div class="new_what">
-            <%= f.label :what, "What would you like to deliver?" %>
-            <%= f.text_field :what, :placeholder => "Type delivery contents..."   %>
-          </div>
-          <div class="new_size">
-            <%= f.label :size, "How big is your delivery?" %>
-            <%= f.select :size, options_for_select(%w[Small Medium Large]), :include_blank => "Pick Size..." %>
-          </div>
-          <%= f.label :more_details, "Please provide some more details:" %>
-          <%= f.text_area :more_details, :placeholder => "Add any detail that might be important...", :rows => 2 %>
-        </div>
-      </fieldset>
-      <fieldset>
-        <div class="single_step">
-          <legend  style="background-image: url('../assets/4.png');"><b>Time of Delivery</b></legend>
-          <div class="new_deadline">
-            <%= f.label :when, "When would you like your delivery to ship?" %>
-            <%= f.text_field :when, :placeholder => "mm/dd/yyyy", :class => "datepicker" %>
-          </div>
-        </div>
-      </fieldset>
-      <fieldset>
-        <div class="single_step">
-          <legend  style="background-image: url('../assets/5.png');"><b>Payment</b></legend>
           <div class="new_money">
             <%= f.label :cost, "How much will you pay for the delivery?" %>
-            <%= f.text_field :cost, :placeholder => "Type an amount..."   %><br>
-            <div class="currency_select">
-              <%= f.select :currency, options_for_select(%w[NIS USD Euro]), :include_blank => "Pick Currency..." %>
-            </div>
+            <%= f.text_field :cost, :placeholder => "Type an amount..."   %>
+            <%= f.select :currency, options_for_select(%w[NIS USD Euro]), :include_blank => "Pick Currency..." %>
           </div>
           <div class="form_submit">
             <%= f.submit "Finish", :type => :image, :src => "assets/Finish.png", :class => "finish" %>

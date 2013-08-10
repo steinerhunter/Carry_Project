@@ -204,12 +204,6 @@ header {
   }
 }
 
-.single_step label {
-  margin-right:auto;
-  margin-left:auto;
-  font-size:30px;
-}
-
 .new_size select {
   width:175px;
   height:45px;
@@ -229,18 +223,6 @@ header {
 
 .new_deadline input[type=text] {
   width: 250px;
-}
-
-.new_money input[type=text] {
-  width: 185px;
-}
-
-.new_money select {
-  width:185px;
-  height:45px;
-  padding-top:7px;
-  font-size: 1.5em;
-  border:solid 1px #000;
 }
 
 .section_title {
@@ -281,70 +263,6 @@ footer {
   small {
     float: left;
   }
-}
-
-.new_delivery_request_class {
-  margin-top: 1%;
-  width:700px;
-  margin-left: auto;
-  margin-right: auto;
-}
-
-.new_delivery_suggest_class {
-  margin-top: 1%;
-  width:700px;
-  margin-left: auto;
-  margin-right: auto;
-}
-
-fieldset {
-  text-align: center;
-  background-color: #1d79e2;
-  -moz-box-shadow: 5px 5px 5px #333333;; /* Old Firefox */
-  box-shadow: 5px 5px 5px #333333;
-  border:solid 3px;
-  border-radius:10px;
-  -moz-border-radius:10px; /* Old Firefox */
-  padding-bottom: 10px;
-  color: #ffffff;
-  border-color: #18212e;
-}
-
-legend {
-  text-align: left;
-  height:40px;
-  padding-top: 10px;
-  padding-bottom: 10px;
-  font-size: 3.2em;
-  border-bottom:solid 2px;
-  border-color: #18212e;
-  background-color:#00008b;
-  background-repeat: no-repeat;
-  background-position: bottom left;
-  -moz-border-radius: 0px;
-  -webkit-border-radius: 3px 3px 0px 0px;
-  border-radius: 3px 3px 0px 0px;
-  color: #ffffff;
-  b {
-    padding-left: 60px;
-  }
-}
-
-fieldset label {
-  display:block;
-  margin:15px 0 5px;
-  font-size: 2.8em;
-  margin-top: 30px;
-  margin-bottom: 20px;
-  text-align: center;
-  width: 600px;
-}
-
-fieldset input[type=text] {
-  width:480px;
-  padding:8px;
-  font-size: 1.5em;
-  border:solid 1px #000;
 }
 
 .go_back {
@@ -440,6 +358,21 @@ textarea {
   padding-top:12px;
   line-height: 30px;
   width: 600px;
+  background-color: #c80000;
+  border: 1px solid #111111;
+  border-radius:5px;
+  color: #ffffff;
+  font-size: 17px;
+  text-align: left;
+}
+
+.request_delivery_errors {
+  margin: 0 auto;
+  margin-top: 2%;
+  padding: 5px;
+  padding-top:12px;
+  line-height: 30px;
+  width: 500px;
   background-color: #c80000;
   border: 1px solid #111111;
   border-radius:5px;

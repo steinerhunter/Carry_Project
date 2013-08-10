@@ -1,14 +1,16 @@
 <div class="show_delivery">
   <div class="right_side">
-    <% if @accepted_request.blank? %>
-        <div class="challenge_accepted">
-          <b><%= link_to "Accept Request",   accept_request_delivery_path(@request_delivery, type: "accept"), method: :put %></b>
-        </div>
-    <% else  %>
-        <div class="challenge_cancelled">
-          <b style="font-size:33px"><%= link_to "Cancel Acceptance", accept_request_delivery_path(@request_delivery, type: "cancel"), method: :put %></b>
-        </div>
-    <% end %>
+    <% if @request_delivery.user != current_user %>
+        <% if @accepted_request.blank? %>
+            <div class="challenge_accepted">
+              <b><%= link_to "Accept Request",   accept_request_delivery_path(@request_delivery, type: "accept"), method: :put %></b>
+            </div>
+        <% else  %>
+            <div class="challenge_cancelled">
+              <b style="font-size:33px"><%= link_to "Cancel Acceptance", accept_request_delivery_path(@request_delivery, type: "cancel"), method: :put %></b>
+            </div>
+        <% end %>
+    <% end  %>
     <div id="current-delivery-map"></div>
     <div class="extra_info">
       <div class="extra_info_title">
@@ -16,24 +18,41 @@
       </div>
       <div class="extra_info_data">
         <div class="the_deadline">
-          Delivery Needed By<br><b><%= @request_delivery.when.strftime("%B #{@request_delivery.when.day.ordinalize}, %Y")%></b>
+          <% if @request_delivery.when.blank? %>
+              <% if @request_delivery.user == current_user %>
+                  <%= render 'shared/missing' %>
+                  <b style="color: #e43f45">Delivery Needed By</b><br>Not set yet.
+                  <% else  %>
+                  <b>Delivery Needed By</b><br>Not set yet.
+              <% end  %>
+          <% else %>
+              Delivery Needed By<br><b><%= @request_delivery.when.strftime("%B #{@request_delivery.when.day.ordinalize}, %Y")%></b>
+          <% end %>
         </div>
         <% if @request_delivery.size == "Large" %>
             <div class="the_size"  style="background-image: url('../assets/Large.png');">
+                Delivery Size<br><b><%= @request_delivery.size %></b>
         <% elsif @request_delivery.size == "Medium" %>
             <div class="the_size"  style="background-image: url('../assets/Medium.png');">
+                Delivery Size<br><b><%= @request_delivery.size %></b>
         <% elsif @request_delivery.size == "Small" %>
             <div class="the_size"  style="background-image: url('../assets/Small.png');">
+                Delivery Size<br><b><%= @request_delivery.size %></b>
+        <% elsif @request_delivery.size.blank?  %>
+            <div class="the_size">
+              <% if @request_delivery.user == current_user %>
+                  <%= render 'shared/missing' %>
+              <% end  %>
+              <b style="color: #e43f45">Delivery Size</b><br>Not set yet.
         <% end %>
-        Delivery Size<br><b><%= @request_delivery.size %></b>
         </div>
-        <% if !@accepted_request.blank? %>
-            <div class="task_status" style="background-image: url('../assets/status_Pending.png');">
-              Request Status<br><b style="color: #d67a31;">Pending Confirmation</b>
-            </div>
-        <% elsif @request_delivery.status == "Open" %>
+        <% if @request_delivery.status == "Open" %>
             <div class="task_status" style="background-image: url('../assets/status_Open.png');">
               Request Status<br><b style="color: #20d62c;"><%= @request_delivery.status %></b>
+            </div>
+        <% elsif @request_delivery.status == "Pending Confirmation" %>
+            <div class="task_status" style="background-image: url('../assets/status_Pending.png');">
+              Request Status<br><b style="color: #d67a31;"><%= @request_delivery.status %></b>
             </div>
         <% end %>
 
@@ -134,17 +153,40 @@
       </div>
       <div class="the_sender_and_receiver">
         <div class="the_sender">
-          Sending Person<br><b><%= @request_delivery.sending_person %><br></b>
+          <% if @request_delivery.sending_person.blank? %>
+              <% if @request_delivery.user == current_user %>
+                <%= render 'shared/missing' %>
+                  <b style="color: #e43f45">Sending Person</b><br>Not set yet.
+                  <% else  %>
+                  <b>Sending Person</b><br>Not set yet.
+              <% end  %>
+          <% else  %>
+              <b>Sending Person</b><br><%= @request_delivery.sending_person %>
+          <% end  %>
         </div>
         <div class="the_receiver">
-          Receiving Person<br><b><%= @request_delivery.receiving_person %><br></b>
+          <% if @request_delivery.receiving_person.blank? %>
+              <% if @request_delivery.user == current_user %>
+                  <%= render 'shared/missing' %>
+                  <b style="color: #e43f45">Receiving Person</b><br>Not set yet.
+                  <% else  %>
+                  <b>Receiving Person</b><br>Not set yet.
+              <% end  %>
+          <% else  %>
+              <b>Receiving Person</b><br><%= @request_delivery.receiving_person %>
+          <% end  %>
         </div>
       </div>
     </div>
   </div>
       <div class="show_data" style="margin-top: 15px;">
         <div class="show_title" style="background-image: url('../assets/contact.png');font-size: 2.6em;height:35px;">
-          <b style="padding-left: 70px;">Contact <%= link_to @request_delivery.user.name, @request_delivery.user  %></b>
+          <% if @request_delivery.more_details.blank? %>
+              <% if @request_delivery.user == current_user %>
+                  <%= render 'shared/missing' %>
+              <% end  %>
+          <% end  %>
+          <b style="padding-left: 70px;">Ask More Details</b>
         </div>
         <div class="show_comments">
           <%= render 'comments/comments' %>

@@ -410,6 +410,28 @@
   }
 }
 
+.edit_size_blank {
+  display: inline-block;
+  font-size:1.4em;
+  width: 212px;
+  text-align: center;
+  background-color: #10529b;
+  background-repeat: no-repeat;
+  background-position: middle left;
+  border:1px solid;
+  border-radius:4px;
+  -moz-border-radius:10px; /* Old Firefox */
+  padding: 5px;
+  color: #ffffff;
+  border-color: #000000;
+  margin-bottom: 10px;
+  select {
+    width:170px;
+    margin-right:20px;
+    float:right;
+  }
+}
+
 .edit_deadline {
   display: inline-block;
   font-size:1.4em;

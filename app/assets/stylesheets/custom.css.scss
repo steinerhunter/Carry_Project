@@ -205,6 +205,7 @@ header {
 }
 
 .new_size select {
+  display: inline-block;
   width:175px;
   height:45px;
   padding-top:7px;
@@ -213,7 +214,8 @@ header {
 }
 
 .new_size label {
-  width:600px;
+  display: inline-block;
+  width:380px;
 }
 
 .new_deadline label {
@@ -358,21 +360,6 @@ textarea {
   padding-top:12px;
   line-height: 30px;
   width: 600px;
-  background-color: #c80000;
-  border: 1px solid #111111;
-  border-radius:5px;
-  color: #ffffff;
-  font-size: 17px;
-  text-align: left;
-}
-
-.request_delivery_errors {
-  margin: 0 auto;
-  margin-top: 2%;
-  padding: 5px;
-  padding-top:12px;
-  line-height: 30px;
-  width: 500px;
   background-color: #c80000;
   border: 1px solid #111111;
   border-radius:5px;

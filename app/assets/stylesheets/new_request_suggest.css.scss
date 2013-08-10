@@ -26,7 +26,7 @@ legend {
   padding-bottom: 10px;
   font-size: 3em;
   border-bottom:solid 2px;
-  border-color: #18212e;
+  border-color: #000000;
   background-color:#00008b;
   background-repeat: no-repeat;
   background-position: bottom left;
@@ -79,4 +79,19 @@ fieldset input[type=text] {
   padding:8px;
   font-size: 1.5em;
   border:solid 1px #000;
+}
+
+.request_suggest_delivery_errors {
+  margin: 0 auto;
+  margin-top: 2%;
+  padding: 5px;
+  padding-top:12px;
+  line-height: 30px;
+  width: 500px;
+  background-color: #c80000;
+  border: 1px solid #111111;
+  border-radius:5px;
+  color: #ffffff;
+  font-size: 17px;
+  text-align: left;
 }

@@ -1,5 +1,5 @@
 (function($) {
-    $.fn.formToWizard = function(options) {
+    $.fn.mapsAndDate = function(options) {
         options = $.extend({
             submitButton: ""
         }, options);

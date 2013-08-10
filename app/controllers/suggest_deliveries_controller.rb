@@ -1,6 +1,7 @@
 class SuggestDeliveriesController < ApplicationController
   before_filter :signed_in_user, only: [:create, :destroy]
   before_filter :correct_user,   only: :destroy
+  respond_to :html, :js
 
   def show
     @suggest_delivery = SuggestDelivery.find(params[:id])
@@ -17,10 +18,12 @@ class SuggestDeliveriesController < ApplicationController
   def create
     @suggest_delivery = current_user.suggest_deliveries.build(params[:suggest_delivery])
     if @suggest_delivery.save
-      flash[:success] = "Delivery Suggestion created!"
-      redirect_to root_url
-    else
-      render 'static_pages/home'
+      flash[:post_created] = "Your suggestion was added successfully!<br>
+                                                      <div class='sub_flash_text'>There are some missing details though.<br>
+                                                      Go to <b style=\"color:#ff9054\">Edit</b> <img src=\"../assets/edit_post_big.png\"> and add them to attract more senders!</div>".html_safe
+      respond_with(@suggest_delivery) do |format|
+        format.html { redirect_to suggest_delivery_url(@suggest_delivery)}
+      end
     end
   end
 
@@ -30,21 +33,22 @@ class SuggestDeliveriesController < ApplicationController
 
   def edit
     @suggest_delivery = SuggestDelivery.find(params[:id])
-    session[:return_to] ||= request.referer
   end
 
   def update
     @suggest_delivery = SuggestDelivery.find(params[:id])
     if @suggest_delivery.update_attributes( params[:suggest_delivery])
-      redirect_to session.delete(:return_to)
-    else
-      render 'edit'
+      flash[:post_updated] = "Your suggestion was updated successfully!"
+      respond_with(@suggest_delivery) do |format|
+        format.html { redirect_to suggest_delivery_url(@suggest_delivery)}
+      end
     end
   end
 
   def destroy
     @suggest_delivery = SuggestDelivery.find(params[:id])
     @suggest_delivery.destroy
+    flash[:post_deleted] = "Your suggestion was successfully deleted!"
     redirect_to suggestions_path
   end
 

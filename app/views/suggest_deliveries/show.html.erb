@@ -1,14 +1,16 @@
 <div class="show_delivery">
   <div class="right_side">
-    <% if @accepted_suggest.blank? %>
-        <div class="challenge_accepted" style="font-size:2.4em">
-          <b><%= link_to "Accept Suggestion",   accept_suggest_delivery_path(@suggest_delivery, type: "accept"), method: :put %></b>
-        </div>
-    <% else  %>
-        <div class="challenge_cancelled">
-          <b style="font-size:33px"><%= link_to "Cancel Acceptance", accept_suggest_delivery_path(@suggest_delivery, type: "cancel"), method: :put %></b>
-        </div>
-    <% end %>
+    <% if @suggest_delivery.user != current_user %>
+        <% if @accepted_suggest.blank? %>
+            <div class="challenge_accepted" style="font-size:2.4em">
+              <b><%= link_to "Accept Suggestion",   accept_suggest_delivery_path(@suggest_delivery, type: "accept"), method: :put %></b>
+            </div>
+        <% else  %>
+            <div class="challenge_cancelled">
+              <b style="font-size:33px"><%= link_to "Cancel Acceptance", accept_suggest_delivery_path(@suggest_delivery, type: "cancel"), method: :put %></b>
+            </div>
+        <% end %>
+    <% end  %>
     <div id="current-delivery-map"></div>
     <div class="extra_info">
       <div class="extra_info_title">
@@ -16,16 +18,33 @@
       </div>
       <div class="extra_info_data">
         <div class="the_deadline">
-          Delivery Available On<br><b><%= @suggest_delivery.when.strftime("%B #{@suggest_delivery.when.day.ordinalize}, %Y")%></b>
+          <% if @suggest_delivery.when.blank? %>
+              <% if @suggest_delivery.user == current_user %>
+                  <%= render 'shared/missing' %>
+                  <b style="color: #e43f45">Delivery Available On</b><br>Not set yet.
+              <% else  %>
+                  <b>Delivery Available On</b><br>Not set yet.
+              <% end  %>
+          <% else %>
+              Delivery Available On<br><b><%= @suggest_delivery.when.strftime("%B #{@suggest_delivery.when.day.ordinalize}, %Y")%></b>
+          <% end %>
         </div>
         <% if @suggest_delivery.size == "Large" %>
             <div class="the_size"  style="background-image: url('../assets/Large.png');">
+              Can deliver items of size<br><b><%= @suggest_delivery.size %></b>
         <% elsif @suggest_delivery.size == "Medium" %>
             <div class="the_size"  style="background-image: url('../assets/Medium.png');">
+              Can deliver items of size<br><b><%= @suggest_delivery.size %></b>
         <% elsif @suggest_delivery.size == "Small" %>
             <div class="the_size"  style="background-image: url('../assets/Small.png');">
+              Can deliver items of size<br><b><%= @suggest_delivery.size %></b>
+        <% elsif @suggest_delivery.size.blank?  %>
+            <div class="the_size">
+              <% if @suggest_delivery.user == current_user %>
+                  <%= render 'shared/missing' %>
+              <% end  %>
+              <b style="color: #e43f45">Can deliver items of size</b><br>Not set yet.
         <% end %>
-        Delivery Size<br><b><%= @suggest_delivery.size %></b>
         </div>
         <div class="task_status">
           <% if @suggest_delivery.status == "Open" %>
@@ -69,72 +88,77 @@
           <% elsif @suggest_delivery.currency == "USD" %>
               <div class="the_money"  style="background-image: url('../assets/usd.png');">
           <% end %>
-            Delivery Cost<br><b><%= @suggest_delivery.cost %> <%= @suggest_delivery.currency %></b>
+          Delivery Cost<br><b><%= @suggest_delivery.cost %> <%= @suggest_delivery.currency %></b>
           </div>
-        </div>
-        <div class="the_from_and_to">
-          <div class="the_from">
-            Delivery Origin<br><b><%= @suggest_delivery.from %><br></b>
           </div>
-          <div class="the_to">
-            Delivery Destination<br><b><%= @suggest_delivery.to %><br></b>
+          <div class="the_from_and_to">
+            <div class="the_from">
+              Delivery Origin<br><b><%= @suggest_delivery.from %><br></b>
+            </div>
+            <div class="the_to">
+              Delivery Destination<br><b><%= @suggest_delivery.to %><br></b>
+            </div>
           </div>
-        </div>
-        <div class="the_size_and_more_info">
-          <div class="posted_by">
-            <%=  link_to gravatar_for(@suggest_delivery.user), @suggest_delivery.user  %>
-            Posted By <b><%= link_to @suggest_delivery.user.name, @suggest_delivery.user  %></b>
-            <div class="verified_details">
-              <div class="verified_item">
-                <div class="bubbleInfo">
-                  <%= image_tag("VerifiedEmail.png", :class => "trigger") %>
-                  <div class="popup">
-                    <b><%=@suggest_delivery.user.name %></b> has verified his/her Email Address.
-                    <div id="tail1"></div>
-                    <div id="tail2"></div>
+          <div class="the_size_and_more_info">
+            <div class="posted_by">
+              <%=  link_to gravatar_for(@suggest_delivery.user), @suggest_delivery.user  %>
+              Posted By <b><%= link_to @suggest_delivery.user.name, @suggest_delivery.user  %></b>
+              <div class="verified_details">
+                <div class="verified_item">
+                  <div class="bubbleInfo">
+                    <%= image_tag("VerifiedEmail.png", :class => "trigger") %>
+                    <div class="popup">
+                      <b><%=@suggest_delivery.user.name %></b> has verified his/her Email Address.
+                      <div id="tail1"></div>
+                      <div id="tail2"></div>
+                    </div>
                   </div>
                 </div>
-              </div>
-              <div class="verified_item">
-                <div class="bubbleInfo">
-                  <%= image_tag("VerifiedPhone.png", :class => "trigger")%>
-                  <div class="popup">
-                    <b><%=@suggest_delivery.user.name %></b> has verified his/her Phone Number.
-                    <div id="tail1"></div>
-                    <div id="tail2"></div>
+                <div class="verified_item">
+                  <div class="bubbleInfo">
+                    <%= image_tag("VerifiedPhone.png", :class => "trigger")%>
+                    <div class="popup">
+                      <b><%=@suggest_delivery.user.name %></b> has verified his/her Phone Number.
+                      <div id="tail1"></div>
+                      <div id="tail2"></div>
+                    </div>
                   </div>
                 </div>
-              </div>
-              <div class="verified_item">
-                <div class="bubbleInfo">
-                  <%= image_tag("VerifiedPaypal.png", :class => "trigger")%>
-                  <div class="popup">
-                    <b><%=@suggest_delivery.user.name %></b> has verified his/her Phone Number.
-                    <div id="tail1"></div>
-                    <div id="tail2"></div>
+                <div class="verified_item">
+                  <div class="bubbleInfo">
+                    <%= image_tag("VerifiedPaypal.png", :class => "trigger")%>
+                    <div class="popup">
+                      <b><%=@suggest_delivery.user.name %></b> has verified his/her Phone Number.
+                      <div id="tail1"></div>
+                      <div id="tail2"></div>
+                    </div>
                   </div>
                 </div>
-              </div>
-              <div class="verified_item">
-                <div class="bubbleInfo">
-                  <%= image_tag("VerifiedPhoto.png", :class => "trigger")%>
-                  <div class="popup">
-                    <b><%=@suggest_delivery.user.name %></b> has uploaded a photo.
-                    <div id="tail1"></div>
-                    <div id="tail2"></div>
+                <div class="verified_item">
+                  <div class="bubbleInfo">
+                    <%= image_tag("VerifiedPhoto.png", :class => "trigger")%>
+                    <div class="popup">
+                      <b><%=@suggest_delivery.user.name %></b> has uploaded a photo.
+                      <div id="tail1"></div>
+                      <div id="tail2"></div>
+                    </div>
                   </div>
                 </div>
               </div>
             </div>
           </div>
+          </div>
+          <div class="show_data" style="margin-top: 15px;">
+            <div class="show_title" style="background-image: url('../assets/contact.png');font-size: 2.6em;height:35px;">
+              <% if @suggest_delivery.more_details.blank? %>
+                  <% if @suggest_delivery.user == current_user %>
+                      <%= render 'shared/missing' %>
+                  <% end  %>
+              <% end  %>
+              <b style="padding-left: 70px;">Ask More Details</b>
+            </div>
+            <div class="show_comments">
+              <%= render 'comments/comments' %>
+            </div>
+          </div>
         </div>
-      </div>
-      <div class="show_data" style="margin-top: 15px;">
-        <div class="show_title" style="background-image: url('../assets/contact.png');font-size: 2.6em;height:35px;">
-          <b style="padding-left: 70px;">Contact <%= link_to @suggest_delivery.user.name, @suggest_delivery.user  %></b>
-        </div>
-        <div class="show_comments">
-          <%= render 'comments/comments' %>
-        </div>
-      </div>
-    </div>

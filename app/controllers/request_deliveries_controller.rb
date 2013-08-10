@@ -18,9 +18,9 @@ class RequestDeliveriesController < ApplicationController
   def create
     @request_delivery = current_user.request_deliveries.build(params[:request_delivery])
     if @request_delivery.save
-      flash[:request_created] = "Your request was added successfully!<br>
-                                                              <div class='sub_flash_text'>There are some missing details though.<br>
-                                                              Go to <b style=\"color:#ff9054\">Edit</b> <img src=\"../assets/edit_post_big.png\"> and add them to attract more transporters!</div>".html_safe
+      flash[:post_created] = "Your request was added successfully!<br>
+                                                      <div class='sub_flash_text'>There are some missing details though.<br>
+                                                      Go to <b style=\"color:#ff9054\">Edit</b> <img src=\"../assets/edit_post_big.png\"> and add them to attract more transporters!</div>".html_safe
       respond_with(@request_delivery) do |format|
         format.html { redirect_to request_delivery_url(@request_delivery)}
       end
@@ -38,7 +38,7 @@ class RequestDeliveriesController < ApplicationController
   def update
     @request_delivery = RequestDelivery.find(params[:id])
     if @request_delivery.update_attributes( params[:request_delivery])
-      flash[:request_updated] = "Your request was updated successfully!"
+      flash[:post_updated] = "Your request was updated successfully!"
       respond_with(@request_delivery) do |format|
         format.html { redirect_to request_delivery_url(@request_delivery)}
         end
@@ -48,7 +48,7 @@ class RequestDeliveriesController < ApplicationController
   def destroy
     @request_delivery = RequestDelivery.find(params[:id])
     @request_delivery.destroy
-    flash[:request_deleted] = "Your request was successfully deleted!"
+    flash[:post_deleted] = "Your request was successfully deleted!"
     redirect_to requests_path
   end
 
@@ -61,8 +61,8 @@ class RequestDeliveriesController < ApplicationController
         @request_delivery.accept_request
         redirect_to :back
         flash[:accept] = "You've chosen to accept <br><b>#{@request_delivery.what}</b><br> delivery request!<br>
-                                              <div class='sub_flash_text'><b>#{@request_delivery.user.name}</b>, the creator of the request, will be notified. <br>
-                                              Please allow <b>#{@request_delivery.user.name}</b> some time to get back to you.</div>".html_safe
+                                          <div class='sub_flash_text'><b>#{@request_delivery.user.name}</b>, the creator of the request, will be notified. <br>
+                                          Please allow <b>#{@request_delivery.user.name}</b> some time to get back to you.</div>".html_safe
       elsif type == "cancel"
         current_user.request_accepts.delete(@request_delivery)
         redirect_to :back

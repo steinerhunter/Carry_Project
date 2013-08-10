@@ -3,8 +3,8 @@ var form = $('.edit_request_delivery');
 <% if @request_delivery.errors.any? %>
 
 // Delete errors from previous submission
-if ($(".request_delivery_errors")[0]){
-    $('.request_delivery_errors').remove();
+if ($(".request_suggest_delivery_errors")[0]){
+    $('.request_suggest_delivery_errors').remove();
 }
 
 // Create a list of errors
@@ -18,7 +18,7 @@ var errors = $('<ul />');
 <% end %>
 
 // Display errors before the form
-$('<div />').addClass('request_delivery_errors').html(errors).appendTo(".edit_request_delivery").hide().fadeIn('slow');
+$('<div />').addClass('request_suggest_delivery_errors').html(errors).appendTo(".edit_request_delivery").hide().fadeIn('slow');
 
 <% else %>
 

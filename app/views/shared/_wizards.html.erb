@@ -1,29 +1,25 @@
  <% if controller.controller_name == 'request_deliveries' && controller.action_name == 'new' %>
     <script type="text/javascript">
         $(document).ready(function(){
-            $("#new_request_delivery").formToWizard()
-            $("#new_request_delivery").enableClientSideValidations();
+            $("#new_request_delivery").mapsAndDate()
         });
     </script>
      <% elsif controller.controller_name == 'request_deliveries' && controller.action_name == 'edit' %>
          <script type="text/javascript">
              $(document).ready(function(){
-                 $(".edit_request_delivery").formToWizard()
-
+                 $(".edit_request_delivery").mapsAndDate()
              });
          </script>
 <% elsif controller.controller_name == 'suggest_deliveries' && controller.action_name == 'new' %>
     <script type="text/javascript">
         $(document).ready(function(){
-            $("#new_suggest_delivery").formToWizard()
-            $("#new_suggest_delivery").enableClientSideValidations();
+            $("#new_suggest_delivery").mapsAndDate()
         });
     </script>
  <% elsif controller.controller_name == 'suggest_deliveries' && controller.action_name == 'edit' %>
      <script type="text/javascript">
          $(document).ready(function(){
-             $(".edit_suggest_delivery").formToWizard()
-
+             $(".edit_suggest_delivery").mapsAndDate()
          });
      </script>
 <% end %>

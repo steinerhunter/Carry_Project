@@ -1,1 +1,50 @@
-<%= render 'shared/edit_suggest_delivery_form' %>
+<%= form_for(@suggest_delivery, :remote => true ) do |f| %>
+    <div class="edit_data">
+      <div class="edit_title">
+        <b style="padding-left: 60px;font-size: 36px;">Edit Delivery Suggestion</b>
+      </div>
+      <div class="edit_what_and_money">
+        <div class="edit_money">
+          How much will you charge?<br><%= f.text_field :cost  %><%= f.select :currency, options_for_select(%w[NIS USD Euro], :selected => @suggest_delivery.currency) %>
+        </div>
+      </div>
+      <div class="edit_from_and_to">
+        <div class="edit_from">
+          Your Starting Point<br><%= f.text_field :from, :class => "address_field" %>
+        </div>
+        <div class="edit_to">
+          Your End Point<br><%= f.text_field :to, :class => "address_field" %>
+        </div>
+      </div>
+      <div class="the_size_and_more_info">
+        <div class="edit_sender_and_receiver">
+          <div class="edit_deadline">
+            Delivery Date<br><%= f.text_field :when, :placeholder => "mm/dd/yyyy", :class => "datepicker", :value => "#{@suggest_delivery.when.strftime("%d/%m/%Y")}" %>
+          </div>
+          <% if @suggest_delivery.size == "Large" %>
+              <div class="edit_size"  style="background-image: url('../../assets/edit_Large.png');">
+                Delivery Size<br><%= f.select :size, options_for_select(%w[Small Medium Large], :selected => @suggest_delivery.size) %>
+              </div>
+          <% elsif @suggest_delivery.size == "Medium" %>
+              <div class="edit_size"  style="background-image: url('../../assets/edit_Medium.png');">
+                Delivery Size<br><%= f.select :size, options_for_select(%w[Small Medium Large], :selected => @suggest_delivery.size) %>
+              </div>
+          <% elsif @suggest_delivery.size == "Small" %>
+              <div class="edit_size"  style="background-image: url('../../assets/edit_Small.png');">
+                Delivery Size<br><%= f.select :size, options_for_select(%w[Small Medium Large], :selected => @suggest_delivery.size) %>
+              </div>
+          <% elsif @suggest_delivery.size.blank?  %>
+              <div class="edit_size_blank">
+                <b style="color:#e43f45">Delivery Size</b><br><%= f.select :size, options_for_select(%w[Small Medium Large]), :include_blank => "Pick Size..." %>
+              </div>
+          <% end %>
+        </div>
+        <div class="edit_more_info">
+          More Details <br><%= f.text_area :more_details, :rows => 2 %>
+        </div>
+        <div class="edit_update">
+          <%= f.submit "Update", :type => :image, :src => "../../assets/Update.png" %>
+        </div>
+      </div>
+    </div>
+<% end  %>

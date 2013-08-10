@@ -1,21 +1,23 @@
 <header class="navbar navbar-inverse">
   <div class="navbar-inner">
-    <div class="container" style="width:850px">
-      <%= link_to "The Carry Project", root_path, id: "logo" %>
+    <div class="container" style="width:950px">
+      <%= link_to "TransWith.me", root_path, id: "logo" %>
       <nav>
         <ul class="nav pull-right" id="header_items">
+          <li id="header_transporters"><%= link_to "Find Transporters", suggestions_path  %></li>
+          <li id="header_senders"><%= link_to "Browse Senders", requests_path  %></li>
           <% if signed_in?  %>
-              <li><%= link_to "Find Transporters", suggestions_path  %></li>
-              <li><%= link_to "Browse Senders", requests_path  %></li>
-              <li><%= link_to "Messages", conversations_path %></li>
-              <li><%= link_to "Activity", activity_path %></li>
-              <li><%= link_to current_user.name, current_user  %></li>
+              <% if current_user.mailbox.receipts.where(:is_read => false).count > 0 %>
+                  <li id="header_messages_unread"><%= link_to "Messages", conversations_path %></li>
+              <% else  %>
+                  <li id="header_messages"><%= link_to "Messages", conversations_path %></li>
+              <% end  %>
+              <li id="header_activity"><%= link_to "Activity", activity_path %></li>
+              <li id="header_user"><%= link_to header_gravatar_for(current_user)+current_user.name, current_user  %></li>
           <% else  %>
-              <li><%= link_to "Find Transporters", suggestions_path  %></li>
-              <li><%= link_to "Browse Senders", requests_path  %></li>
-              <li><%= link_to "How it works", '#' %></li>
-              <li><%= link_to "Sign in", signin_path %></li>
-              <li><%= link_to "Register", signup_path %></li>
+              <li id="header_how_it_works"><%= link_to "How it works", '#' %></li>
+              <li id="header_sign_in"><%= link_to "Sign in", signin_path %></li>
+              <li id="header_register"><%= link_to "Register", signup_path %></li>
           <% end %>
         </ul>
       </nav>

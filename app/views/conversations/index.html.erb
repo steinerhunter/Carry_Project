@@ -1,7 +1,7 @@
 <div class="index_activity">
   <div class="activity_data" style="margin-left:auto; margin-right:auto;">
     <div class="activity_title" style="background-image: url('../assets/contact.png');margin-bottom:15px;">
-      <b style="padding-left: 70px;">My Conversations</b>
+      <b style="padding-left: 70px;">Messages</b>
     </div>
     <% if @my_conversations.any?  %>
         <%= render (mailbox.inbox + mailbox.sentbox).sort_by { |conversation| conversation.last_message.created_at }.reverse.uniq %>

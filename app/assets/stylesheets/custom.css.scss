@@ -32,63 +32,6 @@ p {
 
 .nav li {display:inline;}
 
-/* header */
-
-header {
-  a {
-    color: #eda358;
-    &:hover {
-      color: #cccccc;
-    }
-  }
-}
-
-.navbar {
-  .navbar-inner {
-    vertical-align: middle;
-    border: 1px solid #000000;
-    background-color: #1d79e2;
-    background-image: none;
-
-    .dropdown .dropdown-toggle {
-      height: 23px;
-    }
-
-    .dropdown .dropdown-menu::before,
-    .dropdown .dropdown-menu::after {
-      border: none;
-      content: none;
-    }
-
-    .dropdown .dropdown-menu {
-      border: 1px solid #000000;
-      border-radius: 2px;
-      background-color: #1d79e2;
-      .divider {
-        border: black;
-        background-color: black;
-      }
-    }
-  }
-  .border{
-    border-right: 1px solid black;
-    height: 43px;
-  }
-}
-
-#header_items {
-  padding-top: 1px;
-  color: #ffffff;
-
-  a {
-    color: #ffffff;
-
-    &:hover {
-      text-decoration:underline;
-    }
-  }
-}
-
 .signup_form_class {
   width: 700px;
   height: 310px;
@@ -238,7 +181,6 @@ header {
   margin-right: 10px;
   font-size: 1.7em;
   color: #fff;
-  text-transform: uppercase;
   letter-spacing: -1px;
   padding-top: 9px;
   font-weight: bold;
@@ -274,44 +216,6 @@ footer {
 textarea {
   width: 500px;
   border:solid 1px #000;
-}
-
-.step_class {
-  width: 700px;
-  margin-left: auto;
-  margin-right: auto;
-}
-
-.step_command {
-  float: center;
-  margin-top: 15px;
-  margin-bottom: 10px;
-}
-
-#steps {
-  list-style:none;
-  width:600px;
-  text-align: center;
-  overflow:hidden;
-  margin-left: auto;
-  margin-right: auto;
-  padding:0px;
-}
-
-#steps li {
-  font-size:24px;
-  display:inline-block;
-  padding:10px;
-  color:#b0b1b3;
-}
-
-#steps li span {
-  font-size:11px;
-  display:block;
-}
-
-#steps li.current { 
-  color:#000;
 }
 
 .field_with_errors label {
@@ -416,12 +320,6 @@ aside {
       line-height: 1;
     }
   }
-}
-
-.gravatar {
-  float: left;
-  margin-right: 10px;
-  border: 1px solid #111111;
 }
 
 /* forms */

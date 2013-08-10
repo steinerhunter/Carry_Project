@@ -46,11 +46,15 @@
               <b style="color: #e43f45">Can deliver items of size</b><br>Not set yet.
         <% end %>
         </div>
-        <div class="task_status">
           <% if @suggest_delivery.status == "Open" %>
+            <div class="task_status" style="background-image: url('../assets/status_Open.png');">
               Suggestion Status<br><b style="color: #20d62c;"><%= @suggest_delivery.status %></b>
+            </div>
+        <% elsif @suggest_delivery.status == "Pending Confirmation" %>
+            <div class="task_status" style="background-image: url('../assets/status_Pending.png');">
+              Suggestion Status<br><b style="color: #d67a31;"><%= @suggest_delivery.status %></b>
+            </div>
           <% end %>
-        </div>
         </div>
         </div>
       </div>
@@ -78,7 +82,7 @@
                 </div>
               </div>
           <% end %>
-          <b style="padding-left: 70px;">Delivery of <%= @suggest_delivery.size %> sized items</b>
+          <b style="padding-left: 65px;">Transport  <%= @suggest_delivery.size %> sized items</b>
         </div>
         <div class="the_deadline_and_money">
           <% if @suggest_delivery.currency == "NIS" %>

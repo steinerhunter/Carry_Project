@@ -11,18 +11,15 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130804191824) do
+ActiveRecord::Schema.define(:version => 20130811210816) do
 
   create_table "accepted_requests", :force => true do |t|
     t.integer  "request_delivery_id"
     t.integer  "user_id"
-    t.datetime "created_at",          :null => false
-    t.datetime "updated_at",          :null => false
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.boolean  "confirmed",           :default => false
   end
-
-  add_index "accepted_requests", ["request_delivery_id", "user_id"], :name => "index_accepted_requests_on_request_delivery_id_and_user_id", :unique => true
-  add_index "accepted_requests", ["request_delivery_id"], :name => "index_accepted_requests_on_request_delivery_id"
-  add_index "accepted_requests", ["user_id"], :name => "index_accepted_requests_on_user_id"
 
   create_table "accepted_suggests", :force => true do |t|
     t.integer  "suggest_delivery_id"
@@ -104,17 +101,6 @@ ActiveRecord::Schema.define(:version => 20130804191824) do
   end
 
   add_index "request_deliveries", ["user_id", "created_at"], :name => "index_request_deliveries_on_user_id_and_created_at"
-
-  create_table "request_relationships", :force => true do |t|
-    t.integer  "accepter_id"
-    t.integer  "request_id"
-    t.datetime "created_at",  :null => false
-    t.datetime "updated_at",  :null => false
-  end
-
-  add_index "request_relationships", ["accepter_id", "request_id"], :name => "index_request_relationships_on_accepter_id_and_request_id", :unique => true
-  add_index "request_relationships", ["accepter_id"], :name => "index_request_relationships_on_accepter_id"
-  add_index "request_relationships", ["request_id"], :name => "index_request_relationships_on_request_id"
 
   create_table "suggest_deliveries", :force => true do |t|
     t.string   "from"

@@ -77,6 +77,19 @@ class RequestDeliveriesController < ApplicationController
     end
   end
 
+  def confirm
+    @accepted_request = AcceptedRequest.find(params[:accepted_request_id])
+    @request_delivery = RequestDelivery.find(params[:request_delivery_id])
+    @confirmed_user = User.find( @accepted_request.user_id)
+    if @accepted_request.save
+      @accepted_request.confirm_accepted_request
+      @request_delivery.confirm_request
+      flash[:confirm] = "You've chosen to confirm <br><b>#{@confirmed_user.name}</b><br>
+                                          <div class='sub_flash_text'>For your request <div class='confirmed_request'><b>#{@request_delivery.what}</b><br></div></div>".html_safe
+    end
+    redirect_to activity_path
+  end
+
   private
 
   def correct_user

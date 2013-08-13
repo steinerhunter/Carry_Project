@@ -24,4 +24,8 @@ class RequestDelivery < ActiveRecord::Base
     self.update_attribute(:status, "Open")
   end
 
+  def confirm_request
+    self.update_attribute(:status, "Confirmed")
+  end
+
 end

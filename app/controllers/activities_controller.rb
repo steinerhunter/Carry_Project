@@ -14,7 +14,11 @@ class ActivitiesController < ApplicationController
     @my_requests_accepted = AcceptedRequest.find_all_by_request_delivery_id(@my_requests_id)
 
     @confirmed_request = AcceptedRequest.find_by_confirmed(true)
-    @confirmed_user = User.find_by_id(@confirmed_request.user_id)
+    @confirmed_user = nil
+    if @confirmed_request
+      @confirmed_user = User.find_by_id(@confirmed_request.user_id)
+    end
+
 
     @suggest_feed_items = current_user.user_suggest_feed
     @my_accepted_suggests = AcceptedSuggest.where("user_id = ?",current_user.id)

@@ -50,7 +50,7 @@
         Others' Delivery Requests
       </div>
       <% if @my_accepted_request_feed_items.any? %>
-          <% if @confirmed_user.blank? || @confirmed_user == current_user %>
+          <% if @confirmed_user.nil? || @confirmed_user == current_user %>
             <%= render partial: 'shared/activity_request_item', collection: @my_accepted_request_feed_items %>
             <% else  %>
               <div class="no_active">

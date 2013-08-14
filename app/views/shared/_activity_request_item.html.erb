@@ -100,7 +100,7 @@
             <% end  %>
         <% elsif activity_request_item.status == "Confirmed" %>
             Status: <b style="color:#4dbeff"><%= activity_request_item.status %></b>
-            <% if activity_request_item.user == current_user  && @confirmed_user.exists? %>
+            <% if activity_request_item.user == current_user  && !@confirmed_user.nil? %>
                 (by <b style="color:#f2ff5e">you</b>)  <br>
                 <div class="send_messages_to_users" style="background-color: #0b5aff;">
                   <div class="needs_to_confirm">

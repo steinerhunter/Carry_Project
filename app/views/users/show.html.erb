@@ -4,7 +4,9 @@
       <h1>
         <%= gravatar_for @user %>
         <%= @user.name  %>
-        <%= link_to "Sign out", signout_path, method: "delete"  %>
+        <% if @user == current_user  %>
+            <%= link_to "Sign out", signout_path, method: "delete"  %>
+         <% end  %>
       </h1>
     </section>
   </aside>

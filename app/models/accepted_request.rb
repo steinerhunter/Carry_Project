@@ -1,4 +1,5 @@
 class AcceptedRequest < ActiveRecord::Base
+  attr_accessible :confirmed
   belongs_to :request_delivery
   belongs_to :user
 

@@ -9,7 +9,6 @@ class AcceptedRequest < ActiveRecord::Base
   validate :unique_confirmation
   validate :correct_user
 
-
   def correct_user
     if self.user == self.request_delivery.user
       errors.add :user_id, "You cannot accept your own requests..."

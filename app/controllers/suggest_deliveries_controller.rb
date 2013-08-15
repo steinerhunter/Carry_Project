@@ -77,6 +77,19 @@ class SuggestDeliveriesController < ApplicationController
     end
   end
 
+  def confirm
+    @accepted_suggest = AcceptedSuggest.find(params[:accepted_suggest_id])
+    @suggest_delivery = SuggestDelivery.find(params[:suggest_delivery_id])
+    @confirmed_user = User.find( @accepted_suggest.user_id)
+    if @accepted_suggest.save
+      @accepted_suggest.confirm_accepted_suggest
+      @suggest_delivery.confirm_suggest
+      flash[:confirm] = "You've chosen to confirm <br><b>#{@confirmed_user.name}</b><br>
+                                          <div class='sub_flash_text'>For your suggestion <div class='confirmed_suggest'><b>Transport #{@suggest_delivery.size} sized items</b><br></div></div>".html_safe
+    end
+    redirect_to activity_path
+  end
+
   private
 
   def correct_user

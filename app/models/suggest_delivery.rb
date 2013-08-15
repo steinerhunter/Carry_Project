@@ -22,5 +22,9 @@ class SuggestDelivery < ActiveRecord::Base
   def cancel_suggest
     self.update_attribute(:status, "Open")
   end
+
+  def confirm_suggest
+    self.update_attribute(:status, "Confirmed")
+  end
   
 end

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130811210816) do
+ActiveRecord::Schema.define(:version => 20130815153814) do
 
   create_table "accepted_requests", :force => true do |t|
     t.integer  "request_delivery_id"
@@ -24,8 +24,9 @@ ActiveRecord::Schema.define(:version => 20130811210816) do
   create_table "accepted_suggests", :force => true do |t|
     t.integer  "suggest_delivery_id"
     t.integer  "user_id"
-    t.datetime "created_at",          :null => false
-    t.datetime "updated_at",          :null => false
+    t.datetime "created_at",                             :null => false
+    t.datetime "updated_at",                             :null => false
+    t.boolean  "confirmed",           :default => false
   end
 
   add_index "accepted_suggests", ["suggest_delivery_id", "user_id"], :name => "index_accepted_suggests_on_suggest_delivery_id_and_user_id", :unique => true

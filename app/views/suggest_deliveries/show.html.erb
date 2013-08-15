@@ -31,13 +31,13 @@
         </div>
         <% if @suggest_delivery.size == "Large" %>
             <div class="the_size"  style="background-image: url('../assets/Large.png');">
-              Can deliver items of size<br><b><%= @suggest_delivery.size %></b>
+              <b>Can deliver items of size</b><br><%= @suggest_delivery.size %>
         <% elsif @suggest_delivery.size == "Medium" %>
             <div class="the_size"  style="background-image: url('../assets/Medium.png');">
-              Can deliver items of size<br><b><%= @suggest_delivery.size %></b>
+              <b>Can deliver items of size</b><br><%= @suggest_delivery.size %>
         <% elsif @suggest_delivery.size == "Small" %>
             <div class="the_size"  style="background-image: url('../assets/Small.png');">
-              Can deliver items of size<br><b><%= @suggest_delivery.size %></b>
+              <b>Can deliver items of size</b><br><%= @suggest_delivery.size %>
         <% elsif @suggest_delivery.size.blank?  %>
             <div class="the_size">
               <% if @suggest_delivery.user == current_user %>
@@ -48,11 +48,11 @@
         </div>
           <% if @suggest_delivery.status == "Open" %>
             <div class="task_status" style="background-image: url('../assets/status_Open.png');">
-              Suggestion Status<br><b style="color: #20d62c;"><%= @suggest_delivery.status %></b>
+              <b>Suggestion Status</b><br><b style="color: #20d62c;"><%= @suggest_delivery.status %></b>
             </div>
         <% elsif @suggest_delivery.status == "Pending Confirmation" %>
             <div class="task_status" style="background-image: url('../assets/status_Pending.png');">
-              Suggestion Status<br><b style="color: #d67a31;"><%= @suggest_delivery.status %></b>
+              <b>Suggestion Status</b><br><b style="color: #d67a31;"><%= @suggest_delivery.status %></b>
             </div>
           <% end %>
         </div>

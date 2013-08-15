@@ -31,13 +31,13 @@
         </div>
         <% if @request_delivery.size == "Large" %>
             <div class="the_size"  style="background-image: url('../assets/Large.png');">
-                Delivery Size<br><b><%= @request_delivery.size %></b>
+              <b>Delivery Size</b><br><%= @request_delivery.size %>
         <% elsif @request_delivery.size == "Medium" %>
             <div class="the_size"  style="background-image: url('../assets/Medium.png');">
-                Delivery Size<br><b><%= @request_delivery.size %></b>
+              <b>Delivery Size</b><br><%= @request_delivery.size %>
         <% elsif @request_delivery.size == "Small" %>
             <div class="the_size"  style="background-image: url('../assets/Small.png');">
-                Delivery Size<br><b><%= @request_delivery.size %></b>
+              <b>Delivery Size</b><br><%= @request_delivery.size %>
         <% elsif @request_delivery.size.blank?  %>
             <div class="the_size">
               <% if @request_delivery.user == current_user %>

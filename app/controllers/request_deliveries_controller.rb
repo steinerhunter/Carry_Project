@@ -100,8 +100,7 @@ class RequestDeliveriesController < ApplicationController
     @accepted_request = AcceptedRequest.find(params[:accepted_request_id])
     @request_delivery = RequestDelivery.find(params[:request_delivery_id])
     @confirmed_user = User.find( @accepted_request.user_id)
-    if @accepted_request.save
-      @accepted_request.confirm_accepted_request
+    if  @accepted_request.confirm_accepted_request
       @request_delivery.confirm_request
       flash[:confirm] = "You've chosen to confirm <br><b>#{@confirmed_user.name}</b><br>
                                           <div class='sub_flash_text'>For your request <div class='confirmed_request'><b>#{@request_delivery.what}</b><br></div></div>".html_safe
@@ -109,10 +108,21 @@ class RequestDeliveriesController < ApplicationController
     redirect_to activity_path
   end
 
+  def complete
+    @accepted_request = AcceptedRequest.find(params[:accepted_request_id])
+    @request_delivery = RequestDelivery.find(params[:request_delivery_id])
+    if @accepted_request.complete_accepted_request
+      @request_delivery.complete_request
+      flash[:complete] = "You've chosen to mark <br><b>#{@request_delivery.what}</b><br> delivery request as <br><div class='complete'><b>complete!</b></div>
+                                            <div class='sub_flash_text'>A payment of <b>#{@request_delivery.cost} #{@request_delivery.currency}</b> will be transferred to you. <br></div>".html_safe
+    end
+    redirect_to activity_path
+  end
+
   private
 
   def correct_user
-    @request_delivey = current_user.request_deliveries.find_by_id(params[:id])
+    @request_delivery = current_user.request_deliveries.find_by_id(params[:id])
     redirect_to root_url if @request_delivey.nil? && !current_user.try(:admin?)
   end
 

@@ -1,5 +1,5 @@
 class AcceptedRequest < ActiveRecord::Base
-  attr_accessible :confirmed
+  attr_accessible :confirmed, :complete
   belongs_to :request_delivery
   belongs_to :user
 
@@ -7,6 +7,7 @@ class AcceptedRequest < ActiveRecord::Base
   validates :user_id, presence: true
   validates_uniqueness_of :user_id, :scope => :request_delivery_id, :message => "You've already accepted this request..."
   validate :unique_confirmation
+  validate :complete_only_confirmed
   validate :correct_user
 
   def correct_user
@@ -21,8 +22,18 @@ class AcceptedRequest < ActiveRecord::Base
     end
   end
 
+  def complete_only_confirmed
+    if (self.confirmed == false) && (self.complete == true)
+      errors.add :complete, "You cannot complete unconfirmed requests..."
+    end
+  end
+
   def confirm_accepted_request
     self. update_attribute(:confirmed, true)
+  end
+
+  def complete_accepted_request
+    self. update_attribute(:complete, true)
   end
 
   def user_for_confirmed_request

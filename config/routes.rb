@@ -30,8 +30,11 @@ TheCarryProject::Application.routes.draw do
 
   match '/request', to:'request_deliveries#new'
   match '/requests', to:'request_deliveries#index'
+
   match '/confirm_request', to:'request_deliveries#confirm'
   match '/confirm_suggestion', to:'suggest_deliveries#confirm'
+
+  match '/complete_request', to:'request_deliveries#complete'
 
   match '/suggest', to:'suggest_deliveries#new'
   match '/suggestions', to:'suggest_deliveries#index'

@@ -1,4 +1,8 @@
-<div class="activity_feed_item">
+<% if activity_request_item.status == "Complete" %>
+    <div class="activity_feed_item" style="background-color: #257b2a;">
+<% else %>
+    <div class="activity_feed_item">
+<% end  %>
   <% if (current_user?(activity_request_item.user)) || (current_user.try(:admin?)) %>
       <div class="delete_post">
         <div class="bubbleInfo">
@@ -21,7 +25,7 @@
         </div>
       </div>
   <% end %>
-  <div class="activity_feed_item_info">
+    <div class="activity_feed_item_info">
     <%= link_to activity_request_item.what, request_delivery_path(activity_request_item)  %>
     <div class="status_and_created">
       <div class="activity_created">
@@ -104,17 +108,7 @@
                 (by <b style="color:#f2ff5e">you</b>)  <br>
                 <div class="send_messages_to_users" style="background-color: #0b5aff;">
                   <div class="needs_to_confirm">
-                    <div class="confirm_me">
-                      <div class="bubbleInfo">
-                        <%= image_tag("confirmed.png", class: "trigger") %>
-                        <div class="popup" style="height:20px; width:240px; margin-top:57px;">
-                          User is <b style="color:#18a320;">confirmed</b> for your request!
-                          <div id="tail1" style="left:36px"></div>
-                          <div id="tail2" style="left:36px"></div>
-                        </div>
-                      </div>
-                    </div>
-                    <div class="send_message">
+                    <div class="send_message" style="right:3px;">
                       <div class="bubbleInfo">
                         <%=  link_to image_tag("send_message.png"),
                                      {:controller => "conversations",
@@ -130,7 +124,7 @@
                       </div>
                     </div>
                     <b style="color:#f2ff5e"><%= link_to activity_request_item.accepted_request.user_for_confirmed_request.name,
-                                                                                                   activity_request_item.accepted_request.user_for_confirmed_request  %></b> is confirmed!
+                                                                           activity_request_item.accepted_request.user_for_confirmed_request  %></b> is confirmed!
                   </div>
                 </div>
             <% elsif activity_request_item.accepted_request.user_for_confirmed_request == current_user  %>
@@ -139,9 +133,14 @@
                   <div class="needs_to_confirm">
                     <div class="confirm_me">
                       <div class="bubbleInfo">
-                        <%= image_tag("confirmed.png", class: "trigger") %>
-                        <div class="popup" style="height:20px; width:240px; margin-top:57px;">
-                          You are <b style="color:#18a320;">confirmed</b> for this request!
+                        <%=  link_to image_tag("confirmed.png"),
+                                     {:controller => "request_deliveries",
+                                      :action => "complete",
+                                      :accepted_request_id => activity_request_item.accepted_request.id,
+                                      :request_delivery_id => activity_request_item.id  },
+                                     class: "trigger" %>
+                        <div class="popup" style="height:20px; width:185px; margin-top:57px;">
+                          Mark request as <b style="color:#19b522;">Complete</b>!
                           <div id="tail1" style="left:36px"></div>
                           <div id="tail2" style="left:36px"></div>
                         </div>
@@ -172,6 +171,13 @@
                     <b style="color:#f2ff5e"><%= link_to activity_request_item.user.name, activity_request_item.user  %></b> has confirmed another user!
                   </div>
                 </div>
+            <% end  %>
+        <% elsif activity_request_item.status == "Complete" %>
+            Status: <b style="color:#74e239"><%= activity_request_item.status %></b>
+            <% if activity_request_item.user == current_user %>
+                (by <b style="color:#f2ff5e"><%= link_to activity_request_item.accepted_request.user_for_confirmed_request.name, activity_request_item.accepted_request.user_for_confirmed_request %></b>)
+          <% elsif activity_request_item.accepted_request.user_for_confirmed_request == current_user  %>
+                (by <b style="color:#f2ff5e">you</b>)
             <% end  %>
         <% end  %>
       </div>

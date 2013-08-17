@@ -104,17 +104,7 @@
                 (by <b style="color:#f2ff5e">you</b>)  <br>
                 <div class="send_messages_to_users" style="background-color: #0b5aff;">
                   <div class="needs_to_confirm">
-                    <div class="confirm_me">
-                      <div class="bubbleInfo">
-                        <%= image_tag("confirmed.png", class: "trigger") %>
-                        <div class="popup" style="height:20px; width:260px; margin-top:57px;">
-                          User is <b style="color:#18a320;">confirmed</b> for your suggestion!
-                          <div id="tail1" style="left:36px"></div>
-                          <div id="tail2" style="left:36px"></div>
-                        </div>
-                      </div>
-                    </div>
-                    <div class="send_message">
+                    <div class="send_message" style="right:3px;">
                       <div class="bubbleInfo">
                         <%=  link_to image_tag("send_message.png"),
                                      {:controller => "conversations",

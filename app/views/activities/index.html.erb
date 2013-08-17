@@ -20,13 +20,7 @@
           Others' Delivery Suggestions
         </div>
         <% if @my_accepted_suggest_feed_items.any? %>
-            <% if @confirmed_user_for_suggest.nil? || @confirmed_user_for_suggest == current_user %>
-                <%= render partial: 'shared/activity_suggest_item', collection: @my_accepted_suggest_feed_items %>
-            <% else  %>
-                <div class="no_active">
-                  No active delivery requests by others.
-                </div>
-            <% end  %>
+            <%= render partial: 'shared/activity_suggest_item', collection: @my_accepted_suggest_feed_items %>
         <% else  %>
             <div class="no_active">
               No active delivery suggestions by others.
@@ -56,13 +50,7 @@
         Others' Delivery Requests
       </div>
       <% if @my_accepted_request_feed_items.any? %>
-          <% if @confirmed_user_for_request.nil? || @confirmed_user_for_request == current_user %>
-            <%= render partial: 'shared/activity_request_item', collection: @my_accepted_request_feed_items %>
-            <% else  %>
-              <div class="no_active">
-                No active delivery requests by others.
-              </div>
-          <% end  %>
+          <%= render partial: 'shared/activity_request_item', collection: @my_accepted_request_feed_items %>
       <% else  %>
           <div class="no_active">
             No active delivery requests by others.

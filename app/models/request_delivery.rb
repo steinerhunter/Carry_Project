@@ -28,4 +28,8 @@ class RequestDelivery < ActiveRecord::Base
     self.update_attribute(:status, "Confirmed")
   end
 
+  def accepted_request
+    AcceptedRequest.find_by_request_delivery_id_and_confirmed(self.id, true)
+  end
+
 end

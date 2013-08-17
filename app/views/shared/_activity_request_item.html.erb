@@ -100,7 +100,7 @@
             <% end  %>
         <% elsif activity_request_item.status == "Confirmed" %>
             Status: <b style="color:#4dbeff"><%= activity_request_item.status %></b>
-            <% if activity_request_item.user == current_user  && !@confirmed_user_for_request.nil? %>
+            <% if activity_request_item.user == current_user %>
                 (by <b style="color:#f2ff5e">you</b>)  <br>
                 <div class="send_messages_to_users" style="background-color: #0b5aff;">
                   <div class="needs_to_confirm">
@@ -119,7 +119,7 @@
                         <%=  link_to image_tag("send_message.png"),
                                      {:controller => "conversations",
                                       :action => "new",
-                                      :recipient_id => @confirmed_user_for_request.id,
+                                      :recipient_id => activity_request_item.accepted_request.user_for_confirmed_request.id,
                                       :request_delivery_id => activity_request_item.id  },
                                      class: "trigger" %>
                         <div class="popup" style="height:20px; width:120px; margin-top:57px;">
@@ -129,10 +129,11 @@
                         </div>
                       </div>
                     </div>
-                    <b style="color:#f2ff5e"><%= link_to @confirmed_user_for_request.name, @confirmed_user_for_request  %></b> is confirmed!
+                    <b style="color:#f2ff5e"><%= link_to activity_request_item.accepted_request.user_for_confirmed_request.name,
+                                                                                                   activity_request_item.accepted_request.user_for_confirmed_request  %></b> is confirmed!
                   </div>
                 </div>
-            <% else  %>
+            <% elsif activity_request_item.accepted_request.user_for_confirmed_request == current_user  %>
                 <br>
                 <div class="send_messages_to_users" style="background-color: #0b5aff;">
                   <div class="needs_to_confirm">
@@ -162,6 +163,13 @@
                       </div>
                     </div>
                     <b style="color:#f2ff5e"><%= link_to activity_request_item.user.name, activity_request_item.user  %></b> has confirmed!
+                  </div>
+                </div>
+            <% else  %>
+                <br>
+                <div class="send_messages_to_users" style="background-color: #0b5aff;">
+                  <div class="needs_to_confirm">
+                    <b style="color:#f2ff5e"><%= link_to activity_request_item.user.name, activity_request_item.user  %></b> has confirmed another user!
                   </div>
                 </div>
             <% end  %>

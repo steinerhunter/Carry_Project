@@ -16,13 +16,17 @@ class AcceptedSuggest < ActiveRecord::Base
   end
 
   def unique_confirmation
-    if !self.class.where('confirmed = ?', true).empty?
-      errors.add :confirmed, "You cannot confirm more than one user per request..."
+    if !self.class.where('confirmed = ? AND suggest_delivery_id = ?', true, self.suggest_delivery_id).empty?
+      errors.add :confirmed, "You cannot confirm more than one user per suggestion..."
     end
   end
 
   def confirm_accepted_suggest
     self. update_attribute(:confirmed, true)
+  end
+
+  def user_for_confirmed_suggest
+    User.find_by_id(self.user_id)
   end
 
 end

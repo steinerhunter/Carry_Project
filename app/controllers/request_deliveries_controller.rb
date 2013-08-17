@@ -33,23 +33,37 @@ class RequestDeliveriesController < ApplicationController
 
   def edit
     @request_delivery = RequestDelivery.find(params[:id])
+    if @request_delivery.status == "Confirmed"
+      flash[:request_post_updated] = "You cannot edit a confirmed request."
+      redirect_to :back
+    end
   end
 
   def update
     @request_delivery = RequestDelivery.find(params[:id])
-    if @request_delivery.update_attributes( params[:request_delivery])
-      flash[:request_post_updated] = "Your request was updated successfully!"
-      respond_with(@request_delivery) do |format|
-        format.html { redirect_to request_delivery_url(@request_delivery)}
+    if @request_delivery.status == "Confirmed"
+      flash[:request_post_updated] = "You cannot update a confirmed request."
+      redirect_to :back
+    else
+      if @request_delivery.update_attributes( params[:request_delivery])
+        flash[:request_post_updated] = "Your request was updated successfully!"
+        respond_with(@request_delivery) do |format|
+          format.html { redirect_to request_delivery_url(@request_delivery)}
         end
+      end
     end
   end
 
   def destroy
     @request_delivery = RequestDelivery.find(params[:id])
-    @request_delivery.destroy
-    flash[:request_post_deleted] = "Your request was successfully deleted!"
-    redirect_to requests_path
+    if @request_delivery.status == "Confirmed"
+      flash[:request_post_deleted] = "You cannot delete a confirmed request."
+      redirect_to :back
+    else
+      @request_delivery.destroy
+      flash[:request_post_deleted] = "Your request was successfully deleted!"
+      redirect_to requests_path
+    end
   end
 
   def accept
@@ -64,10 +78,15 @@ class RequestDeliveriesController < ApplicationController
                                           <div class='sub_flash_text'><b>#{@request_delivery.user.name}</b>, the creator of the request, will be notified. <br>
                                           Please allow <b>#{@request_delivery.user.name}</b> some time to get back to you.</div>".html_safe
       elsif type == "cancel"
-        current_user.request_accepts.delete(@request_delivery)
-        redirect_to :back
-        @request_delivery.cancel_request
-        flash[:cancel] = "You've chosen to cancel the request."
+        if @request_delivery.status == "Confirmed"
+          flash[:cancel] = "You cannot cancel a confirmed request."
+          redirect_to :back
+        else
+          current_user.request_accepts.delete(@request_delivery)
+          redirect_to :back
+          @request_delivery.cancel_request
+          flash[:cancel] = "You've chosen to cancel the request."
+        end
       else
         redirect_to :back
       end

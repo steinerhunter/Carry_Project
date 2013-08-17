@@ -5,9 +5,13 @@
             <div class="challenge_accepted" style="font-size:2.4em">
               <b><%= link_to "Accept Suggestion",   accept_suggest_delivery_path(@suggest_delivery, type: "accept"), method: :put %></b>
             </div>
-        <% else  %>
+        <% elsif @suggest_delivery.status == "Pending Confirmation"  %>
             <div class="challenge_cancelled">
               <b style="font-size:33px"><%= link_to "Cancel Acceptance", accept_suggest_delivery_path(@suggest_delivery, type: "cancel"), method: :put %></b>
+            </div>
+        <% else  %>
+            <div class="challenge_confirmed">
+              <b style="font-size:33px">Confirmed</b>
             </div>
         <% end %>
     <% end  %>
@@ -53,6 +57,10 @@
         <% elsif @suggest_delivery.status == "Pending Confirmation" %>
             <div class="task_status" style="background-image: url('../assets/status_Pending.png');">
               <b>Suggestion Status</b><br><b style="color: #d67a31;"><%= @suggest_delivery.status %></b>
+            </div>
+        <% elsif @suggest_delivery.status == "Confirmed" %>
+            <div class="task_status" style="background-image: url('../assets/status_Confirmed.png');">
+              <b>Request Status</b><br><b style="color: #0000fa;"><%= @suggest_delivery.status %></b>
             </div>
           <% end %>
         </div>

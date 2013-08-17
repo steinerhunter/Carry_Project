@@ -33,23 +33,37 @@ class SuggestDeliveriesController < ApplicationController
 
   def edit
     @suggest_delivery = SuggestDelivery.find(params[:id])
+    if @suggest_delivery.status == "Confirmed"
+      flash[:suggest_post_updated] = "You cannot edit a confirmed suggestion."
+      redirect_to :back
+    end
   end
 
   def update
     @suggest_delivery = SuggestDelivery.find(params[:id])
-    if @suggest_delivery.update_attributes( params[:suggest_delivery])
-      flash[:suggest_post_updated] = "Your suggestion was updated successfully!"
-      respond_with(@suggest_delivery) do |format|
-        format.html { redirect_to suggest_delivery_url(@suggest_delivery)}
+    if @suggest_delivery.status == "Confirmed"
+      flash[:suggest_post_updated] = "You cannot update a confirmed suggestion."
+      redirect_to :back
+    else
+      if @suggest_delivery.update_attributes( params[:suggest_delivery])
+        flash[:suggest_post_updated] = "Your suggestion was updated successfully!"
+        respond_with(@suggest_delivery) do |format|
+          format.html { redirect_to suggest_delivery_url(@suggest_delivery)}
+        end
       end
     end
   end
 
   def destroy
     @suggest_delivery = SuggestDelivery.find(params[:id])
-    @suggest_delivery.destroy
-    flash[:suggest_post_deleted] = "Your suggestion was successfully deleted!"
-    redirect_to suggestions_path
+    if @suggest_delivery.status == "Confirmed"
+      flash[:suggest_post_deleted] = "You cannot delete a confirmed suggestion."
+      redirect_to :back
+    else
+      @suggest_delivery.destroy
+      flash[:suggest_post_deleted] = "Your suggestion was successfully deleted!"
+      redirect_to suggestions_path
+    end
   end
 
   def accept
@@ -64,10 +78,15 @@ class SuggestDeliveriesController < ApplicationController
                                               <div class='sub_flash_text'><b>#{@suggest_delivery.user.name}</b>, the creator of the suggestion, will be notified. <br>
                                               Please allow <b>#{@suggest_delivery.user.name}</b> some time to get back to you.</div>".html_safe
       elsif type == "cancel"
-        current_user.suggest_accepts.delete(@suggest_delivery)
-        redirect_to :back
-        @suggest_delivery.cancel_suggest
-        flash[:cancel] = "You've chosen to cancel the suggestion."
+        if @suggest_delivery.status == "Confirmed"
+          flash[:cancel] = "You cannot cancel a confirmed suggestion."
+          redirect_to :back
+        else
+          current_user.suggest_accepts.delete(@suggest_delivery)
+          redirect_to :back
+          @suggest_delivery.cancel_suggest
+          flash[:cancel] = "You've chosen to cancel the suggestion."
+        end
       else
         redirect_to :back
       end

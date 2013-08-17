@@ -1,3 +1,57 @@
+.alert-signup_success {
+  position: absolute;
+  background-color: #1d4eff;
+  background-repeat: no-repeat;
+  background-position: bottom center;
+  max-width:600px;
+  height: 100px;
+  font-size: 2.5em;
+  border: 1px solid;
+  color: #ffffff;
+  left:150px;
+  right:150px;
+  line-height: 110%;
+  margin-top:150px;
+  margin-left:auto;
+  margin-right:auto;
+  text-align: center;
+  font-family: Impact !important;
+  -moz-box-shadow: 5px 5px 5px #333333;; /* Old Firefox */
+  box-shadow: 5px 5px 5px #333333;
+  border:1px solid;
+  border-radius:10px;
+  -moz-border-radius:10px; /* Old Firefox */
+  border-color: #000000;
+  z-index: 10;
+}
+
+.alert-profile_update {
+  position: absolute;
+  background-color: #1d4eff;
+  background-repeat: no-repeat;
+  background-position: bottom center;
+  max-width:600px;
+  height: 100px;
+  font-size: 2.5em;
+  border: 1px solid;
+  color: #ffffff;
+  left:150px;
+  right:150px;
+  line-height: 110%;
+  margin-top:150px;
+  margin-left:auto;
+  margin-right:auto;
+  text-align: center;
+  font-family: Impact !important;
+  -moz-box-shadow: 5px 5px 5px #333333;; /* Old Firefox */
+  box-shadow: 5px 5px 5px #333333;
+  border:1px solid;
+  border-radius:10px;
+  -moz-border-radius:10px; /* Old Firefox */
+  border-color: #000000;
+  z-index: 10;
+}
+
 .alert-accept {
   position: absolute;
   background-color: #1d4eff;
@@ -91,7 +145,7 @@
   }
 }
 
-.alert-post_created {
+.alert-request_post_created {
   position: absolute;
   background-color: #1d4eff;
   background-repeat: no-repeat;
@@ -131,7 +185,47 @@
   }
 }
 
-.alert-post_updated {
+.alert-suggest_post_created {
+  position: absolute;
+  background-color: #1d4eff;
+  background-repeat: no-repeat;
+  background-position: bottom center;
+  max-width:600px;
+  height: 220px;
+  font-size: 2.5em;
+  border: 1px solid;
+  color: #ffffff;
+  left:150px;
+  right:150px;
+  line-height: 110%;
+  margin-top:150px;
+  margin-left:auto;
+  margin-right:auto;
+  text-align: center;
+  font-family: Impact !important;
+  -moz-box-shadow: 5px 5px 5px #333333;; /* Old Firefox */
+  box-shadow: 5px 5px 5px #333333;
+  border:1px solid;
+  border-radius:10px;
+  -moz-border-radius:10px; /* Old Firefox */
+  border-color: #000000;
+  z-index: 10;
+  .sub_flash_text {
+    text-align: center;
+    width:450px;
+    margin-left:auto;
+    margin-right: auto;
+    margin-top:30px;
+    font-size: 0.7em;
+    line-height: 95%;
+    b {
+      color: #f0d62b;
+      font-size: 1em;
+    }
+  }
+}
+
+.alert-request_post_updated {
   position: absolute;
   background-color: #1d4eff;
   background-repeat: no-repeat;
@@ -158,13 +252,67 @@
   z-index: 10;
 }
 
-.alert-post_deleted {
+.alert-suggest_post_updated {
+  position: absolute;
+  background-color: #1d4eff;
+  background-repeat: no-repeat;
+  background-position: bottom center;
+  max-width:600px;
+  height: 130px;
+  font-size: 2.5em;
+  border: 1px solid;
+  color: #ffffff;
+  left:150px;
+  right:150px;
+  line-height: 110%;
+  margin-top:150px;
+  margin-left:auto;
+  margin-right:auto;
+  text-align: center;
+  font-family: Impact !important;
+  -moz-box-shadow: 5px 5px 5px #333333;; /* Old Firefox */
+  box-shadow: 5px 5px 5px #333333;
+  border:1px solid;
+  border-radius:10px;
+  -moz-border-radius:10px; /* Old Firefox */
+  border-color: #000000;
+  z-index: 10;
+}
+
+.alert-request_post_deleted {
   position: absolute;
   background-color: #1d4eff;
   background-repeat: no-repeat;
   background-position: bottom center;
   max-width:600px;
   height: 100px;
+  font-size: 2.5em;
+  border: 1px solid;
+  color: #ffffff;
+  left:150px;
+  right:150px;
+  line-height: 110%;
+  margin-top:150px;
+  margin-left:auto;
+  margin-right:auto;
+  text-align: center;
+  font-family: Impact !important;
+  -moz-box-shadow: 5px 5px 5px #333333;; /* Old Firefox */
+  box-shadow: 5px 5px 5px #333333;
+  border:1px solid;
+  border-radius:10px;
+  -moz-border-radius:10px; /* Old Firefox */
+  border-color: #000000;
+  z-index: 10;
+}
+
+.alert-suggest_post_deleted {
+  position: absolute;
+  background-color: #1d4eff;
+  background-repeat: no-repeat;
+  background-position: bottom center;
+  max-width:600px;
+  height: 130px;
   font-size: 2.5em;
   border: 1px solid;
   color: #ffffff;

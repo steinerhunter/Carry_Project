@@ -18,7 +18,7 @@ class SuggestDeliveriesController < ApplicationController
   def create
     @suggest_delivery = current_user.suggest_deliveries.build(params[:suggest_delivery])
     if @suggest_delivery.save
-      flash[:post_created] = "Your suggestion was added successfully!<br>
+      flash[:suggest_post_created] = "Your suggestion was added successfully!<br>
                                                       <div class='sub_flash_text'>There are some missing details though.<br>
                                                       Go to <b style=\"color:#ff9054\">Edit</b> <img src=\"../assets/edit_post_big.png\"> and add them to attract more senders!</div>".html_safe
       respond_with(@suggest_delivery) do |format|
@@ -38,7 +38,7 @@ class SuggestDeliveriesController < ApplicationController
   def update
     @suggest_delivery = SuggestDelivery.find(params[:id])
     if @suggest_delivery.update_attributes( params[:suggest_delivery])
-      flash[:post_updated] = "Your suggestion was updated successfully!"
+      flash[:suggest_post_updated] = "Your suggestion was updated successfully!"
       respond_with(@suggest_delivery) do |format|
         format.html { redirect_to suggest_delivery_url(@suggest_delivery)}
       end
@@ -48,7 +48,7 @@ class SuggestDeliveriesController < ApplicationController
   def destroy
     @suggest_delivery = SuggestDelivery.find(params[:id])
     @suggest_delivery.destroy
-    flash[:post_deleted] = "Your suggestion was successfully deleted!"
+    flash[:suggest_post_deleted] = "Your suggestion was successfully deleted!"
     redirect_to suggestions_path
   end
 

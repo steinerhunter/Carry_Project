@@ -19,7 +19,11 @@
       <div class="the_size_and_more_info">
         <div class="edit_sender_and_receiver">
           <div class="edit_deadline">
-            Delivery Date<br><%= f.text_field :when, :placeholder => "mm/dd/yyyy", :class => "datepicker", :value => "#{@suggest_delivery.when.strftime("%d/%m/%Y")}" %>
+            <% if @suggest_delivery.when.blank? %>
+                <b style="color:#e43f45">Delivery Date</b><br><%= f.text_field :when, :placeholder => "mm/dd/yyyy", :class => "datepicker" %>
+            <% else  %>
+                Delivery Date<br><%= f.text_field :when, :placeholder => "mm/dd/yyyy", :class => "datepicker", :value => "#{@suggest_delivery.when.strftime("%d/%m/%Y")}" %>
+            <% end  %>
           </div>
           <% if @suggest_delivery.size == "Large" %>
               <div class="edit_size"  style="background-image: url('../../assets/edit_Large.png');">

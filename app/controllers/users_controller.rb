@@ -19,14 +19,14 @@ class UsersController < ApplicationController
     @user = User.new(params[:user])
     if @user.save
       sign_in @user
-      flash[:success] = "Welcome to the Carry Project!"
+      flash[:signup_success] = "Thank you for registering!"
       respond_with(@user, :location => root_path)
     end
   end
 
   def destroy
     User.find(params[:id]).destroy
-    flash[:success] = "User successfully deleted."
+    flash[:success] = "You've successfully deleted your account."
     redirect_to users_url
   end
 
@@ -35,7 +35,7 @@ class UsersController < ApplicationController
 
   def update
        if @user.update_attributes( params[:user])
-      flash[:success] = "Profile successfully updated!"
+         flash[:profile_update] = "Your Profile was successfully updated!"
       sign_in @user
       respond_with(@user, :location => user_path(@user))
     end

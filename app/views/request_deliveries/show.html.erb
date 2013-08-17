@@ -43,8 +43,9 @@
               <% if @request_delivery.user == current_user %>
                   <%= render 'shared/missing' %>
                   <b style="color: #e43f45">Delivery Size</b><br>Not set yet.
+              <% else %>
+                  <b>Delivery Size</b><br>Not set yet.
               <% end  %>
-              <b>Delivery Size</b><br>Not set yet.
         <% end %>
         </div>
         <% if @request_delivery.status == "Open" %>
@@ -54,6 +55,10 @@
         <% elsif @request_delivery.status == "Pending Confirmation" %>
             <div class="task_status" style="background-image: url('../assets/status_Pending.png');">
               <b>Request Status</b><br><b style="color: #d67a31;"><%= @request_delivery.status %></b>
+            </div>
+        <% elsif @request_delivery.status == "Confirmed" %>
+            <div class="task_status" style="background-color: #background-image: url('../assets/status_Pending.png');">
+              <b>Request Status</b><br><b style="color: #6796e3;"><%= @request_delivery.status %></b>
             </div>
         <% end %>
 

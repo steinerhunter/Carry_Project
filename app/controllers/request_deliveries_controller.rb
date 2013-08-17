@@ -18,7 +18,7 @@ class RequestDeliveriesController < ApplicationController
   def create
     @request_delivery = current_user.request_deliveries.build(params[:request_delivery])
     if @request_delivery.save
-      flash[:post_created] = "Your request was added successfully!<br>
+      flash[:request_post_created] = "Your request was added successfully!<br>
                                                       <div class='sub_flash_text'>There are some missing details though.<br>
                                                       Go to <b style=\"color:#ff9054\">Edit</b> <img src=\"../assets/edit_post_big.png\"> and add them to attract more transporters!</div>".html_safe
       respond_with(@request_delivery) do |format|
@@ -38,7 +38,7 @@ class RequestDeliveriesController < ApplicationController
   def update
     @request_delivery = RequestDelivery.find(params[:id])
     if @request_delivery.update_attributes( params[:request_delivery])
-      flash[:post_updated] = "Your request was updated successfully!"
+      flash[:request_post_updated] = "Your request was updated successfully!"
       respond_with(@request_delivery) do |format|
         format.html { redirect_to request_delivery_url(@request_delivery)}
         end
@@ -48,7 +48,7 @@ class RequestDeliveriesController < ApplicationController
   def destroy
     @request_delivery = RequestDelivery.find(params[:id])
     @request_delivery.destroy
-    flash[:post_deleted] = "Your request was successfully deleted!"
+    flash[:request_post_deleted] = "Your request was successfully deleted!"
     redirect_to requests_path
   end
 

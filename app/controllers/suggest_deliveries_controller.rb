@@ -112,8 +112,8 @@ class SuggestDeliveriesController < ApplicationController
   private
 
   def correct_user
-    @suggest_delivey = current_user.suggest_deliveries.find_by_id(params[:id])
-    redirect_to root_url if @suggest_delivey.nil? && !current_user.try(:admin?)
+    @suggest_delivery = current_user.suggest_deliveries.find_by_id(params[:id])
+    redirect_to root_url if @suggest_delivery.nil? && !current_user.try(:admin?)
   end
 
 end

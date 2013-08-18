@@ -22,7 +22,7 @@
   border-radius:10px;
   -moz-border-radius:10px; /* Old Firefox */
   border-color: #000000;
-  z-index: 10;
+  z-index: 15;
 }
 
 .alert-profile_update {
@@ -49,7 +49,7 @@
   border-radius:10px;
   -moz-border-radius:10px; /* Old Firefox */
   border-color: #000000;
-  z-index: 10;
+  z-index: 15;
 }
 
 .alert-accept {
@@ -76,7 +76,7 @@
   border-radius:10px;
   -moz-border-radius:10px; /* Old Firefox */
   border-color: #000000;
-  z-index: 10;
+  z-index: 15;
   b {
     color: #6cda40;
     font-size: 2em;
@@ -118,7 +118,7 @@
   border-radius:10px;
   -moz-border-radius:10px; /* Old Firefox */
   border-color: #000000;
-  z-index: 10;
+  z-index: 15;
 }
 
 .alert-confirm {
@@ -145,7 +145,7 @@
   border-radius:10px;
   -moz-border-radius:10px; /* Old Firefox */
   border-color: #000000;
-  z-index: 13;
+  z-index: 15;
   b {
     color: #f0d62b;
     font-size: 2em;
@@ -172,6 +172,33 @@
   }
 }
 
+.alert-cannot {
+  position: absolute;
+  background-color: #1d4eff;
+  background-repeat: no-repeat;
+  background-position: bottom center;
+  max-width:600px;
+  height: 130px;
+  font-size: 2.5em;
+  border: 1px solid;
+  color: #ffffff;
+  left:150px;
+  right:150px;
+  line-height: 110%;
+  margin-top:150px;
+  margin-left:auto;
+  margin-right:auto;
+  text-align: center;
+  font-family: Impact !important;
+  -moz-box-shadow: 5px 5px 5px #333333;; /* Old Firefox */
+  box-shadow: 5px 5px 5px #333333;
+  border:1px solid;
+  border-radius:10px;
+  -moz-border-radius:10px; /* Old Firefox */
+  border-color: #000000;
+  z-index: 15;
+}
+
 .alert-complete {
   position: absolute;
   background-color: #1d4eff;
@@ -196,7 +223,7 @@
   border-radius:10px;
   -moz-border-radius:10px; /* Old Firefox */
   border-color: #000000;
-  z-index: 13;
+  z-index: 15;
   b {
     color: #f0d62b;
     font-size: 2em;
@@ -247,7 +274,7 @@
   border-radius:10px;
   -moz-border-radius:10px; /* Old Firefox */
   border-color: #000000;
-  z-index: 10;
+  z-index: 15;
   .sub_flash_text {
     text-align: center;
     width:450px;
@@ -287,7 +314,7 @@
   border-radius:10px;
   -moz-border-radius:10px; /* Old Firefox */
   border-color: #000000;
-  z-index: 10;
+  z-index: 15;
   .sub_flash_text {
     text-align: center;
     width:450px;
@@ -327,7 +354,7 @@
   border-radius:10px;
   -moz-border-radius:10px; /* Old Firefox */
   border-color: #000000;
-  z-index: 10;
+  z-index: 15;
 }
 
 .alert-suggest_post_updated {
@@ -354,7 +381,7 @@
   border-radius:10px;
   -moz-border-radius:10px; /* Old Firefox */
   border-color: #000000;
-  z-index: 10;
+  z-index: 15;
 }
 
 .alert-request_post_deleted {
@@ -381,7 +408,7 @@
   border-radius:10px;
   -moz-border-radius:10px; /* Old Firefox */
   border-color: #000000;
-  z-index: 10;
+  z-index: 15;
 }
 
 .alert-suggest_post_deleted {
@@ -408,7 +435,7 @@
   border-radius:10px;
   -moz-border-radius:10px; /* Old Firefox */
   border-color: #000000;
-  z-index: 10;
+  z-index: 15;
 }
 
 .alert-your_own {
@@ -435,7 +462,7 @@
   border-radius:10px;
   -moz-border-radius:10px; /* Old Firefox */
   border-color: #000000;
-  z-index: 10;
+  z-index: 15;
 }
 
 .alert-new_message_sent {
@@ -462,7 +489,7 @@
   border-radius:10px;
   -moz-border-radius:10px; /* Old Firefox */
   border-color: #000000;
-  z-index: 10;
+  z-index: 15;
 }
 
 .close_flash {

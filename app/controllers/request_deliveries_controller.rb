@@ -78,8 +78,14 @@ class RequestDeliveriesController < ApplicationController
                                           <div class='sub_flash_text'><b>#{@request_delivery.user.name}</b>, the creator of the request, will be notified. <br>
                                           Please allow <b>#{@request_delivery.user.name}</b> some time to get back to you.</div>".html_safe
       elsif type == "cancel"
-        if @request_delivery.status == "Confirmed"
-          flash[:cancel] = "You cannot cancel a confirmed request."
+        if @request_delivery.status == "Open"
+          flash[:cancel] = "You cannot cancel an Open request."
+          redirect_to :back
+        elsif @request_delivery.status == "Confirmed"
+          flash[:cancel] = "You cannot cancel a Confirmed request."
+          redirect_to :back
+        elsif @request_delivery.status == "Complete"
+          flash[:cancel] = "You cannot cancel a Complete request."
           redirect_to :back
         else
           current_user.request_accepts.delete(@request_delivery)
@@ -99,11 +105,16 @@ class RequestDeliveriesController < ApplicationController
   def confirm
     @accepted_request = AcceptedRequest.find(params[:accepted_request_id])
     @request_delivery = RequestDelivery.find(params[:request_delivery_id])
+    @request_creator = User.find(@request_delivery.user_id)
     @confirmed_user = User.find( @accepted_request.user_id)
-    if  @accepted_request.confirm_accepted_request
-      @request_delivery.confirm_request
-      flash[:confirm] = "You've chosen to confirm <br><b>#{@confirmed_user.name}</b><br>
+    if @request_creator == current_user
+      if  @accepted_request.confirm_accepted_request
+        @request_delivery.confirm_request
+        flash[:confirm] = "You've chosen to confirm <br><b>#{@confirmed_user.name}</b><br>
                                           <div class='sub_flash_text'>For your request <div class='confirmed_request'><b>#{@request_delivery.what}</b><br></div></div>".html_safe
+      end
+    else
+      flash[:cannot] = "Only the creator of the request can confirm it."
     end
     redirect_to activity_path
   end
@@ -111,10 +122,15 @@ class RequestDeliveriesController < ApplicationController
   def complete
     @accepted_request = AcceptedRequest.find(params[:accepted_request_id])
     @request_delivery = RequestDelivery.find(params[:request_delivery_id])
-    if @accepted_request.complete_accepted_request
-      @request_delivery.complete_request
-      flash[:complete] = "You've chosen to mark <br><b>#{@request_delivery.what}</b><br> delivery request as <br><div class='complete'><b>complete!</b></div>
+    @confirmed_user = User.find( @accepted_request.user_id)
+    if @confirmed_user == current_user
+      if @accepted_request.complete_accepted_request
+        @request_delivery.complete_request
+        flash[:complete] = "You've chosen to mark <br><b>#{@request_delivery.what}</b><br> delivery request as <br><div class='complete'><b>complete!</b></div>
                                             <div class='sub_flash_text'>A payment of <b>#{@request_delivery.cost} #{@request_delivery.currency}</b> will be transferred to you. <br></div>".html_safe
+      end
+    else
+      flash[:cannot] = "Only the confirmed user can complete the request."
     end
     redirect_to activity_path
   end
@@ -123,7 +139,7 @@ class RequestDeliveriesController < ApplicationController
 
   def correct_user
     @request_delivery = current_user.request_deliveries.find_by_id(params[:id])
-    redirect_to root_url if @request_delivey.nil? && !current_user.try(:admin?)
+    redirect_to root_url if @request_delivery.nil? && !current_user.try(:admin?)
   end
 
 end

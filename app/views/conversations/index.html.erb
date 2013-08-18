@@ -14,7 +14,7 @@
    <% if @trashed.any? %>
       <div class="activity_data" style="margin-left:auto; margin-right:auto;margin-top:20px;">
         <div class="activity_title" style="background-image: url('../assets/trash.png');margin-bottom:15px;">
-          <b style="padding-left: 55px;">My Trash</b>
+          <b style="padding-left: 55px;">Trash</b>
         </div>
         <% mailbox.trash.each do |conversation| %>
             <% if (conversation.receipts_for(current_user).where("deleted = ?", true).empty?) %>

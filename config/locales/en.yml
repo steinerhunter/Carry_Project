@@ -6,3 +6,9 @@ en:
     format: "%{message}"
     messages:
           confirmation: "OOPS! It seems like your password doesn't match your confirmation..."
+  mailboxer:
+    message_mailer:
+     subject_new: "You have a  new message!"
+     subject_reply: "You have a new reply!"
+    notification_mailer:
+      subject: "You have a  new notification!"

@@ -80,7 +80,7 @@ class RequestDeliveriesController < ApplicationController
         @accepted_request = AcceptedRequest.find_by_request_delivery_id(@request_delivery.id)
         @creating_user = User.find_by_id(@request_delivery.user_id)
         @accepting_user = User.find_by_id(@accepted_request.user_id)
-        NotifMailer.new_accepted_request(@creating_user,@accepting_user).deliver
+        NotifMailer.new_accepted_request(@creating_user,@accepting_user,@request_delivery).deliver
       elsif type == "cancel"
         if @request_delivery.status == "Open"
           flash[:cancel] = "You cannot cancel an Open request."
@@ -116,6 +116,10 @@ class RequestDeliveriesController < ApplicationController
         @request_delivery.confirm_request
         flash[:confirm] = "You've chosen to confirm <br><b>#{@confirmed_user.name}</b><br>
                                           <div class='sub_flash_text'>For your request <div class='confirmed_request'><b>#{@request_delivery.what}</b><br></div></div>".html_safe
+        @accepted_request = AcceptedRequest.find_by_request_delivery_id(@request_delivery.id)
+        @creating_user = User.find_by_id(@request_delivery.user_id)
+        @accepting_user = User.find_by_id(@accepted_request.user_id)
+        NotifMailer.new_confirmed_request(@request_creator,@confirmed_user,@request_delivery).deliver
       end
     else
       flash[:cannot] = "Only the creator of the request can confirm it."

@@ -116,9 +116,6 @@ class RequestDeliveriesController < ApplicationController
         @request_delivery.confirm_request
         flash[:confirm] = "You've chosen to confirm <br><b>#{@confirmed_user.name}</b><br>
                                           <div class='sub_flash_text'>For your request <div class='confirmed_request'><b>#{@request_delivery.what}</b><br></div></div>".html_safe
-        @accepted_request = AcceptedRequest.find_by_request_delivery_id(@request_delivery.id)
-        @creating_user = User.find_by_id(@request_delivery.user_id)
-        @accepting_user = User.find_by_id(@accepted_request.user_id)
         NotifMailer.new_confirmed_request(@request_creator,@confirmed_user,@request_delivery).deliver
       end
     else
@@ -130,12 +127,14 @@ class RequestDeliveriesController < ApplicationController
   def complete
     @accepted_request = AcceptedRequest.find(params[:accepted_request_id])
     @request_delivery = RequestDelivery.find(params[:request_delivery_id])
+    @request_creator = User.find(@request_delivery.user_id)
     @confirmed_user = User.find( @accepted_request.user_id)
     if @confirmed_user == current_user
       if @accepted_request.complete_accepted_request
         @request_delivery.complete_request
         flash[:complete] = "You've chosen to mark <br><b>#{@request_delivery.what}</b><br> delivery request as <br><div class='complete'><b>complete!</b></div>
                                             <div class='sub_flash_text'>A payment of <b>#{@request_delivery.cost} #{@request_delivery.currency}</b> will be transferred to you. <br></div>".html_safe
+        NotifMailer.new_complete_request(@request_creator,@confirmed_user,@request_delivery).deliver
       end
     else
       flash[:cannot] = "Only the confirmed user can complete the request."

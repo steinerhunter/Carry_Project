@@ -15,4 +15,11 @@ class NotifMailer < ActionMailer::Base
     mail(:to => @accepting_user.email, :subject => "#{creating_user.name} has confirmed you for their request!")
   end
 
+  def new_complete_request(creating_user,accepting_user,request_delivery)
+    @creating_user = creating_user
+    @accepting_user = accepting_user
+    @request_delivery = request_delivery
+    mail(:to => @creating_user.email, :subject => "#{accepting_user.name} has completed your request!")
+  end
+
 end

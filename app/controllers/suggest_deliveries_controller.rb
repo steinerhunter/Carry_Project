@@ -99,12 +99,35 @@ class SuggestDeliveriesController < ApplicationController
   def confirm
     @accepted_suggest = AcceptedSuggest.find(params[:accepted_suggest_id])
     @suggest_delivery = SuggestDelivery.find(params[:suggest_delivery_id])
+    @suggest_creator = User.find(@suggest_delivery.user_id)
     @confirmed_user = User.find( @accepted_suggest.user_id)
-    if @accepted_suggest.save
-      @accepted_suggest.confirm_accepted_suggest
-      @suggest_delivery.confirm_suggest
-      flash[:confirm] = "You've chosen to confirm <br><b>#{@confirmed_user.name}</b><br>
+    if @suggest_creator == current_user
+      if @accepted_suggest.save
+        @accepted_suggest.confirm_accepted_suggest
+        @suggest_delivery.confirm_suggest
+        flash[:confirm] = "You've chosen to confirm <br><b>#{@confirmed_user.name}</b><br>
                                           <div class='sub_flash_text'>For your suggestion <div class='confirmed_suggest'><b>Transport #{@suggest_delivery.size} sized items</b><br></div></div>".html_safe
+      end
+    else
+      flash[:cannot] = "Only the creator of the suggestion can confirm it."
+    end
+    redirect_to activity_path
+  end
+
+  def complete
+    @accepted_suggest = AcceptedSuggest.find(params[:accepted_suggest_id])
+    @suggest_delivery = SuggestDelivery.find(params[:suggest_delivery_id])
+    @suggest_creator = User.find(@suggest_delivery.user_id)
+    @confirmed_user = User.find( @accepted_suggest.user_id)
+    if @suggest_creator == current_user
+      if @accepted_suggest.complete_accepted_suggest
+        @suggest_delivery.complete_suggest
+        flash[:complete] = "You've chosen to mark <br><b>#{@suggest_delivery.size} Sized Items</b><br> delivery suggestion as <br><div class='complete'><b>complete!</b></div>
+                                            <div class='sub_flash_text'>A payment of <b>#{@suggest_delivery.cost} #{@suggest_delivery.currency}</b> will be transferred to you. <br></div>".html_safe
+        #NotifMailer.new_complete_suggest(@suggest_creator,@confirmed_user,@suggest_delivery).deliver
+      end
+    else
+      flash[:cannot] = "Only the creator of the suggestion can mark it as complete."
     end
     redirect_to activity_path
   end

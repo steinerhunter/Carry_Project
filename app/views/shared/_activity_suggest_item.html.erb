@@ -1,4 +1,8 @@
-<div class="activity_feed_item">
+<% if activity_suggest_item.status == "Complete" %>
+    <div class="activity_feed_item" style="background-color: #257b2a;">
+<% else %>
+    <div class="activity_feed_item">
+<% end  %>
   <% if (current_user?(activity_suggest_item.user)) || (current_user.try(:admin?)) %>
       <div class="delete_post">
         <div class="bubbleInfo">
@@ -104,7 +108,22 @@
                 (by <b style="color:#f2ff5e">you</b>)  <br>
                 <div class="send_messages_to_users" style="background-color: #0b5aff;">
                   <div class="needs_to_confirm">
-                    <div class="send_message" style="right:3px;">
+                    <div class="confirm_me">
+                      <div class="bubbleInfo">
+                        <%=  link_to image_tag("confirmed.png"),
+                                     {:controller => "suggest_deliveries",
+                                      :action => "complete",
+                                      :accepted_suggest_id => activity_suggest_item.accepted_suggest.id,
+                                      :suggest_delivery_id => activity_suggest_item.id  },
+                                     class: "trigger" %>
+                        <div class="popup" style="height:20px; width:210px; margin-top:57px;">
+                          Mark suggestion as <b style="color:#19b522;">Complete</b>!
+                          <div id="tail1" style="left:36px"></div>
+                          <div id="tail2" style="left:36px"></div>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="send_message">
                       <div class="bubbleInfo">
                         <%=  link_to image_tag("send_message.png"),
                                      {:controller => "conversations",
@@ -127,17 +146,7 @@
                 <br>
                 <div class="send_messages_to_users" style="background-color: #0b5aff;">
                   <div class="needs_to_confirm">
-                    <div class="confirm_me">
-                      <div class="bubbleInfo">
-                        <%= image_tag("confirmed.png", class: "trigger") %>
-                        <div class="popup" style="height:20px; width:260px; margin-top:57px;">
-                          You are <b style="color:#18a320;">confirmed</b> for this suggestion!
-                          <div id="tail1" style="left:36px"></div>
-                          <div id="tail2" style="left:36px"></div>
-                        </div>
-                      </div>
-                    </div>
-                    <div class="send_message">
+                    <div class="send_message" style="right:3px">
                       <div class="bubbleInfo">
                         <%=  link_to image_tag("send_message.png"),
                                      {:controller => "conversations",
@@ -162,6 +171,13 @@
                     <b style="color:#f2ff5e"><%= link_to activity_suggest_item.user.name, activity_suggest_item.user  %></b> has confirmed another user!
                   </div>
                 </div>
+            <% end  %>
+        <% elsif activity_suggest_item.status == "Complete" %>
+            Status: <b style="color:#74e239"><%= activity_suggest_item.status %></b>
+            <% if activity_suggest_item.user == current_user %>
+                (by <b style="color:#f2ff5e">you</b>)
+            <% elsif activity_suggest_item.accepted_suggest.user_for_confirmed_suggest == current_user  %>
+                (by <b style="color:#f2ff5e"><%= link_to activity_suggest_item.accepted_suggest.user_for_confirmed_suggest.name, activity_suggest_item.accepted_suggest.user_for_confirmed_suggest %></b>)
             <% end  %>
         <% end  %>
       </div>

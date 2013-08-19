@@ -1,5 +1,5 @@
 class AcceptedSuggest < ActiveRecord::Base
-  attr_accessible :confirmed
+  attr_accessible :confirmed, :complete
   belongs_to :suggest_delivery
   belongs_to :user
 
@@ -7,6 +7,7 @@ class AcceptedSuggest < ActiveRecord::Base
   validates :user_id, presence: true
   validates_uniqueness_of :user_id, :scope => :suggest_delivery_id, :message => "You've already accepted this suggestion..."
   validate :unique_confirmation
+  validate :complete_only_confirmed
 
   def unique_confirmation
     if !self.class.where('confirmed = ? AND suggest_delivery_id = ?', true, self.suggest_delivery_id).empty?
@@ -14,8 +15,18 @@ class AcceptedSuggest < ActiveRecord::Base
     end
   end
 
+  def complete_only_confirmed
+    if (self.confirmed == false) && (self.complete == true)
+      errors.add :complete, "You cannot complete unconfirmed requests..."
+    end
+  end
+
   def confirm_accepted_suggest
     self. update_attribute(:confirmed, true)
+  end
+
+  def complete_accepted_suggest
+    self. update_attribute(:complete, true)
   end
 
   def user_for_confirmed_suggest

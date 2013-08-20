@@ -22,4 +22,25 @@ class NotifMailer < ActionMailer::Base
     mail(:to => @creating_user.email, :subject => "#{accepting_user.name} has completed your request!")
   end
 
+  def new_accepted_suggest(creating_user,accepting_user,suggest_delivery)
+    @creating_user = creating_user
+    @accepting_user = accepting_user
+    @suggest_delivery = suggest_delivery
+    mail(:to => @creating_user.email, :subject => "#{accepting_user.name} has accepted your suggestion!")
+  end
+
+  def new_confirmed_suggest(creating_user,accepting_user,suggest_delivery)
+    @creating_user = creating_user
+    @accepting_user = accepting_user
+    @suggest_delivery = suggest_delivery
+    mail(:to => @accepting_user.email, :subject => "#{creating_user.name} has confirmed you for their suggestion!")
+  end
+
+  def new_complete_suggest(creating_user,accepting_user,suggest_delivery)
+    @creating_user = creating_user
+    @accepting_user = accepting_user
+    @suggest_delivery = suggest_delivery
+    mail(:to => @accepting_user.email, :subject => "#{creating_user.name} has completed their suggestion!")
+  end
+
 end

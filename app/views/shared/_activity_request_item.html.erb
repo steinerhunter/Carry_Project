@@ -40,7 +40,9 @@
                 (from <b style="color:#f2ff5e">you</b>)  <br>
                 <% @my_requests_accepted.each do |my_request_accepted| %>
                     <% @users.each do |user| %>
-                        <% if user.id == my_request_accepted.user_id && my_request_accepted.confirmed == false%>
+                        <% if user.id == my_request_accepted.user_id &&
+                                activity_request_item.id == my_request_accepted.request_delivery_id &&
+                                my_request_accepted.confirmed == false %>
                             <div class="send_messages_to_users" style="background-color: #257b2a;">
                               <div class="needs_to_confirm">
                                 <div class="confirm_me">

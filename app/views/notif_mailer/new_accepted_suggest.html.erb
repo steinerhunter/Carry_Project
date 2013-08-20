@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta content="text/html; charset=UTF-8" http-equiv="Content-Type" />
+</head>
+<body>
+    <h2>Hi there <%= @creating_user.name %>,</h2><br>
+    <h3>It seems <b style="color:#279227"><%= @accepting_user.name  %></b> has accepted your suggestion - "<b style="color:#63a2ff"><%= @suggest_delivery.size %> Sized Items</b>"!</h3>
+    <h3>Go to <%= link_to "sendwithme.herokuapp.com", root_url %> in order to confirm!</h3>
+    <p>
+    <h3>Yours, Someone</h3>
+    </p>
+</body>
+</html>

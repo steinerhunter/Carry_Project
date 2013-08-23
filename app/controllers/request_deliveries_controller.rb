@@ -1,5 +1,5 @@
 class RequestDeliveriesController < ApplicationController
-  before_filter :signed_in_user, only: [:create, :destroy]
+  before_filter :signed_in_user, :except => [:show, :index, :new, :create]
   before_filter :correct_user,   only: :destroy
   respond_to :html, :js
 
@@ -12,19 +12,40 @@ class RequestDeliveriesController < ApplicationController
   end
 
   def new
-    @request_delivery = current_user.request_deliveries.build if signed_in?
+    if current_user.nil?
+        @request_delivery = RequestDelivery.new
+    else
+      @request_delivery = current_user.request_deliveries.build
+    end
   end
 
   def create
-    @request_delivery = current_user.request_deliveries.build(params[:request_delivery])
-    if @request_delivery.save
-      flash[:request_post_created] = "Your request was added successfully!<br>
+    if current_user.nil?
+      @request_delivery = RequestDelivery.new(params[:request_delivery])
+      if @request_delivery.valid?
+       session[:request_delivery_what] = @request_delivery.what
+       session[:request_delivery_from] = @request_delivery.from
+       session[:request_delivery_to] = @request_delivery.to
+       session[:request_delivery_cost] = @request_delivery.cost
+       session[:request_delivery_currency] = @request_delivery.currency
+      end
+    else
+      @request_delivery = current_user.request_deliveries.build(params[:request_delivery])
+      if @request_delivery.save
+        session[:request_delivery_what] = nil
+        session[:request_delivery_from] = nil
+        session[:request_delivery_to] = nil
+        session[:request_delivery_cost] = nil
+        session[:request_delivery_currency] = nil
+        flash[:request_post_created] = "Your request was added successfully!<br>
                                                       <div class='sub_flash_text'>There are some missing details though.<br>
                                                       Go to <b style=\"color:#ff9054\">Edit</b> <img src=\"../assets/edit_post_big.png\"> and add them to attract more transporters!</div>".html_safe
-      respond_with(@request_delivery) do |format|
-        format.html { redirect_to request_delivery_url(@request_delivery)}
+        respond_with(@request_delivery) do |format|
+          format.html { redirect_to request_delivery_url(@request_delivery)}
+        end
       end
     end
+
   end
 
   def index

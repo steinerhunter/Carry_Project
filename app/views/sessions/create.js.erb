@@ -16,6 +16,8 @@ $('<div />').addClass('signin_errors').html(errors).appendTo("#new_session").hid
 <% else %>
 
 // On successful signin, redirect to main page
-window.location.href = "/"
+<% url = session[:return_to] || default %>
+<% session[:return_to] = nil if session[:return_to].present? %>
+window.location.href = "<%= url %>"
 
 <% end %>

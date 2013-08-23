@@ -4,15 +4,35 @@
         <div class="single_step">
           <legend style="background-image: url('../assets/box.png');"><b>What's that you're sending?</b></legend>
           <%= f.label :what, "What would you like to deliver?" %>
-          <%= f.text_field :what, :placeholder => "Type delivery contents..."   %>
+          <% if session[:request_delivery_what].present? %>
+                <%= f.text_field :what, :placeholder => "Type delivery contents...", :value => session[:request_delivery_what]   %>
+          <% else  %>
+                <%= f.text_field :what, :placeholder => "Type delivery contents..."   %>
+          <% end %>
           <%= f.label :from, "Where do you want to deliver from?" %>
-          <%= f.text_field :from, :placeholder => "Type origin address...", :class => "address_field" %>
+          <% if session[:request_delivery_from].present? %>
+                <%= f.text_field :from, :placeholder => "Type origin address...", :class => "address_field", :value => session[:request_delivery_from] %>
+          <% else %>
+              <%= f.text_field :from, :placeholder => "Type origin address...", :class => "address_field" %>
+          <% end  %>
           <%= f.label :to, "Where do you want your delivery to reach?" %>
-          <%= f.text_field :to, :placeholder => "Type destination address...", :class => "address_field"   %>
+          <% if session[:request_delivery_to].present? %>
+                <%= f.text_field :to, :placeholder => "Type destination address...", :class => "address_field", :value => session[:request_delivery_to]   %>
+          <% else  %>
+              <%= f.text_field :to, :placeholder => "Type destination address...", :class => "address_field"   %>
+          <% end  %>
           <div class="new_money">
             <%= f.label :cost, "How much will you pay for the delivery?" %>
-            <%= f.text_field :cost, :placeholder => "Type an amount..."   %>
-            <%= f.select :currency, options_for_select(%w[NIS USD Euro]), :include_blank => "Pick Currency..." %>
+            <% if session[:request_delivery_cost].present? %>
+                    <%= f.text_field :cost, :placeholder => "Type an amount...", :value => session[:request_delivery_cost] %>
+            <% else  %>
+                <%= f.text_field :cost, :placeholder => "Type an amount..." %>
+            <% end %>
+            <% if session[:request_delivery_currency].present? %>
+                <%= f.select :currency, options_for_select(%w[NIS USD Euro], :selected => @request_delivery.currency) %>
+            <% else  %>
+                <%= f.select :currency, options_for_select(%w[NIS USD Euro]), :include_blank => "Pick Currency..." %>
+            <% end  %>
           </div>
           <div class="form_submit">
             <%= f.submit "Finish", :type => :image, :src => "assets/Finish.png", :class => "finish" %>

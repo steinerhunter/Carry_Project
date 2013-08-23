@@ -21,8 +21,12 @@ var errors = $('<ul />');
 $('<div />').addClass('request_suggest_delivery_errors').html(errors).appendTo("#new_request_delivery").hide().fadeIn('slow');
 
 <% else %>
-
-// On successful creation of new user, redirect to main page
-window.location.href = "<%=request_delivery_url(@request_delivery) %>"
+    <% if current_user.nil? %>
+    <% store_location %>
+        window.location.href = "<%=signin_path %>"
+    <% else %>
+        // On successful creation of new user, redirect to main page
+        window.location.href = "<%=request_delivery_url(@request_delivery) %>"
+    <% end %>
 
 <% end %>

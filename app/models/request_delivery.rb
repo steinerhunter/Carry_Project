@@ -5,7 +5,6 @@ class RequestDelivery < ActiveRecord::Base
   has_many :accepted_by, through: :accepted_requests, source: :user
   belongs_to :user
 
-  validates :user_id, presence: true
   validates :what, :presence => { :message => "You do want to send something, right...?"}
   validates :what, :length => { maximum: 20, :message => "Surely it can be described in less than 20 chars."}
   validates :from, :presence => { :message => "We're going to need your delivery's origin..."}

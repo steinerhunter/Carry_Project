@@ -1,5 +1,5 @@
 class SuggestDeliveriesController < ApplicationController
-  before_filter :signed_in_user, only: [:create, :destroy]
+  before_filter :signed_in_user, :except => [:show, :index, :new, :create]
   before_filter :correct_user,   only: :destroy
   respond_to :html, :js
 
@@ -12,17 +12,37 @@ class SuggestDeliveriesController < ApplicationController
   end
 
   def new
-    @suggest_delivery = current_user.suggest_deliveries.build if signed_in?
+    if current_user.nil?
+      @suggest_delivery = SuggestDelivery.new
+    else
+      @suggest_delivery = current_user.suggest_deliveries.build
+    end
   end
 
   def create
-    @suggest_delivery = current_user.suggest_deliveries.build(params[:suggest_delivery])
-    if @suggest_delivery.save
-      flash[:suggest_post_created] = "Your suggestion was added successfully!<br>
+    if current_user.nil?
+      @suggest_delivery = SuggestDelivery.new(params[:suggest_delivery])
+      if @suggest_delivery.valid?
+        session[:suggest_delivery_size] = @suggest_delivery.size
+        session[:suggest_delivery_from] = @suggest_delivery.from
+        session[:suggest_delivery_to] = @suggest_delivery.to
+        session[:suggest_delivery_cost] = @suggest_delivery.cost
+        session[:suggest_delivery_currency] = @suggest_delivery.currency
+      end
+    else
+      @suggest_delivery = current_user.suggest_deliveries.build(params[:suggest_delivery])
+      if @suggest_delivery.save
+        session[:suggest_delivery_size] = nil
+        session[:suggest_delivery_from] = nil
+        session[:suggest_delivery_to] = nil
+        session[:suggest_delivery_cost] = nil
+        session[:suggest_delivery_currency] = nil
+        flash[:suggest_post_created] = "Your suggestion was added successfully!<br>
                                                       <div class='sub_flash_text'>There are some missing details though.<br>
                                                       Go to <b style=\"color:#ff9054\">Edit</b> <img src=\"../assets/edit_post_big.png\"> and add them to attract more senders!</div>".html_safe
-      respond_with(@suggest_delivery) do |format|
-        format.html { redirect_to suggest_delivery_url(@suggest_delivery)}
+        respond_with(@suggest_delivery) do |format|
+          format.html { redirect_to suggest_delivery_url(@suggest_delivery)}
+        end
       end
     end
   end

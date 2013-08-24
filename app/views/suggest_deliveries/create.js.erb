@@ -1,11 +1,11 @@
 var form = $('#new_suggest_delivery');
 
-<% if @suggest_delivery.errors.any? %>
-
 // Delete errors from previous submission
 if ($(".request_suggest_delivery_errors")[0]){
     $('.request_suggest_delivery_errors').remove();
 }
+
+<% if @suggest_delivery.errors.any? %>
 
 // Create a list of errors
 var errors = $('<ul />');
@@ -21,8 +21,12 @@ var errors = $('<ul />');
 $('<div />').addClass('request_suggest_delivery_errors').html(errors).appendTo("#new_suggest_delivery").hide().fadeIn('slow');
 
 <% else %>
-
-// On successful creation of new user, redirect to main page
-window.location.href = "<%=suggest_delivery_url(@suggest_delivery) %>"
+    <% if current_user.nil? %>
+        <% store_location %>
+        window.location.href = "<%=signin_path %>"
+    <% else %>
+        // On successful creation of new user, redirect to main page
+        window.location.href = "<%=suggest_delivery_url(@suggest_delivery) %>"
+    <% end %>
 
 <% end %>

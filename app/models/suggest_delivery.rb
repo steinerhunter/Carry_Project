@@ -5,7 +5,6 @@ class SuggestDelivery < ActiveRecord::Base
   has_many :accepted_by, through: :accepted_suggests, source: :user
   belongs_to :user
 
-  validates :user_id, presence: true
   validates :size, :presence => { :message => "It seems you left out delivery size..."}
   validates :from, :presence => { :message => "We need to know where you're coming from..."}
   validates :to, :presence => { :message => "We need to know where you're going to..."}

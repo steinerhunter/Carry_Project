@@ -31,11 +31,7 @@ module SessionsHelper
   def sign_out
     self.current_user = nil
     cookies.delete(:remember_token)
-    session[:request_delivery_what] = nil
-    session[:request_delivery_from] = nil
-    session[:request_delivery_to] = nil
-    session[:request_delivery_cost] = nil
-    session[:request_delivery_currency] = nil
+    reset_session
   end
 
   def redirect_back_or(default)

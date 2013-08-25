@@ -168,3 +168,22 @@
   margin-left: 3px;
   z-index: 11;
 }
+
+.index_status {
+  position:absolute;
+  padding:3px;
+  right:3px;
+  top:3px;
+  padding-left:5px;
+  padding-right: 5px;
+  z-index: 11;
+  background-color: #10529b;
+  background-repeat: no-repeat;
+  background-position: top left;
+  border:1px solid;
+  border-radius:4px;
+  -moz-border-radius:10px; /* Old Firefox */
+  color: #ffffff;
+  border-color: #000000;
+  font-size: 1.2em;
+}

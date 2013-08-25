@@ -1,6 +1,6 @@
 class RequestDeliveriesController < ApplicationController
   before_filter :signed_in_user, :except => [:show, :index, :new, :create]
-  before_filter :correct_user,   only: :destroy
+  before_filter :correct_user,   only: [:destroy, :edit, :update]
   respond_to :html, :js
 
   def show
@@ -169,7 +169,7 @@ class RequestDeliveriesController < ApplicationController
 
   def correct_user
     @request_delivery = current_user.request_deliveries.find_by_id(params[:id])
-    redirect_to root_url if @request_delivery.nil? && !current_user.try(:admin?)
+    redirect_to :back if @request_delivery.nil? && !current_user.try(:admin?)
   end
 
 end

@@ -35,4 +35,8 @@ class RequestDelivery < ActiveRecord::Base
     AcceptedRequest.find_by_request_delivery_id_and_confirmed(self.id, true)
   end
 
+  def accepted_request_not_confirmed
+    AcceptedRequest.find_by_request_delivery_id_and_confirmed(self.id, false)
+  end
+
 end

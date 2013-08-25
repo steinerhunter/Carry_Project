@@ -1,17 +1,21 @@
 <div class="show_delivery">
   <div class="right_side">
     <% if @suggest_delivery.user != current_user %>
-        <% if @accepted_suggest.blank? %>
-            <div class="challenge_accepted" style="font-size:2.4em">
-              <b><%= link_to "Accept Suggestion",   accept_suggest_delivery_path(@suggest_delivery, type: "accept"), method: :put %></b>
+        <% if @suggest_delivery.status == "Complete" %>
+            <div class="challenge_complete">
+              <b style="font-size:33px">Complete</b>
             </div>
-        <% elsif @suggest_delivery.status == "Pending Confirmation"  %>
+        <% elsif @suggest_delivery.status == "Confirmed"  %>
+            <div class="challenge_confirmed">
+              <b style="font-size:33px">Confirmed</b>
+            </div>
+        <% elsif @suggest_delivery.status == "Pending Confirmation" && @accepted_suggest.present?  %>
             <div class="challenge_cancelled">
               <b style="font-size:33px"><%= link_to "Cancel Acceptance", accept_suggest_delivery_path(@suggest_delivery, type: "cancel"), method: :put %></b>
             </div>
-        <% else  %>
-            <div class="challenge_confirmed">
-              <b style="font-size:33px">Confirmed</b>
+        <% else %>
+            <div class="challenge_accepted" style="font-size:2.4em">
+              <b><%= link_to "Accept Suggestion",   accept_suggest_delivery_path(@suggest_delivery, type: "accept"), method: :put %></b>
             </div>
         <% end %>
     <% end  %>
@@ -50,19 +54,23 @@
               <b style="color: #e43f45">Can deliver items of size</b><br>Not set yet.
         <% end %>
         </div>
-          <% if @suggest_delivery.status == "Open" %>
-            <div class="task_status" style="background-image: url('../assets/status_Open.png');">
-              <b>Suggestion Status</b><br><b style="color: #20d62c;"><%= @suggest_delivery.status %></b>
-            </div>
-        <% elsif @suggest_delivery.status == "Pending Confirmation" %>
-            <div class="task_status" style="background-image: url('../assets/status_Pending.png');">
-              <b>Suggestion Status</b><br><b style="color: #d67a31;"><%= @suggest_delivery.status %></b>
+        <% if @suggest_delivery.status == "Complete" %>
+            <div class="task_status" style="background-image: url('../assets/status_Complete.png');">
+              <b>Suggestion Status</b><br><b style="color: #7f7f7f;"><%= @suggest_delivery.status %></b>
             </div>
         <% elsif @suggest_delivery.status == "Confirmed" %>
             <div class="task_status" style="background-image: url('../assets/status_Confirmed.png');">
-              <b>Request Status</b><br><b style="color: #0000fa;"><%= @suggest_delivery.status %></b>
+              <b>Suggestion Status</b><br><b style="color: #0000fa;"><%= @suggest_delivery.status %></b>
             </div>
-          <% end %>
+        <% elsif @suggest_delivery.status == "Pending Confirmation"  && @accepted_suggest.present?%>
+            <div class="task_status" style="background-image: url('../assets/status_Pending.png');">
+              <b>Suggestion Status</b><br><b style="color: #d67a31;"><%= @suggest_delivery.status %></b>
+            </div>
+        <% else %>
+            <div class="task_status" style="background-image: url('../assets/status_Open.png');">
+              <b>Suggestion Status</b><br><b style="color: #20d62c;">Open</b>
+            </div>
+        <% end %>
         </div>
         </div>
       </div>

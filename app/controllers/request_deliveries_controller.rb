@@ -5,7 +5,9 @@ class RequestDeliveriesController < ApplicationController
 
   def show
     @request_delivery = RequestDelivery.find(params[:id])
-    @accepted_request = AcceptedRequest.find_by_user_id_and_request_delivery_id(current_user.id,@request_delivery.id)
+    if !current_user.nil?
+      @accepted_request = AcceptedRequest.find_by_user_id_and_request_delivery_id(current_user.id,@request_delivery.id)
+    end
     @commentable = @request_delivery
     @comments = @commentable.comments
     @comment = Comment.new

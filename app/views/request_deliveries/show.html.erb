@@ -1,18 +1,22 @@
 <div class="show_delivery">
   <div class="right_side">
     <% if @request_delivery.user != current_user %>
-        <% if @accepted_request.blank? %>
-            <div class="challenge_accepted">
-              <b><%= link_to "Accept Request",   accept_request_delivery_path(@request_delivery, type: "accept"), method: :put %></b>
-            </div>
-        <% elsif @request_delivery.status == "Pending Confirmation"  %>
-            <div class="challenge_cancelled">
-              <b style="font-size:33px"><%= link_to "Cancel Acceptance", accept_request_delivery_path(@request_delivery, type: "cancel"), method: :put %></b>
-            </div>
-        <% else  %>
+        <% if @request_delivery.status == "Complete" %>
+          <div class="challenge_complete">
+            <b style="font-size:33px">Complete</b>
+          </div>
+      <% elsif @request_delivery.status == "Confirmed"  %>
           <div class="challenge_confirmed">
             <b style="font-size:33px">Confirmed</b>
           </div>
+      <% elsif @request_delivery.status == "Pending Confirmation" && @accepted_request.present?  %>
+          <div class="challenge_cancelled">
+            <b style="font-size:33px"><%= link_to "Cancel Acceptance", accept_request_delivery_path(@request_delivery, type: "cancel"), method: :put %></b>
+          </div>
+        <% else %>
+            <div class="challenge_accepted">
+              <b><%= link_to "Accept Request",   accept_request_delivery_path(@request_delivery, type: "accept"), method: :put %></b>
+            </div>
         <% end %>
     <% end  %>
     <div id="current-delivery-map"></div>
@@ -52,17 +56,21 @@
               <% end  %>
         <% end %>
         </div>
-        <% if @request_delivery.status == "Open" %>
-            <div class="task_status" style="background-image: url('../assets/status_Open.png');">
-              <b>Request Status</b><br><b style="color: #20d62c;"><%= @request_delivery.status %></b>
-            </div>
-        <% elsif @request_delivery.status == "Pending Confirmation" %>
-            <div class="task_status" style="background-image: url('../assets/status_Pending.png');">
-              <b>Request Status</b><br><b style="color: #d67a31;"><%= @request_delivery.status %></b>
+        <% if @request_delivery.status == "Complete" %>
+            <div class="task_status" style="background-image: url('../assets/status_Complete.png');">
+              <b>Request Status</b><br><b style="color: #7f7f7f;"><%= @request_delivery.status %></b>
             </div>
         <% elsif @request_delivery.status == "Confirmed" %>
             <div class="task_status" style="background-image: url('../assets/status_Confirmed.png');">
               <b>Request Status</b><br><b style="color: #0000fa;"><%= @request_delivery.status %></b>
+            </div>
+        <% elsif @request_delivery.status == "Pending Confirmation"  && @accepted_request.present?%>
+            <div class="task_status" style="background-image: url('../assets/status_Pending.png');">
+              <b>Request Status</b><br><b style="color: #d67a31;"><%= @request_delivery.status %></b>
+            </div>
+        <% else %>
+            <div class="task_status" style="background-image: url('../assets/status_Open.png');">
+              <b>Request Status</b><br><b style="color: #20d62c;">Open</b>
             </div>
         <% end %>
         </div>

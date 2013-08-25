@@ -5,7 +5,9 @@ class SuggestDeliveriesController < ApplicationController
 
   def show
     @suggest_delivery = SuggestDelivery.find(params[:id])
-    @accepted_suggest = AcceptedSuggest.find_by_user_id_and_suggest_delivery_id(current_user.id,@suggest_delivery.id)
+    if !current_user.nil?
+      @accepted_suggest = AcceptedSuggest.find_by_user_id_and_suggest_delivery_id(current_user.id,@suggest_delivery.id)
+    end
     @commentable = @suggest_delivery
     @comments = @commentable.comments
     @comment = Comment.new

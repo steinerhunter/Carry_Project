@@ -2,12 +2,7 @@ class StaticPagesController < ApplicationController
   def home
   end
 
-  def help
-  end
-  
-  def contact
+  def privacy_policy
   end
 
-  def about
-  end
 end

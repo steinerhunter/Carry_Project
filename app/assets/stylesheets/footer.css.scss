@@ -1,0 +1,36 @@
+footer {
+  color: #999;
+  a {
+    color: #ededed;
+    &:hover {
+      color: #cccccc;
+    }
+  }
+}
+
+.footer_list  ul
+  {
+  margin:0px;
+  padding:0px;
+  margin-top:10px;
+  list-style-type: none;
+  text-align: center;
+}
+
+.footer_list ul li
+  {
+  display: inline;
+}
+
+.footer_item {
+  padding-right:5px;
+  padding-left:5px;
+  border-right:1px solid #ffffff;
+  height:20px;
+}
+
+.copyright_short {
+  text-align: center;
+  color:#ffffff;
+  font-size: 0.8em;
+}

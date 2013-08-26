@@ -4,11 +4,29 @@
 
 html {
   overflow-y: scroll;
+  height:100%;
 }
 
 body {
   padding-top: 0px;
   font-family: Arial, Helvetica, sans-serif ;
+  height:100%;
+}
+
+.wrapper {
+  min-height: 100%;
+  height: auto !important;
+  height: 100%;
+  margin: 0 auto -6em;
+}
+
+.footer {
+  background-color: #626262;
+  border-top: 1px solid #000000;
+}
+
+.footer, .push {
+  height: 6em;
 }
 
 section {
@@ -30,7 +48,9 @@ p {
   line-height: 1.7em;
 }
 
-.nav li {display:inline;}
+.nav li {
+  display:inline;
+}
 
 .signup_form_class {
   width: 700px;
@@ -198,24 +218,6 @@ p {
   &:hover {
     color: #fff;
     text-decoration: none;
-  }
-}
-
-/* footer */
-
-footer {
-  margin-top: 45px;
-  padding-top: 5px;
-  border-top: 1px solid #eaeaea;
-  color: #999;
-  a {
-    color: #ededed;
-    &:hover {
-      color: #cccccc;
-    }
-  }
-  small {
-    float: left;
   }
 }
 

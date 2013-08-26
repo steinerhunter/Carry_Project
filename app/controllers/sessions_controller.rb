@@ -1,4 +1,5 @@
 class SessionsController < ApplicationController
+  before_filter :correct_user,   only: [:new, :create]
   respond_to :html, :js
 
   def new
@@ -16,6 +17,12 @@ class SessionsController < ApplicationController
   def destroy
     sign_out
     redirect_to root_path
+  end
+
+  private
+
+  def correct_user
+    redirect_to root_path if !current_user.nil?
   end
 
 end

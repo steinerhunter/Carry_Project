@@ -28,6 +28,8 @@ $('<div />').addClass('signup_errors').html(errors).appendTo("#new_user").hide()
 <% else %>
 
 // On successful creation of new user, redirect to main page
-window.location.href = "/"
+<% url = session[:return_to] || root_path %>
+<% session[:return_to] = nil if session[:return_to].present? %>
+window.location.href = "<%= url %>"
 
 <% end %>

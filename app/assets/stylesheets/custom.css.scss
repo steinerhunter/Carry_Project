@@ -50,7 +50,7 @@ p {
 
 .signin_form_class {
   width: 600px;
-  height: 250px;
+  height: 280px;
   text-align: center;
   background-color: #1d79e2;
   -moz-box-shadow: 5px 5px 5px #333333;; /* Old Firefox */
@@ -112,6 +112,16 @@ p {
   width: 370px;
   font-size: 2.0em;
   padding-bottom:8px;
+}
+
+.button_signin {
+  a {
+    color: #f2ff5e;
+    text-decoration: none;
+    &:hover {
+      color: #ffffff;
+    }
+  }
 }
 
 .signup_fields {

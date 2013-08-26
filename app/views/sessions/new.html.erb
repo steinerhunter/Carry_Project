@@ -14,7 +14,8 @@
         </div>
       </div>
         <div class="button_signin">
-          <%=  f.submit "Sign in", :type => :image, :src => "../assets/Signin.png" %>
+          <%=  f.submit "Sign in", :type => :image, :src => "../assets/Signin.png" %><br><br>
+          <b>Don't have an account yet?  <%= link_to "Sign Up", signup_path %> now!</b>
         </div>
   <% end  %>
 </div>

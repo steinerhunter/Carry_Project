@@ -36,7 +36,7 @@ class RequestDelivery < ActiveRecord::Base
   end
 
   def accepted_request_not_confirmed
-    AcceptedRequest.find_by_request_delivery_id_and_confirmed(self.id, false)
+    AcceptedRequest.where("request_delivery_id = ? AND confirmed = ?",self.id,false).pluck(:user_id)
   end
 
 end

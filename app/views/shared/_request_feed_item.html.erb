@@ -36,7 +36,7 @@
       <div class="delete_post">
         <div class="bubbleInfo">
           <%=  link_to image_tag("delete_post.png"), request_feed_item, method: :delete, class: "trigger" %>
-          <div class="popup" style="height:20px; width:190px; margin-top:57px;">
+          <div class="popup" style="height:20px; width:195px; margin-top:57px;">
             <b style="color:#FF0523;">Delete</b> your delivery request.
             <div id="tail1" style="left:37px"></div>
             <div id="tail2" style="left:37px"></div>
@@ -46,7 +46,7 @@
       <div class="edit_post">
         <div class="bubbleInfo">
           <%=  link_to image_tag("edit_post.png"), edit_request_delivery_path(request_feed_item), class: "trigger" %>
-          <div class="popup" style="height:20px; width:170px; margin-top:57px;">
+          <div class="popup" style="height:20px; width:180px; margin-top:57px;">
             <b style="color:#ff9054">Edit</b> your delivery request.
             <div id="tail1" style="left:35px"></div>
             <div id="tail2" style="left:35px"></div>
@@ -89,7 +89,7 @@
           <div class="index_status" style="background-color: #7f7f7f;">
       <% elsif request_feed_item.status == "Confirmed" %>
           <div class="index_status" style="background-color: #1d79e2;">
-      <% elsif request_feed_item.status == "Pending Confirmation" && request_feed_item.accepted_request_not_confirmed.other_user_for_request.id == current_user.id %>
+      <% elsif request_feed_item.status == "Pending Confirmation" && request_feed_item.accepted_request_not_confirmed.include?(current_user.id) %>
           <div class="index_status" style="background-color: #d67a31;">
       <% else %>
           <div class="index_status" style="background-color: #257b2a;">
@@ -100,7 +100,7 @@
               <b><%= request_feed_item.status  %></b>
           <% elsif request_feed_item.status == "Confirmed" %>
               <b><%= request_feed_item.status  %></b>
-          <% elsif request_feed_item.status == "Pending Confirmation" && request_feed_item.accepted_request_not_confirmed.other_user_for_request.id == current_user.id %>
+          <% elsif request_feed_item.status == "Pending Confirmation" && request_feed_item.accepted_request_not_confirmed.include?(current_user.id) %>
               <b><%= request_feed_item.status  %></b>
           <% else %>
               <b>Open</b>
@@ -122,7 +122,7 @@
                 <div class="popup" style="height:20px; width:320px; margin-top:53px;">
                   Someone has been <b style="color:#1d79e2">Confirmed</b> for this request.
             <% end  %>
-        <% elsif request_feed_item.status == "Pending Confirmation" && request_feed_item.accepted_request_not_confirmed.other_user_for_request.id == current_user.id %>
+        <% elsif request_feed_item.status == "Pending Confirmation" && request_feed_item.accepted_request_not_confirmed.include?(current_user.id) %>
             <div class="popup" style="height:20px; width:315px; margin-top:53px;">
               This request is <b style="color:#ff9054">Pending Confirmation</b> for you!
         <% else %>

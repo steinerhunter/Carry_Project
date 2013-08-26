@@ -35,7 +35,7 @@ class SuggestDelivery < ActiveRecord::Base
   end
 
   def accepted_suggest_not_confirmed
-    AcceptedSuggest.find_by_suggest_delivery_id_and_confirmed(self.id, false)
+    AcceptedSuggest.where("suggest_delivery_id = ? AND confirmed = ?",self.id,false).pluck(:user_id)
   end
 
 

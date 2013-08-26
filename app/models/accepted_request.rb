@@ -29,7 +29,7 @@ class AcceptedRequest < ActiveRecord::Base
     self. update_attribute(:complete, true)
   end
 
-  def user_for_confirmed_request
+  def other_user_for_request
     User.find_by_id(self.user_id)
   end
 

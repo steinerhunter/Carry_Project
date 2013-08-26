@@ -89,7 +89,7 @@
           <div class="index_status" style="background-color: #7f7f7f;">
       <% elsif request_feed_item.status == "Confirmed" %>
           <div class="index_status" style="background-color: #1d79e2;">
-      <% elsif request_feed_item.status == "Pending Confirmation" && request_feed_item.accepted_request_not_confirmed.user_for_confirmed_request.id == current_user.id %>
+      <% elsif request_feed_item.status == "Pending Confirmation" && request_feed_item.accepted_request_not_confirmed.other_user_for_request.id == current_user.id %>
           <div class="index_status" style="background-color: #d67a31;">
       <% else %>
           <div class="index_status" style="background-color: #257b2a;">
@@ -100,14 +100,14 @@
               <b><%= request_feed_item.status  %></b>
           <% elsif request_feed_item.status == "Confirmed" %>
               <b><%= request_feed_item.status  %></b>
-          <% elsif request_feed_item.status == "Pending Confirmation" && request_feed_item.accepted_request_not_confirmed.user_for_confirmed_request.id == current_user.id %>
+          <% elsif request_feed_item.status == "Pending Confirmation" && request_feed_item.accepted_request_not_confirmed.other_user_for_request.id == current_user.id %>
               <b><%= request_feed_item.status  %></b>
           <% else %>
               <b>Open</b>
           <% end  %>
         </div>
         <% if request_feed_item.status == "Complete" %>
-            <% if request_feed_item.accepted_request.user_for_confirmed_request.id == current_user.id %>
+            <% if request_feed_item.accepted_request_confirmed.other_user_for_request.id == current_user.id %>
                 <div class="popup" style="height:20px; width:295px; margin-top:53px;">
                   You have marked this request as <b style="color:#7f7f7f">Complete</b>!
             <% else  %>
@@ -115,14 +115,14 @@
                   This request has been marked as <b style="color:#7f7f7f">Complete</b>!
             <% end  %>
         <% elsif request_feed_item.status == "Confirmed" %>
-            <% if request_feed_item.accepted_request.user_for_confirmed_request.id == current_user.id %>
+            <% if request_feed_item.accepted_request_confirmed.other_user_for_request.id == current_user.id %>
                 <div class="popup" style="height:20px; width:240px; margin-top:53px;">
                   You are <b style="color:#1d79e2">Confirmed</b> for this request!
             <% else  %>
                 <div class="popup" style="height:20px; width:320px; margin-top:53px;">
                   Someone has been <b style="color:#1d79e2">Confirmed</b> for this request.
             <% end  %>
-        <% elsif request_feed_item.status == "Pending Confirmation" && request_feed_item.accepted_request_not_confirmed.user_for_confirmed_request.id == current_user.id %>
+        <% elsif request_feed_item.status == "Pending Confirmation" && request_feed_item.accepted_request_not_confirmed.other_user_for_request.id == current_user.id %>
             <div class="popup" style="height:20px; width:315px; margin-top:53px;">
               This request is <b style="color:#ff9054">Pending Confirmation</b> for you!
         <% else %>

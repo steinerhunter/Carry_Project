@@ -29,7 +29,7 @@ class AcceptedSuggest < ActiveRecord::Base
     self. update_attribute(:complete, true)
   end
 
-  def user_for_confirmed_suggest
+  def other_user_for_suggest
     User.find_by_id(self.user_id)
   end
 

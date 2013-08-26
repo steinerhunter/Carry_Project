@@ -115,7 +115,7 @@
                         <%=  link_to image_tag("confirmed.png"),
                                      {:controller => "suggest_deliveries",
                                       :action => "complete",
-                                      :accepted_suggest_id => activity_suggest_item.accepted_suggest.id,
+                                      :accepted_suggest_id => activity_suggest_item.accepted_suggest_confirmed.id,
                                       :suggest_delivery_id => activity_suggest_item.id  },
                                      class: "trigger" %>
                         <div class="popup" style="height:20px; width:210px; margin-top:57px;">
@@ -130,7 +130,7 @@
                         <%=  link_to image_tag("send_message.png"),
                                      {:controller => "conversations",
                                       :action => "new",
-                                      :recipient_id => activity_suggest_item.accepted_suggest.user_for_confirmed_suggest.id,
+                                      :recipient_id => activity_suggest_item.accepted_suggest_confirmed.other_user_for_suggest.id,
                                       :suggest_delivery_id => activity_suggest_item.id  },
                                      class: "trigger" %>
                         <div class="popup" style="height:20px; width:120px; margin-top:57px;">
@@ -140,11 +140,11 @@
                         </div>
                       </div>
                     </div>
-                    <b style="color:#f2ff5e"><%= link_to activity_suggest_item.accepted_suggest.user_for_confirmed_suggest.name,
-                                                                                                   activity_suggest_item.accepted_suggest.user_for_confirmed_suggest  %></b> is confirmed!
+                    <b style="color:#f2ff5e"><%= link_to activity_suggest_item.accepted_suggest_confirmed.other_user_for_suggest.name,
+                                                                                                   activity_suggest_item.accepted_suggest_confirmed.other_user_for_suggest  %></b> is confirmed!
                   </div>
                 </div>
-            <% elsif activity_suggest_item.accepted_suggest.user_for_confirmed_suggest == current_user  %>
+            <% elsif activity_suggest_item.accepted_suggest_confirmed.other_user_for_suggest == current_user  %>
                 <br>
                 <div class="send_messages_to_users" style="background-color: #0b5aff;">
                   <div class="needs_to_confirm">
@@ -178,8 +178,8 @@
             Status: <b style="color:#74e239"><%= activity_suggest_item.status %></b>
             <% if activity_suggest_item.user == current_user %>
                 (by <b style="color:#f2ff5e">you</b>)
-            <% elsif activity_suggest_item.accepted_suggest.user_for_confirmed_suggest == current_user  %>
-                (by <b style="color:#f2ff5e"><%= link_to activity_suggest_item.accepted_suggest.user_for_confirmed_suggest.name, activity_suggest_item.accepted_suggest.user_for_confirmed_suggest %></b>)
+            <% elsif activity_suggest_item.accepted_suggest_confirmed.other_user_for_suggest == current_user  %>
+                (by <b style="color:#f2ff5e"><%= link_to activity_suggest_item.accepted_suggest_confirmed.other_user_for_suggest.name, activity_suggest_item.accepted_suggest_confirmed.other_user_for_suggest %></b>)
             <% end  %>
         <% end  %>
       </div>

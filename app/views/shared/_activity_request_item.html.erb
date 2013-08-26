@@ -115,7 +115,7 @@
                         <%=  link_to image_tag("send_message.png"),
                                      {:controller => "conversations",
                                       :action => "new",
-                                      :recipient_id => activity_request_item.accepted_request.user_for_confirmed_request.id,
+                                      :recipient_id => activity_request_item.accepted_request_confirmed.other_user_for_request.id,
                                       :request_delivery_id => activity_request_item.id  },
                                      class: "trigger" %>
                         <div class="popup" style="height:20px; width:120px; margin-top:57px;">
@@ -125,11 +125,11 @@
                         </div>
                       </div>
                     </div>
-                    <b style="color:#f2ff5e"><%= link_to activity_request_item.accepted_request.user_for_confirmed_request.name,
-                                                                           activity_request_item.accepted_request.user_for_confirmed_request  %></b> is confirmed!
+                    <b style="color:#f2ff5e"><%= link_to activity_request_item.accepted_request_confirmed.other_user_for_request.name,
+                                                                           activity_request_item.accepted_request_confirmed.other_user_for_request  %></b> is confirmed!
                   </div>
                 </div>
-            <% elsif activity_request_item.accepted_request.user_for_confirmed_request == current_user  %>
+            <% elsif activity_request_item.accepted_request_confirmed.other_user_for_request == current_user  %>
                 <br>
                 <div class="send_messages_to_users" style="background-color: #0b5aff;">
                   <div class="needs_to_confirm">
@@ -138,7 +138,7 @@
                         <%=  link_to image_tag("confirmed.png"),
                                      {:controller => "request_deliveries",
                                       :action => "complete",
-                                      :accepted_request_id => activity_request_item.accepted_request.id,
+                                      :accepted_request_id => activity_request_item.accepted_request_confirmed.id,
                                       :request_delivery_id => activity_request_item.id  },
                                      class: "trigger" %>
                         <div class="popup" style="height:20px; width:185px; margin-top:57px;">
@@ -177,8 +177,8 @@
         <% elsif activity_request_item.status == "Complete" %>
             Status: <b style="color:#74e239"><%= activity_request_item.status %></b>
             <% if activity_request_item.user == current_user %>
-                (by <b style="color:#f2ff5e"><%= link_to activity_request_item.accepted_request.user_for_confirmed_request.name, activity_request_item.accepted_request.user_for_confirmed_request %></b>)
-          <% elsif activity_request_item.accepted_request.user_for_confirmed_request == current_user  %>
+                (by <b style="color:#f2ff5e"><%= link_to activity_request_item.accepted_request_confirmed.other_user_for_request.name, activity_request_item.accepted_request_confirmed.other_user_for_request %></b>)
+          <% elsif activity_request_item.accepted_request_confirmed.other_user_for_request == current_user  %>
                 (by <b style="color:#f2ff5e">you</b>)
             <% end  %>
         <% end  %>

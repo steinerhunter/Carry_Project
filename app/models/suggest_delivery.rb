@@ -30,8 +30,12 @@ class SuggestDelivery < ActiveRecord::Base
     self.update_attribute(:status, "Complete")
   end
 
-  def accepted_suggest
+  def accepted_suggest_confirmed
     AcceptedSuggest.find_by_suggest_delivery_id_and_confirmed(self.id, true)
+  end
+
+  def accepted_suggest_not_confirmed
+    AcceptedSuggest.find_by_suggest_delivery_id_and_confirmed(self.id, false)
   end
 
 

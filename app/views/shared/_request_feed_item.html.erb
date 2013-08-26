@@ -1,5 +1,38 @@
 <div class="feed_item">
-  <% if (current_user?(request_feed_item.user)) || (current_user.try(:admin?)) %>
+  <% if current_user.nil? %>
+      <% if request_feed_item.status == "Complete" %>
+          <div class="index_status" style="background-color: #7f7f7f;">
+      <% elsif request_feed_item.status == "Confirmed" %>
+          <div class="index_status" style="background-color: #1d79e2;">
+      <% else %>
+          <div class="index_status" style="background-color: #257b2a;">
+      <% end  %>
+      <div class="bubbleInfo">
+        <div class="trigger">
+          <% if request_feed_item.status == "Complete" %>
+              <b><%= request_feed_item.status  %></b>
+          <% elsif request_feed_item.status == "Confirmed" %>
+              <b><%= request_feed_item.status  %></b>
+          <% else %>
+              <b>Open</b>
+          <% end  %>
+        </div>
+        <% if request_feed_item.status == "Complete" %>
+            <div class="popup" style="height:20px; width:295px; margin-top:53px;">
+              This request has been marked as <b style="color:#7f7f7f">Complete</b>!
+        <% elsif request_feed_item.status == "Confirmed" %>
+            <div class="popup" style="height:20px; width:320px; margin-top:53px;">
+              Someone has been <b style="color:#1d79e2">Confirmed</b> for this request.
+        <% else %>
+            <div class="popup" style="height:20px; width:215px; margin-top:53px;">
+              This request is <b style="color:#257b2a">Open</b> for takers!
+        <% end  %>
+        <div id="tail1" style="left:35px"></div>
+        <div id="tail2" style="left:35px"></div>
+        </div>
+        </div>
+        </div>
+  <% elsif (current_user?(request_feed_item.user)) || (current_user.try(:admin?)) %>
       <div class="delete_post">
         <div class="bubbleInfo">
           <%=  link_to image_tag("delete_post.png"), request_feed_item, method: :delete, class: "trigger" %>
@@ -29,28 +62,28 @@
       <% else %>
           <div class="index_status" style="right:63px;background-color: #257b2a;">
       <% end  %>
-        <div class="bubbleInfo">
-          <div class="trigger">
-            <b><%= request_feed_item.status  %></b>
-          </div>
-          <% if request_feed_item.status == "Complete" %>
-              <div class="popup" style="height:20px; width:305px; margin-top:53px;">
-                Your request has been marked as <b style="color:#7f7f7f">Complete</b>!
-          <% elsif request_feed_item.status == "Confirmed" %>
-              <div class="popup" style="height:20px; width:330px; margin-top:53px;">
-                You have <b style="color:#1d79e2">Confirmed</b> someone for your request!
-          <% elsif request_feed_item.status == "Pending Confirmation" %>
-              <div class="popup" style="height:20px; width:350px; margin-top:53px;">
-                Your request is <b style="color:#ff9054">Pending Confirmation</b> for someone!
-          <% else %>
-              <div class="popup" style="height:20px; width:215px; margin-top:53px;">
-                Your request is <b style="color:#257b2a">Open</b> for takers!
-          <% end  %>
-            <div id="tail1" style="left:35px"></div>
-            <div id="tail2" style="left:35px"></div>
-          </div>
+      <div class="bubbleInfo">
+        <div class="trigger">
+          <b><%= request_feed_item.status  %></b>
         </div>
-      </div>
+        <% if request_feed_item.status == "Complete" %>
+            <div class="popup" style="height:20px; width:305px; margin-top:53px;">
+              Your request has been marked as <b style="color:#7f7f7f">Complete</b>!
+        <% elsif request_feed_item.status == "Confirmed" %>
+            <div class="popup" style="height:20px; width:330px; margin-top:53px;">
+              You have <b style="color:#1d79e2">Confirmed</b> someone for your request!
+        <% elsif request_feed_item.status == "Pending Confirmation" %>
+            <div class="popup" style="height:20px; width:350px; margin-top:53px;">
+              Your request is <b style="color:#ff9054">Pending Confirmation</b> for someone!
+        <% else %>
+            <div class="popup" style="height:20px; width:215px; margin-top:53px;">
+              Your request is <b style="color:#257b2a">Open</b> for takers!
+        <% end  %>
+        <div id="tail1" style="left:35px"></div>
+        <div id="tail2" style="left:35px"></div>
+        </div>
+        </div>
+        </div>
   <% else  %>
       <% if request_feed_item.status == "Complete" %>
           <div class="index_status" style="background-color: #7f7f7f;">
@@ -61,46 +94,46 @@
       <% else %>
           <div class="index_status" style="background-color: #257b2a;">
       <% end  %>
-        <div class="bubbleInfo">
-          <div class="trigger">
-            <% if request_feed_item.status == "Complete" %>
-                <b><%= request_feed_item.status  %></b>
-            <% elsif request_feed_item.status == "Confirmed" %>
-                <b><%= request_feed_item.status  %></b>
-            <% elsif request_feed_item.status == "Pending Confirmation" && request_feed_item.accepted_request_not_confirmed.user_for_confirmed_request.id == current_user.id %>
-                <b><%= request_feed_item.status  %></b>
-            <% else %>
-                <b>Open</b>
-            <% end  %>
-          </div>
+      <div class="bubbleInfo">
+        <div class="trigger">
           <% if request_feed_item.status == "Complete" %>
-              <% if request_feed_item.accepted_request.user_for_confirmed_request.id == current_user.id %>
-                  <div class="popup" style="height:20px; width:295px; margin-top:53px;">
-                    You have marked this request as <b style="color:#7f7f7f">Complete</b>!
-              <% else  %>
-                  <div class="popup" style="height:20px; width:295px; margin-top:53px;">
-                   This request has been marked as <b style="color:#7f7f7f">Complete</b>!
-              <% end  %>
+              <b><%= request_feed_item.status  %></b>
           <% elsif request_feed_item.status == "Confirmed" %>
-                <% if request_feed_item.accepted_request.user_for_confirmed_request.id == current_user.id %>
-                  <div class="popup" style="height:20px; width:240px; margin-top:53px;">
-                        You are <b style="color:#1d79e2">Confirmed</b> for this request!
-                <% else  %>
-                  <div class="popup" style="height:20px; width:320px; margin-top:53px;">
-                        Someone has been <b style="color:#1d79e2">Confirmed</b> for this request.
-                <% end  %>
+              <b><%= request_feed_item.status  %></b>
           <% elsif request_feed_item.status == "Pending Confirmation" && request_feed_item.accepted_request_not_confirmed.user_for_confirmed_request.id == current_user.id %>
-              <div class="popup" style="height:20px; width:315px; margin-top:53px;">
-                This request is <b style="color:#ff9054">Pending Confirmation</b> for you!
+              <b><%= request_feed_item.status  %></b>
           <% else %>
-              <div class="popup" style="height:20px; width:215px; margin-top:53px;">
-                This request is <b style="color:#257b2a">Open</b> for takers!
+              <b>Open</b>
           <% end  %>
-            <div id="tail1" style="left:35px"></div>
-            <div id="tail2" style="left:35px"></div>
-          </div>
         </div>
-      </div>
+        <% if request_feed_item.status == "Complete" %>
+            <% if request_feed_item.accepted_request.user_for_confirmed_request.id == current_user.id %>
+                <div class="popup" style="height:20px; width:295px; margin-top:53px;">
+                  You have marked this request as <b style="color:#7f7f7f">Complete</b>!
+            <% else  %>
+                <div class="popup" style="height:20px; width:295px; margin-top:53px;">
+                  This request has been marked as <b style="color:#7f7f7f">Complete</b>!
+            <% end  %>
+        <% elsif request_feed_item.status == "Confirmed" %>
+            <% if request_feed_item.accepted_request.user_for_confirmed_request.id == current_user.id %>
+                <div class="popup" style="height:20px; width:240px; margin-top:53px;">
+                  You are <b style="color:#1d79e2">Confirmed</b> for this request!
+            <% else  %>
+                <div class="popup" style="height:20px; width:320px; margin-top:53px;">
+                  Someone has been <b style="color:#1d79e2">Confirmed</b> for this request.
+            <% end  %>
+        <% elsif request_feed_item.status == "Pending Confirmation" && request_feed_item.accepted_request_not_confirmed.user_for_confirmed_request.id == current_user.id %>
+            <div class="popup" style="height:20px; width:315px; margin-top:53px;">
+              This request is <b style="color:#ff9054">Pending Confirmation</b> for you!
+        <% else %>
+            <div class="popup" style="height:20px; width:215px; margin-top:53px;">
+              This request is <b style="color:#257b2a">Open</b> for takers!
+        <% end  %>
+        <div id="tail1" style="left:35px"></div>
+        <div id="tail2" style="left:35px"></div>
+        </div>
+        </div>
+        </div>
   <% end %>
   <div class="right_index">
     <div class="feed_item_map">
@@ -123,4 +156,4 @@
       </div>
     </div>
   </div>
-</div>
+  </div>

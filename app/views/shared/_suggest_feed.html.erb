@@ -1,6 +1,5 @@
 <div class="suggestposts">
   <% if @suggest_feed_items.any? %>
-      <h3>Available delivery suggestions</h3>
       <%= render partial: 'shared/suggest_feed_item', collection: @suggest_feed_items %>
   <% else  %>
       <h3>No delivery suggestions available at the moment!</h3>

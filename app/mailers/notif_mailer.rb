@@ -1,6 +1,11 @@
 class NotifMailer < ActionMailer::Base
   default from: "sendwithme@sendwith.me"
 
+  def password_reset(user)
+    @user = user
+    mail(:to => user.email, :subject => "Password Reset Instructions")
+  end
+
   def new_accepted_request(creating_user,accepting_user,request_delivery)
     @creating_user = creating_user
     @accepting_user = accepting_user

@@ -9,7 +9,7 @@ TheCarryProject::Application.routes.draw do
     put :accept, on: :member
     resources :comments
   end
-
+  resources :password_resets
   resources :conversations, only: [:index, :show, :new, :create] do
     member do
       post :reply

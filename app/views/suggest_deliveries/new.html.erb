@@ -33,11 +33,11 @@
             <% if session[:suggest_delivery_currency].present? %>
                 <%= f.select :currency, options_for_select(%w[NIS USD Euro], :selected =>session[:suggest_delivery_currency]) %>
             <% else  %>
-                <%= f.select :currency, options_for_select(%w[NIS USD Euro]), :include_blank => "Pick Currency..." %>
+                <%= f.select :currency, options_for_select(%w[NIS USD Euro], :selected =>"NIS") %>
             <% end  %>
           </div>
           <div class="form_submit">
-            <%= f.submit "Finish", :type => :image, :src => "assets/Finish.png", :class => "finish" %>
+            <%= f.submit "Finish", :type => :image, :src => "assets/Post.png", :class => "finish" %>
           </div>
         </div>
       </fieldset>

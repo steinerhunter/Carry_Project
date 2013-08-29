@@ -6,7 +6,7 @@
 
         var $input_id;
 
-        $('input').click(
+        $('input').focus(
             function(){
                 if ($(this).attr('class') == "address_field") {
                     $input_id = $(this).attr('id');
@@ -17,5 +17,6 @@
         $('.datepicker').datepicker({
             format: 'dd/mm/yyyy'
         });
+
     }
 })(jQuery);

@@ -4,9 +4,9 @@
   </div>
   <%= form_for @user, :url => password_reset_path(params[:id]), :remote => true do |f| %>
       <%=  render 'shared/error_messages', object: f.object  %>
-      <div class="signup_fields">
+      <div class="signup_fields" style="height: 100px">
         <div class="myfield_signup">
-          <%= f.label :password, "Choose a Password:" %>
+          <%= f.label :password, "Choose a new Password:" %>
           <%= f.password_field :password, :placeholder => "At least 8 characters"  %>
         </div>
         <div class="myfield_signup">

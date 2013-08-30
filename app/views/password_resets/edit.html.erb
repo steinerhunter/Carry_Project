@@ -1,21 +1,21 @@
-<%= form_for @user, :url => password_reset_path(params[:id]) do |f| %>
-    <% if @user.errors.any? %>
-        <div class="error_messages">
-          <h2>Form is invalid</h2>
-          <ul>
-            <% for message in @user.errors.full_messages %>
-                <li><%= message %></li>
-            <% end %>
-          </ul>
+<div class="signup_form_class">
+  <div class="form_title">
+    <b>Pick a New Password</b>
+  </div>
+  <%= form_for @user, :url => password_reset_path(params[:id]) do |f| %>
+      <%=  render 'shared/error_messages', object: f.object  %>
+      <div class="signup_fields">
+        <div class="myfield_signup">
+          <%= f.label :password, "Choose a Password:" %>
+          <%= f.password_field :password, :placeholder => "At least 8 characters"  %>
         </div>
-    <% end %>
-    <div class="field">
-      <%= f.label :password %>
-      <%= f.password_field :password %>
-    </div>
-    <div class="field">
-      <%= f.label :password_confirmation %>
-      <%= f.password_field :password_confirmation %>
-    </div>
-    <div class="actions"><%= f.submit "Update Password" %></div>
-<% end %>
+        <div class="myfield_signup">
+          <%= f.label :password_confirmation, "Confirm your Password:" %>
+          <%= f.password_field :password_confirmation %>
+        </div>
+      </div>
+      <div class="button_signup">
+        <%=  f.submit "Update!", :type => :image, :src => "../../assets/UpdatePassword.png"  %>
+      </div>
+  <% end  %>
+</div>

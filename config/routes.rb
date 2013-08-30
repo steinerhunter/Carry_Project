@@ -43,6 +43,8 @@ TheCarryProject::Application.routes.draw do
 
   match '/activity', to:'activities#index'
 
+  match '/reset_password', to: 'password_resets#new'
+
   match "empty_trash" => "users#empty_trash"
 
   # The priority is based upon order of creation:

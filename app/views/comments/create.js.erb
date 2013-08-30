@@ -13,14 +13,18 @@ var errors = 'Sorry, you must write something... '
 $('<div />').addClass('comment_errors').html(errors).appendTo("#new_comment").hide().fadeIn('slow');;
 
 <% else %>
+    <% if current_user.nil? %>
+        <% store_location %>
+        window.location.href = "<%=signin_path %>"
+    <% else %>
+        if ($(".comment_errors")[0]){
+            $('.comment_errors').remove();
+        }
 
-if ($(".comment_errors")[0]){
-    $('.comment_errors').remove();
-}
+        $('#new_comment')[0].reset()
 
-$('#new_comment')[0].reset()
-
-// Add the new comment to the beginning of the #comment division
-$("#comments").append('<%= j(render(:partial => "comment", :object => @comment))%>').fadeIn(1500);
+        // Add the new comment to the beginning of the #comment division
+        $("#comments").append('<%= j(render(:partial => "comment", :object => @comment))%>').fadeIn(1500);
+    <% end %>
 
 <% end %>

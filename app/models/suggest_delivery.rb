@@ -11,8 +11,17 @@ class SuggestDelivery < ActiveRecord::Base
   validates :cost, :presence => { :message => "We need to know how much you will charge..."}
   validates :cost, :numericality => { :only_integer => true, :message => "Only whole numbers please..." }
   validates :currency, :presence => { :message => "It seems you left out currency..."}
+  validate :date_not_in_past
 
   default_scope order: 'suggest_deliveries.created_at DESC'
+
+  def date_not_in_past
+    if !self.when.nil?
+      if self.when < Date.today
+        errors.add(:when, 'You selected a date from the past...')
+      end
+    end
+  end
 
   def accept_suggest
     self.update_attribute(:status, "Pending Confirmation")

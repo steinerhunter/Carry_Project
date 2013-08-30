@@ -9,10 +9,19 @@ class CommentsController < ApplicationController
   def create
     @commentable = find_commentable
     @comment = @commentable.comments.new(params[:comment])
-    @comment.user_id = current_user.id
-    if @comment.save
-      respond_with @commentable, :location => @commentable
+    if current_user.nil?
+      @comment.user_id = 0
+      if @comment.valid?
+        session[:comment_content] = @comment.content
+      end
+    else
+      session[:comment_content] = nil
+      @comment.user_id = current_user.id
+      if @comment.save
+        respond_with @commentable, :location => @commentable
+      end
     end
+
   end
 
   def destroy

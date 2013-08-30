@@ -1,8 +1,8 @@
 <div class="signup_form_class">
   <div class="form_title">
-    <b>Pick a New Password</b>
+    <b style="padding-left:35px">Pick a New Password</b>
   </div>
-  <%= form_for @user, :url => password_reset_path(params[:id]) do |f| %>
+  <%= form_for @user, :url => password_reset_path(params[:id]), :remote => true do |f| %>
       <%=  render 'shared/error_messages', object: f.object  %>
       <div class="signup_fields">
         <div class="myfield_signup">

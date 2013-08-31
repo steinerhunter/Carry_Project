@@ -42,7 +42,7 @@ module SessionsHelper
   def store_location
     session[:return_to] =
         if request.get?
-          request.request_uri
+          request.path
         else
           request.referer
         end

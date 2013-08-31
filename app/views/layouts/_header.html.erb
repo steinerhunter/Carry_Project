@@ -7,7 +7,7 @@
           <li id="header_transporters"><%= link_to "Find Transporters", suggestions_path  %></li>
           <li id="header_senders"><%= link_to "Browse Senders", requests_path  %></li>
           <% if signed_in?  %>
-              <% if current_user.mailbox.receipts.where(:is_read => false).count > 0 %>
+              <% if current_user.mailbox.receipts.where(:is_read => false).where(:deleted => false).count > 0 %>
                   <li id="header_messages_unread"><%= link_to "Messages", conversations_path %></li>
               <% else  %>
                   <li id="header_messages"><%= link_to "Messages", conversations_path %></li>

@@ -194,6 +194,36 @@ header {
   }
 }
 
+#header_activity_new {
+  position:relative;
+  width:110px;
+  margin-left:3px;
+  text-align: left;
+  font-size: 1em;
+  font-family: Impact !important;
+  background-image: url('header_activity_new.png');
+  border-color: #1d79e2;
+  background-repeat: no-repeat;
+  background-position: bottom left;
+  -moz-border-radius: 0px;
+  a {
+    color: #ffffff;
+    padding-left:50px;
+    text-decoration: none;
+    border-color: #000000;
+    &:hover {
+      color: #f2ff5e;
+      text-decoration: none;
+      background-image: url('header_activity_new.png');
+      background-repeat: no-repeat;
+      background-position: bottom left;
+      background-color:#00008b;
+      -webkit-border-radius: 7px 7px 0px 0px;
+      border-radius: 7px 7px 0px 0px;
+    }
+  }
+}
+
 #header_user {
   margin-left:13px;
   text-align: left;

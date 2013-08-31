@@ -23,6 +23,14 @@ class SuggestDelivery < ActiveRecord::Base
     end
   end
 
+  def check_all_details
+    if self.when.present? && self.more_details.present?
+      self.update_attribute(:has_all_details,true)
+    else
+      self.update_attribute(:has_all_details,false)
+    end
+  end
+
   def accept_suggest
     self.update_attribute(:status, "Pending Confirmation")
   end

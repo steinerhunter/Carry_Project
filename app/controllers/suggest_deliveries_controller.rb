@@ -68,6 +68,7 @@ class SuggestDeliveriesController < ApplicationController
       redirect_to :back
     else
       if @suggest_delivery.update_attributes( params[:suggest_delivery])
+        @suggest_delivery.check_all_details
         flash[:suggest_post_updated] = "Your suggestion was updated successfully!"
         respond_with(@suggest_delivery) do |format|
           format.html { redirect_to suggest_delivery_url(@suggest_delivery)}

@@ -1,12 +1,32 @@
 <div class="feed_item">
   <% if current_user.nil? %>
-      <% if suggest_feed_item.status == "Complete" %>
-          <div class="index_status" style="background-color: #7f7f7f;">
-      <% elsif suggest_feed_item.status == "Confirmed" %>
-          <div class="index_status" style="background-color: #1d79e2;">
-      <% else %>
-          <div class="index_status" style="background-color: #257b2a;">
-      <% end  %>
+      <% if suggest_feed_item.has_all_details %>
+          <div class="has_all_details" style="right:3px">
+            <div class="bubbleInfo">
+              <%= image_tag("has_all_details.png", class: "trigger") %>
+              <div class="popup" style="height:20px; width:305px; margin-top:57px;">
+                This suggestion has <b style="color:#279227">all</b> the necessary details!
+                <div id="tail1" style="left:35px"></div>
+                <div id="tail2" style="left:35px"></div>
+              </div>
+            </div>
+          </div>
+          <% if suggest_feed_item.status == "Complete" %>
+              <div class="index_status" style="right:33px; background-color: #7f7f7f;">
+          <% elsif suggest_feed_item.status == "Confirmed" %>
+              <div class="index_status" style="right:33px; background-color: #1d79e2;">
+          <% else %>
+              <div class="index_status" style="right:33px; background-color: #257b2a;">
+          <% end  %>
+      <% else  %>
+          <% if suggest_feed_item.status == "Complete" %>
+              <div class="index_status" style="background-color: #7f7f7f;">
+          <% elsif suggest_feed_item.status == "Confirmed" %>
+              <div class="index_status" style="background-color: #1d79e2;">
+          <% else %>
+              <div class="index_status" style="background-color: #257b2a;">
+          <% end  %>
+      <% end %>
       <div class="bubbleInfo">
         <div class="trigger">
           <% if suggest_feed_item.status == "Complete" %>
@@ -53,29 +73,60 @@
           </div>
         </div>
       </div>
-      <% if suggest_feed_item.status == "Complete" %>
-          <div class="index_status" style="right:63px;background-color: #7f7f7f;">
-      <% elsif suggest_feed_item.status == "Confirmed" %>
-          <div class="index_status" style="right:63px;background-color: #1d79e2;">
-      <% elsif suggest_feed_item.status == "Pending Confirmation" %>
-          <div class="index_status" style="right:63px;background-color: #d67a31;">
-      <% else %>
-          <div class="index_status" style="right:63px;background-color: #257b2a;">
-      <% end  %>
-      <div class="bubbleInfo">
-        <div class="trigger">
-          <b><%= suggest_feed_item.status  %></b>
+    <% if suggest_feed_item.has_all_details %>
+        <div class="has_all_details">
+          <div class="bubbleInfo">
+            <%= image_tag("has_all_details.png", class: "trigger") %>
+            <div class="popup" style="height:20px; width:305px; margin-top:57px;">
+              Your suggestion has <b style="color:#279227">all</b> the necessary details!
+              <div id="tail1" style="left:35px"></div>
+              <div id="tail2" style="left:35px"></div>
+            </div>
+          </div>
         </div>
         <% if suggest_feed_item.status == "Complete" %>
+            <div class="index_status" style="right:93px;background-color: #7f7f7f;">
+        <% elsif suggest_feed_item.status == "Confirmed" %>
+            <div class="index_status" style="right:93px;background-color: #1d79e2;">
+        <% elsif suggest_feed_item.status == "Pending Confirmation" %>
+            <div class="index_status" style="right:93px;background-color: #d67a31;">
+        <% else %>
+            <div class="index_status" style="right:93px;background-color: #257b2a;">
+        <% end  %>
+    <% else  %>
+        <% if suggest_feed_item.status == "Complete" %>
+            <div class="index_status" style="right:63px;background-color: #7f7f7f;">
+        <% elsif suggest_feed_item.status == "Confirmed" %>
+            <div class="index_status" style="right:63px;background-color: #1d79e2;">
+        <% elsif suggest_feed_item.status == "Pending Confirmation" %>
+            <div class="index_status" style="right:63px;background-color: #d67a31;">
+        <% else %>
+            <div class="index_status" style="right:63px;background-color: #257b2a;">
+        <% end  %>
+    <% end %>
+      <div class="bubbleInfo">
+        <% if suggest_feed_item.status == "Complete" %>
+            <div class="trigger">
+              <b><%= suggest_feed_item.status  %></b>
+            </div>
             <div class="popup" style="height:20px; width:325px; margin-top:53px;">
               Your suggestion has been marked as <b style="color:#7f7f7f">Complete</b>!
         <% elsif suggest_feed_item.status == "Confirmed" %>
+            <div class="trigger">
+              <b><%= suggest_feed_item.status  %></b>
+            </div>
             <div class="popup" style="height:20px; width:355px; margin-top:53px;">
               You have <b style="color:#1d79e2">Confirmed</b> someone for your suggestion!
         <% elsif suggest_feed_item.status == "Pending Confirmation" %>
+            <div class="trigger">
+              <b>Pending</b>
+            </div>
             <div class="popup" style="height:20px; width:380px; margin-top:53px;">
               Your suggestion is <b style="color:#ff9054">Pending Confirmation</b> for someone!
         <% else %>
+            <div class="trigger">
+              <b><%= suggest_feed_item.status  %></b>
+            </div>
             <div class="popup" style="height:20px; width:245px; margin-top:53px;">
               Your suggestion is <b style="color:#257b2a">Open</b> for takers!
         <% end  %>
@@ -85,15 +136,37 @@
         </div>
         </div>
   <% else  %>
-      <% if suggest_feed_item.status == "Complete" %>
-          <div class="index_status" style="background-color: #7f7f7f;">
-      <% elsif suggest_feed_item.status == "Confirmed" %>
-          <div class="index_status" style="background-color: #1d79e2;">
-      <% elsif suggest_feed_item.status == "Pending Confirmation" && suggest_feed_item.accepted_suggest_not_confirmed.include?(current_user.id) %>
-          <div class="index_status" style="background-color: #d67a31;">
-      <% else %>
-          <div class="index_status" style="background-color: #257b2a;">
-      <% end  %>
+    <% if suggest_feed_item.has_all_details %>
+        <div class="has_all_details" style="right:3px;">
+          <div class="bubbleInfo">
+            <%= image_tag("has_all_details.png", class: "trigger") %>
+            <div class="popup" style="height:20px; width:305px; margin-top:57px;">
+              This suggestion has <b style="color:#279227">all</b> the necessary details!
+              <div id="tail1" style="left:35px"></div>
+              <div id="tail2" style="left:35px"></div>
+            </div>
+          </div>
+        </div>
+        <% if suggest_feed_item.status == "Complete" %>
+            <div class="index_status" style="right:33px; background-color: #7f7f7f;">
+        <% elsif suggest_feed_item.status == "Confirmed" %>
+            <div class="index_status" style="right:33px;background-color: #1d79e2;">
+        <% elsif suggest_feed_item.status == "Pending Confirmation" && suggest_feed_item.accepted_suggest_not_confirmed.include?(current_user.id) %>
+            <div class="index_status" style="right:33px;background-color: #d67a31;">
+        <% else %>
+            <div class="index_status" style="right:33px;background-color: #257b2a;">
+        <% end  %>
+    <% else  %>
+        <% if suggest_feed_item.status == "Complete" %>
+            <div class="index_status" style="background-color: #7f7f7f;">
+        <% elsif suggest_feed_item.status == "Confirmed" %>
+            <div class="index_status" style="background-color: #1d79e2;">
+        <% elsif suggest_feed_item.status == "Pending Confirmation" && suggest_feed_item.accepted_suggest_not_confirmed.include?(current_user.id) %>
+            <div class="index_status" style="background-color: #d67a31;">
+        <% else %>
+            <div class="index_status" style="background-color: #257b2a;">
+        <% end  %>
+    <% end %>
       <div class="bubbleInfo">
         <div class="trigger">
           <% if suggest_feed_item.status == "Complete" %>
@@ -101,7 +174,7 @@
           <% elsif suggest_feed_item.status == "Confirmed" %>
               <b><%= suggest_feed_item.status  %></b>
           <% elsif suggest_feed_item.status == "Pending Confirmation" && suggest_feed_item.accepted_suggest_not_confirmed.include?(current_user.id) %>
-              <b><%= suggest_feed_item.status  %></b>
+              <b>Pending</b>
           <% else %>
               <b>Open</b>
           <% end  %>
@@ -119,7 +192,7 @@
             <% end  %>
         <% elsif suggest_feed_item.status == "Pending Confirmation" && suggest_feed_item.accepted_suggest_not_confirmed.include?(current_user.id) %>
             <div class="popup" style="height:20px; width:315px; margin-top:53px;">
-              This request is <b style="color:#ff9054">Pending Confirmation</b> for you!
+              This suggestion is <b style="color:#ff9054">Pending Confirmation</b> for you!
         <% else %>
             <div class="popup" style="height:20px; width:235px; margin-top:53px;">
               This suggestion is <b style="color:#257b2a">Open</b> for takers!

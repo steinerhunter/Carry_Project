@@ -69,6 +69,7 @@ class RequestDeliveriesController < ApplicationController
       redirect_to :back
     else
       if @request_delivery.update_attributes( params[:request_delivery])
+        @request_delivery.check_all_details
         flash[:request_post_updated] = "Your request was updated successfully!"
         respond_with(@request_delivery) do |format|
           format.html { redirect_to request_delivery_url(@request_delivery)}

@@ -24,6 +24,18 @@
           </div>
         </div>
       </div>
+    <% if activity_request_item.has_all_details %>
+        <div class="has_all_details">
+          <div class="bubbleInfo">
+            <%= image_tag("has_all_details.png", class: "trigger") %>
+            <div class="popup" style="height:20px; width:315px; margin-top:57px;">
+              Your request post has <b style="color:#279227">all</b> the necessary details!
+              <div id="tail1" style="left:35px"></div>
+              <div id="tail2" style="left:35px"></div>
+            </div>
+          </div>
+        </div>
+    <% end %>
   <% end %>
     <div class="activity_feed_item_info">
     <%= link_to activity_request_item.what, request_delivery_path(activity_request_item)  %>

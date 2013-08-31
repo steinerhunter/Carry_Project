@@ -17,7 +17,11 @@
   <%= render 'layouts/shim' %>
 </head>
 <body>
-<div class="wrapper">
+<% if  controller.controller_name == 'static_pages' && controller.action_name == 'home' %>
+    <div class="wrapper" style="margin-bottom:-6em;">
+<% else  %>
+    <div class="wrapper">
+<% end  %>
 <%= render 'layouts/header' %>
 <div class="container">
   <% flash.each do |key, value| %>

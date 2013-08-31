@@ -79,13 +79,40 @@
   border-color: #000000;
 }
 
-.back_button {
+.how_it_works_title {
+  width: 850px;
+  font-size:4em;
+  margin-top:80px;
+}
+
+.how_it_works_right {
+  margin-top:80px;
+}
+
+.how_it_works_image {
+  display:inline-block;
+}
+
+.how_it_works_text {
+  display:inline-block;
+  vertical-align: top;
+  padding-top:10px;
+}
+
+.how_it_works_text_title {
+  font-size:3em;
+  margin-bottom: 30px;;
+}
+
+.how_it_works_text_content {
+  font-size:1.9em;
+  width:500px;
+  line-height: 25px;
+}
+
+.sign_up_now {
+  margin-top: 40px;
   text-align: center;
-  width: 200px;
-  height: 150px;
-  line-height: 150px;
-  margin-left: auto;
-  margin-right: auto;
-  margin-top: -50px;
+  font-size: 2em;
 }
 

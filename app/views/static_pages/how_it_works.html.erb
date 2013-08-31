@@ -1,0 +1,64 @@
+<div class="how_it_works_title">
+  <b>How it works.</b>
+</div>
+<div class="how_it_works_right">
+  <div class="how_it_works_image">
+    <%= image_tag("HowItWorks1.png") %>
+  </div>
+  <div class="how_it_works_text" style="padding-left: 30px;">
+    <div class="how_it_works_text_title">
+      Post your delivery request.
+    </div>
+    <div class="how_it_works_text_content">
+      Fill out basic details about your item.<br>
+      You only have to tell us what you're sending, where from and to, and how much you will pay for the shipment.
+    </div>
+  </div>
+</div>
+<div class="how_it_works_right">
+  <div class="how_it_works_text" style=" padding-right: 30px;">
+    <div class="how_it_works_text_title">
+      Transport stuff for others.
+    </div>
+    <div class="how_it_works_text_content">
+      Accept others' requests to ship items.<br>
+      Once you're confirmed for the assignment, complete the transport from A to B, then get the bounty for it!
+    </div>
+  </div>
+  <div class="how_it_works_image">
+    <%= image_tag("HowItWorks2.png") %>
+  </div>
+</div>
+<div class="how_it_works_right">
+  <div class="how_it_works_image">
+    <%= image_tag("HowItWorks3.png") %>
+  </div>
+  <div class="how_it_works_text" style="padding-left: 30px;">
+    <div class="how_it_works_text_title">
+      Contact your delivery buddy.
+    </div>
+    <div class="how_it_works_text_content">
+      Get in touch with the person you're shipping for, or the one shipping for you.<br>
+      Discuss the necessary details for a successful delivery experience.
+    </div>
+  </div>
+</div>
+<div class="how_it_works_right">
+  <div class="how_it_works_text" style=" padding-right: 30px;">
+    <div class="how_it_works_text_title">
+     Become a top transporter.
+    </div>
+    <div class="how_it_works_text_content">
+      Complete others' delivery requests.<br>
+      Earn more money, receive positive reviews, get confirmed for more assignments!
+    </div>
+  </div>
+  <div class="how_it_works_image">
+    <%= image_tag("HowItWorks4.png") %>
+  </div>
+</div>
+<% if current_user.nil? %>
+<div class="sign_up_now">
+  <%= link_to "Register now!", signup_path %>
+</div>
+<% end  %>

@@ -24,6 +24,7 @@ TheCarryProject::Application.routes.draw do
   match '/signin', to: 'sessions#new'
   match '/signout', to: 'sessions#destroy', via: :delete
 
+  match '/how_it_works',    to: 'static_pages#how_it_works'
   match '/privacy_policy',    to: 'static_pages#privacy_policy'
   match '/terms_of_use',    to: 'static_pages#terms_of_use'
   match '/website_disclaimer',    to: 'static_pages#website_disclaimer'

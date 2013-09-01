@@ -191,7 +191,7 @@
             <% if activity_suggest_item.user == current_user %>
                 (by <b style="color:#f2ff5e">you</b>)
             <% elsif activity_suggest_item.accepted_suggest_confirmed.other_user_for_suggest == current_user  %>
-                (by <b style="color:#f2ff5e"><%= link_to activity_suggest_item.accepted_suggest_confirmed.other_user_for_suggest.name, activity_suggest_item.accepted_suggest_confirmed.other_user_for_suggest %></b>)
+                (by <b style="color:#f2ff5e"><%= link_to activity_suggest_item.user.name, activity_suggest_item.user %></b>)
             <% end  %>
         <% end  %>
       </div>

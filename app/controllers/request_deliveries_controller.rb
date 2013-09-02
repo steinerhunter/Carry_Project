@@ -152,7 +152,6 @@ class RequestDeliveriesController < ApplicationController
     else
       flash[:cannot] = "Only the creator of the request can confirm it."
     end
-    redirect_to activity_path
   end
 
   def complete

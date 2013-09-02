@@ -138,9 +138,16 @@ class RequestDeliveriesController < ApplicationController
     if @request_creator == current_user
       if  @accepted_request.confirm_accepted_request
         @request_delivery.confirm_request
-        flash[:confirm] = "You've chosen to confirm <br><b>#{@confirmed_user.name}</b><br>
-                                          <div class='sub_flash_text'>For your request <div class='confirmed_request'><b>#{@request_delivery.what}</b><br></div></div>".html_safe
+        flash[:confirm] = "You've chosen to confirm <br><b>SOMEONE</b><br>
+                                          <div class='sub_flash_text'>For your request <div class='confirmed_request'><b>#{@request_delivery.what}</b><br></div></div>
+                                          <div class='paypal_redirection'>You will now be redirected to
+                                          <!-- PayPal Logo --><table border='0' cellpadding='10' cellspacing='0' align='center'><tr><td align='center'></td></tr><tr><td align='center'>
+                                          <a href='https://www.paypal.com/webapps/mpp/paypal-popup' title='How PayPal Works'
+                                          onclick='javascript:window.open('https://www.paypal.com/webapps/mpp/paypal-popup','WIPaypal','toolbar=no, location=no, directories=no, status=no,
+                                          menubar=no, scrollbars=yes, resizable=yes, width=1060, height=700'); return false;'>
+                                          <img src='https://www.paypalobjects.com/webstatic/mktg/logo/pp_cc_mark_37x23.jpg' border='0' alt='PayPal Logo'></a></td></tr></table><!-- PayPal Logo --></div>".html_safe
         NotifMailer.new_confirmed_request(@request_creator,@confirmed_user,@request_delivery).deliver
+        redirect_to dummy_paypal_redirection_path
       end
     else
       flash[:cannot] = "Only the creator of the request can confirm it."

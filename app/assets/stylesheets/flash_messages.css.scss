@@ -154,7 +154,7 @@
   background-repeat: no-repeat;
   background-position: bottom center;
   max-width:600px;
-  height: 290px;
+  height: 420px;
   font-size: 2.5em;
   border: 1px solid;
   color: #ffffff;
@@ -183,6 +183,16 @@
     font-size: 1em;
     text-align: center;
     line-height: 95%;
+    b {
+      color: #f0d62b;
+      font-size: 1em;
+    }
+  }
+  .paypal_redirection {
+    margin-top:30px;
+    font-size: 0.7em;
+    text-align: center;
+    line-height: 25%;
     b {
       color: #f0d62b;
       font-size: 1em;

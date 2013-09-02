@@ -25,6 +25,7 @@ TheCarryProject::Application.routes.draw do
   match '/signout', to: 'sessions#destroy', via: :delete
 
   match '/how_it_works',    to: 'static_pages#how_it_works'
+  match '/dummy_paypal_redirection',    to: 'static_pages#dummy_paypal_redirection'
   match '/privacy_policy',    to: 'static_pages#privacy_policy'
   match '/terms_of_use',    to: 'static_pages#terms_of_use'
   match '/website_disclaimer',    to: 'static_pages#website_disclaimer'

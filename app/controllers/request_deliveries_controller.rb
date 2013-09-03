@@ -101,7 +101,7 @@ class RequestDeliveriesController < ApplicationController
         flash[:accept] = "You've chosen to accept <br><b>#{@request_delivery.what}</b><br> delivery request!<br>
                                           <div class='sub_flash_text'><b>#{@request_delivery.user.name}</b>, the creator of the request, will be notified. <br>
                                           Please allow <b>#{@request_delivery.user.name}</b> some time to get back to you.</div>".html_safe
-        @accepted_request = AcceptedRequest.find_by_request_delivery_id(@request_delivery.id)
+        @accepted_request = AcceptedRequest.find_all_by_request_delivery_id(@request_delivery.id).last
         @creating_user = User.find_by_id(@request_delivery.user_id)
         @accepting_user = User.find_by_id(@accepted_request.user_id)
         NotifMailer.new_accepted_request(@creating_user,@accepting_user,@request_delivery).deliver

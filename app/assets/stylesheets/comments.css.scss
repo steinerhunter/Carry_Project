@@ -18,7 +18,7 @@
 }
 
 .triangle-isosceles.left {
-  margin-left:13px;
+  margin-left:23px;
   background:#9fd1ff;
 }
 
@@ -97,4 +97,17 @@
   bottom:-20px;
   left:50%;
   margin-left: -125px;
+}
+
+.gravatar_user_name {
+  font-size:0.9em;
+  line-height: 110%;
+  a {
+    color: #f2ff5e;
+    text-decoration: none;
+    &:hover {
+      color: #ffffff;
+      text-decoration: none;
+    }
+  }
 }

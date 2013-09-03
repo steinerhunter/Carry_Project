@@ -7,8 +7,11 @@
       <% message = receipt.message %>
       <% if (message.sender.id == current_user.id) %>
           <div class="comment_item" style="text-align: left;margin-left:10px" id=<%= dom_id(message) %>>
-            <div class="chat_gravatar">
+            <div class="chat_gravatar" style="float:left; width:50px; text-align: center;">
               <%=  link_to chat_gravatar_for(current_user), current_user  %>
+              <div class="gravatar_user_name">
+                <%= link_to current_user.name, current_user %>
+              </div>
             </div>
             <div class="triangle-isosceles left">
               <div class="comment_content">
@@ -21,8 +24,11 @@
           </div>
       <% else  %>
           <div class="comment_item" style="text-align: right;" id=<%= dom_id(message) %>>
-            <div class="chat_gravatar" style="float:right">
+            <div class="chat_gravatar" style="float:right; width:50px; text-align: center;padding-right: 10px;">
               <%=  link_to chat_gravatar_for(message.sender), message.sender  %>
+              <div class="gravatar_user_name">
+                <%= link_to message.sender.name, message.sender %>
+              </div>
             </div>
             <div class="triangle-isosceles right">
               <div class="comment_content">

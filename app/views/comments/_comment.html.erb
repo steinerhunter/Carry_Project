@@ -1,27 +1,40 @@
-<% if current_user == @commentable.user %>
-    <% if comment.user == @commentable.user %>
-        <div class="comment_item" style="text-align: left;" id=<%= dom_id(comment) %>>
-          <div class="chat_gravatar">
-            <%=  link_to chat_gravatar_for(comment.user), comment.user  %>
-          </div>
-          <div class="triangle-isosceles left">
+<% if comment.user == @commentable.user %>
+    <div class="comment_item" style="text-align: left; margin-top:15px; margin-bottom: 15px;" id=<%= dom_id(comment) %>>
+      <div class="chat_gravatar" style="float:left; width:50px; text-align: center;">
+        <%=  link_to chat_gravatar_for(comment.user), comment.user  %>
+        <div class="gravatar_user_name">
+          <%= link_to comment.user.name, comment.user %>
+        </div>
+      </div>
+      <div class="triangle-isosceles left">
+        <% if current_user == @commentable.user %>
             <div class="delete_comment">
               <%= link_to image_tag("delete_comment.png"), [@commentable, comment], :method => :delete, :remote => true %>
             </div>
-            <div class="comment_content">
-              <b>"<%= comment.content %>"</b>
-            </div>
-            <div class="comment_posted">
-              Posted <%=  time_ago_in_words(comment.created_at) %> ago.
-            </div>
-          </div>
+        <% end  %>
+        <div class="comment_content">
+          <b>"<%= comment.content %>"</b>
         </div>
-    <% else %>
+        <div class="comment_posted">
+          Posted <%=  time_ago_in_words(comment.created_at) %> ago.
+        </div>
+      </div>
+    </div>
+<% else %>
+    <% if current_user == comment.user || current_user == @commentable.user %>
         <div class="comment_item" style="text-align: right;" id=<%= dom_id(comment) %>>
-          <div class="chat_gravatar" style="float:right">
+          <div class="chat_gravatar" style="float:right; width:50px; text-align: center;">
             <%=  link_to chat_gravatar_for(comment.user), comment.user  %>
+            <div class="gravatar_user_name">
+              <%= link_to comment.user.name, comment.user %>
+            </div>
           </div>
           <div class="triangle-isosceles right">
+            <% if current_user == comment.user %>
+                <div class="delete_comment">
+                  <%= link_to image_tag("delete_comment.png"), [@commentable, comment], :method => :delete, :remote => true %>
+                </div>
+            <% end  %>
             <div class="comment_content">
               <b>"<%= comment.content %>"</b>
             </div>
@@ -31,21 +44,4 @@
           </div>
         </div>
     <% end  %>
-<% elsif (comment.user == current_user) %>
-    <div class="comment_item" style="text-align: right;" id=<%= dom_id(comment) %>>
-      <div class="chat_gravatar" style="float:right">
-        <%=  link_to chat_gravatar_for(comment.user), comment.user  %>
-      </div>
-      <div class="triangle-isosceles right">
-        <div class="delete_comment">
-            <%= link_to image_tag("delete_comment.png"), [@commentable, comment], :method => :delete, :remote => true %>
-        </div>
-        <div class="comment_content">
-          <b>"<%= comment.content %>"</b>
-        </div>
-        <div class="comment_posted">
-          Posted <%=  time_ago_in_words(comment.created_at) %> ago.
-        </div>
-      </div>
-    </div>
-<% end %>
+<% end  %>

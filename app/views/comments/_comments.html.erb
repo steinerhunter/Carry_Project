@@ -1,7 +1,10 @@
 <div class="comments_data">
   <div class="comment_item" style="text-align: left;">
-    <div class="chat_gravatar">
-      <%=  link_to chat_gravatar_for(@commentable.user), @commentable.user  %>
+    <div class="chat_gravatar" style="float:left; width:50px; text-align: center;">
+      <%=  link_to chat_gravatar_for(@commentable.user), @commentable.user  %><br>
+      <div class="gravatar_user_name">
+        <%= link_to @commentable.user.name, @commentable.user %>
+      </div>
     </div>
     <div class="triangle-isosceles left">
       <% if @commentable.more_details.blank?  %>
@@ -21,7 +24,7 @@
   </div>
 </div>
 
-<div class="comments_form">
+<div class="comments_form" style="margin-top:20px;">
   <%= form_for [@commentable, @comment], :remote => true do |f| %>
       <% if  session[:comment_content].present? %>
           <%= f.text_area :content, :placeholder => "Type your question here..." ,:value => session[:comment_content], :rows => 1 %>

@@ -27,9 +27,18 @@ class UsersController < ApplicationController
         @request_delivery.currency = session[:request_delivery_currency]
         @request_delivery.user = @user
         @request_delivery.save
+      elsif session[:suggest_delivery_size].present?
+        @suggest_delivery = SuggestDelivery.new
+        @suggest_delivery.size = session[:suggest_delivery_size]
+        @suggest_delivery.from = session[:suggest_delivery_from]
+        @suggest_delivery.to = session[:suggest_delivery_to]
+        @suggest_delivery.cost = session[:suggest_delivery_cost]
+        @suggest_delivery.currency = session[:suggest_delivery_currency]
+        @suggest_delivery.user = @user
+        @suggest_delivery.save
       end
       sign_in @user
-      flash[:signup_success] = "Thank you for registering!"
+      flash.now[:signup_success] = "Thank you for registering!"
       respond_with(@user, :location => root_path)
     end
   end

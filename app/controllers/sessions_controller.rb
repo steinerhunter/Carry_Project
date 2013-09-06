@@ -5,7 +5,10 @@ class SessionsController < ApplicationController
   def new
       if session[:request_delivery_what].present?
         flash.now[:request_signin] = "<div class='sub_flash_text'>Thank you</div> for adding your request delivery details.<br><br>
-                                                              We will store them temporarily, and post them to our database once you sign in.".html_safe
+                                                                    We will store them temporarily, and post them to our database once you sign in.".html_safe
+        elsif session[:suggest_delivery_size].present?
+          flash.now[:request_signin] = "<div class='sub_flash_text'>Thank you</div> for adding your transport details.<br><br>
+                                                                      We will store them temporarily, and post them to our database once you sign in.".html_safe
       end
   end
 
@@ -22,6 +25,15 @@ class SessionsController < ApplicationController
         @request_delivery.currency = session[:request_delivery_currency]
         @request_delivery.user = user
         @request_delivery.save
+      elsif session[:suggest_delivery_size].present?
+        @suggest_delivery = SuggestDelivery.new
+        @suggest_delivery.size = session[:suggest_delivery_size]
+        @suggest_delivery.from = session[:suggest_delivery_from]
+        @suggest_delivery.to = session[:suggest_delivery_to]
+        @suggest_delivery.cost = session[:suggest_delivery_cost]
+        @suggest_delivery.currency = session[:suggest_delivery_currency]
+        @suggest_delivery.user = user
+        @suggest_delivery.save
       end
       sign_in user
       respond_with(user, :location => root_path)

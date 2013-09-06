@@ -23,6 +23,12 @@ $('<div />').addClass('signin_errors').html(errors).appendTo("#new_session").hid
     <% session[:request_delivery_cost] = nil %>
     <% session[:request_delivery_currency] = nil %>
     window.location.href = "<%=request_delivery_url(@request_delivery) %>"
+<% elsif session[:suggest_delivery_size].present? %>
+    <% session[:suggest_delivery_from]  = nil %>
+    <% session[:suggest_delivery_to] = nil %>
+    <% session[:suggest_delivery_cost] = nil %>
+    <% session[:suggest_delivery_currency] = nil %>
+    window.location.href = "<%=suggest_delivery_url(@suggest_delivery) %>"
 <% else %>
     <% url = session[:return_to] || root_path %>
     <% session[:return_to] = nil if session[:return_to].present? %>

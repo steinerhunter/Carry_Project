@@ -34,11 +34,6 @@ class SuggestDeliveriesController < ApplicationController
     else
       @suggest_delivery = current_user.suggest_deliveries.build(params[:suggest_delivery])
       if @suggest_delivery.save
-        session[:suggest_delivery_size] = nil
-        session[:suggest_delivery_from] = nil
-        session[:suggest_delivery_to] = nil
-        session[:suggest_delivery_cost] = nil
-        session[:suggest_delivery_currency] = nil
         flash[:suggest_post_created] = "Your suggestion was added successfully!<br>
                                                       <div class='sub_flash_text'>There are some missing details though.<br>
                                                       Go to <b style=\"color:#ff9054\">Edit</b> <img src=\"../assets/edit_post_big.png\"> and add them to attract more senders!</div>".html_safe

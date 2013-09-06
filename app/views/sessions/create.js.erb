@@ -16,8 +16,16 @@ $('<div />').addClass('signin_errors').html(errors).appendTo("#new_session").hid
 <% else %>
 
 // On successful signin, redirect to main page
-<% url = session[:return_to] || root_path %>
-<% session[:return_to] = nil if session[:return_to].present? %>
-window.location.href = "<%= url %>"
-
+<% if session[:request_delivery_what].present? %>
+    <% session[:request_delivery_what] = nil %>
+    <% session[:request_delivery_from]  = nil %>
+    <% session[:request_delivery_to] = nil %>
+    <% session[:request_delivery_cost] = nil %>
+    <% session[:request_delivery_currency] = nil %>
+    window.location.href = "<%=request_delivery_url(@request_delivery) %>"
+<% else %>
+    <% url = session[:return_to] || root_path %>
+    <% session[:return_to] = nil if session[:return_to].present? %>
+    window.location.href = "<%= url %>"
+<% end %>
 <% end %>

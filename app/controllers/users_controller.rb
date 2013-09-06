@@ -18,6 +18,16 @@ class UsersController < ApplicationController
   def create
     @user = User.new(params[:user])
     if @user.save
+      if session[:request_delivery_what].present?
+        @request_delivery = RequestDelivery.new
+        @request_delivery.what = session[:request_delivery_what]
+        @request_delivery.from = session[:request_delivery_from]
+        @request_delivery.to = session[:request_delivery_to]
+        @request_delivery.cost = session[:request_delivery_cost]
+        @request_delivery.currency = session[:request_delivery_currency]
+        @request_delivery.user = @user
+        @request_delivery.save
+      end
       sign_in @user
       flash[:signup_success] = "Thank you for registering!"
       respond_with(@user, :location => root_path)
@@ -62,6 +72,5 @@ class UsersController < ApplicationController
     def admin_user
       redirect_to :back unless current_user.admin?
     end
-
 
 end

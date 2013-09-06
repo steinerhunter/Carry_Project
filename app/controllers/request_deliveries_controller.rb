@@ -34,11 +34,6 @@ class RequestDeliveriesController < ApplicationController
     else
       @request_delivery = current_user.request_deliveries.build(params[:request_delivery])
       if @request_delivery.save
-        session[:request_delivery_what] = nil
-        session[:request_delivery_from] = nil
-        session[:request_delivery_to] = nil
-        session[:request_delivery_cost] = nil
-        session[:request_delivery_currency] = nil
         flash[:request_post_created] = "Your request was added successfully!<br>
                                                       <div class='sub_flash_text'>There are some missing details though.<br>
                                                       Go to <b style=\"color:#ff9054\">Edit</b> <img src=\"../assets/edit_post_big.png\"> and add them to attract more transporters!</div>".html_safe

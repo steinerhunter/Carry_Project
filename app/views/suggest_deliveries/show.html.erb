@@ -29,7 +29,7 @@
           <% if @suggest_delivery.when.blank? %>
               <% if @suggest_delivery.user == current_user %>
                   <%= render 'shared/missing' %>
-                  <b style="color: #e43f45">Delivery Available On</b><br>Not set yet.
+                  <b style="color: #d67a31">Delivery Available On</b><br>Not set yet.
               <% else  %>
                   <b>Delivery Available On</b><br>Not set yet.
               <% end  %>
@@ -51,7 +51,7 @@
               <% if @suggest_delivery.user == current_user %>
                   <%= render 'shared/missing' %>
               <% end  %>
-              <b style="color: #e43f45">Can deliver items of size</b><br>Not set yet.
+              <b style="color: #d67a31">Can deliver items of size</b><br>Not set yet.
         <% end %>
         </div>
         <% if @suggest_delivery.status == "Complete" %>

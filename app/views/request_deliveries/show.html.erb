@@ -29,7 +29,7 @@
           <% if @request_delivery.when.blank? %>
               <% if @request_delivery.user == current_user %>
                   <%= render 'shared/missing' %>
-                  <b style="color: #e43f45">Delivery Needed By</b><br>Not set yet.
+                  <b style="color: #d67a31">Delivery Needed By</b><br>Not set yet.
                   <% else  %>
                   <b>Delivery Needed By</b><br>Not set yet.
               <% end  %>
@@ -50,7 +50,7 @@
             <div class="the_size">
               <% if @request_delivery.user == current_user %>
                   <%= render 'shared/missing' %>
-                  <b style="color: #e43f45">Delivery Size</b><br>Not set yet.
+                  <b style="color: #d67a31">Delivery Size</b><br>Not set yet.
               <% else %>
                   <b>Delivery Size</b><br>Not set yet.
               <% end  %>
@@ -197,8 +197,8 @@
         <div class="the_sender">
           <% if @request_delivery.sending_person.blank? %>
               <% if @request_delivery.user == current_user %>
-                <%= render 'shared/missing' %>
-                  <b style="color: #e43f45">Sending Person</b><br>Not set yet.
+                <%= render 'shared/missing_other' %>
+                  <b style="color: #d67a31">Sending Person</b><br>Not set yet.
                   <% else  %>
                   <b>Sending Person</b><br>Not set yet.
               <% end  %>
@@ -209,8 +209,8 @@
         <div class="the_receiver">
           <% if @request_delivery.receiving_person.blank? %>
               <% if @request_delivery.user == current_user %>
-                  <%= render 'shared/missing' %>
-                  <b style="color: #e43f45">Receiving Person</b><br>Not set yet.
+                  <%= render 'shared/missing_other' %>
+                  <b style="color: #d67a31">Receiving Person</b><br>Not set yet.
                   <% else  %>
                   <b>Receiving Person</b><br>Not set yet.
               <% end  %>

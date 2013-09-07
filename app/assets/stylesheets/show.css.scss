@@ -204,7 +204,14 @@
 .missing_detail {
   position:absolute;
   right:2px;
-  top: 2px;
+  bottom: 2px;
+  z-index: 13;
+}
+
+.missing_detail_other {
+  position:absolute;
+  right:2px;
+  bottom: 0px;
   z-index: 13;
 }
 

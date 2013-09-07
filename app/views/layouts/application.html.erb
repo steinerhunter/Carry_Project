@@ -16,7 +16,7 @@
   <%= csrf_meta_tags %>
   <%= render 'layouts/shim' %>
 </head>
-<body>
+<%= render 'layouts/background' %>
 <% if  controller.controller_name == 'static_pages' && controller.action_name == 'home' %>
     <div class="wrapper" style="margin-bottom:-6em;">
 <% else  %>

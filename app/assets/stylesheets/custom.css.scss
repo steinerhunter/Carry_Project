@@ -13,6 +13,13 @@ body {
   height:100%;
 }
 
+.body_background_home {
+  background-image: url('back2.jpg');
+  background-size: 100%;
+  background-repeat: no-repeat;
+  background-position: left top;
+}
+
 .wrapper {
   min-height: 100%;
   height: auto !important;
@@ -57,8 +64,8 @@ p {
   height: 310px;
   text-align: center;
   background-color: #1d79e2;
-  -moz-box-shadow: 5px 5px 5px #333333;; /* Old Firefox */
-  box-shadow: 5px 5px 5px #333333;
+  -moz-box-shadow: 5px 5px 5px #6b6b6b; /* Old Firefox */
+  box-shadow: 5px 5px 5px #6b6b6b;
   border:solid 3px;
   border-radius:10px;
   -moz-border-radius:10px; /* Old Firefox */
@@ -73,8 +80,8 @@ p {
   height: 280px;
   text-align: center;
   background-color: #1d79e2;
-  -moz-box-shadow: 5px 5px 5px #333333;; /* Old Firefox */
-  box-shadow: 5px 5px 5px #333333;
+  -moz-box-shadow: 5px 5px 5px #6b6b6b; /* Old Firefox */
+  box-shadow: 5px 5px 5px #6b6b6b;
   border:solid 3px;
   border-radius:10px;
   -moz-border-radius:10px; /* Old Firefox */
@@ -224,7 +231,7 @@ p {
 
 #logo {
   float: left;
-  margin-right: 10px;
+  margin-right: 5px;
   font-size: 1.7em;
   color: #fff;
   letter-spacing: -1px;
@@ -235,6 +242,12 @@ p {
     color: #fff;
     text-decoration: none;
   }
+}
+
+.logo_image {
+  display: inline-block;
+  height:31px;
+  margin-top:-8px;
 }
 
 .go_back {

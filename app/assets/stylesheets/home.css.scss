@@ -49,11 +49,11 @@
   width: 400px;
   height: 200px;
   background-image: url('pass_something.png');
-  background-color: #1d79e2;
+  background-color: #d67a31;
   background-repeat: no-repeat;
   background-position: bottom center;
-  -moz-box-shadow: 5px 5px 5px #333333;; /* Old Firefox */
-  box-shadow: 5px 5px 5px #333333;
+  -moz-box-shadow: 5px 5px 5px #6b6b6b; /* Old Firefox */
+  box-shadow: 5px 5px 5px #6b6b6b;
   border:solid 3px;
   border-radius:10px;
   -moz-border-radius:10px; /* Old Firefox */
@@ -67,16 +67,21 @@
   width: 400px;
   height: 200px;
   background-image: url('send_something.png');
-  background-color: #1d79e2;
+  background-color: #d67a31;
   background-repeat: no-repeat;
   background-position: bottom center;
-  -moz-box-shadow: 5px 5px 5px #333333;; /* Old Firefox */
-  box-shadow: 5px 5px 5px #333333;
+  -moz-box-shadow: 5px 5px 5px #6b6b6b; /* Old Firefox */
+  box-shadow: 5px 5px 5px #6b6b6b;
   border:solid 3px;
   border-radius:10px;
   -moz-border-radius:10px; /* Old Firefox */
   color: #ffffff;
   border-color: #000000;
+}
+
+.left_button:hover, .right_button:hover{
+  background-color: #59ed24;
+  cursor:pointer;
 }
 
 .how_it_works_title {

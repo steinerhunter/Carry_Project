@@ -52,8 +52,8 @@
   background-color: #d67a31;
   background-repeat: no-repeat;
   background-position: bottom center;
-  -moz-box-shadow: 5px 5px 5px #6b6b6b; /* Old Firefox */
-  box-shadow: 5px 5px 5px #6b6b6b;
+  -moz-box-shadow: 3px 3px 3px #3d3d3d; /* Old Firefox */
+  box-shadow: 3px 3px 3px #3d3d3d;
   border:solid 3px;
   border-radius:10px;
   -moz-border-radius:10px; /* Old Firefox */
@@ -70,8 +70,8 @@
   background-color: #d67a31;
   background-repeat: no-repeat;
   background-position: bottom center;
-  -moz-box-shadow: 5px 5px 5px #6b6b6b; /* Old Firefox */
-  box-shadow: 5px 5px 5px #6b6b6b;
+  -moz-box-shadow: 3px 3px 3px #3d3d3d; /* Old Firefox */
+  box-shadow: 3px 3px 3px #3d3d3d;
   border:solid 3px;
   border-radius:10px;
   -moz-border-radius:10px; /* Old Firefox */
@@ -80,7 +80,7 @@
 }
 
 .left_button:hover, .right_button:hover{
-  background-color: #59ed24;
+  background-color: #1d79e2;
   cursor:pointer;
 }
 

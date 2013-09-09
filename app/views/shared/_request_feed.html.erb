@@ -1,3 +1,23 @@
+<div class="search_requests">
+  <div class="search_title">
+    <b>Request Filter</b>
+  </div>
+  <%= form_for @search, :url => requests_path, :html => {:method => :get} do |f| %>
+      <div class="search_fields">
+        <div class="myfield_search">
+          <%= f.label :from_contains, "From:" %>
+          <%= f.text_field :from_contains, :class => "address_field" %>
+        </div>
+        <div class="myfield_search">
+          <%= f.label :to_contains, "To:" %>
+          <%= f.text_field :to_contains, :class => "address_field" %>
+        </div>
+      </div>
+      <div class="search_submit">
+        <%= f.submit :type => :image, :src => "assets/Filter_Requests.png" %>
+      </div>
+  <% end %>
+</div>
 <div class="requestposts">
   <% if @request_feed_items.any? %>
       <%= render partial: 'shared/request_feed_item', collection: @request_feed_items %>

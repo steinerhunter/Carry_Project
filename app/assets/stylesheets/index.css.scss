@@ -1,13 +1,66 @@
 .requestposts {
-  width: 600px;
-  margin-left: auto;
-  margin-right: auto;
+  width: 57%;
+
 }
 
 .suggestposts {
   width: 600px;
   margin-left: auto;
   margin-right: auto;
+}
+
+.search_requests {
+  float:right;
+  width: 33%;
+  background-color: #a3a3a3;
+  -moz-box-shadow: 5px 5px 5px #6b6b6b; /* Old Firefox */
+  box-shadow: 5px 5px 5px #6b6b6b;
+  border:solid 1px;
+  border-radius:6px;
+  -moz-border-radius:6px; /* Old Firefox */
+  color: #ffffff;
+  border-color: #000000;
+}
+
+.search_title {
+  position:relative;
+  text-align: center;
+  height:40px;
+  padding-top:14px;
+  font-size: 2.8em;
+  border-bottom:solid 2px;
+  border-color: #18212e;
+  background-color: #434343;
+  background-repeat: no-repeat;
+  background-position: bottom left;
+  -moz-border-radius: 0px;
+  -webkit-border-radius: 3px 3px 0px 0px;
+  border-radius: 3px 3px 0px 0px;
+}
+
+.search_fields {
+  margin-top:10px;
+}
+
+.myfield_search label, .myfield_search input {
+  display:inline-block;
+}
+
+.myfield_search input {
+  width:210px;
+  border-color: #000000;
+}
+
+.myfield_search label {
+  width:50px;
+  padding-left:10px;
+  margin-right:5px;
+  font-size: 20px;
+}
+
+.search_submit {
+  margin-top:10px;
+  text-align: center;
 }
 
 .feed_item {

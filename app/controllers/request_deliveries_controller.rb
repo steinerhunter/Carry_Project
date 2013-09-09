@@ -46,7 +46,9 @@ class RequestDeliveriesController < ApplicationController
   end
 
   def index
-    @request_feed_items = RequestDelivery.all
+    #@request_feed_items = RequestDelivery.all
+    @search = RequestDelivery.search(params[:search])
+    @request_feed_items = @search.all
   end
 
   def edit

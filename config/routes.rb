@@ -45,6 +45,8 @@ TheCarryProject::Application.routes.draw do
 
   match '/activity', to:'activities#index'
 
+  match '/users/:id/confirm/:email_confirmation_token', to:'users#confirm'
+
   match '/reset_password', to: 'password_resets#new'
 
   match "empty_trash" => "users#empty_trash"

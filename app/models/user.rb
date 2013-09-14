@@ -49,11 +49,21 @@ class User < ActiveRecord::Base
     email
   end
 
+  def send_email_confirmation_request
+    generate_token(:email_confirmation_token)
+    save!(validate: false)
+    NotifMailer.confirmation_email(self).deliver
+  end
+
   def send_password_reset
     generate_token(:password_reset_token)
     self.password_reset_sent_at = Time.zone.now
     save!(validate: false)
     NotifMailer.password_reset(self).deliver
+  end
+
+  def confirm_user
+    self.update_attribute(:email_confirmed,true)
   end
 
   private

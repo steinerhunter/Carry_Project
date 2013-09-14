@@ -38,6 +38,7 @@ class UsersController < ApplicationController
         @suggest_delivery.save
       end
       sign_in @user
+      @user.send_email_confirmation_request
       flash.now[:signup_success] = "Thank you for registering!"
       respond_with(@user, :location => root_path)
     end
@@ -62,6 +63,15 @@ class UsersController < ApplicationController
 
   def index
     @users = User.all
+  end
+
+  def confirm
+    @user = User.find_by_email_confirmation_token!(params[:id])
+    if @user.present?
+      flash[:profile_update] = "You've successfully confirmed your email address!"
+      @user.confirm_user
+    end
+
   end
 
   def empty_trash

@@ -1,20 +1,16 @@
-<div class="search_requests">
+<div class="search_posts">
   <div class="search_title">
-    <b>Request Filter</b>
+    <b>Delivery Requests</b>
   </div>
   <%= form_for @search, :url => requests_path, :html => {:method => :get} do |f| %>
       <div class="search_fields">
         <div class="myfield_search">
           <%= f.label :from_contains, "From:" %>
           <%= f.text_field :from_contains, :class => "address_field" %>
-        </div>
-        <div class="myfield_search">
           <%= f.label :to_contains, "To:" %>
           <%= f.text_field :to_contains, :class => "address_field" %>
+          <%= f.submit :type => :image, :src => "assets/Filter_Requests.png", :id =>"search_button" %>
         </div>
-      </div>
-      <div class="search_submit">
-        <%= f.submit :type => :image, :src => "assets/Filter_Requests.png" %>
       </div>
   <% end %>
 </div>

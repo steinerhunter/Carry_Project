@@ -14,10 +14,9 @@ body {
 }
 
 .body_background_home {
-  background-image: url('back2.jpg');
   background-size: 100%;
   background-repeat: no-repeat;
-  background-position: left top;
+  background-position: center center;
 }
 
 .wrapper {
@@ -27,13 +26,18 @@ body {
   margin: 0 auto 2em;
 }
 
+.top_container {
+  margin-right: auto;
+  margin-left: auto;
+}
+
 .footer {
   background-color: #626262;
   border-top: 1px solid #000000;
 }
 
 .footer, .push {
-  height: 8em;
+  height: 6em;
 }
 
 section {
@@ -227,27 +231,6 @@ p {
   text-align: left;
   font-size: 2.8em;
   margin-bottom: 10px;
-}
-
-#logo {
-  float: left;
-  margin-right: 5px;
-  font-size: 1.7em;
-  color: #fff;
-  letter-spacing: -1px;
-  padding-top: 9px;
-  font-weight: bold;
-  line-height: 1;
-  &:hover {
-    color: #fff;
-    text-decoration: none;
-  }
-}
-
-.logo_image {
-  display: inline-block;
-  height:31px;
-  margin-top:-8px;
 }
 
 .go_back {

@@ -23,7 +23,11 @@
     <div class="wrapper">
 <% end  %>
 <%= render 'layouts/header' %>
-<div class="container">
+<% if  controller.controller_name == 'static_pages' && controller.action_name == 'home' %>
+    <div class="top_container" style="width:100%;">
+<% else  %>
+    <div class="top_container" style="width:950px">
+<% end  %>
   <% flash.each do |key, value| %>
       <div class="alert alert-<%= key %>" id="flash_message">
         <%= value %>

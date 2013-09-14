@@ -28,4 +28,10 @@
              $(".edit_suggest_delivery").mapsAndDate()
          });
      </script>
+ <% elsif controller.controller_name == 'suggest_deliveries' && controller.action_name == 'index' %>
+     <script type="text/javascript">
+         $(document).ready(function(){
+             $("#suggest_delivery_search").mapsAndDate()
+         });
+     </script>
 <% end %>

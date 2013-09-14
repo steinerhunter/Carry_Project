@@ -1,17 +1,13 @@
 .requestposts {
-  width: 57%;
+
 
 }
 
 .suggestposts {
-  width: 600px;
-  margin-left: auto;
-  margin-right: auto;
+
 }
 
-.search_requests {
-  float:right;
-  width: 33%;
+.search_posts {
   background-color: #a3a3a3;
   -moz-box-shadow: 5px 5px 5px #6b6b6b; /* Old Firefox */
   box-shadow: 5px 5px 5px #6b6b6b;
@@ -20,6 +16,7 @@
   -moz-border-radius:6px; /* Old Firefox */
   color: #ffffff;
   border-color: #000000;
+  margin-bottom:30px;
 }
 
 .search_title {
@@ -46,26 +43,28 @@
   display:inline-block;
 }
 
-.myfield_search input {
-  width:210px;
+.myfield_search input[type=text] {
+  width:310px;
   border-color: #000000;
 }
 
+#search_button {
+  padding-bottom: 8px;
+  margin-left:20px;
+}
+
 .myfield_search label {
-  width:50px;
   padding-left:10px;
-  margin-right:5px;
+  margin-right:0px;
   font-size: 20px;
 }
 
-.search_submit {
-  margin-top:10px;
-  text-align: center;
+#request_delivery_search {
+  margin-bottom:0px;
 }
 
 .feed_item {
   position: relative;
-  width: 600px;
   background-color: #1d79e2;
   -moz-box-shadow: 5px 5px 5px #6b6b6b; /* Old Firefox */
   box-shadow: 5px 5px 5px #6b6b6b;
@@ -122,7 +121,7 @@
 
 .feed_item_money {
   text-align: center;
-  width: 380px;
+  width: 715px;
   margin-bottom: 10px;
   margin-left: 10px;
   background-color: #257b2a;
@@ -146,8 +145,9 @@
 }
 
 .feed_from_and_to {
+  display: inline-block;
   text-align: center;
-  width: 330px;
+  width: 290px;
   bottom:0;
   left:0;
   margin-bottom: 10px;
@@ -200,7 +200,7 @@
 .feed_item_map {
   position:absolute;
   right:10px;
-  margin-top:63px;
+  margin-top:13px;
   border:1px solid;
   border-color: #000000;
   z-index: 9;

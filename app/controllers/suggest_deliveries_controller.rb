@@ -45,7 +45,9 @@ class SuggestDeliveriesController < ApplicationController
   end
 
   def index
-    @suggest_feed_items = SuggestDelivery.all
+    #@suggest_feed_items = SuggestDelivery.all
+    @search = SuggestDelivery.search(params[:search])
+    @suggest_feed_items = @search.all
   end
 
   def edit

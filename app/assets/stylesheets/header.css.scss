@@ -44,13 +44,27 @@ header {
   padding-top: 4px;
 }
 
+#logo {
+  float: left;
+  margin-right: 5px;
+  font-size: 1.7em;
+  color: #fff;
+  letter-spacing: -1px;
+  padding-top: 9px;
+  font-weight: bold;
+  line-height: 1;
+  &:hover {
+    color: #fff;
+    text-decoration: none;
+  }
+}
+
 #header_transporters {
   position:relative;
   width:190px;
   margin-left:3px;
   text-align: left;
-  font-size: 1em;
-  font-family: Impact !important;
+  font-size: 0.9em;
   background-image: url('header_car.png');
   border-color: #1d79e2;
   background-repeat: no-repeat;
@@ -79,8 +93,7 @@ header {
   width:160px;
   margin-left:3px;
   text-align: left;
-  font-size: 1em;
-  font-family: Impact !important;
+  font-size: 0.9em;
   background-image: url('header_box.png');
   border-color: #1d79e2;
   background-repeat: no-repeat;
@@ -109,8 +122,7 @@ header {
   width:120px;
   margin-left:3px;
   text-align: left;
-  font-size: 1em;
-  font-family: Impact !important;
+  font-size: 0.9em;
   background-image: url('header_message.png');
   border-color: #1d79e2;
   background-repeat: no-repeat;
@@ -139,8 +151,7 @@ header {
   width:120px;
   margin-left:3px;
   text-align: left;
-  font-size: 1em;
-  font-family: Impact !important;
+  font-size: 0.9em;
   background-image: url('header_message_unread.png');
   border-color: #1d79e2;
   background-repeat: no-repeat;
@@ -169,8 +180,7 @@ header {
   width:110px;
   margin-left:3px;
   text-align: left;
-  font-size: 1em;
-  font-family: Impact !important;
+  font-size: 0.9em;
   background-image: url('header_activity.png');
   border-color: #1d79e2;
   background-repeat: no-repeat;
@@ -199,8 +209,7 @@ header {
   width:110px;
   margin-left:3px;
   text-align: left;
-  font-size: 1em;
-  font-family: Impact !important;
+  font-size: 0.9em;
   background-image: url('header_activity_new.png');
   border-color: #1d79e2;
   background-repeat: no-repeat;
@@ -227,8 +236,7 @@ header {
 #header_user {
   margin-left:13px;
   text-align: left;
-  font-size: 1em;
-  font-family: Impact !important;
+  font-size: 0.9em;
   border-color: #63b4e2;
   background-repeat: no-repeat;
   background-position: bottom left;
@@ -251,11 +259,10 @@ header {
 
 #header_how_it_works {
   position:relative;
-  width:140px;
+  width:150px;
   margin-left:3px;
   text-align: left;
-  font-size: 1em;
-  font-family: Impact !important;
+  font-size: 0.9em;
   background-image: url('header_how_it_works.png');
   border-color: #1d79e2;
   background-repeat: no-repeat;
@@ -284,8 +291,7 @@ header {
   width:110px;
   margin-left:33px;
   text-align: left;
-  font-size: 1em;
-  font-family: Impact !important;
+  font-size: 0.9em;
   background-image: url('header_sign_in.png');
   border-color: #1d79e2;
   background-repeat: no-repeat;
@@ -314,11 +320,10 @@ header {
   width:110px;
   margin-left:3px;
   text-align: left;
-  font-size: 1em;
-  font-family: Impact !important;
+  font-size: 0.9em;
   background-color: #3a9930;
   background-image: url('header_register.png');
-  border-color: #1d79e2;
+  border-color: #434343;
   background-repeat: no-repeat;
   background-position: bottom left;
   -moz-border-radius: 0px;

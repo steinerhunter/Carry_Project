@@ -38,7 +38,7 @@ class UsersController < ApplicationController
         @suggest_delivery.save
       end
       sign_in @user
-      @user.send_email_confirmation_request
+      #@user.send_email_confirmation_request
       flash.now[:signup_success] = "Thank you for registering!"
       respond_with(@user, :location => root_path)
     end

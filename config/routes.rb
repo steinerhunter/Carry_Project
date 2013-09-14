@@ -1,6 +1,6 @@
 TheCarryProject::Application.routes.draw do
   resources :users do
-    member do
+    collection do
       get :confirm
     end
   end

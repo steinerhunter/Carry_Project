@@ -1,5 +1,9 @@
 TheCarryProject::Application.routes.draw do
-  resources :users
+  resources :users do
+    collection do
+      get :confirm
+    end
+  end
   resources :sessions, only: [:new, :create, :destroy]
   resources :request_deliveries, only: [:create, :show, :edit, :update, :destroy] do
     put :accept, on: :member
@@ -44,8 +48,6 @@ TheCarryProject::Application.routes.draw do
   match '/suggestions', to:'suggest_deliveries#index'
 
   match '/activity', to:'activities#index'
-
-  match '/confirm', to:'users#confirm'
 
   match '/reset_password', to: 'password_resets#new'
 

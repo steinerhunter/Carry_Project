@@ -1,9 +1,10 @@
 TheCarryProject::Application.routes.draw do
   resources :users do
-    collection do
+    member do
       get :confirm
     end
   end
+
   resources :sessions, only: [:new, :create, :destroy]
   resources :request_deliveries, only: [:create, :show, :edit, :update, :destroy] do
     put :accept, on: :member

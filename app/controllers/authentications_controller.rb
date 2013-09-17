@@ -13,20 +13,20 @@ class AuthenticationsController < ApplicationController
     authentication = Authentication.find_by_provider_and_uid(omniauth[:provider], omniauth[:uid])
     user = User.find_by_email(omniauth[:info][:email])
     if authentication
-      # a allready registered user logs in with Facebook
-
+      # an already registered user logs in with Facebook
+      msg = "Random message1 for connecting a given account to these Facebook OAuth2 credentials"
       @user = authentication.user
       login_authenticated(msg)
     elsif current_user || user
-      # a allready logged in user connects its account with Facebook
+      # an already logged in user connects its account with Facebook
 
       @user = current_user ? current_user : user
       @user.authentications.create(:provider => omniauth[:provider], :uid => omniauth[:uid])
-      msg = "Random mmessage for connecting a given account to these Facebook OAuth2 credentials"
+      msg = "Random message2 for connecting a given account to these Facebook OAuth2 credentials"
       user ? login_authenticated(msg) : redirect_to_callback(msg)
     else
       # a new user registers with Facebook
-
+      msg = "Random message3 for connecting a given account to these Facebook OAuth2 credentials"
       @user = User.create()
       @user.authentications.create(:provider => omniauth[:provider], :uid => omniauth[:uid])
       login_authenticated(msg)

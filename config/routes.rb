@@ -51,6 +51,13 @@ TheCarryProject::Application.routes.draw do
 
   match "empty_trash" => "users#empty_trash"
 
+  # facebook authentication
+  match '/auth/new' => 'authentications#new'
+  match '/auth/:provider/callback' => 'authentications#create'
+  match "/auth/failure" => "authentications#failure" #OMNIAUTH
+  match "facebook/logout", :to => "authentications#logout", :as => :logout_authentication
+
+
   # The priority is based upon order of creation:
   # first created -> highest priority.
 

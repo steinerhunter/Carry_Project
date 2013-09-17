@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130914210806) do
+ActiveRecord::Schema.define(:version => 20130917111337) do
 
   create_table "accepted_requests", :force => true do |t|
     t.integer  "request_delivery_id"
@@ -34,6 +34,17 @@ ActiveRecord::Schema.define(:version => 20130914210806) do
   add_index "accepted_suggests", ["suggest_delivery_id", "user_id"], :name => "index_accepted_suggests_on_suggest_delivery_id_and_user_id", :unique => true
   add_index "accepted_suggests", ["suggest_delivery_id"], :name => "index_accepted_suggests_on_suggest_delivery_id"
   add_index "accepted_suggests", ["user_id"], :name => "index_accepted_suggests_on_user_id"
+
+  create_table "authentications", :force => true do |t|
+    t.integer  "user_id"
+    t.string   "provider"
+    t.string   "uid"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
+
+  add_index "authentications", ["provider", "uid"], :name => "index_authentications_on_provider_and_uid"
+  add_index "authentications", ["user_id"], :name => "index_authentications_on_user_id"
 
   create_table "comments", :force => true do |t|
     t.text     "content"

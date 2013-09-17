@@ -9,6 +9,8 @@ gem 'coffee-rails', '3.2.2'
 gem 'mailboxer'
 gem 'newrelic_rpm'
 gem 'meta_search'
+gem 'omniauth'
+gem 'omniauth-facebook'
 
 group :development, :test do
   gem 'sqlite3', '1.3.5'

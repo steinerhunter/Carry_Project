@@ -16,6 +16,7 @@ class User < ActiveRecord::Base
   has_many :request_deliveries, dependent: :destroy
   has_many :accepted_requests
   has_many :request_accepts, through: :accepted_requests, source: :request_delivery
+  has_many :authentications
 
   has_many :suggest_deliveries, dependent: :destroy
   has_many :accepted_suggests

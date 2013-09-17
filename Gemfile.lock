@@ -204,7 +204,7 @@ DEPENDENCIES
   meta_search
   newrelic_rpm
   omniauth
-  omniauth-facebook (= 1.4.0)
+  omniauth-facebook
   pg
   rails (= 3.2.13)
   rspec-rails (= 2.11.0)

@@ -10,7 +10,7 @@ gem 'mailboxer'
 gem 'newrelic_rpm'
 gem 'meta_search'
 gem 'omniauth'
-gem 'omniauth-facebook', '1.4.0'
+gem 'omniauth-facebook'
 
 group :development, :test do
   gem 'sqlite3', '1.3.5'

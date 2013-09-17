@@ -152,10 +152,30 @@
         Posted By <b><%= link_to @request_delivery.user.name, @request_delivery.user  %></b>
         <div class="verified_details">
           <div class="verified_item">
+            <% if @request_delivery.user.email_confirmed %>
+                <div class="bubbleInfo">
+                  <%= image_tag("VerifiedEmail.png", :class => "trigger") %>
+                  <div class="popup">
+                    User has <b style="color:#279227">verified</b> his/her Email Address.
+                    <div id="tail1" style="left:47px;"></div>
+                    <div id="tail2" style="left:47px;"></div>
+                  </div>
+            <% else %>
+                <div class="bubbleInfo">
+                  <%= image_tag("NonVerifiedEmail.png", :class => "trigger") %>
+                  <div class="popup">
+                    User has <b style="color: #d67a31">not verified</b> his/her Email Address.
+                    <div id="tail1" style="left:47px;"></div>
+                    <div id="tail2" style="left:47px;"></div>
+                  </div>
+            <% end  %>
+            </div>
+          </div>
+          <div class="verified_item">
             <div class="bubbleInfo">
-              <%= image_tag("VerifiedEmail.png", :class => "trigger") %>
+              <%= image_tag("NonVerifiedPhone.png", :class => "trigger")%>
               <div class="popup">
-                <b><%=@request_delivery.user.name %></b> has verified his/her Email Address.
+                User has <b style="color: #d67a31">not verified</b> his/her Phone Number.
                 <div id="tail1" style="left:47px;"></div>
                 <div id="tail2" style="left:47px;"></div>
               </div>
@@ -163,9 +183,9 @@
           </div>
           <div class="verified_item">
             <div class="bubbleInfo">
-              <%= image_tag("VerifiedPhone.png", :class => "trigger")%>
+              <%= image_tag("NonVerifiedFB.png", :class => "trigger")%>
               <div class="popup">
-                <b><%=@request_delivery.user.name %></b> has verified his/her Phone Number.
+                User has <b style="color: #d67a31">not verified</b> his/her Facebook Account.
                 <div id="tail1" style="left:47px;"></div>
                 <div id="tail2" style="left:47px;"></div>
               </div>
@@ -173,19 +193,9 @@
           </div>
           <div class="verified_item">
             <div class="bubbleInfo">
-              <%= image_tag("VerifiedPaypal.png", :class => "trigger")%>
+            <%= image_tag("NonVerifiedPhoto.png", :class => "trigger")%>
               <div class="popup">
-                <b><%=@request_delivery.user.name %></b> has verified his/her Paypal account.
-                <div id="tail1" style="left:47px;"></div>
-                <div id="tail2" style="left:47px;"></div>
-              </div>
-            </div>
-          </div>
-          <div class="verified_item">
-            <div class="bubbleInfo">
-            <%= image_tag("VerifiedPhoto.png", :class => "trigger")%>
-              <div class="popup">
-                <b><%=@request_delivery.user.name %></b> has uploaded a profile picture.
+                User has <b style="color: #d67a31">not uploaded</b> a Profile Picture.
                 <div id="tail1" style="left:47px;"></div>
                 <div id="tail2" style="left:47px;"></div>
               </div>

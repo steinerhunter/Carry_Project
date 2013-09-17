@@ -1,4 +1,4 @@
-class AuthenticationsController < BaseController
+class AuthenticationsController < ApplicationController
   # skip_before_filter that save your application by logout
 
   layout :nil

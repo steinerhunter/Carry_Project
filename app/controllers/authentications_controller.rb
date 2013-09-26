@@ -19,9 +19,10 @@ class AuthenticationsController < ApplicationController
       login_authenticated(msg)
     elsif current_user || user
       # an already logged in user connects its account with Facebook
-
       @user = current_user ? current_user : user
       @user.authentications.create(:provider => omniauth[:provider], :uid => omniauth[:uid])
+      @user.image = omniauth[:info][:image]
+      @user.save
       msg = "Random message2 for connecting a given account to these Facebook OAuth2 credentials"
       user ? login_authenticated(msg) : redirect_to_callback(msg)
     else
@@ -29,6 +30,8 @@ class AuthenticationsController < ApplicationController
       msg = "Random message3 for connecting a given account to these Facebook OAuth2 credentials"
       @user = User.create()
       @user.authentications.create(:provider => omniauth[:provider], :uid => omniauth[:uid])
+      @user.image = omniauth[:info][:image]
+      @user.save
       login_authenticated(msg)
     end
   end

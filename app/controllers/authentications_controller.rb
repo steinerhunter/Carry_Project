@@ -10,7 +10,6 @@ class AuthenticationsController < ApplicationController
 
   def create
     omniauth = request.env["omniauth.auth"]
-    render :text => omniauth.inspect
     authentication = Authentication.find_by_provider_and_uid(omniauth[:provider], omniauth[:uid])
     user = User.find_by_email(omniauth[:info][:email])
     if authentication
@@ -31,6 +30,11 @@ class AuthenticationsController < ApplicationController
       @user.authentications.create(:provider => omniauth[:provider], :uid => omniauth[:uid], :image => omniauth[:info][:image] )
       login_authenticated(msg)
     end
+  end
+
+  def show_omniauth
+    omniauth = request.env["omniauth.auth"]
+    render :text => omniauth.inspect
   end
 
   def failure

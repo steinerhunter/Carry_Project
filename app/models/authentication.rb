@@ -18,6 +18,6 @@ class Authentication < ActiveRecord::Base
   #
   #
 
-  attr_accessible :provider, :uid
+  attr_accessible :provider, :uid, :image
 
 end

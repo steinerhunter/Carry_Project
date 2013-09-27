@@ -52,6 +52,7 @@ TheCarryProject::Application.routes.draw do
   match "empty_trash" => "users#empty_trash"
 
   # facebook authentication
+  match '/auth/show' => 'authentications#show_omniauth'
   match '/auth/new' => 'authentications#new'
   match '/auth/:provider/callback' => 'authentications#create'
   match "/auth/failure" => "authentications#failure" #OMNIAUTH

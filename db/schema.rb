@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130927151517) do
+ActiveRecord::Schema.define(:version => 20130927152406) do
 
   create_table "accepted_requests", :force => true do |t|
     t.integer  "request_delivery_id"
@@ -39,9 +39,10 @@ ActiveRecord::Schema.define(:version => 20130927151517) do
     t.integer  "user_id"
     t.string   "provider"
     t.string   "uid"
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
+    t.datetime "created_at",                    :null => false
+    t.datetime "updated_at",                    :null => false
     t.string   "image"
+    t.boolean  "verified",   :default => false
   end
 
   add_index "authentications", ["provider", "uid"], :name => "index_authentications_on_provider_and_uid"

@@ -10,6 +10,7 @@ class AuthenticationsController < ApplicationController
 
   def create
     omniauth = request.env["omniauth.auth"]
+    render :text => auth_hash.inspect
     authentication = Authentication.find_by_provider_and_uid(omniauth[:provider], omniauth[:uid])
     user = User.find_by_email(omniauth[:info][:email])
     if authentication

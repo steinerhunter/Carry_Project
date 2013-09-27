@@ -24,8 +24,8 @@ module UsersHelper
 
   def facebook_profile_photo(type)
     if type == "chat"
-      photo_url = current_user.authentications.image.split("?")[0] << "?width=50&height=50"
-      image_tag(photo_url, alt: user.name, class:"header_gravatar")
+      photo_url = current_user.authentications.where("provider = ?","facebook").image.split("?")[0] << "?width=50&height=50"
+      image_tag(photo_url, alt: current_user.name, class:"header_gravatar")
     end
   end
 

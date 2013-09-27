@@ -19,7 +19,7 @@ module UsersHelper
   end
 
   def facebook_authorization(user)
-    put user.authentications.where("provider = ?","facebook").where("verified = ?",true)
+    user.authentications.where("provider = ?","facebook").where("verified = ?",true).present?
   end
 
   def facebook_profile_photo(type)

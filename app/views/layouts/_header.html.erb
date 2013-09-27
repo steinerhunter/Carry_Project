@@ -13,7 +13,7 @@
                   <li id="header_messages"><%= link_to "Messages", conversations_path %></li>
               <% end  %>
               <li id="header_activity"><%= link_to "Activity", activity_path %></li>
-              <% if current_user.authentications.verified == true  %>
+              <% if facebook_authorization(current_user)  %>
                   <li id="header_user"><%= link_to facebook_profile_photo("chat")+current_user.name, current_user  %></li>
               <% else  %>
                   <li id="header_user"><%= link_to header_gravatar_for(current_user)+current_user.name, current_user  %></li>

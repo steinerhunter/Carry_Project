@@ -9,7 +9,6 @@ class AuthenticationsController < ApplicationController
   end
 
   def create
-    raise request.env["omniauth.auth"].to_yaml
     omniauth = request.env["omniauth.auth"]
     authentication = Authentication.find_by_provider_and_uid(omniauth[:provider], omniauth[:uid])
     user = User.find_by_email(omniauth[:info][:email])

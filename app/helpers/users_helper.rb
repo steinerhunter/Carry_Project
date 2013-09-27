@@ -23,8 +23,9 @@ module UsersHelper
   end
 
   def facebook_profile_photo(type)
-    if type == "chat"
-      photo_url = current_user.authentications.where("provider = ?","facebook").image.split("?")[0] << "?width=50&height=50"
+    photo_url = current_user.authentications.where(:provider => "facebook").where(:verified => true).pluck(:image)
+    if type == "header"
+      photo_url.to_s.split("?")[0] << "?width=30&height=30"
       image_tag(photo_url, alt: current_user.name, class:"header_gravatar")
     end
   end

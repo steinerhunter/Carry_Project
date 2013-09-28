@@ -1,7 +1,11 @@
 <div class="comments_data">
   <div class="comment_item" style="text-align: left;">
     <div class="chat_gravatar" style="float:left; width:50px; text-align: center;">
-      <%=  link_to chat_gravatar_for(@commentable.user), @commentable.user  %><br>
+      <% if facebook_authorization(@commentable.user)  %>
+          <%= link_to facebook_profile_photo(@commentable.user,"chat"), @commentable.user %>
+      <% else  %>
+          <%=  link_to chat_gravatar_for(@commentable.user), @commentable.user  %><br>
+      <% end  %>
       <div class="gravatar_user_name">
         <%= link_to @commentable.user.name, @commentable.user %>
       </div>

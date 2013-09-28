@@ -148,7 +148,7 @@
     </div>
     <div class="the_size_and_more_info">
       <div class="posted_by">
-        <% if facebook_authorization(current_user)  %>
+        <% if facebook_authorization(@request_delivery.user)  %>
             <%= link_to facebook_profile_photo(@request_delivery.user,"profile"), @request_delivery.user %>
         <% else  %>
             <%=  link_to gravatar_for(@request_delivery.user), @request_delivery.user  %>

@@ -14,7 +14,7 @@ class SessionsController < ApplicationController
 
   def create
     user = User.find_by_email(params[:session][:email].downcase)
-    @session = user && user.authenticate(params[:session][:password]) && !user.only_facebook
+    @session = user && user.authenticate(params[:session][:password]) && (user.only_facebook == false)
     if @session
       if session[:request_delivery_what].present?
         @request_delivery = RequestDelivery.new

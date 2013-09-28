@@ -17,6 +17,7 @@ class UsersController < ApplicationController
 
   def create
     @user = User.new(params[:user])
+    @user.only_facebook = false
     if @user.save
       if session[:request_delivery_what].present?
         @request_delivery = RequestDelivery.new

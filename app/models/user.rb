@@ -10,7 +10,7 @@
 #
 
 class User < ActiveRecord::Base
-  attr_accessible :name, :email, :password, :password_confirmation
+  attr_accessible :name, :email, :password, :password_confirmation, :only_facebook
   has_secure_password
   acts_as_messageable
   has_many :request_deliveries, dependent: :destroy

@@ -42,6 +42,7 @@ class AuthenticationsController < ApplicationController
   end
 
   def logout
+    sign_out
     reset_session
     redirect_to_callback("Some logout message", params[:callback])
   end

@@ -14,7 +14,7 @@
               <% end  %>
               <li id="header_activity"><%= link_to "Activity", activity_path %></li>
               <% if facebook_authorization(current_user)  %>
-                  <li id="header_user"><%= link_to facebook_profile_photo("small")+current_user.name, current_user  %></li>
+                  <li id="header_user"><%= link_to facebook_profile_photo("header")+current_user.name, current_user  %></li>
               <% else  %>
                   <li id="header_user"><%= link_to header_gravatar_for(current_user)+current_user.name, current_user  %></li>
               <% end  %>

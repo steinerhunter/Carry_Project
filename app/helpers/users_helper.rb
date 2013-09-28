@@ -22,14 +22,17 @@ module UsersHelper
     user.authentications.where("provider = ?","facebook").where("verified = ?",true).present?
   end
 
-  def facebook_profile_photo(type)
-    photo_url = current_user.authentications.where(:provider => "facebook").where(:verified => true).pluck(:image)
+  def facebook_profile_photo(user,type)
+    photo_url = user.authentications.where(:provider => "facebook").where(:verified => true).pluck(:image)
     if type == "header"
       split_photo_url = photo_url[0].split("?")[0] << "?width=20&height=20"
-      image_tag(split_photo_url, alt: current_user.name, class:"header_gravatar")
+      image_tag(split_photo_url, alt: current_user.name, class:"header_facebook_image")
+    elsif type == "chat"
+      split_photo_url = photo_url[0].split("?")[0] << "?width=50&height=50"
+      image_tag(split_photo_url, alt: current_user.name, class:"chat_facebook_image")
     elsif type == "profile"
       split_photo_url = photo_url[0].split("?")[0] << "?width=100&height=100"
-      image_tag(split_photo_url, alt: current_user.name, class:"header_gravatar")
+      image_tag(split_photo_url, alt: current_user.name, class:"profile_facebook_image")
     end
   end
 

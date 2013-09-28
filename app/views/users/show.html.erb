@@ -3,7 +3,7 @@
     <section>
       <h1>
         <% if facebook_authorization(current_user)  %>
-            <%= facebook_profile_photo("profile") %>
+            <%= facebook_profile_photo(current_user,"profile") %>
         <% else  %>
             <%= gravatar_for @user %>
         <% end  %>

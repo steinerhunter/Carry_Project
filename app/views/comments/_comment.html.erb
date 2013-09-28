@@ -1,7 +1,11 @@
 <% if comment.user == @commentable.user %>
     <div class="comment_item" style="text-align: left; margin-top:15px; margin-bottom: 15px;" id=<%= dom_id(comment) %>>
       <div class="chat_gravatar" style="float:left; width:50px; text-align: center;">
-        <%=  link_to chat_gravatar_for(comment.user), comment.user  %>
+        <% if facebook_authorization(comment.user)  %>
+            <%= link_to facebook_profile_photo(comment.user,"chat"), comment.user %>
+        <% else  %>
+            <%=  link_to chat_gravatar_for(comment.user), comment.user  %>
+        <% end  %>
         <div class="gravatar_user_name">
           <%= link_to comment.user.name, comment.user %>
         </div>
@@ -24,7 +28,11 @@
     <% if current_user == comment.user || current_user == @commentable.user %>
         <div class="comment_item" style="text-align: right;" id=<%= dom_id(comment) %>>
           <div class="chat_gravatar" style="float:right; width:50px; text-align: center;">
-            <%=  link_to chat_gravatar_for(comment.user), comment.user  %>
+            <% if facebook_authorization(comment.user)  %>
+                <%= link_to facebook_profile_photo(comment.user,"chat"), comment.user %>
+            <% else  %>
+                <%=  link_to chat_gravatar_for(comment.user), comment.user  %>
+            <% end  %>
             <div class="gravatar_user_name">
               <%= link_to comment.user.name, comment.user %>
             </div>

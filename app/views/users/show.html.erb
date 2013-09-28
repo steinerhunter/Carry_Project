@@ -2,7 +2,11 @@
   <aside class="span4">
     <section>
       <h1>
-        <%= gravatar_for @user %>
+        <% if facebook_authorization(current_user)  %>
+            <%= facebook_profile_photo("profile") %>
+        <% else  %>
+            <%= gravatar_for @user %>
+        <% end  %>
         <%= @user.name  %>
         <% if @user == current_user  %>
             <%= link_to "Sign out", signout_path, method: "delete"  %>

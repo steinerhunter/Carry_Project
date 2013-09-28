@@ -29,6 +29,7 @@ class AuthenticationsController < ApplicationController
       @user = User.new(:name => "SomeName", :email => omniauth['info']['email'])
       @user.save(:validate => false)
       @user.authentications.create(:provider => omniauth[:provider], :uid => omniauth[:uid], :image => omniauth['info']['image'], :verified => omniauth['info']['verified'] )
+      sign_in @user
       login_authenticated(msg)
     end
   end

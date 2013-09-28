@@ -26,7 +26,8 @@ class AuthenticationsController < ApplicationController
     else
       # a new user registers with Facebook
       msg = "Random message3 for connecting a given account to these Facebook OAuth2 credentials"
-      @user = User.create(:name => "SomeName", :email => omniauth['info']['email'])
+      @user = User.new(:name => "SomeName", :email => omniauth['info']['email'])
+      @user.save(:validate => false)
       @user.authentications.create(:provider => omniauth[:provider], :uid => omniauth[:uid], :image => omniauth['info']['image'], :verified => omniauth['info']['verified'] )
       login_authenticated(msg)
     end

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130928145729) do
+ActiveRecord::Schema.define(:version => 20130929200512) do
 
   create_table "accepted_requests", :force => true do |t|
     t.integer  "request_delivery_id"
@@ -159,6 +159,7 @@ ActiveRecord::Schema.define(:version => 20130928145729) do
     t.string   "email_confirmation_token"
     t.boolean  "email_confirmed",          :default => false
     t.boolean  "only_facebook"
+    t.string   "phone"
   end
 
   add_index "users", ["email"], :name => "index_users_on_email", :unique => true

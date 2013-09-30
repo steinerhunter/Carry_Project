@@ -1,18 +1,158 @@
-<div class="row">
-  <aside class="span4">
-    <section>
-      <h1>
-        <% if facebook_authorization(current_user)  %>
-            <%= facebook_profile_photo(current_user,"profile") %>
-        <% else  %>
-            <%= gravatar_for @user %>
-        <% end  %>
-        <%= @user.name  %>
+<div class="show_profile">
+  <div class="right_side">
+    <% if @user == current_user  %>
+        <div class="right_box" style="margin-bottom: 15px;">
+          <div class="right_box_title">
+            <b>Control Panel</b>
+          </div>
+          <div class="right_box_data">
+            <div class="control_panel_item"  style="background-image: url('../assets/edit_post.png');">
+              <%= link_to "Edit Profile", edit_user_path(current_user)  %>
+            </div>
+            <div class="control_panel_item"  style="background-image: url('../assets/sign_out.png');">
+              <% if facebook_authorization(current_user)  %>
+                  <%= link_to "Sign Out", logout_authentication_path %>
+              <% else  %>
+                  <%= link_to "Sign Out", signout_path, method: "delete"  %>
+              <% end  %>
+            </div>
+          </div>
+        </div>
+    <% end  %>
+    <div class="right_box">
+      <div class="right_box_title">
+        <b>Earned Badges</b>
+      </div>
+      <div class="right_box_data" style="line-height: 100%;">
         <% if @user == current_user  %>
-            <%= link_to "Sign out", signout_path, method: "delete"  %>
-         <% end  %>
-      </h1>
-    </section>
-  </aside>
+        You haven't
+        <% else  %>
+        User hasn't
+        <% end  %>
+        earned any badges yet.
+      </div>
+    </div>
+  </div>
+</div>
+<div class="show_profile_data">
+  <div class="show_profile_title">
+    <b style="padding-left:20px;"><%= @user.name %></b>
+  </div>
+  <div class="profile_pic">
+    <% if facebook_authorization(@user)  %>
+        <%= facebook_profile_photo(@user,"profile") %>
+    <% else  %>
+        <%= gravatar_for @user %>
+    <% end  %>
+  </div>
+  <div class="profile_verified">
+    <div class="profile_verified_image">
+      <%= image_tag("profile_email_verified.png") %>
+    </div>
+    <div class="profile_verified_item">
+      <% if @user == current_user  %>
+          <%= @user.email %>
+      <% else  %>
+          User's Email Address
+      <% end  %>
+    </div>
+    <div class="profile_verified_action">
+      <% if @user.email_confirmed %>
+          <div class="bubbleInfo">
+            <%= image_tag("profile_item_verified.png", class: "trigger") %>
+            <div class="popup" style="height:20px; width:220px; margin-top:57px;">
+              <% if @user == current_user  %>
+                  Your
+              <% else  %>
+                  User's
+              <% end  %>
+              Email Address is <b style="color:#279227">verified</b>!
+              <div id="tail1" style="left:71px"></div>
+              <div id="tail2" style="left:71px"></div>
+            </div>
+          </div>
+      <% else  %>
+          <% if @user == current_user  %>
+              <%= link_to image_tag("verify_now.png"), verify_path(:id => current_user.id) %>
+          <% else  %>
+              <div class="bubbleInfo">
+                <%= image_tag("profile_item_not_verified.png", class: "trigger") %>
+                <div class="popup" style="height:20px; width:260px; margin-top:57px;">
+                  User hasn't verified Email Address yet.
+                  <div id="tail1" style="left:71px"></div>
+                  <div id="tail2" style="left:71px"></div>
+                </div>
+              </div>
+          <% end  %>
+      <% end  %>
+    </div>
+  </div>
+  <div class="profile_verified">
+    <div class="profile_verified_image">
+      <%= image_tag("profile_facebook_verified.png") %>
+    </div>
+    <div class="profile_verified_item">
+      <% if @user == current_user  %>
+      Your
+      <% else  %>
+      User's
+      <% end  %>
+      Facebook Account
+    </div>
+    <div class="profile_verified_action">
+      <% if facebook_authorization(@user)  %>
+          <div class="bubbleInfo">
+            <%= image_tag("profile_item_verified.png", class: "trigger") %>
+            <div class="popup" style="height:20px; width:245px; margin-top:57px;">
+              <% if @user == current_user  %>
+                  Your
+              <% else  %>
+                  User's
+              <% end  %>
+              Facebook Account is <b style="color:#279227">verified</b>!
+              <div id="tail1" style="left:71px"></div>
+              <div id="tail2" style="left:71px"></div>
+            </div>
+          </div>
+      <% else  %>
+          <% if @user == current_user  %>
+              <%= link_to image_tag("verify_now.png"), "/auth/facebook" %>
+          <% else  %>
+              <div class="bubbleInfo">
+                <%= image_tag("profile_item_not_verified.png", class: "trigger") %>
+                <div class="popup" style="height:20px; width:290px; margin-top:57px;">
+                  User hasn't verified Facebook Account yet.
+                  <div id="tail1" style="left:71px"></div>
+                  <div id="tail2" style="left:71px"></div>
+                </div>
+              </div>
+          <% end  %>
+      <% end  %>
+    </div>
+  </div>
+  <div class="profile_verified">
+    <div class="profile_verified_image">
+      <%= image_tag("profile_phone_verified.png") %>
+    </div>
+    <div class="profile_verified_item">
+      <% if current_user.phone.blank? %>
+        Your Mobile Phone Number
+      <% end %>
+    </div>
+    <div class="profile_verified_action">
+      <% if @user == current_user  %>
+          <%= image_tag("add_now.png") %>
+      <% else  %>
+          <div class="bubbleInfo">
+            <%= image_tag("profile_item_not_verified.png", class: "trigger") %>
+            <div class="popup" style="height:20px; width:320px; margin-top:57px;">
+              User hasn't verified Mobile Phone Number yet.
+              <div id="tail1" style="left:71px"></div>
+              <div id="tail2" style="left:71px"></div>
+            </div>
+          </div>
+      <% end  %>
+    </div>
+  </div>
 </div>
 

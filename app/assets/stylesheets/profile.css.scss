@@ -1,0 +1,128 @@
+.profile_name {
+  font-size:30px;
+}
+
+.profile_pic {
+  padding:5px;
+}
+
+.show_profile_data {
+  width: 67%;
+  background-color: #1d79e2;
+  -moz-box-shadow: 5px 5px 5px #6b6b6b; /* Old Firefox */
+  box-shadow: 5px 5px 5px #6b6b6b;
+  border:solid 3px;
+  border-radius:10px;
+  -moz-border-radius:10px; /* Old Firefox */
+  color: #ffffff;
+  border-color: #000000;
+}
+
+.show_profile_title {
+  position:relative;
+  text-align: left;
+  height:40px;
+  padding-top:14px;
+  font-size: 2.8em;
+  border-bottom:solid 2px;
+  border-color: #18212e;
+  background-color:#00008b;
+  background-repeat: no-repeat;
+  background-position: bottom left;
+  -moz-border-radius: 0px;
+  -webkit-border-radius: 3px 3px 0px 0px;
+  border-radius: 3px 3px 0px 0px;
+  a {
+    color: #f2ff5e;
+    text-decoration: none;
+    &:hover {
+      color: #cccccc;
+    }
+  }
+}
+
+.right_box {
+  width: 75%;
+  float:right;
+  background-color: #1d79e2;
+  -moz-box-shadow: 5px 5px 5px #6b6b6b; /* Old Firefox */
+  box-shadow: 5px 5px 5px #6b6b6b;
+  border:solid 3px;
+  border-radius:10px;
+  -moz-border-radius:10px; /* Old Firefox */
+  color: #ffffff;
+  border-color: #000000;
+}
+
+.right_box_title {
+  padding-top:5px;
+  padding-bottom: 6px;
+  line-height: 20px;
+  font-size: 1.4em;
+  border-bottom:solid 2px;
+  border-color: #18212e;
+  background-color:#00008b;
+  background-repeat: no-repeat;
+  background-position: top left;
+  -moz-border-radius: 0px;
+  -webkit-border-radius: 3px 3px 0px 0px;
+  border-radius: 3px 3px 0px 0px;
+  b {
+    padding-left: 20px;
+  }
+}
+
+.right_box_data {
+  position:relative;
+  text-align: center;
+  margin: 10px;
+  font-size: 2em;
+}
+
+.control_panel_item {
+  position:relative;
+  display: inline-block;
+  width: 250px;
+  font-size:18px;
+  margin-top: 10px;
+  text-align: center;
+  background-color: #10529b;
+  background-repeat: no-repeat;
+  background-position: bottom left;
+  border:1px solid;
+  border-radius:4px;
+  -moz-border-radius:10px; /* Old Firefox */
+  padding: 5px;
+  color: #ffffff;
+  border-color: #000000;
+  a {
+    color: #ffffff;
+    text-decoration: none;
+    &:hover {
+      color: #f2ff5e;
+    }
+  }
+}
+
+.profile_verified {
+  padding:5px;
+
+}
+
+.profile_verified_image {
+  display: inline-block;
+  width:40px;
+  text-align: center;
+}
+
+.profile_verified_item {
+  display: inline-block;
+  width:300px;
+  font-size: 20px;
+}
+
+.profile_verified_action {
+  display: inline-block;
+  width:100px;
+  text-align: center;
+}

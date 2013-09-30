@@ -45,6 +45,7 @@ TheCarryProject::Application.routes.draw do
 
   match '/activity', to:'activities#index'
 
+  match '/verify', to: 'users#verify'
   match '/confirm/:token', to: 'confirmations#confirm', as: 'confirm'
 
   match '/reset_password', to: 'password_resets#new'

@@ -45,6 +45,11 @@ class UsersController < ApplicationController
     end
   end
 
+  def verify
+    @user = User.find_by_id(params[:id])
+    @user.send_email_confirmation_request
+  end
+
   def destroy
     User.find(params[:id]).destroy
     flash[:success] = "You've successfully deleted your account."
@@ -77,7 +82,7 @@ class UsersController < ApplicationController
 
     def correct_user
       @user = User.find(params[:id])
-      redirect_to :back unless current_user?(@user)
+      redirect_to :back unless current_user?(@user) && !current_user.only_facebook
     end
 
     def admin_user

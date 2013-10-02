@@ -48,6 +48,7 @@ class UsersController < ApplicationController
   def verify
     @user = User.find(params[:id])
     @user.send_email_confirmation_request_no_token
+    flash[:confirm_email] = "<div class='thank_you_text'>Thank you!</div> <br> We've sent a confirmation Email to: <br> <b>#{@user.email}</b>".html_safe
     redirect_to :back
   end
 
@@ -62,10 +63,10 @@ class UsersController < ApplicationController
 
   def update
        if @user.update_attributes( params[:user])
-         flash[:profile_update] = "Your Profile was successfully updated!"
-      sign_in @user
-      respond_with(@user, :location => user_path(@user))
-    end
+        flash[:profile_update] = "Your Profile was successfully updated!"
+        sign_in @user
+        respond_with(@user, :location => user_path(@user))
+      end
   end
 
   def index

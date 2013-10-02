@@ -46,8 +46,8 @@ class UsersController < ApplicationController
   end
 
   def verify
-    @user = User.find_by_id(params[:id])
-    @user.send_email_confirmation_request
+    @user = User.find(params[:id])
+    @user.send_email_confirmation_request_no_token
   end
 
   def destroy

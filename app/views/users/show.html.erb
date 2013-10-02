@@ -73,7 +73,8 @@
           </div>
       <% else  %>
           <% if @user == current_user  %>
-              <%= link_to image_tag("verify_now.png"), verify_url(@user.id) %>
+              <%= link_to image_tag("verify_now.png"), { :controller => "users", :action => "verify", :id => @user.id}
+ %>
           <% else  %>
               <div class="bubbleInfo">
                 <%= image_tag("profile_item_not_verified.png", class: "trigger") %>

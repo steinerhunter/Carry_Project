@@ -48,6 +48,7 @@ class UsersController < ApplicationController
   def verify
     @user = User.find(params[:id])
     @user.send_email_confirmation_request_no_token
+    redirect_to :back
   end
 
   def destroy

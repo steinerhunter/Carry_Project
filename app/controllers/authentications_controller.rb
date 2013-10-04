@@ -26,6 +26,7 @@ class AuthenticationsController < ApplicationController
       @user = current_user ? current_user : user
       @user.authentications.create(:provider => omniauth[:provider], :uid => omniauth[:uid], :image => omniauth['info']['image'], :verified => omniauth['info']['verified'] )
       msg = "Random message2 for connecting a given account to these Facebook OAuth2 credentials"
+      flash[:profile_update] = "You've successfully confirmed your Facebook account!"
       user ? login_authenticated(msg) : redirect_to_callback(msg)
     else
       # a new user registers with Facebook

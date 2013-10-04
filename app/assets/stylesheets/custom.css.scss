@@ -65,7 +65,7 @@ p {
 
 .signup_form_class {
   width: 700px;
-  height: 310px;
+  height: 350px;
   text-align: center;
   background-color: #1d79e2;
   -moz-box-shadow: 5px 5px 5px #6b6b6b; /* Old Firefox */
@@ -77,11 +77,12 @@ p {
   border-color: #18212e;
   margin-right: auto;
   margin-left: auto;
+  padding-bottom: 20px;
 }
 
 .signin_form_class {
   width: 600px;
-  height: 280px;
+  height: 340px;
   text-align: center;
   background-color: #1d79e2;
   -moz-box-shadow: 5px 5px 5px #6b6b6b; /* Old Firefox */
@@ -318,54 +319,25 @@ textarea {
   box-sizing: border-box;
 }
 
-/* miscellaneous */
-
-.debug_dump {
-  clear: both;
-  float: left;
-  width: 100%;
-  margin-top: 45px;
-  @include box_sizing;
-}
-
-/* sidebar */
-
-aside {
-  section {
-    padding: 10px 0;
-    border-top: 1px solid $grayLighter;
-    &:first-child {
-      border: 0;
-      padding-top: 0;
-    }
-    span {
-      display: block;
-      margin-bottom: 3px;
-      line-height: 1;
-    }
-  }
-}
-
-/* forms */
-
-input, textarea, select, .uneditable-input {
-  @include box_sizing;
-}
-
-input {
-  height: auto !important;
-}
-
-/* users index */
-
-.users {
-  list-style: none;
-  margin: 0;
-  li {
-    overflow: auto;
-    border-top: 1px solid $grayLighter;
-    &:last-child {
-      border-bottom: 1px solid $grayLighter;
-    }
-  }
+.signup_using_facebook {
+  cursor:pointer;
+  width: 220px;
+  text-align: right;
+  background-image: url('SignUpWithFacebook.png');
+  background-color: #19264f;
+  background-repeat: no-repeat;
+  background-position: middle left;
+  border:solid 1px;
+  border-radius:5px;
+  -moz-border-radius:3px; /* Old Firefox */
+  color: #ffffff;
+  border-color: #000000;
+  padding-top:10px;
+  padding-bottom:10px;
+  padding-left: 10px;
+  padding-right: 10px;
+  margin-top:10px;
+  margin-right: auto;
+  margin-left: auto;
+  font-size: 1.3em;
 }

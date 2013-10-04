@@ -14,6 +14,7 @@ class AuthenticationsController < ApplicationController
     user = User.find_by_email(omniauth[:info][:email])
     if authentication
       # an already registered user logs in with Facebook
+
       msg = "Random message1 for connecting a given account to these Facebook OAuth2 credentials"
       @user = authentication.user
       if current_user.nil?

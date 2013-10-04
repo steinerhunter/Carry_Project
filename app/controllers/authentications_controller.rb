@@ -56,7 +56,7 @@ class AuthenticationsController < ApplicationController
   end
 
   def redirect_to_callback(msg, callback = request.env['omniauth.params']['callback'])
-    redirect_to (callback.present? ? callback.to_s.force_encoding('utf-8') : root_path), :notice => msg
+    redirect_to (callback.present? ? callback.to_s.force_encoding('utf-8') : root_path)
   end
 
 end

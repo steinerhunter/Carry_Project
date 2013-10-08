@@ -58,6 +58,8 @@ TheCarryProject::Application.routes.draw do
   match "/auth/failure" => "authentications#failure" #OMNIAUTH
   match "facebook/logout", :to => "authentications#logout", :as => :logout_authentication
 
+  match 'payments/pay', :to => "payments#pay"
+
 
   # The priority is based upon order of creation:
   # first created -> highest priority.

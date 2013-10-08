@@ -29,13 +29,7 @@ class Payment
 
     # Access Response
     if @pay_response.success?
-      @pay_response.payKey
-      @pay_response.paymentExecStatus
-      @pay_response.payErrorList
-      @pay_response.paymentInfoList
-      @pay_response.sender
-      @pay_response.defaultFundingPlan
-      @pay_response.warningDataList
+      @pay_response
     else
       @pay_response.error
     end

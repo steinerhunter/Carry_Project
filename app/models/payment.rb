@@ -9,21 +9,21 @@ class Payment
     pay = @api.build_pay({
                              :actionType => "PAY",
                              :cancelUrl => "http://sendwithme.herokuapp.com",
-                             :currencyCode => "EUR",
+                             :currencyCode => "USD",
                              :feesPayer => "SENDER",
                              :ipnNotificationUrl => "https://paypal-sdk-samples.herokuapp.com/adaptive_payments/ipn_notify",
                              :receiverList => {
                                  :receiver => [{
-                                                   :amount => 25.0,
+                                                   :amount => 100.0,
                                                    :email => "salomon.omer-facilitator@gmail.com",
                                                    :primary => false,
                                                    :paymentType => "SERVICE" }] },
-                             :sender_email => 'thesender@sendwith.me',
-                             :returnUrl => "http://sendwithme.herokuapp.com",
-                             :sender => {
-                                 :useCredentials => false }
-                         })
-
+                             :senderEmail => "thesender@sendwith.me",
+                             :returnUrl => "https://paypal-sdk-samples.herokuapp.com/adaptive_payments/pay",
+                             :fundingConstraint => {
+                                 :allowedFundingType => {
+                                     :fundingTypeInfo => [{
+                                                              :fundingType => "BALANCE" }] } } })
     # Make API call & get response
     @pay_response = @api.pay(pay)
 

@@ -8,6 +8,8 @@ class Payment
                              :cancelUrl => "http://sendwithme.herokuapp.com",
                              :currencyCode => "USD",
                              :feesPayer => "SENDER",
+                             :requestEnvelope => {
+                                 :errorLanguage => "en_US" },
                              :ipnNotificationUrl => "https://paypal-sdk-samples.herokuapp.com/adaptive_payments/ipn_notify",
                              :receiverList => {
                                  :receiver => [{
@@ -17,16 +19,19 @@ class Payment
                                                    :paymentType => "SERVICE" }] },
                              :senderEmail => "thesender@sendwith.me",
                              :returnUrl => "https://paypal-sdk-samples.herokuapp.com/adaptive_payments/pay",
-                             :fundingConstraint => {
-                                 :allowedFundingType => {
-                                     :fundingTypeInfo => [{
-                                                              :fundingType => "BALANCE" }] } } })
+                       })
     # Make API call & get response
     @pay_response = @api.pay(pay)
 
     # Access Response
     if @pay_response.success?
-      @pay_response
+      @pay_response.payKey
+      @pay_response.paymentExecStatus
+      @pay_response.payErrorList
+      @pay_response.paymentInfoList
+      @pay_response.sender
+      @pay_response.defaultFundingPlan
+      @pay_response.warningDataList
     else
       @pay_response.error
     end

@@ -2,7 +2,7 @@ class Payment
   attr_accessor :api
 
   def buildApi
-    loadSDK
+    @api = PayPal::SDK::AdaptivePayments::API.new
     pay = @api.build_pay({
                              :actionType => "PAY",
                              :cancelUrl => "http://sendwithme.herokuapp.com",
@@ -42,9 +42,9 @@ class Payment
   end
 
   private
-  def loadSDK
-    PayPal::SDK.load('config/paypal.yml', ENV['RACK_ENV'] || 'development')
-    @api = PayPal::SDK::AdaptivePayments::API.new
-  end
+ # def loadSDK
+   # PayPal::SDK.load('config/paypal.yml', ENV['RACK_ENV'] || 'development')
+    #@api = PayPal::SDK::AdaptivePayments::API.new
+  #end
 
 end

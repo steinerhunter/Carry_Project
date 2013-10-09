@@ -1,4 +1,4 @@
-class Payment < ActiveRecord::Base
+class Payment
 
   def pay
     pay_request = PaypalAdaptive::Request.new

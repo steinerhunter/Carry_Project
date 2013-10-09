@@ -1,6 +1,6 @@
 class PaymentsController < ApplicationController
   def pay
-   @payment = Payment.new
+   @payment = Payment.pay
   end
 
   def find

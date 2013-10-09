@@ -1,7 +1,7 @@
 class Payment
 
   def pay
-    @pay_request = PaypalAdaptive::Request.new
+    pay_request = PaypalAdaptive::Request.new
     data = {
         :returnUrl => "https://sendwithme.herokuapp.com/adaptive_payments/request",
         :requestEnvelope => {
@@ -20,11 +20,11 @@ class Payment
 
     #To do chained payments, just add a primary boolean flag:{“receiver”=> [{"email"=>"PRIMARY", "amount"=>"100.00", "primary" => true}, {"email"=>"OTHER", "amount"=>"75.00", "primary" => false}]}
 
-    @pay_response = @pay_request.pay(data)
+    pay_response = pay_request.pay(data)
 
-    if @pay_response.success?
+    if pay_response.success?
       # Send user to paypal
-      redirect_to "https://www.sandbox.paypal.com/cgi-bin/webscr?cmd=_ap-payment&paykey="+@pay_response.payKey
+      redirect_to "https://www.sandbox.paypal.com/cgi-bin/webscr?cmd=_ap-payment&paykey="+pay_response.payKey
     else
       puts @pay_response.errors.first['message']
       redirect_to "/", notice: "Something went wrong. Please contact support."

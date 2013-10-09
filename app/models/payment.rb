@@ -1,11 +1,8 @@
 class Payment
   attr_accessor :api
 
-  def initialize
-    loadSDK
-  end
-
   def buildApi
+    loadSDK
     pay = @api.build_pay({
                              :actionType => "PAY",
                              :cancelUrl => "http://sendwithme.herokuapp.com",

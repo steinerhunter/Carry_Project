@@ -1,55 +1,34 @@
-class Payment
-  attr_accessor :api
+class Payment < ActiveRecord::Base
 
-  def buildApi
-    @api = PayPal::SDK::AdaptivePayments::API.new
-    pay = @api.build_pay({
-                             :actionType => "PAY",
-                             :cancelUrl => "http://sendwithme.herokuapp.com",
-                             :currencyCode => "USD",
-                             :feesPayer => "SENDER",
-                             :requestEnvelope => {
-                                 :errorLanguage => "en_US" },
-                             :ipnNotificationUrl => "https://paypal-sdk-samples.herokuapp.com/adaptive_payments/ipn_notify",
-                             :receiverList => {
-                                 :receiver => [{
-                                                   :amount => 100.0,
-                                                   :email => "salomon.omer-facilitator@gmail.com",
-                                                   :primary => false,
-                                                   :paymentType => "SERVICE" }] },
-                             :senderEmail => "thesender@sendwith.me",
-                             :returnUrl => "https://paypal-sdk-samples.herokuapp.com/adaptive_payments/pay",
-                       })
-    # Make API call & get response
-    @pay_response = @api.pay(pay)
+  def pay
+    pay_request = PaypalAdaptive::Request.new
+    data = {
+        :returnUrl => "https://sendwithme.herokuapp.com/adaptive_payments/request",
+        :requestEnvelope => {
+            :errorLanguage => "en_US" },
+        :currencyCode => "USD",
+        :receiverList => {
+            :receiver => [{
+                              :amount => 25.0,
+                              :email => "salomon.omer-facilitator@gmail.com",
+                              :primary => false,
+                              :paymentType => "SERVICE" }] },
+        :cancelUrl => "http://sendwithme.herokuapp.com",
+        :actionType => "PAY",
+        :ipnNotificationUrl => "https://paypal-sdk-samples.herokuapp.com/adaptive_payments/ipn_notify",
+    }
 
-    # Access Response
-    if @pay_response.success?
-      @pay_response.payKey
-      @pay_response.paymentExecStatus
-      @pay_response.payErrorList
-      @pay_response.paymentInfoList
-      @pay_response.sender
-      @pay_response.defaultFundingPlan
-      @pay_response.warningDataList
+    #To do chained payments, just add a primary boolean flag:{“receiver”=> [{"email"=>"PRIMARY", "amount"=>"100.00", "primary" => true}, {"email"=>"OTHER", "amount"=>"75.00", "primary" => false}]}
+
+    pay_response = pay_request.pay(data)
+
+    if pay_response.success?
+      # Send user to paypal
+      redirect_to pay_response.approve_paypal_payment_url
     else
-      @pay_response.error
+      puts pay_response.errors.first['message']
+      redirect_to "/", notice: "Something went wrong. Please contact support."
     end
 
   end
-
-  def find(order)
-    # Build request object
-    @payment_details = @api.build_payment_details({:payKey => order })
-
-    # Make API call & get response
-    @payment_details_response = @api.payment_details(@payment_details)
-  end
-
-  private
- # def loadSDK
-   # PayPal::SDK.load('config/paypal.yml', ENV['RACK_ENV'] || 'development')
-    #@api = PayPal::SDK::AdaptivePayments::API.new
-  #end
-
 end

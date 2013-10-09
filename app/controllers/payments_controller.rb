@@ -1,9 +1,6 @@
 class PaymentsController < ApplicationController
   def pay
-    payment = Payment.new
-    @pay_response = payment.buildApi
-    redirect_to "https://www.sandbox.paypal.com/cgi-bin/webscr?cmd=_ap-payment&paykey="+@pay_response.payKey
-    #render json: @pay_response
+    @payment = Payment.new
   end
 
   def find

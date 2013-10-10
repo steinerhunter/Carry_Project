@@ -17,7 +17,7 @@ class BillingController < ApplicationController
 
   # ASSUMPTION   # payment is valid i.e. amount is entered
   def checkout
-    response = @payment.setup_purchase(:return_url => confirm_paypal_url(@payment), :cancel_return_url => root_url)
+    response = @payment.setup_purchase(:ip => request.remote_ip, :return_url => confirm_paypal_url(@payment), :cancel_return_url => root_url)
     redirect_to @payment.redirect_url_for(response.token)
   end
 

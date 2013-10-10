@@ -13,8 +13,8 @@ test:
   application_id: "APP-80W284485P519543T"
 
 production:
-  environment: "production"
-  username: "my_production_username"
-  password: "my_production_password"
-  signature: "my_production_signature"
-  application_id: "my_production_app_id"
+  mode: "sandbox"
+  username: "salomon.omer_api1.gmail.com"
+  password: "1380958401"
+  signature: "AKTmX5eGgu-1LRjREME7XhqcjiogApo6JtEThvMLEWnr8onZK2lNc5-U"
+  application_id: "APP-80W284485P519543T"

@@ -1,15 +1,15 @@
 development:
-  environment: "sandbox"
+  mode: "sandbox"
   username: "salomon.omer_api1.gmail.com"
-  password: "A2RDZ7UP6YAAVT5A"
-  signature: "AKHBx3F15DqGBpv4bzGQQW3CZk77ADu0mFztIDlSsk-4axFzxRUvuBPj"
+  password: "1380958401"
+  signature: "AKTmX5eGgu-1LRjREME7XhqcjiogApo6JtEThvMLEWnr8onZK2lNc5-U"
   application_id: "APP-80W284485P519543T"
 
 test:
-  environment: "sandbox"
+  mode: "sandbox"
   username: "salomon.omer_api1.gmail.com"
-  password: "A2RDZ7UP6YAAVT5A"
-  signature: "AKHBx3F15DqGBpv4bzGQQW3CZk77ADu0mFztIDlSsk-4axFzxRUvuBPj"
+  password: "1380958401"
+  signature: "AKTmX5eGgu-1LRjREME7XhqcjiogApo6JtEThvMLEWnr8onZK2lNc5-U"
   application_id: "APP-80W284485P519543T"
 
 production:

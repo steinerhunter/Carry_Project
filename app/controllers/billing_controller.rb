@@ -9,7 +9,7 @@ class BillingController < ApplicationController
     @payment = Payment.new(params[:payment])
     if @payment.save
       ## Paypal Checkout page
-      redirect_to billing_url
+      redirect_to billing_url(@payment)
     else
       render :action => :new
     end

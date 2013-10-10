@@ -12,7 +12,7 @@ class Payment < ActiveRecord::Base
 
   ## Paypal
   def setup_purchase(options)
-    gateway.setup_purchase(amount * 100, options)
+    gateway.setup_purchase(amount.to_i * 100, options)
   end
 
   def redirect_url_for(token)
@@ -24,7 +24,7 @@ class Payment < ActiveRecord::Base
     #:ip       => request.remote_ip,
     #:payer_id => params[:payer_id],
     #:token    => params[:token]
-    response = gateway.purchase(amount, options)
+    response = gateway.purchase(amount.to_i, options)
     if response.success?
       self.transaction_num = response.params['transaction_id']
       self.status = SUCCESS

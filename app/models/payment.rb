@@ -2,7 +2,7 @@ class Payment < ActiveRecord::Base
   PROCESSING, FAILED, SUCCESS = 1, 2, 3
 
   validates :amount, :presence => { :message => "OOPS! Looks like you didn't type any amount..."}
-  validates :amount, :numericality => { :only_integer => true, :message => "Only whole numbers please..." }
+  validates :amount, :numericality => { :only_float => true, :message => "Only whole numbers please..." }
 
   def self.conf
     @@gateway_conf ||= YAML.load_file(Rails.root.join('config/gateway.yml').to_s)[Rails.env]

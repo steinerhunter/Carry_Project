@@ -20,7 +20,7 @@ class Payment < ActiveRecord::Base
     #:ip       => request.remote_ip,
     #:payer_id => params[:payer_id],
     #:token    => params[:token]
-    response = gateway.purchase(amt, options)
+    response = gateway.purchase(amount, options)
     if response.success?
       self.transaction_num = response.params['transaction_id']
       self.status = SUCCESS

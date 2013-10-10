@@ -1,4 +1,6 @@
 class Payment < ActiveRecord::Base
+  attr_accessible :amount
+
   PROCESSING, FAILED, SUCCESS = 1, 2, 3
 
   validates :amount, :presence => { :message => "OOPS! Looks like you didn't type any amount..."}

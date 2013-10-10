@@ -87,7 +87,7 @@ ActiveRecord::Schema.define(:version => 20131010163215) do
 
   create_table "payments", :force => true do |t|
     t.string   "status"
-    t.integer  "amount"
+    t.string   "amount"
     t.string   "transaction_number"
     t.datetime "created_at",         :null => false
     t.datetime "updated_at",         :null => false

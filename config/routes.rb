@@ -61,6 +61,7 @@ TheCarryProject::Application.routes.draw do
   ## PayPal Callback URL
   match '/billing/paypal/:id/confirm', :to => 'billing#paypal', :as => :confirm_paypal
   ## Create payment
+  match '/pay', :to => '#billing#new'
   match '/billing', :to => 'billing#create', :as => :pay_bill
   ## Request URL
   match '/billing/paypal/:id', :to => 'billing#checkout', :as => :billing

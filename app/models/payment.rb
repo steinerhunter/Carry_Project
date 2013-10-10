@@ -1,34 +1,47 @@
-class Payment
+class Payment < ActiveRecord::Base
+  PROCESSING, FAILED, SUCCESS = 1, 2, 3
 
-  def pay
-    pay_request = PaypalAdaptive::Request.new
-    data = {
-        :returnUrl => "https://sendwithme.herokuapp.com/adaptive_payments/request",
-        :requestEnvelope => {
-            :errorLanguage => "en_US" },
-        :currencyCode => "USD",
-        :receiverList => {
-            :receiver => [{
-                              :amount => 25.0,
-                              :email => "salomon.omer-facilitator@gmail.com",
-                              :primary => false,
-                              :paymentType => "SERVICE" }] },
-        :cancelUrl => "http://sendwithme.herokuapp.com",
-        :actionType => "PAY",
-        :ipnNotificationUrl => "https://paypal-sdk-samples.herokuapp.com/adaptive_payments/ipn_notify",
-    }
+  validates :amount, :presence => true, :numericality => { :greater_than => 0 }
+  def self.conf
+    @@gateway_conf ||= YAML.load_file(Rails.root.join('config/gateway.yml').to_s)[Rails.env]
+  end
 
-    #To do chained payments, just add a primary boolean flag:{“receiver”=> [{"email"=>"PRIMARY", "amount"=>"100.00", "primary" => true}, {"email"=>"OTHER", "amount"=>"75.00", "primary" => false}]}
+  ## Paypal
+  def setup_purchase(options)
+    gateway.setup_purchase(amount * 100, options)
+  end
 
-    pay_response = pay_request.pay(data)
+  def redirect_url_for(token)
+    gateway.redirect_url_for(token)
+  end
 
-    if pay_response.success?
-      # Send user to paypal
-      redirect_to "https://www.sandbox.paypal.com/cgi-bin/webscr?cmd=_ap-payment&paykey="+pay_response.payKey
+  def purchase(options={})
+    self.status = PROCESSING
+    #:ip       => request.remote_ip,
+    #:payer_id => params[:payer_id],
+    #:token    => params[:token]
+    response = gateway.purchase(amt, options)
+    if response.success?
+      self.transaction_num = response.params['transaction_id']
+      self.status = SUCCESS
     else
-      puts @pay_response.errors.first['message']
-      redirect_to "/", notice: "Something went wrong. Please contact support."
+      self.status = FAILED
     end
+    return self
+  rescue Exception => e
+    self.status = FAILED
+    return self
+  end
 
+  private
+  def gateway
+    ActiveMerchant::Billing::Base.mode = auth['mode'].to_sym
+    ActiveMerchant::Billing::PaypalExpressGateway.new(
+        :login => auth['login'], :password => auth['password'],
+        :signature => auth['signature'])
+  end
+
+  def auth
+    self.class.conf
   end
 end

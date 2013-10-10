@@ -11,7 +11,7 @@ gem 'newrelic_rpm'
 gem 'meta_search'
 gem 'omniauth'
 gem 'omniauth-facebook'
-gem 'paypal-sdk-adaptivepayments'
+gem 'activemerchant'
 
 group :development, :test do
   gem 'sqlite3', '1.3.5'

@@ -52,13 +52,19 @@ TheCarryProject::Application.routes.draw do
 
   match "empty_trash" => "users#empty_trash"
 
-  # facebook authentication
+  # Facebook authentication
   match '/auth/new' => 'authentications#new'
   match '/auth/:provider/callback' => 'authentications#create'
   match "/auth/failure" => "authentications#failure" #OMNIAUTH
   match "facebook/logout", :to => "authentications#logout", :as => :logout_authentication
 
-  match 'payments/pay', :to => "payments#pay"
+  ## PayPal Callback URL
+  match '/billing/paypal/:id/confirm', :to => 'billing#paypal', :as => :confirm_paypal
+  ## Create payment
+  match '/billing', :to => 'billing#create', :as => :pay_bill
+  ## Request URL
+  match '/billing/paypal/:id', :to => 'billing#checkout', :as => :billing
+  match '/billing/thank_you/:id', :to => 'billing#checkout', :as => :billing_thank_you
 
 
   # The priority is based upon order of creation:

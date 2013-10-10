@@ -1,8 +1,12 @@
 class BillingController < ApplicationController
   before_filter :get_payment, :only => [:checkout, :paypal, :thank_you]
 
+  def new
+    @payment = Payment.new
+  end
+
   def create
-    @payment = Payment.new params[:payment]
+    @payment = Payment.new(params[:payment])
     if @payment.save
       ## Paypal Checkout page
       redirect_to billing_url

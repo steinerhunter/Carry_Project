@@ -58,15 +58,11 @@ TheCarryProject::Application.routes.draw do
   match "/auth/failure" => "authentications#failure" #OMNIAUTH
   match "facebook/logout", :to => "authentications#logout", :as => :logout_authentication
 
-  ## PayPal Callback URL
-  match '/billing/paypal/:id/confirm', :to => 'billing#paypal', :as => :confirm_paypal
-  ## Create payment
-  match '/pay', :to => 'billing#new'
-  match '/billing', :to => 'billing#create', :as => :pay_bill
-  ## Request URL
-  match '/billing/paypal/:id', :to => 'billing#checkout', :as => :billing
-  match '/billing/thank_you/:id', :to => 'billing#checkout', :as => :billing_thank_you
-
+  # PayPal routing
+  get 'payments', to: 'payments#home', as: :home
+  post 'payments/checkout', to: 'payments#checkout', as: :checkout
+  get 'payments/fail', to: 'payments#fail', as: :fail
+  get 'payments/ipn_notification', to: 'payments#ipn_notification', as: :ipn_notification
 
   # The priority is based upon order of creation:
   # first created -> highest priority.

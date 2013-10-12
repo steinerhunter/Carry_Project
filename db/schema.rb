@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20131010163215) do
+ActiveRecord::Schema.define(:version => 20130929200512) do
 
   create_table "accepted_requests", :force => true do |t|
     t.integer  "request_delivery_id"
@@ -84,14 +84,6 @@ ActiveRecord::Schema.define(:version => 20131010163215) do
   end
 
   add_index "notifications", ["conversation_id"], :name => "index_notifications_on_conversation_id"
-
-  create_table "payments", :force => true do |t|
-    t.string   "status"
-    t.string   "amount"
-    t.string   "transaction_number"
-    t.datetime "created_at",         :null => false
-    t.datetime "updated_at",         :null => false
-  end
 
   create_table "receipts", :force => true do |t|
     t.integer  "receiver_id"

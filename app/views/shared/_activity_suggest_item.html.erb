@@ -3,7 +3,7 @@
 <% else %>
     <div class="activity_feed_item">
 <% end  %>
-  <% if (current_user?(activity_suggest_item.user)) || (current_user.try(:admin?)) %>
+<% if (current_user?(activity_suggest_item.user) && activity_suggest_item.status == "Open") || (current_user.try(:admin?)) %>
       <div class="delete_post">
         <div class="bubbleInfo">
           <%=  link_to image_tag("delete_post.png"), activity_suggest_item, method: :delete, class: "trigger" %>
@@ -57,7 +57,7 @@
                                     my_suggest_accepted.confirmed == false %>
                             <div class="send_messages_to_users" style="background-color: #257b2a;">
                               <div class="needs_to_confirm">
-                                <div class="confirm_me">
+                                <div class="confirm_me" style="right: 35px">
                                   <div class="bubbleInfo">
                                     <%=  link_to image_tag("confirm_me.png"),
                                                  {:controller => "suggest_deliveries",
@@ -72,7 +72,7 @@
                                     </div>
                                   </div>
                                 </div>
-                                <div class="send_message">
+                                <div class="send_message" style="right: 3px">
                                   <div class="bubbleInfo">
                                     <%=  link_to image_tag("send_message.png"),
                                                  {:controller => "conversations",
@@ -122,7 +122,7 @@
                 (by <b style="color:#f2ff5e">you</b>)  <br>
                 <div class="send_messages_to_users" style="background-color: #0b5aff;">
                   <div class="needs_to_confirm">
-                    <div class="confirm_me">
+                    <div class="confirm_me" style="right: 35px">
                       <div class="bubbleInfo">
                         <%=  link_to image_tag("confirmed.png"),
                                      {:controller => "suggest_deliveries",
@@ -137,7 +137,7 @@
                         </div>
                       </div>
                     </div>
-                    <div class="send_message">
+                    <div class="send_message" style="right:3px">
                       <div class="bubbleInfo">
                         <%=  link_to image_tag("send_message.png"),
                                      {:controller => "conversations",

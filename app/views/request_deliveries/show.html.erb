@@ -128,9 +128,9 @@
       <b style="padding-left: 70px;"><%= @request_delivery.what %></b>
     </div>
     <div class="the_deadline_and_money">
-      <% if @request_delivery.currency == "NIS" %>
+      <% if @request_delivery.currency == "ILS" %>
           <div class="the_money"  style="background-image: url('../assets/nis.png');">
-      <% elsif @request_delivery.currency == "Euro" %>
+      <% elsif @request_delivery.currency == "EUR" %>
           <div class="the_money"  style="background-image: url('../assets/euro.png');">
       <% elsif @request_delivery.currency == "USD" %>
           <div class="the_money"  style="background-image: url('../assets/usd.png');">

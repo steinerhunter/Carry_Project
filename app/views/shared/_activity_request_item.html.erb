@@ -3,7 +3,7 @@
 <% else %>
     <div class="activity_feed_item">
 <% end  %>
-  <% if (current_user?(activity_request_item.user)) || (current_user.try(:admin?)) %>
+  <% if (current_user?(activity_request_item.user) && activity_request_item.status == "Open") || (current_user.try(:admin?)) %>
       <div class="delete_post">
         <div class="bubbleInfo">
           <%=  link_to image_tag("delete_post.png"), activity_request_item, method: :delete, class: "trigger" %>

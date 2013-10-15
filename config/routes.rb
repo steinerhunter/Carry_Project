@@ -60,10 +60,11 @@ TheCarryProject::Application.routes.draw do
 
   # PayPal routing
   get 'payments', to: 'payments#home', as: :home
-  post 'payments/checkout', to: 'payments#checkout', as: :checkout
-  post 'payments/execute', to: 'payments#execute', as: :execute
+  get 'payments/checkout', to: 'payments#checkout', as: :checkout
+  get 'payments/execute', to: 'payments#execute', as: :execute
   get 'payments/fail', to: 'payments#fail', as: :fail
   get 'payments/ipn_notification', to: 'payments#ipn_notification', as: :ipn_notification
+  match '/details/:accepted_request_id', to: 'payments#details', as: 'details'
 
   # The priority is based upon order of creation:
   # first created -> highest priority.

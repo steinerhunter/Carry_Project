@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20131012174804) do
+ActiveRecord::Schema.define(:version => 20131013212400) do
 
   create_table "accepted_requests", :force => true do |t|
     t.integer  "request_delivery_id"
@@ -39,14 +39,11 @@ ActiveRecord::Schema.define(:version => 20131012174804) do
     t.integer  "user_id"
     t.string   "provider"
     t.string   "uid"
-    t.datetime "created_at",                    :null => false
-    t.datetime "updated_at",                    :null => false
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.boolean  "verified"
     t.string   "image"
-    t.boolean  "verified",   :default => false
   end
-
-  add_index "authentications", ["provider", "uid"], :name => "index_authentications_on_provider_and_uid"
-  add_index "authentications", ["user_id"], :name => "index_authentications_on_user_id"
 
   create_table "comments", :force => true do |t|
     t.text     "content"
@@ -125,6 +122,7 @@ ActiveRecord::Schema.define(:version => 20131012174804) do
     t.string   "payKey"
     t.datetime "created_at",          :null => false
     t.datetime "updated_at",          :null => false
+    t.string   "status"
   end
 
   add_index "request_payments", ["request_delivery_id", "user_id"], :name => "index_request_payments_on_request_delivery_id_and_user_id", :unique => true

@@ -5,7 +5,7 @@
       </div>
       <div class="edit_what_and_money">
         <div class="edit_money">
-          How much will you charge?<br><%= f.text_field :cost  %><%= f.select :currency, options_for_select(%w[NIS USD Euro], :selected => @suggest_delivery.currency) %>
+          How much will you charge?<br><%= f.text_field :cost  %><%= f.select :currency, options_for_select(%w[ILS USD EUR], :selected => @suggest_delivery.currency) %>
         </div>
       </div>
       <div class="edit_from_and_to">

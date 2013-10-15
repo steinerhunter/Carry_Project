@@ -6,8 +6,11 @@
     <%= text_field_tag :amount %>
     <%= submit_tag 'Pay' %>
 <% end -%>
-
 <br>
 <%= form_tag execute_url do -%>
     <%= submit_tag 'Execute' %>
+<% end -%>
+<br>
+<%= form_tag details_url do -%>
+    <%= submit_tag 'PaymentDetails' %>
 <% end -%>

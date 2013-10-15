@@ -126,9 +126,9 @@
           <b style="padding-left: 65px;"><%= @suggest_delivery.size %> sized items</b>
         </div>
         <div class="the_deadline_and_money">
-          <% if @suggest_delivery.currency == "NIS" %>
+          <% if @suggest_delivery.currency == "ILS" %>
               <div class="the_money"  style="background-image: url('../assets/nis.png');">
-          <% elsif @suggest_delivery.currency == "Euro" %>
+          <% elsif @suggest_delivery.currency == "EUR" %>
               <div class="the_money"  style="background-image: url('../assets/euro.png');">
           <% elsif @suggest_delivery.currency == "USD" %>
               <div class="the_money"  style="background-image: url('../assets/usd.png');">

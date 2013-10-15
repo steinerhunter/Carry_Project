@@ -8,7 +8,7 @@
           What do you need to deliver?<br><%= f.text_field :what  %>
         </div>
         <div class="edit_money">
-          How much will you pay?<br><%= f.text_field :cost  %><%= f.select :currency, options_for_select(%w[NIS USD Euro], :selected => @request_delivery.currency) %>
+          How much will you pay?<br><%= f.text_field :cost  %><%= f.select :currency, options_for_select(%w[ILS USD EUR], :selected => @request_delivery.currency) %>
         </div>
       </div>
       <div class="edit_from_and_to">

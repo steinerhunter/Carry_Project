@@ -1,5 +1,5 @@
 class NotifMailer < ActionMailer::Base
-  default from: "sendwithme@sendwith.me"
+  default from: "support@sendd.me"
 
   def confirmation_email(user)
     @user = user

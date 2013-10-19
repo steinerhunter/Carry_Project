@@ -1,4 +1,6 @@
 .search_posts {
+  display:inline-block;
+  width: 70%;
   background-color: #a3a3a3;
   -moz-box-shadow: 5px 5px 5px #6b6b6b; /* Old Firefox */
   box-shadow: 5px 5px 5px #6b6b6b;
@@ -22,12 +24,10 @@
   background-repeat: no-repeat;
   background-position: bottom left;
   -moz-border-radius: 0px;
-  -webkit-border-radius: 3px 3px 0px 0px;
-  border-radius: 3px 3px 0px 0px;
 }
 
 .search_fields {
-  margin-top:10px;
+  margin-top:5px;
 }
 
 .myfield_search label, .myfield_search input {
@@ -35,7 +35,7 @@
 }
 
 .myfield_search input[type=text] {
-  width:310px;
+  width:205px;
   border-color: #000000;
 }
 
@@ -56,6 +56,56 @@
 
 #suggest_delivery_search {
   margin-bottom:0px;
+}
+
+.add_your_own {
+  display:inline-block;
+  vertical-align: top;
+}
+
+.transport_button_index {
+  font-size: 1.3em;
+  line-height: 140%;
+  text-align: center;
+  width: 250px;
+  height: 100px;
+  background-image: url('pass_something_index.png');
+  background-color: #d67a31;
+  background-repeat: no-repeat;
+  background-position: bottom center;
+  -moz-box-shadow: 5px 5px 5px #6b6b6b; /* Old Firefox */
+  box-shadow: 5px 5px 5px #6b6b6b;
+  border:solid 3px;
+  border-radius:10px;
+  -moz-border-radius:10px; /* Old Firefox */
+  color: #ffffff;
+  border-color: #000000;
+  margin-left: 20px;
+}
+
+.send_button_index {
+  font-size: 1.5em;
+  line-height: 140%;
+  text-align: center;
+  width: 250px;
+  height: 100px;
+  background-image: url('send_something_index.png');
+  background-color: #d67a31;
+  background-repeat: no-repeat;
+  background-position: bottom center;
+  -moz-box-shadow: 5px 5px 5px #6b6b6b; /* Old Firefox */
+  box-shadow: 5px 5px 5px #6b6b6b;
+  border:solid 3px;
+  border-radius:10px;
+  -moz-border-radius:10px; /* Old Firefox */
+  color: #ffffff;
+  border-color: #000000;
+  margin-left: 20px;
+}
+
+.send_button_index:hover, .transport_button_index:hover{
+  background-color: #1d79e2;
+  cursor:pointer;
 }
 
 .feed_item {

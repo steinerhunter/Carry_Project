@@ -14,6 +14,11 @@
       </div>
   <% end %>
 </div>
+<div class="add_your_own">
+  <div class="transport_button_index"  onclick="location.href='/suggest'">
+    <b>Add your own suggestion.</b>
+  </div>
+</div>
 <div class="suggestposts">
   <% if @suggest_feed_items.any? %>
       <%= render partial: 'shared/suggest_feed_item', collection: @suggest_feed_items %>

@@ -5,13 +5,24 @@ class PaymentsController < ApplicationController
   end
 
   def checkout
-    request_creator = User.find_by_id(params[:request_creator_id])
     confirmed_user = User.find_by_id(params[:confirmed_user_id])
-    request_delivery = RequestDelivery.find_by_id(params[:request_delivery_id])
-    accepted_request = AcceptedRequest.find_by_id(params[:accepted_request_id])
-    pay_request = PaypalAdaptive::Request.new
-    amount = request_delivery.cost.to_f
+    task_creator = User.find_by_id(params[:task_creator_id])
+    req_or_sugg = params[:req_or_sugg]
+    if req_or_sugg == "request_delivery"
+      request_delivery = RequestDelivery.find_by_id(params[:task_id])
+      accepted_request = AcceptedRequest.find_by_id(params[:accepted_task_id])
+      request_payment = RequestPayment.find_by_request_delivery_id(request_delivery.id)
+      amount = request_delivery.cost.to_f
+    elsif req_or_sugg == "suggest_delivery"
+      suggest_delivery = SuggestDelivery.find_by_id(params[:task_id])
+      accepted_suggest = AcceptedSuggest.find_by_id(params[:accepted_task_id])
+      #suggest_payment = SuggestPayment.find_by_request_delivery_id(suggest_delivery.id)
+      amount = suggest_delivery.cost.to_f
+    end
     seller_amount = 0.85*amount.to_f
+
+    pay_request = PaypalAdaptive::Request.new
+
     data = {
         "returnUrl" => details_url(accepted_request),
         "requestEnvelope" => { "errorLanguage" => "en_US" },
@@ -53,11 +64,22 @@ class PaymentsController < ApplicationController
 
   def execute
     confirmed_user = User.find_by_id(params[:confirmed_user_id])
-    request_creator = User.find_by_id(params[:request_creator_id])
-    request_delivery = RequestDelivery.find_by_id(params[:request_delivery_id])
+    task_creator = User.find_by_id(params[:task_creator_id])
+    req_or_sugg = params[:req_or_sugg]
+    if req_or_sugg == "request_delivery"
+      request_delivery = RequestDelivery.find_by_id(params[:task_id])
+      accepted_request = AcceptedRequest.find_by_id(params[:accepted_task_id])
+      request_payment = RequestPayment.find_by_request_delivery_id(request_delivery.id)
+      task = request_delivery
+    elsif req_or_sugg == "suggest_delivery"
+      suggest_delivery = SuggestDelivery.find_by_id(params[:task_id])
+      accepted_suggest = AcceptedSuggest.find_by_id(params[:accepted_task_id])
+      #suggest_payment = SuggestPayment.find_by_request_delivery_id(suggest_delivery.id)
+      task = suggest_delivery
+    end
+
     pay_execute = PaypalAdaptive::Request.new
-    request_payment = RequestPayment.find_by_request_delivery_id(request_delivery.id)
-    accepted_request = AcceptedRequest.find_by_id(params[:accepted_request_id])
+
     data = {
         "payKey" => request_payment.payKey,
         "requestEnvelope" => { "errorLanguage" => "en_US" },
@@ -75,16 +97,21 @@ class PaymentsController < ApplicationController
         request_payment.status = paymentdetails_response["status"]
         request_payment.save
         if paymentdetails_response["status"] == "COMPLETED"
-          accepted_request.complete_accepted_request
-          request_delivery.complete_request
+          if req_or_sugg == "request_delivery"
+            accepted_request.complete_accepted_request
+            request_delivery.complete_request
+          elsif req_or_sugg == "suggest_delivery"
+            accepted_suggest.complete_accepted_suggest
+            suggest_delivery.complete_suggest
+          end
         end
         redirect_to :controller => 'user_reviews',
                                   :action => 'new',
                                   :from_user_id => confirmed_user.id,
-                                  :to_user_id => request_creator.id,
-                                  :req_or_sugg => "request_delivery",
+                                  :to_user_id => task_creator.id,
+                                  :req_or_sugg => req_or_sugg,
                                   :job_type => "SENDER",
-                                  :task_id => request_delivery.id
+                                  :task_id => task.id
       else
         session[:error] = paymentdetails_response#pay_response.errors.first['message']
         redirect_to fail_url

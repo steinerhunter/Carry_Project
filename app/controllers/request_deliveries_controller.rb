@@ -136,10 +136,11 @@ class RequestDeliveriesController < ApplicationController
         #NotifMailer.new_confirmed_request(@request_creator,@confirmed_user,@request_delivery).deliver
         redirect_to :controller => 'payments',
                                   :action => 'checkout',
-                                  :request_creator_id => @request_creator.id,
+                                  :req_or_sugg => "request_delivery",
+                                  :task_creator_id => @request_creator.id,
                                   :confirmed_user_id => @confirmed_user.id,
-                                  :request_delivery_id => @request_delivery.id,
-                                  :accepted_request_id => @accepted_request.id and return
+                                  :task_id => @request_delivery.id,
+                                  :accepted_task_id => @accepted_request.id
     else
       flash[:cannot] = "Only the creator of the request can confirm it."
     end
@@ -156,10 +157,11 @@ class RequestDeliveriesController < ApplicationController
         #NotifMailer.new_complete_request(@request_creator,@confirmed_user,@request_delivery).deliver
         redirect_to :controller => 'payments',
                                   :action => 'execute',
-                                 :request_delivery_id => @request_delivery.id,
-                                 :confirmed_user_id => @confirmed_user.id,
-                                 :request_creator_id => @request_creator.id,
-                                :accepted_request_id => @accepted_request.id
+                                  :req_or_sugg => "request_delivery",
+                                  :task_creator_id => @request_creator.id,
+                                  :confirmed_user_id => @confirmed_user.id,
+                                  :task_id => @request_delivery.id,
+                                  :accepted_task_id => @accepted_request.id
     else
       flash[:cannot] = "Only the confirmed user can complete the request."
     end

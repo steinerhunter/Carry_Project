@@ -1,5 +1,6 @@
 TheCarryProject::Application.routes.draw do
   resources :users
+  resources :user_reviews
   resources :sessions, only: [:new, :create, :destroy]
   resources :request_deliveries, only: [:create, :show, :edit, :update, :destroy] do
     put :accept, on: :member
@@ -51,6 +52,8 @@ TheCarryProject::Application.routes.draw do
   match '/reset_password', to: 'password_resets#new'
 
   match "empty_trash" => "users#empty_trash"
+
+  match '/review', to: 'user_reviews#new'
 
   # Facebook authentication
   match '/auth/new' => 'authentications#new'

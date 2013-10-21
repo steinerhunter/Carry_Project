@@ -1,0 +1,125 @@
+.reviews_form_class {
+  width: 600px;
+  height: 400px;
+  text-align: center;
+  background-color: #1d79e2;
+  -moz-box-shadow: 5px 5px 5px #6b6b6b; /* Old Firefox */
+  box-shadow: 5px 5px 5px #6b6b6b;
+  border:solid 3px;
+  border-radius:10px;
+  -moz-border-radius:10px; /* Old Firefox */
+  color: #ffffff;
+  border-color: #18212e;
+  margin-right: auto;
+  margin-left: auto;
+  padding-bottom: 20px;
+}
+
+.review_title {
+  text-align: left;
+  height:37px;
+  padding-top:14px;
+  font-size: 3.2em;
+  border-bottom:solid 2px;
+  background-image: url('review.png');
+  border-color: #18212e;
+  background-color:#00008b;
+  background-repeat: no-repeat;
+  background-position: bottom left;
+  -moz-border-radius: 0px;
+  -webkit-border-radius: 3px 3px 0px 0px;
+  border-radius: 3px 3px 0px 0px;
+  b {
+    padding-left: 65px;
+  }
+}
+
+.pos_box {
+  width: 200px;
+  height: 90px;
+  display: inline-block;
+  text-align: center;
+  background-color: #a3a3a3;
+  background-image: url('happy_face.png');
+  background-repeat: no-repeat;
+  background-position: bottom center;
+  border:solid 1px;
+  border-radius:3px;
+  -moz-border-radius:10px; /* Old Firefox */
+  color: #ffffff;
+  border-color: #18212e;
+  margin-right: auto;
+  margin-left: auto;
+  padding:10px;
+ font-size: 4em;
+  line-height:90%;
+}
+
+.neg_box {
+  width: 200px;
+  height: 90px;
+  display: inline-block;
+  text-align: center;
+  background-color: #a3a3a3;
+  background-image: url('sad_face.png');
+  background-repeat: no-repeat;
+  background-position: bottom center;
+  border:solid 1px;
+  border-radius:3px;
+  -moz-border-radius:10px; /* Old Firefox */
+  color: #ffffff;
+  border-color: #18212e;
+  margin-right: auto;
+  margin-left: auto;
+  padding:10px;
+  margin-left:20px;
+  font-size: 4em;
+  line-height:90%;
+}
+
+.pos_box:hover, .neg_box:hover{
+  cursor:pointer;
+}
+
+.review_fields {
+  width: 600px;
+  height: 170px;
+  margin-right: auto;
+  margin-left: auto;
+  margin-top: 20px;
+}
+
+.myfield_review label{
+  margin-top:35px;
+
+}
+
+.myfield_review input {
+  width:500px;
+  margin-top:5px;
+}
+
+.myfield_review label {
+  vertical-align: middle;
+  font-size: 2.0em;
+  padding-bottom:8px;
+}
+
+.button_review {
+  margin-top:100px;
+}
+
+.user_review_errors {
+  margin: 0 auto;
+  margin-top: 6%;
+  padding: 5px;
+  padding-top:12px;
+  line-height: 30px;
+  width: 600px;
+  background-color: #c80000;
+  border: 1px solid #111111;
+  border-radius:5px;
+  color: #ffffff;
+  font-size: 17px;
+  text-align: left;
+}

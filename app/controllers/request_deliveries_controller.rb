@@ -154,11 +154,17 @@ class RequestDeliveriesController < ApplicationController
         flash[:complete] = "You've chosen to mark <br><b>#{@request_delivery.what}</b><br> delivery request as <br><div class='complete'><b>complete!</b></div>
                                             <div class='sub_flash_text'>A payment of <b>#{@request_delivery.cost} #{@request_delivery.currency}</b> will be transferred to you. <br></div>".html_safe
         #NotifMailer.new_complete_request(@request_creator,@confirmed_user,@request_delivery).deliver
-        redirect_to :controller => 'payments',
-                                   :action => 'execute',
-                                   :request_delivery_id => @request_delivery.id,
-                                   :accepted_request_id => @accepted_request.id and return
-
+        #redirect_to :controller => 'payments',
+        #                          :action => 'execute',
+        #                         :request_delivery_id => @request_delivery.id,
+        #                        :accepted_request_id => @accepted_request.id and return
+        redirect_to :controller => 'user_reviews',
+                                  :action => 'new',
+                                  :from_user_id => @confirmed_user.id,
+                                  :to_user_id => @request_creator.id,
+                                  :req_or_sugg => "request_delivery",
+                                  :job_type => "SENDER",
+                                  :task_id => @request_delivery.id
     else
       flash[:cannot] = "Only the confirmed user can complete the request."
     end

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20131013212400) do
+ActiveRecord::Schema.define(:version => 20131019205103) do
 
   create_table "accepted_requests", :force => true do |t|
     t.integer  "request_delivery_id"
@@ -156,6 +156,24 @@ ActiveRecord::Schema.define(:version => 20131013212400) do
 
   add_index "suggest_deliveries", ["user_id", "created_at"], :name => "index_suggest_deliveries_on_user_id_and_created_at"
 
+  create_table "user_reviews", :force => true do |t|
+    t.integer  "from_user_id"
+    t.integer  "to_user_id"
+    t.string   "req_or_sugg"
+    t.integer  "task_id"
+    t.string   "job_type"
+    t.string   "pos_or_neg"
+    t.string   "review_content"
+    t.datetime "created_at",     :null => false
+    t.datetime "updated_at",     :null => false
+  end
+
+  add_index "user_reviews", ["from_user_id", "to_user_id", "req_or_sugg", "task_id"], :name => "unique_user_reviews_index", :unique => true
+  add_index "user_reviews", ["from_user_id"], :name => "index_user_reviews_on_from_user_id"
+  add_index "user_reviews", ["req_or_sugg"], :name => "index_user_reviews_on_req_or_sugg"
+  add_index "user_reviews", ["task_id"], :name => "index_user_reviews_on_task_id"
+  add_index "user_reviews", ["to_user_id"], :name => "index_user_reviews_on_to_user_id"
+
   create_table "users", :force => true do |t|
     t.string   "name"
     t.string   "email"
@@ -170,6 +188,9 @@ ActiveRecord::Schema.define(:version => 20131013212400) do
     t.boolean  "email_confirmed",          :default => false
     t.boolean  "only_facebook"
     t.string   "phone"
+    t.boolean  "verified_phone",           :default => false
+    t.integer  "sender_rating"
+    t.integer  "transporter_rating"
   end
 
   add_index "users", ["email"], :name => "index_users_on_email", :unique => true

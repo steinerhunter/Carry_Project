@@ -1,0 +1,30 @@
+var form = $('#new_user_review');
+
+<% if @user_review.errors.any? %>
+
+// Delete errors from previous submission
+if ($(".user_review_errors")[0]){
+    $('.user_review_errors').remove();
+}
+
+// Create a list of errors
+var errors = $('<ul />');
+
+
+// Display only first error for each field
+<% @user_review.errors.each do |attribute, message| %>
+    <% if @user_review.errors[attribute].first == message %>
+        errors.append('<li><%= escape_javascript(message) %></li>');
+    <% end %>
+<% end %>
+
+// Display errors before the form
+$('<div />').addClass('user_review_errors').html(errors).appendTo("#new_user_review").hide().fadeIn('slow');
+
+<% else %>
+
+// On successful creation of new user review, redirect to main page
+    <% url = session[:return_to] || root_path %>
+    <% session[:return_to] = nil if session[:return_to].present? %>
+    window.location.href = "<%= url %>"
+<% end %>

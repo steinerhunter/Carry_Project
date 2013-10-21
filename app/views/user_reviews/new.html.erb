@@ -1,0 +1,35 @@
+<div class="reviews_form_class">
+  <div class="review_title" >
+    <b>Rate your experience</b>
+  </div>
+  <%= form_for(@user_review, :remote => true) do |f| %>
+      <%=  render 'shared/error_messages', object: f.object  %>
+      <div class="review_fields">
+        <%= f.hidden_field :from_user_id, :value => params[:from_user_id] %>
+        <%= f.hidden_field :to_user_id, :value => params[:to_user_id] %>
+        <%= f.hidden_field :req_or_sugg, :value => params[:req_or_sugg] %>
+        <%= f.hidden_field :task_id, :value => params[:task_id] %>
+        <%= f.hidden_field :job_type, :value => params[:job_type] %>
+        <%= f.hidden_field :pos_or_neg %>
+        <div class="pos_box" id="good"
+                   onclick="style.backgroundColor='green';
+                   document.getElementById('bad').style.backgroundColor = '#a3a3a3';
+                   document.getElementById('new_user_review').user_review_pos_or_neg.value = 'POSITIVE';">
+          Good
+        </div>
+        <div class="neg_box" id="bad"
+                   onclick="style.backgroundColor='red';
+                   document.getElementById('good').style.backgroundColor = '#a3a3a3';
+                   document.getElementById('new_user_review').user_review_pos_or_neg.value = 'NEGATIVE';">
+          Bad
+        </div>
+        <div class="myfield_review">
+          <%= f.label :review_content, "Can you describe #{@other_user.name} in a sentence?" %>
+          <%= f.text_field :review_content %>
+        </div>
+      </div>
+      <div class="button_review">
+        <%=  f.submit "Post Review!", :type => :image, :src => "../assets/Post_Review.png"  %>
+      </div>
+  <% end  %>
+</div>

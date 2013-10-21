@@ -52,6 +52,8 @@ class PaymentsController < ApplicationController
   end
 
   def execute
+    confirmed_user = User.find_by_id(params[:confirmed_user_id])
+    request_creator = User.find_by_id(params[:request_creator_id])
     request_delivery = RequestDelivery.find_by_id(params[:request_delivery_id])
     pay_execute = PaypalAdaptive::Request.new
     request_payment = RequestPayment.find_by_request_delivery_id(request_delivery.id)
@@ -76,7 +78,13 @@ class PaymentsController < ApplicationController
           accepted_request.complete_accepted_request
           request_delivery.complete_request
         end
-        redirect_to activity_url
+        redirect_to :controller => 'user_reviews',
+                                  :action => 'new',
+                                  :from_user_id => confirmed_user.id,
+                                  :to_user_id => request_creator.id,
+                                  :req_or_sugg => "request_delivery",
+                                  :job_type => "SENDER",
+                                  :task_id => request_delivery.id
       else
         session[:error] = paymentdetails_response#pay_response.errors.first['message']
         redirect_to fail_url

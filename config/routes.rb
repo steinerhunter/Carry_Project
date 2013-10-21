@@ -66,7 +66,7 @@ TheCarryProject::Application.routes.draw do
   get 'payments/checkout', to: 'payments#checkout', as: :checkout
   get 'payments/execute', to: 'payments#execute', as: :execute
   get 'payments/fail', to: 'payments#fail', as: :fail
-  get 'payments/ipn_notification', to: 'payments#ipn_notification', as: :ipn_notification
+  post 'payments/ipn_notification', to: 'payments#ipn_notification', as: :ipn_notification
   match '/details/:accepted_request_id', to: 'payments#details', as: 'details'
 
   # The priority is based upon order of creation:

@@ -4,13 +4,6 @@ class StaticPagesController < ApplicationController
   def home
   end
 
-  def how_it_works
-  end
-
-  def dummy_paypal_redirection
-    render "dummy_paypal_redirection.html.erb", :layout => false
-  end
-
   def privacy_policy
   end
 

@@ -19,7 +19,7 @@
                   <li id="header_user"><%= link_to header_gravatar_for(current_user)+current_user.name, current_user  %></li>
               <% end  %>
           <% else  %>
-              <li id="header_how_it_works"><%= link_to "How It Works", how_it_works_path %></li>
+              <li id="header_how_it_works"><%= link_to "How It Works", root_path(:anchor =>'how_it_works'), class:"smoothScroll" %></li>
               <li id="header_sign_in"><%= link_to "Sign in", signin_path %></li>
               <li id="header_register"><%= link_to "Register", signup_path %></li>
           <% end %>

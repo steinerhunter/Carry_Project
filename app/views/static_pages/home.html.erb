@@ -28,7 +28,7 @@
         Our members are verified.
       </div>
       <div class="good_hands_text_content">
-        All of our transporters and senders validate their mobile phone number, and their contact email address. <br>
+       Our transporters and senders validate their mobile phone number, their Faceook account and their contact email address. <br>
       </div>
     </div>
   </div>
@@ -65,4 +65,75 @@
         <b>Get your own account!</b>
       </div>
   <% end  %>
+</div>
+<a name="how_it_works"></a>
+<div class="home_container3">
+  <div class="how_it_works_container">
+    <div class="how_it_works_title" style="padding-top:100px; text-align: center;">
+      <b>How it works.</b>
+    </div>
+    <div class="how_it_works_right">
+      <div class="how_it_works_image">
+        <%= image_tag("HowItWorks1.png") %>
+      </div>
+      <div class="how_it_works_text" style="padding-left: 30px;">
+        <div class="how_it_works_text_title">
+          Post your delivery request.
+        </div>
+        <div class="how_it_works_text_content">
+          Fill out basic details about your item.<br>
+          You only have to tell us what you're sending, where from and to, and how much you will pay for the delivery.
+        </div>
+      </div>
+    </div>
+    <div class="how_it_works_right">
+      <div class="how_it_works_text" style=" padding-right: 30px;">
+        <div class="how_it_works_text_title">
+          Pick your transporter.
+        </div>
+        <div class="how_it_works_text_content">
+          Choose the right person for your task.<br>
+          Confirm one transporter out of the many who accept your delivery request.
+        </div>
+      </div>
+      <div class="how_it_works_image">
+        <%= image_tag("HowItWorks2.png") %>
+      </div>
+    </div>
+    <div class="how_it_works_right">
+      <div class="how_it_works_image">
+        <%= image_tag("HowItWorks3.png") %>
+      </div>
+      <div class="how_it_works_text" style="padding-left: 30px;">
+        <div class="how_it_works_text_title">
+          Authorize PayPal transaction.
+        </div>
+        <div class="how_it_works_text_content">
+          Confirm delivery payment.<br>
+          Transaction is processed only after transporter has successfully completed your delivery request.
+        </div>
+      </div>
+    </div>
+    <div class="how_it_works_right">
+      <div class="how_it_works_text" style=" padding-right: -10px;">
+        <div class="how_it_works_text_title">
+          Get your stuff delivered.
+        </div>
+        <div class="how_it_works_text_content">
+          This is when your delivery happens.<br>
+          Once it's complete, PayPal finishes the transaction.
+          Rate the experience you've had with your transporter.
+        </div>
+      </div>
+      <div class="how_it_works_image">
+        <%= image_tag("HowItWorks4.png") %>
+      </div>
+    </div>
+    <% if current_user.nil? %>
+        <div class="signup_now" onclick="location.href='/signup'">
+          <b>Get your own account!</b>
+        </div>
+    <% end  %>
+
+  </div>
 </div>

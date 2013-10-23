@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20131019205103) do
+ActiveRecord::Schema.define(:version => 20131023192228) do
 
   create_table "accepted_requests", :force => true do |t|
     t.integer  "request_delivery_id"
@@ -120,9 +120,10 @@ ActiveRecord::Schema.define(:version => 20131019205103) do
     t.integer  "request_delivery_id"
     t.integer  "user_id"
     t.string   "payKey"
-    t.datetime "created_at",          :null => false
-    t.datetime "updated_at",          :null => false
+    t.datetime "created_at",                             :null => false
+    t.datetime "updated_at",                             :null => false
     t.string   "status"
+    t.boolean  "approved",            :default => false
   end
 
   add_index "request_payments", ["request_delivery_id", "user_id"], :name => "index_request_payments_on_request_delivery_id_and_user_id", :unique => true

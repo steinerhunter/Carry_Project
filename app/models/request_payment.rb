@@ -4,7 +4,7 @@ class RequestPayment < ActiveRecord::Base
 
   validates :user_id, :presence => { :message => "Must be owned by some user..."}
   validates :request_delivery_id, :presence => { :message => "Must be associated with a certain request delivery..."}
-  validates :payKey, :presence => { :message => "Must have a payKey..."}
+  validates :payKey, :presence => { :message => "Must have a preapprovalKey..."}
   validates :status, :presence => { :message => "Must have a status..."}
 
   def check_status(status)

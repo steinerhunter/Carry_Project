@@ -146,7 +146,11 @@
           </div>
           <div class="the_size_and_more_info">
             <div class="posted_by">
-              <%=  link_to gravatar_for(@suggest_delivery.user), @suggest_delivery.user  %>
+              <% if facebook_authorization(@suggest_delivery.user)  %>
+                  <%= link_to facebook_profile_photo(@suggest_delivery.user,"profile"), @suggest_delivery.user %>
+              <% else  %>
+                  <%=  link_to gravatar_for(@suggest_delivery.user), @suggest_delivery.user  %>
+              <% end  %>
               Posted By <b><%= link_to @suggest_delivery.user.name, @suggest_delivery.user  %></b>
               <div class="verified_details">
                 <div class="verified_item">

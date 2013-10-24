@@ -90,7 +90,7 @@ class PaymentsController < ApplicationController
           "currencyCode" => "USD",
           "receiverList"=> {
               "receiver"=> [
-                  { "email" => task_creator.email, "amount" => seller_amount, "primary" => false },
+                  { "email" => confirmed_user.email, "amount" => seller_amount, "primary" => false },
                   { "email" => "salomon.omer-facilitator@gmail.com", "amount" =>commission_amount, "primary" => false }
               ]
           },
@@ -132,17 +132,25 @@ class PaymentsController < ApplicationController
       if req_or_sugg == "request_delivery"
         accepted_task.complete_accepted_request
         request_delivery.complete_request
+        redirect_to :controller => 'user_reviews',
+                    :action => 'new',
+                    :from_user_id => confirmed_user.id,
+                    :to_user_id => task_creator.id,
+                    :req_or_sugg => req_or_sugg,
+                    :job_type => "SENDER",
+                    :task_id => task.id
       elsif req_or_sugg == "suggest_delivery"
         accepted_task.complete_accepted_suggest
         suggest_delivery.complete_suggest
+        redirect_to :controller => 'user_reviews',
+                    :action => 'new',
+                    :from_user_id => task_creator.id,
+                    :to_user_id => confirmed_user.id,
+                    :req_or_sugg => req_or_sugg,
+                    :job_type => "SENDER",
+                    :task_id => task.id
       end
-      redirect_to :controller => 'user_reviews',
-                  :action => 'new',
-                  :from_user_id => task_creator.id,
-                  :to_user_id => confirmed_user.id,
-                  :req_or_sugg => req_or_sugg,
-                  :job_type => "SENDER",
-                  :task_id => task.id
+
     else
       session[:error] = confirm_preapproval_response#pay_response.errors.first['message']
       redirect_to fail_url

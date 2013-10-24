@@ -184,24 +184,25 @@
                     </div>
                   </div>
                   <div class="verified_item">
-                    <div class="bubbleInfo">
-                      <%= image_tag("NonVerifiedFB.png", :class => "trigger")%>
-                      <div class="popup">
-                        User has <b style="color: #d67a31">not verified</b> his/her Facebook Account.
-                        <div id="tail1" style="left:47px;"></div>
-                        <div id="tail2" style="left:47px;"></div>
-                      </div>
-                    </div>
-                  </div>
-                  <div class="verified_item">
-                    <div class="bubbleInfo">
-                      <%= image_tag("NonVerifiedPhoto.png", :class => "trigger")%>
-                      <div class="popup">
-                        User has <b style="color: #d67a31">not uploaded</b> a Profile Picture.
-                        <div id="tail1" style="left:47px;"></div>
-                        <div id="tail2" style="left:47px;"></div>
-                      </div>
-                    </div>
+                    <% if @facebook_authentication.present? %>
+                        <div class="bubbleInfo">
+                          <%= image_tag("VerifiedFB.png", :class => "trigger")%>
+                          <div class="popup">
+                            User has <b style="color:#279227">verified</b> his/her Facebook Account.
+                            <div id="tail1" style="left:47px;"></div>
+                            <div id="tail2" style="left:47px;"></div>
+                          </div>
+                        </div>
+                    <% else %>
+                        <div class="bubbleInfo">
+                          <%= image_tag("NonVerifiedFB.png", :class => "trigger")%>
+                          <div class="popup">
+                            User has <b style="color: #d67a31">not verified</b> his/her Facebook Account.
+                            <div id="tail1" style="left:47px;"></div>
+                            <div id="tail2" style="left:47px;"></div>
+                          </div>
+                        </div>
+                    <% end  %>
                   </div>
                 </div>
               </div>

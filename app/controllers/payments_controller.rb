@@ -16,7 +16,7 @@ class PaymentsController < ApplicationController
     elsif req_or_sugg == "suggest_delivery"
       suggest_delivery = SuggestDelivery.find_by_id(params[:task_id])
       accepted_task = AcceptedSuggest.find_by_id(params[:accepted_task_id])
-      #suggest_payment = SuggestPayment.find_by_request_delivery_id(suggest_delivery.id)
+      suggest_payment = SuggestPayment.find_by_suggest_delivery_id(suggest_delivery.id)
       amount = suggest_delivery.cost.to_f
     end
     seller_amount = 0.85*amount.to_f
@@ -55,12 +55,12 @@ class PaymentsController < ApplicationController
           RequestPayment.create(:user_id => current_user.id,
                                 :request_delivery_id => request_delivery.id,
                                 :status => preapproval_details_response["status"],
-                                :payKey => preapproval_response["preapprovalKey"])
+                                :preapprovalKey => preapproval_response["preapprovalKey"])
         elsif req_or_sugg == "suggest_delivery"
           SuggestPayment.create(:user_id => current_user.id,
                                 :suggest_delivery_id => suggest_delivery.id,
                                 :status => preapproval_details_response["status"],
-                                :payKey => preapproval_response["preapprovalKey"])
+                                :preapprovalKey => preapproval_response["preapprovalKey"])
         end
       else
         session[:error] = preapproval_details_response#pay_response.errors.first['message']
@@ -82,33 +82,49 @@ class PaymentsController < ApplicationController
       request_payment = RequestPayment.find_by_request_delivery_id(request_delivery.id)
       task = request_delivery
       amount = request_delivery.cost.to_f
+      seller_amount = 0.85*amount.to_f
+      commission_amount = 0.15*amount.to_f
+      preapproval_data = {
+          "returnUrl" => details_url(accepted_task,req_or_sugg),
+          "requestEnvelope" => { "errorLanguage" => "en_US" },
+          "currencyCode" => "USD",
+          "receiverList"=> {
+              "receiver"=> [
+                  { "email" => task_creator.email, "amount" => seller_amount, "primary" => false },
+                  { "email" => "salomon.omer-facilitator@gmail.com", "amount" =>commission_amount, "primary" => false }
+              ]
+          },
+          "cancelUrl" => activity_url,
+          "ipnNotificationUrl" => ipn_notification_url,
+          "preapprovalKey" => request_payment.preapprovalKey,
+          "actionType" => "PAY"
+      }
     elsif req_or_sugg == "suggest_delivery"
       suggest_delivery = SuggestDelivery.find_by_id(params[:task_id])
       accepted_task= AcceptedSuggest.find_by_id(params[:accepted_task_id])
-      #suggest_payment = SuggestPayment.find_by_request_delivery_id(suggest_delivery.id)
+      suggest_payment = SuggestPayment.find_by_suggest_delivery_id(suggest_delivery.id)
       task = suggest_delivery
       amount = suggest_delivery.cost.to_f
+      seller_amount = 0.85*amount.to_f
+      commission_amount = 0.15*amount.to_f
+      preapproval_data = {
+          "returnUrl" => details_url(accepted_task,req_or_sugg),
+          "requestEnvelope" => { "errorLanguage" => "en_US" },
+          "currencyCode" => "USD",
+          "receiverList"=> {
+              "receiver"=> [
+                  { "email" => task_creator.email, "amount" => seller_amount, "primary" => false },
+                  { "email" => "salomon.omer-facilitator@gmail.com", "amount" =>commission_amount, "primary" => false }
+              ]
+          },
+          "cancelUrl" => activity_url,
+          "ipnNotificationUrl" => ipn_notification_url,
+          "preapprovalKey" => suggest_payment.preapprovalKey,
+          "actionType" => "PAY"
+      }
     end
-    seller_amount = 0.85*amount.to_f
-    commission_amount = 0.15*amount.to_f
 
     preapproval_request = PaypalAdaptive::Request.new
-
-    preapproval_data = {
-        "returnUrl" => details_url(accepted_task,req_or_sugg),
-        "requestEnvelope" => { "errorLanguage" => "en_US" },
-        "currencyCode" => "USD",
-        "receiverList"=> {
-            "receiver"=> [
-                { "email" => confirmed_user.email, "amount" => seller_amount, "primary" => false },
-                { "email" => "salomon.omer-facilitator@gmail.com", "amount" =>commission_amount, "primary" => false }
-            ]
-        },
-        "cancelUrl" => activity_url,
-        "ipnNotificationUrl" => ipn_notification_url,
-        "preapprovalKey" => request_payment.payKey,
-        "actionType" => "PAY"
-    }
 
     confirm_preapproval_response = preapproval_request.pay(preapproval_data)
 
@@ -122,8 +138,8 @@ class PaymentsController < ApplicationController
       end
       redirect_to :controller => 'user_reviews',
                   :action => 'new',
-                  :from_user_id => confirmed_user.id,
-                  :to_user_id => task_creator.id,
+                  :from_user_id => task_creator.id,
+                  :to_user_id => confirmed_user.id,
                   :req_or_sugg => req_or_sugg,
                   :job_type => "SENDER",
                   :task_id => task.id
@@ -140,16 +156,19 @@ class PaymentsController < ApplicationController
       accepted_request = AcceptedRequest.find_by_id(params[:accepted_task_id])
       request_delivery = RequestDelivery.find_by_id(accepted_request.request_delivery_id)
       request_payment = RequestPayment.find_by_request_delivery_id(request_delivery.id)
+      details_data = {
+          "preapprovalKey" => request_payment.preapprovalKey,
+          "requestEnvelope" => { "errorLanguage" => "en_US" },
+      }
     elsif req_or_sugg == "suggest_delivery"
       accepted_suggest = AcceptedSuggest.find_by_id(params[:accepted_task_id])
       suggest_delivery = SuggestDelivery.find_by_id(accepted_suggest.suggest_delivery_id)
-      #suggest_payment = SuggestPayment.find_by_suggest_delivery_id(suggest_delivery.id)
+      suggest_payment = SuggestPayment.find_by_suggest_delivery_id(suggest_delivery.id)
+      details_data = {
+          "preapprovalKey" => suggest_payment.preapprovalKey,
+          "requestEnvelope" => { "errorLanguage" => "en_US" },
+      }
     end
-
-    details_data = {
-        "preapprovalKey" => request_payment.payKey,
-        "requestEnvelope" => { "errorLanguage" => "en_US" },
-    }
 
     preapproval_details_response = preapproval_details.preapproval_details(details_data)
 
@@ -171,7 +190,6 @@ class PaymentsController < ApplicationController
           suggest_delivery.confirm_suggest
         end
       end
-
       redirect_to activity_url
     else
       session[:error] = preapproval_details_response#pay_response.errors.first['message']

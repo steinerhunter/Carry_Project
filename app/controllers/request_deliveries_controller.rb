@@ -151,8 +151,9 @@ class RequestDeliveriesController < ApplicationController
     @request_delivery = RequestDelivery.find(params[:request_delivery_id])
     @request_creator = User.find(@request_delivery.user_id)
     @confirmed_user = User.find( @accepted_request.user_id)
-    if @confirmed_user == current_user
-        flash[:complete] = "You've chosen to mark <br><b>#{@request_delivery.what}</b><br> delivery request as <br><div class='complete'><b>complete!</b></div>
+    @request_payment = RequestPayment.find_by_request_delivery_id(@request_delivery.id)
+    if @confirmed_user == current_user && @request_payment.approved
+      flash[:complete] = "You've chosen to mark <br><b>#{@request_delivery.what}</b><br> delivery request as <br><div class='complete'><b>complete!</b></div>
                                             <div class='sub_flash_text'>A payment of <b>#{@request_delivery.cost} #{@request_delivery.currency}</b> will be transferred to you. <br></div>".html_safe
         #NotifMailer.new_complete_request(@request_creator,@confirmed_user,@request_delivery).deliver
         redirect_to :controller => 'payments',

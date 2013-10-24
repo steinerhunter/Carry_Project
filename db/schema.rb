@@ -11,16 +11,20 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20131023192228) do
+ActiveRecord::Schema.define(:version => 20131024202737) do
 
   create_table "accepted_requests", :force => true do |t|
     t.integer  "request_delivery_id"
     t.integer  "user_id"
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at",                             :null => false
+    t.datetime "updated_at",                             :null => false
     t.boolean  "confirmed",           :default => false
     t.boolean  "complete",            :default => false
   end
+
+  add_index "accepted_requests", ["request_delivery_id", "user_id"], :name => "index_accepted_requests_on_request_delivery_id_and_user_id", :unique => true
+  add_index "accepted_requests", ["request_delivery_id"], :name => "index_accepted_requests_on_request_delivery_id"
+  add_index "accepted_requests", ["user_id"], :name => "index_accepted_requests_on_user_id"
 
   create_table "accepted_suggests", :force => true do |t|
     t.integer  "suggest_delivery_id"
@@ -39,11 +43,14 @@ ActiveRecord::Schema.define(:version => 20131023192228) do
     t.integer  "user_id"
     t.string   "provider"
     t.string   "uid"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-    t.boolean  "verified"
+    t.datetime "created_at",                    :null => false
+    t.datetime "updated_at",                    :null => false
+    t.boolean  "verified",   :default => false
     t.string   "image"
   end
+
+  add_index "authentications", ["provider", "uid"], :name => "index_authentications_on_provider_and_uid"
+  add_index "authentications", ["user_id"], :name => "index_authentications_on_user_id"
 
   create_table "comments", :force => true do |t|
     t.text     "content"
@@ -99,19 +106,19 @@ ActiveRecord::Schema.define(:version => 20131023192228) do
   create_table "request_deliveries", :force => true do |t|
     t.string   "from"
     t.string   "to"
-    t.datetime "when",             :limit => 255
+    t.datetime "when"
     t.string   "more_details"
     t.integer  "user_id"
-    t.datetime "created_at",                                          :null => false
-    t.datetime "updated_at",                                          :null => false
+    t.datetime "created_at",                           :null => false
+    t.datetime "updated_at",                           :null => false
     t.string   "what"
     t.string   "cost"
     t.string   "size"
     t.string   "sending_person"
     t.string   "receiving_person"
     t.string   "currency"
-    t.string   "status",                          :default => "Open"
-    t.boolean  "has_all_details",                 :default => false
+    t.string   "status",           :default => "Open"
+    t.boolean  "has_all_details",  :default => false
   end
 
   add_index "request_deliveries", ["user_id", "created_at"], :name => "index_request_deliveries_on_user_id_and_created_at"
@@ -119,14 +126,14 @@ ActiveRecord::Schema.define(:version => 20131023192228) do
   create_table "request_payments", :force => true do |t|
     t.integer  "request_delivery_id"
     t.integer  "user_id"
-    t.string   "payKey"
+    t.string   "preapprovalKey"
     t.datetime "created_at",                             :null => false
     t.datetime "updated_at",                             :null => false
     t.string   "status"
     t.boolean  "approved",            :default => false
   end
 
-  add_index "request_payments", ["request_delivery_id", "user_id"], :name => "index_request_payments_on_request_delivery_id_and_user_id", :unique => true
+  add_index "request_payments", ["request_delivery_id", "user_id"], :name => "unique_request_payments", :unique => true
   add_index "request_payments", ["request_delivery_id"], :name => "index_request_payments_on_request_delivery_id"
   add_index "request_payments", ["user_id"], :name => "index_request_payments_on_user_id"
 
@@ -143,19 +150,33 @@ ActiveRecord::Schema.define(:version => 20131023192228) do
   create_table "suggest_deliveries", :force => true do |t|
     t.string   "from"
     t.string   "to"
-    t.datetime "when",            :limit => 255
+    t.datetime "when"
     t.string   "more_details"
     t.integer  "user_id"
-    t.datetime "created_at",                                         :null => false
-    t.datetime "updated_at",                                         :null => false
+    t.datetime "created_at",                          :null => false
+    t.datetime "updated_at",                          :null => false
     t.string   "size"
     t.string   "cost"
     t.string   "currency"
-    t.string   "status",                         :default => "Open"
-    t.boolean  "has_all_details",                :default => false
+    t.string   "status",          :default => "Open"
+    t.boolean  "has_all_details", :default => false
   end
 
   add_index "suggest_deliveries", ["user_id", "created_at"], :name => "index_suggest_deliveries_on_user_id_and_created_at"
+
+  create_table "suggest_payments", :force => true do |t|
+    t.integer  "suggest_delivery_id"
+    t.integer  "user_id"
+    t.string   "preapprovalKey"
+    t.string   "status"
+    t.datetime "created_at",                             :null => false
+    t.datetime "updated_at",                             :null => false
+    t.boolean  "approved",            :default => false
+  end
+
+  add_index "suggest_payments", ["suggest_delivery_id", "user_id"], :name => "index_suggest_payments_on_suggest_delivery_id_and_user_id", :unique => true
+  add_index "suggest_payments", ["suggest_delivery_id"], :name => "index_suggest_payments_on_suggest_delivery_id"
+  add_index "suggest_payments", ["user_id"], :name => "index_suggest_payments_on_user_id"
 
   create_table "user_reviews", :force => true do |t|
     t.integer  "from_user_id"

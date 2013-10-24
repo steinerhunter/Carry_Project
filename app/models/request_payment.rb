@@ -7,8 +7,4 @@ class RequestPayment < ActiveRecord::Base
   validates :payKey, :presence => { :message => "Must have a preapprovalKey..."}
   validates :status, :presence => { :message => "Must have a status..."}
 
-  def check_status(status)
-    self. status == status
-  end
-
 end

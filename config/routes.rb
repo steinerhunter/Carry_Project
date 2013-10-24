@@ -38,6 +38,8 @@ TheCarryProject::Application.routes.draw do
   match '/confirm_request', to:'request_deliveries#confirm'
   match '/confirm_suggestion', to:'suggest_deliveries#confirm'
 
+  match '/authorize_suggestion', to:'suggest_deliveries#authorize'
+
   match '/complete_request', to:'request_deliveries#complete'
   match '/complete_suggestion', to:'suggest_deliveries#complete'
 

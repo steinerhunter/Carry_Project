@@ -65,7 +65,7 @@ p {
 
 .signup_form_class {
   width: 700px;
-  height: 350px;
+  height: 380px;
   text-align: center;
   background-color: #1d79e2;
   -moz-box-shadow: 5px 5px 5px #6b6b6b; /* Old Firefox */
@@ -78,6 +78,17 @@ p {
   margin-right: auto;
   margin-left: auto;
   padding-bottom: 20px;
+}
+
+.by_signing_up {
+  margin-top:20px;
+  a {
+    color: #f2ff5e;
+    text-decoration: none;
+    &:hover {
+      color: #ffffff;
+    }
+  }
 }
 
 .signin_form_class {

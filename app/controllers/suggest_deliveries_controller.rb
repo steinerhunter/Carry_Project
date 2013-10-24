@@ -139,22 +139,45 @@ class SuggestDeliveriesController < ApplicationController
     redirect_to activity_path
   end
 
-  def complete
+  def authorize
     @accepted_suggest = AcceptedSuggest.find(params[:accepted_suggest_id])
     @suggest_delivery = SuggestDelivery.find(params[:suggest_delivery_id])
     @suggest_creator = User.find(@suggest_delivery.user_id)
     @confirmed_user = User.find( @accepted_suggest.user_id)
-    if @suggest_creator == current_user
-      if @accepted_suggest.complete_accepted_suggest
-        @suggest_delivery.complete_suggest
-        flash[:complete] = "You've chosen to mark <br><b>#{@suggest_delivery.size} Sized Items</b><br> delivery suggestion as <br><div class='complete'><b>complete!</b></div>
+    if @confirmed_user == current_user
+      #NotifMailer.new_confirmed_suggest(@suggest_creator,@confirmed_user,@suggest_delivery).deliver
+      redirect_to :controller => 'payments',
+                  :action => 'checkout',
+                  :req_or_sugg => "suggest_delivery",
+                  :task_creator_id => @suggest_creator.id,
+                  :confirmed_user_id => @confirmed_user.id,
+                  :task_id => @suggest_delivery.id,
+                  :accepted_task_id => @accepted_suggest.id
+    else
+      flash[:cannot] = "Only the creator of the suggestion can confirm it."
+    end
+  end
+
+  def complete
+    @accepted_suggest = AcceptedSuggest.find(params[:accepted_suggest_id])
+    @suggest_delivery = SuggestDelivery.find(params[:suggest_delivery_id])
+    @suggest_creator = User.find(@suggest_delivery.user_id)
+    @suggest_payment = SuggestPayment.find_by_suggest_delivery_id(@suggest_delivery.id)
+    @confirmed_user = User.find( @accepted_suggest.user_id)
+    if @suggest_creator == current_user && @suggest_payment.approved
+      flash[:complete] = "You've chosen to mark <br><b>#{@suggest_delivery.size} Sized Items</b><br> delivery suggestion as <br><div class='complete'><b>complete!</b></div>
                                             <div class='sub_flash_text'>A payment of <b>#{@suggest_delivery.cost} #{@suggest_delivery.currency}</b> will be transferred to you. <br></div>".html_safe
-        NotifMailer.new_complete_suggest(@suggest_creator,@confirmed_user,@suggest_delivery).deliver
-      end
+        #NotifMailer.new_complete_suggest(@suggest_creator,@confirmed_user,@suggest_delivery).deliver
+        redirect_to :controller => 'payments',
+                                  :action => 'execute',
+                                  :req_or_sugg => "suggest_delivery",
+                                  :task_creator_id => @suggest_creator.id,
+                                  :confirmed_user_id => @confirmed_user.id,
+                                  :task_id => @suggest_delivery.id,
+                                  :accepted_task_id => @accepted_suggest.id
     else
       flash[:cannot] = "Only the creator of the suggestion can mark it as complete."
     end
-    redirect_to activity_path
   end
 
   private

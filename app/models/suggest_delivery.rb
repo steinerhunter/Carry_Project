@@ -55,5 +55,8 @@ class SuggestDelivery < ActiveRecord::Base
     AcceptedSuggest.where("suggest_delivery_id = ? AND confirmed = ?",self.id,false).pluck(:user_id)
   end
 
+  def approved_payment
+    SuggestPayment.where("suggest_delivery_id = ? AND approved = ?",self.id, true)
+  end
 
 end

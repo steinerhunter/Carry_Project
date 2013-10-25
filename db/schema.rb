@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20131024202737) do
+ActiveRecord::Schema.define(:version => 20131025074406) do
 
   create_table "accepted_requests", :force => true do |t|
     t.integer  "request_delivery_id"
@@ -109,16 +109,18 @@ ActiveRecord::Schema.define(:version => 20131024202737) do
     t.datetime "when"
     t.string   "more_details"
     t.integer  "user_id"
-    t.datetime "created_at",                           :null => false
-    t.datetime "updated_at",                           :null => false
+    t.datetime "created_at",                               :null => false
+    t.datetime "updated_at",                               :null => false
     t.string   "what"
     t.string   "cost"
     t.string   "size"
     t.string   "sending_person"
     t.string   "receiving_person"
     t.string   "currency"
-    t.string   "status",           :default => "Open"
-    t.boolean  "has_all_details",  :default => false
+    t.string   "status",               :default => "Open"
+    t.boolean  "has_all_details",      :default => false
+    t.boolean  "sender_reviewed",      :default => false
+    t.boolean  "transporter_reviewed", :default => false
   end
 
   add_index "request_deliveries", ["user_id", "created_at"], :name => "index_request_deliveries_on_user_id_and_created_at"
@@ -153,13 +155,15 @@ ActiveRecord::Schema.define(:version => 20131024202737) do
     t.datetime "when"
     t.string   "more_details"
     t.integer  "user_id"
-    t.datetime "created_at",                          :null => false
-    t.datetime "updated_at",                          :null => false
+    t.datetime "created_at",                               :null => false
+    t.datetime "updated_at",                               :null => false
     t.string   "size"
     t.string   "cost"
     t.string   "currency"
-    t.string   "status",          :default => "Open"
-    t.boolean  "has_all_details", :default => false
+    t.string   "status",               :default => "Open"
+    t.boolean  "has_all_details",      :default => false
+    t.boolean  "sender_reviewed",      :default => false
+    t.boolean  "transporter_reviewed", :default => false
   end
 
   add_index "suggest_deliveries", ["user_id", "created_at"], :name => "index_suggest_deliveries_on_user_id_and_created_at"

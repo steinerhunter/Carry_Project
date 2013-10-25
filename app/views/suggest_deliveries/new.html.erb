@@ -3,13 +3,34 @@
       <fieldset>
         <div class="single_step">
           <legend  style="background-image: url('../assets/car.png');"><b>Can you transport stuff?</b></legend>
+          <%= f.label :size, "How big can you deliver?" %>
+          <% if session[:suggest_delivery_size].present? %>
+              <%= f.hidden_field :size, :value => session[:suggest_delivery_size]%>
+          <% else  %>
+              <%= f.hidden_field :size %>
+          <% end  %>
           <div class="new_size">
-            <%= f.label :size, "How big can you deliver?" %>
-            <% if session[:suggest_delivery_size].present? %>
-                <%= f.select :size, options_for_select(%w[Small Medium Large], :selected => session[:suggest_delivery_size]) %>
-            <% else  %>
-                <%= f.select :size, options_for_select(%w[Small Medium Large]), :include_blank => "Pick Size..." %>
-            <% end  %>
+            <div class="size_box" id="small" style="background-image: url('../assets/mouse.png');"
+                 onclick="style.backgroundColor='#d05e0b';
+                         document.getElementById('medium').style.backgroundColor = '#a3a3a3';
+                         document.getElementById('large').style.backgroundColor = '#a3a3a3';
+                         document.getElementById('new_suggest_delivery').suggest_delivery_size.value = 'Small';">
+              Small
+            </div>
+            <div class="size_box" id="medium" style="background-image: url('../assets/lamp.png'); margin-left:20px;"
+                 onclick="style.backgroundColor='#d05e0b';
+                         document.getElementById('small').style.backgroundColor = '#a3a3a3';
+                         document.getElementById('large').style.backgroundColor = '#a3a3a3';
+                         document.getElementById('new_suggest_delivery').suggest_delivery_size.value = 'Medium';">
+              Medium
+            </div>
+            <div class="size_box" id="large" style="background-image: url('../assets/table.png'); margin-left:20px;"
+                 onclick="style.backgroundColor='#d05e0b';
+                         document.getElementById('small').style.backgroundColor = '#a3a3a3';
+                         document.getElementById('medium').style.backgroundColor = '#a3a3a3';
+                         document.getElementById('new_suggest_delivery').suggest_delivery_size.value = 'Large';">
+              Large
+            </div>
           </div>
           <%= f.label :from, "What's your starting point?" %>
           <% if session[:suggest_delivery_from].present? %>

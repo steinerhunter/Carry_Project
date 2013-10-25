@@ -34,13 +34,12 @@
   }
 }
 
-.pos_box {
+.pos_or_neg_box {
   width: 200px;
   height: 90px;
   display: inline-block;
   text-align: center;
   background-color: #a3a3a3;
-  background-image: url('happy_face.png');
   background-repeat: no-repeat;
   background-position: bottom center;
   border:solid 1px;
@@ -55,29 +54,7 @@
   line-height:90%;
 }
 
-.neg_box {
-  width: 200px;
-  height: 90px;
-  display: inline-block;
-  text-align: center;
-  background-color: #a3a3a3;
-  background-image: url('sad_face.png');
-  background-repeat: no-repeat;
-  background-position: bottom center;
-  border:solid 1px;
-  border-radius:3px;
-  -moz-border-radius:10px; /* Old Firefox */
-  color: #ffffff;
-  border-color: #18212e;
-  margin-right: auto;
-  margin-left: auto;
-  padding:10px;
-  margin-left:20px;
-  font-size: 4em;
-  line-height:90%;
-}
-
-.pos_box:hover, .neg_box:hover{
+.pos_or_neg_box:hover {
   cursor:pointer;
 }
 

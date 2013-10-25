@@ -39,6 +39,30 @@ legend {
   }
 }
 
+.size_box {
+  width: 170px;
+  height: 70px;
+  display: inline-block;
+  text-align: center;
+  background-color: #a3a3a3;
+  background-repeat: no-repeat;
+  background-position: bottom center;
+  border:solid 1px;
+  border-radius:3px;
+  -moz-border-radius:10px; /* Old Firefox */
+  color: #ffffff;
+  border-color: #18212e;
+  margin-right: auto;
+  margin-left: auto;
+  padding:10px;
+  font-size: 2.5em;
+  line-height:70%;
+}
+
+.size_box:hover {
+  cursor:pointer;
+}
+
 .new_money input[type=text] {
   width: 185px;
 }
@@ -95,3 +119,4 @@ fieldset input[type=text] {
   font-size: 17px;
   text-align: left;
 }
+

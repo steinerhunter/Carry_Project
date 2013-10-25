@@ -11,13 +11,13 @@
         <%= f.hidden_field :task_id, :value => params[:task_id] %>
         <%= f.hidden_field :job_type, :value => params[:job_type] %>
         <%= f.hidden_field :pos_or_neg %>
-        <div class="pos_box" id="good"
+        <div class="pos_or_neg_box" id="good" style="background-image: url('../assets/happy_face.png');"
                    onclick="style.backgroundColor='green';
                    document.getElementById('bad').style.backgroundColor = '#a3a3a3';
                    document.getElementById('new_user_review').user_review_pos_or_neg.value = 'POSITIVE';">
           Good
         </div>
-        <div class="neg_box" id="bad"
+        <div class="pos_or_neg_box" id="bad" style="background-image: url('../assets/sad_face.png'); margin-left:20px;"
                    onclick="style.backgroundColor='red';
                    document.getElementById('good').style.backgroundColor = '#a3a3a3';
                    document.getElementById('new_user_review').user_review_pos_or_neg.value = 'NEGATIVE';">

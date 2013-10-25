@@ -24,7 +24,6 @@ $('<div />').addClass('user_review_errors').html(errors).appendTo("#new_user_rev
 <% else %>
 
 // On successful creation of new user review, redirect to main page
-    <% url = session[:return_to] || root_path %>
-    <% session[:return_to] = nil if session[:return_to].present? %>
+    <% url = activity_path %>
     window.location.href = "<%= url %>"
 <% end %>

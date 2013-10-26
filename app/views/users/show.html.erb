@@ -2,7 +2,7 @@
   <div class="right_side">
     <% if @user == current_user  %>
         <div class="right_box" style="margin-bottom: 15px;">
-          <div class="right_box_title">
+          <div class="right_box_title" style="background-image: url('../assets/control_panel_icon.png');">
             <b>Control Panel</b>
           </div>
           <div class="right_box_data">
@@ -20,7 +20,7 @@
         </div>
     <% end  %>
     <div class="right_box" style="margin-bottom:15px">
-      <div class="right_box_title">
+      <div class="right_box_title" style="background-image: url('../assets/rating_icon.png');">
         <b>Rating</b>
       </div>
       <div class="right_box_data" style="line-height: 100%;">
@@ -68,7 +68,7 @@
       </div>
     </div>
     <div class="right_box">
-      <div class="right_box_title">
+      <div class="right_box_title" style="background-image: url('../assets/badges_icon.png');">
         <b>Earned Badges</b>
       </div>
       <div class="right_box_data" style="line-height: 100%;">
@@ -208,7 +208,7 @@
   </div>
 </div>
 <div class="show_reviews_data">
-  <div class="show_reviews_title">
+  <div class="show_reviews_title" style="background-image: url('../assets/others_say.png');padding-left:15px">
     <b style="padding-left: 20px;">What others are saying about</b>
       <% if @user == current_user  %>
           <b style="color:#f2ff5e">You</b>

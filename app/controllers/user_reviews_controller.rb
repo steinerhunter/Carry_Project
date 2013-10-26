@@ -15,6 +15,7 @@ class UserReviewsController < ApplicationController
     if @user_review.save
       @reviewed_user = User.find_by_id(@user_review.to_user_id)
       @reviewed_user.add_review
+      @reviewed_user.save
       if @user_review.job_type == "SENDER"
         if @user_review.req_or_sugg == "suggest_delivery"
           @suggest_delivery = SuggestDelivery.find_by_id(@user_review.task_id)

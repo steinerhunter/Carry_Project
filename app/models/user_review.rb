@@ -10,4 +10,8 @@ class UserReview < ActiveRecord::Base
   validates :pos_or_neg, :presence => { :message => "Your experience was either Good or Bad, right?"}
   validates :review_content, :presence => { :message => "Please add a sentence about your experience..."}
 
+  def from_user
+    User.find_by_id(self.from_user_id)
+  end
+
 end

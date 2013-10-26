@@ -6,6 +6,8 @@ class UsersController < ApplicationController
 
   def show
     @user = User.find(params[:id])
+    @user_transporter_reviews = UserReview.find_all_by_to_user_id_and_job_type(@user.id,"TRANSPORTER")
+    @user_sender_reviews = UserReview.find_all_by_to_user_id_and_job_type(@user.id,"SENDER")
   end
 
   def new

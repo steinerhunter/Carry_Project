@@ -75,20 +75,18 @@ class User < ActiveRecord::Base
     positive_sender_reviews = UserReview.where('to_user_id = ? AND job_type = ? AND pos_or_neg = ?',self.id,"SENDER","POSITIVE").count.to_i
     negative_sender_reviews = UserReview.where('to_user_id = ? AND job_type = ? AND pos_or_neg = ?',self.id,"SENDER","NEGATIVE").count.to_i
     total_sender_reviews = positive_sender_reviews + negative_sender_reviews
-    sender_rating = 100 * positive_sender_reviews / (total_sender_reviews ? 1 : total_sender_reviews)
+    if total_sender_reviews > 0
+      sender_rating = 100 * positive_sender_reviews / total_sender_reviews
+      self.update_attribute(:sender_rating, sender_rating)
+    end
 
     positive_transporter_reviews = UserReview.where('to_user_id = ? AND job_type = ? AND pos_or_neg = ?',self.id,"TRANSPORTER","POSITIVE").count.to_i
     negative_transporter_reviews = UserReview.where('to_user_id = ? AND job_type = ? AND pos_or_neg = ?',self.id,"TRANSPORTER","NEGATIVE").count.to_i
     total_transporter_reviews = positive_transporter_reviews + negative_transporter_reviews
-    transporter_rating = 100 * positive_transporter_reviews / (total_transporter_reviews ? 1 : total_transporter_reviews)
-
-    if (total_sender_reviews != 0)
-      self.update_attribute(:sender_rating, sender_rating)
-    end
-    if (total_transporter_reviews != 0)
+    if total_transporter_reviews > 0
+      transporter_rating = 100 * positive_transporter_reviews / total_transporter_reviews
       self.update_attribute(:transporter_rating, transporter_rating)
     end
-
   end
 
   private

@@ -236,7 +236,11 @@
         <b>By</b>
       </div>
       <div class="by_whom"><%= link_to suggest_feed_item.user.name, suggest_feed_item.user  %></div>
-      <div class="index_rating"><% @user = suggest_feed_item.user %><%=render 'shared/transporter_star_rating' %></div>
+      <% if suggest_feed_item.user.transporter_rating.present? %>
+          <div class="index_rating"><% @user = suggest_feed_item.user %><%=render 'shared/transporter_star_rating' %></div>
+      <% else  %>
+          Not rated yet
+      <% end  %>
     </div>
   </div>
 </div>

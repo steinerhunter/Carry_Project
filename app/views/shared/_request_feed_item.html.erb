@@ -242,7 +242,11 @@
           <b>By</b>
         </div>
         <div class="by_whom"><%= link_to request_feed_item.user.name, request_feed_item.user  %></div>
-        <div class="index_rating"><% @user = request_feed_item.user %><%=render 'shared/sender_star_rating' %></div>
+        <% if request_feed_item.user.sender_rating.present? %>
+            <div class="index_rating"><% @user = request_feed_item.user %><%=render 'shared/sender_star_rating' %></div>
+        <% else  %>
+            Not rated yet
+        <% end  %>
       </div>
     </div>
   </div>

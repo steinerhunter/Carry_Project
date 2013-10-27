@@ -5,9 +5,9 @@
   <%= form_for @search, :url => suggestions_path, :html => {:method => :get} do |f| %>
       <div class="search_fields">
         <div class="myfield_search">
-          <%= f.label :from_contains, "From:" %>
+          <%= f.label :from_contains, "From" %>
           <%= f.text_field :from_contains, :class => "address_field" %>
-          <%= f.label :to_contains, "To:" %>
+          <%= f.label :to_contains, "To" %>
           <%= f.text_field :to_contains, :class => "address_field" %>
           <%= f.submit :type => :image, :src => "assets/Filter_Results.png", :id =>"search_button" %>
         </div>

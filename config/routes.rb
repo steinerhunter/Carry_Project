@@ -66,6 +66,7 @@ TheCarryProject::Application.routes.draw do
   # PayPal routing
   get 'payments', to: 'payments#home', as: :home
   get 'payments/checkout', to: 'payments#checkout', as: :checkout
+  get 'payments/cancel', to: 'payments#cancel', as: :cancel
   get 'payments/execute', to: 'payments#execute', as: :execute
   get 'payments/fail', to: 'payments#fail', as: :fail
   post 'payments/ipn_notification', to: 'payments#ipn_notification', as: :ipn_notification

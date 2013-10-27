@@ -25,6 +25,10 @@ class AcceptedSuggest < ActiveRecord::Base
     self. update_attribute(:confirmed, true)
   end
 
+  def cancel_accepted_suggest
+    self. update_attribute(:confirmed, false)
+  end
+
   def complete_accepted_suggest
     self. update_attribute(:complete, true)
   end

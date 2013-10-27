@@ -72,6 +72,52 @@ class PaymentsController < ApplicationController
     end
   end
 
+  def cancel
+    req_or_sugg = params[:req_or_sugg]
+    if req_or_sugg == "request_delivery"
+      request_delivery = RequestDelivery.find_by_id(params[:task_id])
+      accepted_task = AcceptedRequest.find_by_id(params[:accepted_task_id])
+      request_payment = RequestPayment.find_by_request_delivery_id(request_delivery.id)
+      if request_delivery.when.present? && (Time.now + 3.days > request_delivery.when)
+        redirect_to activity_url
+      end
+      cancel_data = {
+          "preapprovalKey" => request_payment.preapprovalKey,
+          "requestEnvelope" => { "errorLanguage" => "en_US" }
+      }
+    elsif req_or_sugg == "suggest_delivery"
+      suggest_delivery = SuggestDelivery.find_by_id(params[:task_id])
+      accepted_task= AcceptedSuggest.find_by_id(params[:accepted_task_id])
+      suggest_payment = SuggestPayment.find_by_suggest_delivery_id(suggest_delivery.id)
+      if suggest_delivery.when.present? && (Time.now + 3.days > suggest_delivery.when)
+        redirect_to activity_url
+      end
+      task = suggest_delivery
+      cancel_data = {
+          "preapprovalKey" => suggest_payment.preapprovalKey,
+          "requestEnvelope" => { "errorLanguage" => "en_US" }
+      }
+    end
+
+    cancel_request = PaypalAdaptive::Request.new
+
+    cancel_response = cancel_request.cancel_preapproval(cancel_data)
+
+    if cancel_response.success?
+      if req_or_sugg == "request_delivery"
+        accepted_task.cancel_accepted_request
+        request_delivery.unconfirm_request
+      elsif req_or_sugg == "suggest_delivery"
+        accepted_task.cancel_accepted_suggest
+        suggest_delivery.unconfirm_suggest
+      end
+      redirect_to activity_path
+    else
+      session[:error] = cancel_response#pay_response.errors.first['message']
+      redirect_to fail_url
+    end
+  end
+
   def execute
     confirmed_user = User.find_by_id(params[:confirmed_user_id])
     task_creator = User.find_by_id(params[:task_creator_id])

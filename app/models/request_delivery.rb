@@ -44,6 +44,10 @@ class RequestDelivery < ActiveRecord::Base
     self.update_attribute(:status, "Confirmed")
   end
 
+  def unconfirm_request
+    self.accept_request
+  end
+
   def complete_request
     self.update_attribute(:status, "Complete")
   end

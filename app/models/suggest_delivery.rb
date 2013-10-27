@@ -43,6 +43,10 @@ class SuggestDelivery < ActiveRecord::Base
     self.update_attribute(:status, "Confirmed")
   end
 
+  def unconfirm_suggest
+    self.accept_suggest
+  end
+
   def complete_suggest
     self.update_attribute(:status, "Complete")
   end

@@ -25,6 +25,10 @@ class AcceptedRequest < ActiveRecord::Base
     self. update_attribute(:confirmed, true)
   end
 
+  def cancel_accepted_request
+    self. update_attribute(:confirmed, false)
+  end
+
   def complete_accepted_request
     self. update_attribute(:complete, true)
   end

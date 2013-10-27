@@ -140,13 +140,43 @@
   -webkit-border-radius: 10px 10px 0px 0px;
   border-radius: 10px 10px 0px 0px;
   a {
-    padding-left:70px;
     color: #ffffff;
     text-decoration: none;
     &:hover {
       color: #f2ff5e;
     }
   }
+}
+
+.feed_title:hover {
+  background-color: #d67a31;
+  cursor:pointer;
+}
+
+.feed_mini_title {
+  font-size:1.8em;
+  text-align: left;
+  margin-bottom: 10px;
+  b {
+    color: #8bceff
+  }
+}
+
+.by_whom {
+   text-align: center;
+  font-size:20px;
+  padding:10px;
+  a {
+    color: #f2ff5e;
+    text-decoration: none;
+    &:hover {
+      color: #ffffff;
+    }
+  }
+}
+
+.index_rating {
+  text-align: center;
 }
 
 .feed_request_data {
@@ -165,48 +195,35 @@
 }
 
 .feed_item_money {
-  text-align: center;
-  width: 715px;
-  margin-bottom: 10px;
-  margin-left: 10px;
-  background-color: #257b2a;
-  border:1px solid;
-  border-radius:2px;
-  -moz-border-radius:10px; /* Old Firefox */
-  padding-left: 10px;
-  padding-right: 10px;
-  padding-top: 10px;
-  padding-bottom: 10px;
-  color: #ffffff;
-  border-color: #000000;
-  font-size: 1.8em;
-  a {
-    color: #ffffff;
-    text-decoration: none;
-    &:hover {
-      color: #f2ff5e;
-    }
-  }
+  font-size:2.2em;
+  line-height: 150%;
+  height:75px;
+  font-weight: bold;
 }
 
-.feed_from_and_to {
+.from_to_text {
+  text-align: left;
+  font-size:15px;
+  font-weight: bold;
+}
+
+.feed_cost_and_from_and_to_and_by {
   display: inline-block;
+  vertical-align: top;
   text-align: center;
-  width: 290px;
+  width: 195px;
+  height:100px;
   bottom:0;
   left:0;
   margin-bottom: 10px;
   margin-left: 10px;
   background-color: #10529b;
   background-repeat: no-repeat;
-  background-position: top left;
+  background-position: top right;
   border:1px solid;
   border-radius:2px;
   -moz-border-radius:10px; /* Old Firefox */
-  padding-left: 60px;
-  padding-right: 10px;
-  padding-top: 10px;
-  padding-bottom: 10px;
+  padding:10px;
   margin-top:10px;
   color: #ffffff;
   border-color: #000000;
@@ -245,7 +262,7 @@
 .feed_item_map {
   position:absolute;
   right:10px;
-  margin-top:13px;
+  margin-top:63px;
   border:1px solid;
   border-color: #000000;
   z-index: 9;

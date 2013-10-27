@@ -52,7 +52,7 @@
         </div>
         </div>
         </div>
-  <% elsif (current_user?(suggest_feed_item.user)) || (current_user.try(:admin?)) %>
+  <% elsif (current_user.try(:admin?)) %>
       <div class="delete_post">
         <div class="bubbleInfo">
           <%=  link_to image_tag("delete_post.png"), suggest_feed_item, method: :delete, class: "trigger" %>
@@ -203,23 +203,40 @@
         </div>
         </div>
   <% end %>
-  <div class="right_index">
-    <div class="feed_item_map">
-      <img src="http://maps.google.com/maps/api/staticmap?size=150x150&maptype=roadmap&sensor=false&markers=color:green|label:A|<%= suggest_feed_item.from %>&markers=color:green|label:B|<%= suggest_feed_item.to %>" alt="Static, Marked Map of Chicago, Illinois and Hammond, Indiana with no Center and Zoom"></img>
-    </div>
-  </div>
   <div class="feed_item_info">
-    <div class="feed_title" style="background-image: url('../assets/car.png');">
-      <b><%= link_to suggest_feed_item.size + " sized items.", suggest_delivery_path(suggest_feed_item) %></b>
+    <div class="feed_title" style="padding-left:10px" onclick="location.href='<%=suggest_delivery_path(suggest_feed_item)%>'">
+      <b><%= suggest_feed_item.size + " sized items" %></b>
     </div>
-    <div class="feed_from_and_to" style="background-image: url('../assets/index_LocationA.png');">
-      From: <b><%= suggest_feed_item.from %></b>
+    <div class="feed_cost_and_from_and_to_and_by" style="background-image: url('../assets/money_bag.png');background-color:#5f80ba;">
+      <div class="feed_mini_title">
+        <b>Cost</b>
+      </div>
+      <div class="feed_item_money">
+        <%= suggest_feed_item.cost + " " + suggest_feed_item.currency  %>
+      </div>
     </div>
-    <div class="feed_from_and_to" style="background-image: url('../assets/index_LocationB.png');">
-      To: <b><%= suggest_feed_item.to %></b>
+    <div class="feed_cost_and_from_and_to_and_by" style="background-image: url('../assets/index_LocationA.png');">
+      <div class="feed_mini_title">
+        <b>From</b>
+      </div>
+      <div class="from_to_text">
+        <%= suggest_feed_item.from %>
+      </div>
     </div>
-    <div class="feed_item_money">
-      <b><%= link_to "Delivery Cost: " + suggest_feed_item.cost + " " + suggest_feed_item.currency, suggest_delivery_path(suggest_feed_item)  %></b>
+    <div class="feed_cost_and_from_and_to_and_by" style="background-image: url('../assets/index_LocationB.png');">
+      <div class="feed_mini_title">
+        <b>To</b>
+      </div>
+      <div class="from_to_text">
+        <%= suggest_feed_item.to %>
+      </div>
+    </div>
+    <div class="feed_cost_and_from_and_to_and_by" style="background-image: url('../assets/index_by.png');">
+      <div class="feed_mini_title">
+        <b>By</b>
+      </div>
+      <div class="by_whom"><%= link_to suggest_feed_item.user.name, suggest_feed_item.user  %></div>
+      <div class="index_rating"><% @user = suggest_feed_item.user %><%=render 'shared/transporter_star_rating' %></div>
     </div>
   </div>
 </div>

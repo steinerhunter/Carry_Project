@@ -161,9 +161,27 @@
               <% elsif activity_suggest_item.accepted_suggest_confirmed.other_user_for_suggest == current_user  %>
                   (by <b style="color:#f2ff5e">You</b>)
                   <br>
-                  <div class="send_messages_to_users" style="background-color: #d05e0b;">
+                  <div class="send_messages_to_users" style="background-color: #257b2a;">
                     <div class="needs_to_confirm">
-
+                      <% if activity_suggest_item.when.present? && (Time.now + 3.days > activity_suggest_item.when)%>
+                      <% else  %>
+                          <div class="confirm_me" style="right:35px">
+                            <div class="bubbleInfo">
+                              <%=  link_to image_tag("Cancel.png"),
+                                           {:controller => "payments",
+                                            :action => "cancel",
+                                            :req_or_sugg => "suggest_delivery",
+                                            :accepted_task_id => activity_suggest_item.accepted_suggest_confirmed.id,
+                                            :task_id => activity_suggest_item.id  },
+                                           class: "trigger" %>
+                              <div class="popup" style="height:20px; width:205px; margin-top:57px;">
+                                <b style="color:#d05e0b;">Cancel</b> Preapproved payment.
+                                <div id="tail1" style="left:36px"></div>
+                                <div id="tail2" style="left:36px"></div>
+                              </div>
+                            </div>
+                          </div>
+                      <% end  %>
                       <div class="send_message" style="right:3px">
                         <div class="bubbleInfo">
                           <%=  link_to image_tag("send_message.png"),

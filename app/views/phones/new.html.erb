@@ -1,0 +1,14 @@
+<div class="new_delivery_request_class">
+  <%= form_for(@user, :remote => true) do |f| %>
+      <fieldset>
+        <div class="single_step">
+          <legend><b>Add your phone number</b></legend>
+          <%= f.label :phone, "What's your phone number?" %>
+          <%= f.text_field :phone %>
+          <div class="form_submit" style="margin-top:20px;">
+            <%= f.submit "Finish", :type => :image, :src => "assets/Post_Request.png", :class => "finish" %>
+          </div>
+        </div>
+      </fieldset>
+  <% end  %>
+</div>

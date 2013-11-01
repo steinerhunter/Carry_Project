@@ -1,0 +1,47 @@
+.phone_text {
+  font-size: 30px;
+  line-height: 100%;
+  margin-bottom: 10px;
+}
+
+.phone_errors {
+  margin: 0 auto;
+  margin-top: 6%;
+  padding: 5px;
+  padding-top:12px;
+  line-height: 30px;
+  width: 600px;
+  background-color: #c80000;
+  border: 1px solid #111111;
+  border-radius:5px;
+  color: #ffffff;
+  font-size: 17px;
+  text-align: left;
+}
+
+.myfield_phone label, .myfield_phone input {
+  display:inline-block;
+}
+
+.myfield_phone input[type=text] {
+  width:130px;
+  padding:4px;
+}
+
+.myfield_verify_phone input[type=text] {
+  width:85px;
+  padding:4px;
+}
+
+.myfield_phone label {
+  text-align: left;
+  width: 67px;
+  font-size: 2.0em;
+  color:#f2ff5e;
+}
+
+.verif_code {
+  display: inline-block;
+  font-size: 30px;
+  color:#f2ff5e;
+}

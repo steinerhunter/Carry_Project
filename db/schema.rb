@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20131025074406) do
+ActiveRecord::Schema.define(:version => 20131031152645) do
 
   create_table "accepted_requests", :force => true do |t|
     t.integer  "request_delivery_id"
@@ -88,6 +88,17 @@ ActiveRecord::Schema.define(:version => 20131025074406) do
   end
 
   add_index "notifications", ["conversation_id"], :name => "index_notifications_on_conversation_id"
+
+  create_table "phones", :force => true do |t|
+    t.integer  "user_id"
+    t.string   "phone"
+    t.integer  "verification_code"
+    t.boolean  "verified",          :default => false
+    t.datetime "created_at",                           :null => false
+    t.datetime "updated_at",                           :null => false
+  end
+
+  add_index "phones", ["user_id"], :name => "index_phones_on_user_id", :unique => true
 
   create_table "receipts", :force => true do |t|
     t.integer  "receiver_id"
@@ -213,8 +224,6 @@ ActiveRecord::Schema.define(:version => 20131025074406) do
     t.string   "email_confirmation_token"
     t.boolean  "email_confirmed",          :default => false
     t.boolean  "only_facebook"
-    t.string   "phone"
-    t.boolean  "verified_phone",           :default => false
     t.integer  "sender_rating"
     t.integer  "transporter_rating"
   end

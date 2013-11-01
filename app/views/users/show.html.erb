@@ -184,16 +184,42 @@
     </div>
     <div class="profile_verified_item">
       <% if @user == current_user  %>
-          <% if current_user.phone.blank? %>
+          <% if @phone.nil? %>
               Your Mobile Phone Number
-          <% end %>
+          <% else %>
+            <%= @phone.phone  %>
+          <% end  %>
       <% else  %>
           User's Mobile Phone Number
       <% end  %>
     </div>
     <div class="profile_verified_action">
       <% if @user == current_user  %>
-          <%= image_tag("add_now.png") %>
+          <% if @phone.nil? %>
+              <%=  link_to image_tag("add_now.png"),
+                           {:controller => "phones",
+                            :action => "new",
+                            :user_id => current_user.id } %>
+              <% elsif @phone.verified == false %>
+              <%=  link_to image_tag("verify_now.png"),
+                           {:controller => "phones",
+                            :action => "verify",
+                            :user_id => current_user.id } %>
+          <% elsif @phone.verified == true %>
+              <div class="bubbleInfo">
+                <%= image_tag("profile_item_verified.png", class: "trigger") %>
+                <div class="popup" style="height:20px; width:215px; margin-top:57px;">
+                  <% if @user == current_user  %>
+                      Your
+                  <% else  %>
+                      User's
+                  <% end  %>
+                  Phone number is <b style="color:#279227">verified</b>!
+                  <div id="tail1" style="left:71px"></div>
+                  <div id="tail2" style="left:71px"></div>
+                </div>
+              </div>
+          <% end %>
       <% else  %>
           <div class="bubbleInfo">
             <%= image_tag("profile_item_not_verified.png", class: "trigger") %>

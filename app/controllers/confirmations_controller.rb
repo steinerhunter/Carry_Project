@@ -3,7 +3,7 @@ class ConfirmationsController < ApplicationController
     @user = User.find_by_email_confirmation_token(params[:token])
       if @user.present?
         if @user.email_confirmed
-          flash[:profile_update] = "You're already confirmed your email address."
+          flash[:profile_update] = "You've already confirmed your email address."
         else
           flash[:profile_update] = "You've successfully confirmed your email address!"
           @user.confirm_user

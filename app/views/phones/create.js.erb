@@ -1,32 +1,26 @@
-var form = $('#new_request_delivery');
+var form = $('#new_phone');
 
-<% if @request_delivery.errors.any? %>
+<% if @phone.errors.any? %>
 
 // Delete errors from previous submission
-if ($(".request_suggest_delivery_errors")[0]){
-    $('.request_suggest_delivery_errors').remove();
+if ($(".phone_errors")[0]){
+    $('.phone_errors').remove();
 }
 
 // Create a list of errors
 var errors = $('<ul />');
 
 // Display only first error for each field
-<% @request_delivery.errors.each do |attribute, message| %>
-    <% if @request_delivery.errors[attribute].first == message %>
+<% @phone.errors.each do |attribute, message| %>
+    <% if @phone.errors[attribute].first == message %>
         errors.append('<li><%= escape_javascript(message) %></li>');
     <% end %>
 <% end %>
 
 // Display errors before the form
-$('<div />').addClass('request_suggest_delivery_errors').html(errors).appendTo("#new_request_delivery").hide().fadeIn('slow');
+$('<div />').addClass('phone_errors').html(errors).appendTo("#new_phone").hide().fadeIn('slow');
 
 <% else %>
-    <% if current_user.nil? %>
-    <% store_location %>
-        window.location.href = "<%=signin_path %>"
-    <% else %>
         // On successful creation of new user, redirect to main page
-        window.location.href = "<%=request_delivery_url(@request_delivery) %>"
-    <% end %>
-
+        window.location.href = "<%= phone_verify_path(@phone.user_id) %>"
 <% end %>

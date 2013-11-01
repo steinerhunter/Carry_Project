@@ -12,6 +12,7 @@ gem 'meta_search'
 gem 'omniauth'
 gem 'omniauth-facebook'
 gem 'paypal_adaptive'
+gem 'twilio-ruby'
 
 group :development, :test do
   gem 'sqlite3', '1.3.5'

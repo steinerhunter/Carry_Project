@@ -1,6 +1,7 @@
 TheCarryProject::Application.routes.draw do
   resources :users
   resources :user_reviews
+  resources :phones
   resources :sessions, only: [:new, :create, :destroy]
   resources :request_deliveries, only: [:create, :show, :edit, :update, :destroy] do
     put :accept, on: :member
@@ -50,6 +51,10 @@ TheCarryProject::Application.routes.draw do
 
   match '/verify', to: 'users#verify'
   match '/confirm/:token', to: 'confirmations#confirm', as: 'confirm'
+
+  match '/phone', to: 'phones#new'
+  match '/phone_verify/:user_id', to: 'phones#verify', as:'phone_verify'
+  match '/phone_check', to: 'phone_verifications#phone_check'
 
   match '/reset_password', to: 'password_resets#new'
 

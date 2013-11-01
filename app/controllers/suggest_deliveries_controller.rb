@@ -8,6 +8,8 @@ class SuggestDeliveriesController < ApplicationController
     if !current_user.nil?
       @accepted_suggest = AcceptedSuggest.find_by_user_id_and_suggest_delivery_id(current_user.id,@suggest_delivery.id)
     end
+    @facebook_authentication = Authentication.find_by_user_id(@suggest_delivery.user.id)
+    @phone = Phone.find_by_user_id(@suggest_delivery.user.id)
     @commentable = @suggest_delivery
     @comments = @commentable.comments
     @comment = Comment.new

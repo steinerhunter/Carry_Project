@@ -25,13 +25,13 @@ class PhonesController < ApplicationController
     @phone = Phone.find_by_user_id(@user.id)
     if @phone.present?
       @phone.generate_verification_code
-      client = Twilio::REST::Client.new(TWILIO_CONFIG['sid'], TWILIO_CONFIG['token'])
+      client = Twilio::REST::Client.new TWILIO_CONFIG['sid'], TWILIO_CONFIG['token']
 
       #Create and send an SMS message
       client.account.messages.create(
-          from: TWILIO_CONFIG['from'],
-          to: @phone.phone,
-          body: "Your sendd.me verification code is #{@phone.verification_code}."
+          :body  =>  "Your sendd.me verification code is #{@phone.verification_code}.",
+          :to       => @phone.phone,
+          :from  => TWILIO_CONFIG['from']
       )
     else
       redirect_to user_path(@user.id)

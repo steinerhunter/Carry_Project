@@ -1,0 +1,19 @@
+Please click the link below in order to confirm your email address:
+<%= confirm_url(@user.email_confirmation_token) %>
+
+<!DOCTYPE html>
+<html>
+<head>
+  <meta content="text/html; charset=UTF-8" http-equiv="Content-Type" />
+</head>
+<body>
+<h2>Hi there <%= @user.name %>,</h2><br>
+<h3>We've sent you this email in order to verify your email address.</h3>
+<h3>In order to do just that, <%= link_to "click here", confirm_url(@user.email_confirmation_token) %>.</h3>
+<p>
+<h3>Thank you,</h3>
+<h3>Best Regards,</h3>
+<h3>sendd.me Support</h3>
+</p>
+</body>
+</html>

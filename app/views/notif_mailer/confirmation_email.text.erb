@@ -1,2 +1,7 @@
-Please click the link below in order to confirm your email address:
-<%= confirm_url(@user.email_confirmation_token) %>
+Hi there <%= @user.name %>,
+We've sent you this email in order to verify your email address.
+In order to do just that, <%= link_to "click here", confirm_url(@user.email_confirmation_token) %>.
+
+Thank you,
+Best Regards,
+sendd.me Support

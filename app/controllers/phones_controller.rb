@@ -4,7 +4,8 @@ class PhonesController < ApplicationController
   def new
     @phone = Phone.new
     @user = User.find_by_id(params[:user_id])
-    if @user != current_user
+    @user_has_phone = Phone.find_by_user_id(@user.id)
+    if @user != current_user || @user_has_phone.present?
       redirect_to user_path(current_user.id)
     end
   end
@@ -19,10 +20,10 @@ class PhonesController < ApplicationController
 
   def send_code
     @user = User.find_by_id(params[:user_id])
-    if @user != current_user
+    @phone = Phone.find_by_user_id(@user.id)
+    if @user != current_user || @phone.nil?
       redirect_to user_path(current_user.id)
     end
-    @phone = Phone.find_by_user_id(@user.id)
     @phone.generate_verification_code
 
     #Create and send an SMS message
@@ -37,7 +38,8 @@ class PhonesController < ApplicationController
 
   def verify
     @user = User.find_by_id(params[:user_id])
-    if @user != current_user
+    @phone = Phone.find_by_user_id(@user.id)
+    if @user != current_user || @phone.nil?
       redirect_to user_path(current_user.id)
     end
   end

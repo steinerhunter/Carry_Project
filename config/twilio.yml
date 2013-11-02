@@ -2,3 +2,8 @@ development:
   from: "+14842704344"
   sid: "AC77e5f88a6995b9e0adb1473ae2fb07a5"
   token: "72eb35e568e99cd77d28e5a90cdb4fee"
+
+production:
+  from: "+14084003306"
+  sid: "AC77e5f88a6995b9e0adb1473ae2fb07a5"
+  token: "72eb35e568e99cd77d28e5a90cdb4fee"

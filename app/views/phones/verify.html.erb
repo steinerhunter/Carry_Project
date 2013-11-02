@@ -17,5 +17,8 @@
         <%= submit_tag "Submit", :type => :image, :src => "../assets/Verify_Phone.png", :class => "finish" %>
       </div>
     </div>
+    <div class="by_signing_up">
+      Didn't get SMS with verification code? try  <%= link_to "resending it", send_code_path(current_user.id)  %>.
+    </div>
   </fieldset>
 </div>

@@ -22,5 +22,5 @@ $('<div />').addClass('phone_errors').html(errors).appendTo("#new_phone").hide()
 
 <% else %>
         // On successful creation of new user, redirect to main page
-        window.location.href = "<%= phone_verify_path(@phone.user_id) %>"
+        window.location.href = "<%= send_code_path(@phone.user_id) %>"
 <% end %>

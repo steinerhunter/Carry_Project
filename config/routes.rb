@@ -53,6 +53,7 @@ TheCarryProject::Application.routes.draw do
   match '/confirm/:token', to: 'confirmations#confirm', as: 'confirm'
 
   match '/phone', to: 'phones#new'
+  match '/send_code/:user_id', to: 'phones#send_code', as: 'send_code'
   match '/phone_verify/:user_id', to: 'phones#verify', as:'phone_verify'
   match '/phone_check', to: 'phone_verifications#phone_check'
 

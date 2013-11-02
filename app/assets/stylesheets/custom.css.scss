@@ -80,6 +80,23 @@ p {
   padding-bottom: 20px;
 }
 
+.edit_form_class {
+  width: 700px;
+  height: 280px;
+  text-align: center;
+  background-color: #1d79e2;
+  -moz-box-shadow: 5px 5px 5px #6b6b6b; /* Old Firefox */
+  box-shadow: 5px 5px 5px #6b6b6b;
+  border:solid 3px;
+  border-radius:10px;
+  -moz-border-radius:10px; /* Old Firefox */
+  color: #ffffff;
+  border-color: #18212e;
+  margin-right: auto;
+  margin-left: auto;
+  padding-bottom: 20px;
+}
+
 .by_signing_up {
   margin-top:20px;
   a {

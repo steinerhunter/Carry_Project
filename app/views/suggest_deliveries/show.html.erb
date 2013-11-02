@@ -174,14 +174,25 @@
                   </div>
                   </div>
                   <div class="verified_item">
-                    <div class="bubbleInfo">
-                      <%= image_tag("NonVerifiedPhone.png", :class => "trigger")%>
-                      <div class="popup">
-                        User has <b style="color: #d67a31">not verified</b> his/her Phone Number.
-                        <div id="tail1" style="left:47px;"></div>
-                        <div id="tail2" style="left:47px;"></div>
+                    <% if @phone.present? && @phone.verified %>
+                      <div class="bubbleInfo">
+                        <%= image_tag("VerifiedPhone.png", :class => "trigger")%>
+                        <div class="popup">
+                          User has <b style="color: #279227">verified</b> his/her Phone Number.
+                          <div id="tail1" style="left:47px;"></div>
+                          <div id="tail2" style="left:47px;"></div>
+                        </div>
                       </div>
+                    <% else %>
+                      <div class="bubbleInfo">
+                      <%= image_tag("NonVerifiedPhone.png", :class => "trigger")%>
+                        <div class="popup">
+                          User has <b style="color: #d67a31">not verified</b> his/her Phone Number.
+                          <div id="tail1" style="left:47px;"></div>
+                          <div id="tail2" style="left:47px;"></div>
+                        </div>
                     </div>
+                    <% end %>
                   </div>
                   <div class="verified_item">
                     <% if @facebook_authentication.present? %>

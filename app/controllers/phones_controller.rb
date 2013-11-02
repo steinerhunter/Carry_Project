@@ -28,11 +28,11 @@ class PhonesController < ApplicationController
       client = Twilio::REST::Client.new(TWILIO_CONFIG['sid'], TWILIO_CONFIG['token'])
 
       #Create and send an SMS message
-      #client.account.sms.messages.create(
-      #    from: TWILIO_CONFIG['from'],
-      #    to: @phone.phone,
-      #    body: "Your sendd.me verification code is #{@phone.verification_code}."
-      #)
+      client.account.sms.messages.create(
+          from: TWILIO_CONFIG['from'],
+          to: @phone.phone,
+          body: "Your sendd.me verification code is #{@phone.verification_code}."
+      )
     else
       redirect_to user_path(@user.id)
     end

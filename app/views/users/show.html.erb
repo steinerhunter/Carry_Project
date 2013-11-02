@@ -6,9 +6,11 @@
             <b>Control Panel</b>
           </div>
           <div class="right_box_data">
+            <% if current_user.only_facebook == false %>
             <div class="control_panel_item"  style="background-image: url('../assets/edit_post.png');">
               <%= link_to "Edit Profile", edit_user_path(current_user)  %>
             </div>
+             <% end  %>
             <div class="control_panel_item"  style="background-image: url('../assets/sign_out.png');">
               <% if facebook_authorization(current_user)  %>
                   <%= link_to "Sign Out", logout_authentication_path %>

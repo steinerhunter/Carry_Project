@@ -50,7 +50,7 @@ class UsersController < ApplicationController
 
   def verify
     @user = User.find(params[:id])
-    @user.send_email_confirmation_request_no_token
+    @user.send_email_confirmation_request
     flash[:confirm_email] = "<div class='thank_you_text'>Thank you!</div> <br> We've sent a confirmation Email to: <br> <b>#{@user.email}</b>".html_safe
     redirect_to :back
   end

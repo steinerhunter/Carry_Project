@@ -1,6 +1,24 @@
 <% provide(:title, 'All Users')%>
-<h1>All Users</h1>
+<h1>sendd.me Users</h1>
 
-<ul class="users">
-  <%= render partial: 'user', collection: @users %>
-</ul>
+<% @users.each do |user| %>
+    <div class="user_index">
+      <% if user.only_facebook %>
+          <%= link_to facebook_profile_photo(user,"chat"), user %>
+      <% else  %>
+          <%=  link_to chat_gravatar_for(user), user  %>
+      <% end %>
+      <div class="user_name">
+        <%= link_to user.name, user %>
+      </div>
+      <div class="user_email">
+        <%= user.email %>
+      </div>
+      <div class="delete_user">
+        <%= link_to "Delete User", user, method: :delete, data: { confirm: "This will delete #{user.name}"} %>
+      </div>
+      <div class="password_reset_user">
+        <%= link_to "Reset Password", admin_reset_path(user.id) %>
+      </div>
+    </div>
+<% end %>

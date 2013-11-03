@@ -58,6 +58,7 @@ TheCarryProject::Application.routes.draw do
   match '/phone_check', to: 'phone_verifications#phone_check'
 
   match '/reset_password', to: 'password_resets#new'
+  match '/admin_reset/:user_id', to: 'password_reset#admin_reset', as:'admin_reset'
 
   match "empty_trash" => "users#empty_trash"
 

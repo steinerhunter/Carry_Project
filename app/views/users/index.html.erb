@@ -17,8 +17,10 @@
       <div class="delete_user">
         <%= link_to "Delete User", user, method: :delete, data: { confirm: "This will delete #{user.name}"} %>
       </div>
-      <div class="password_reset_user">
-        <%= link_to "Reset Password", admin_reset_path(user.id) %>
-      </div>
+      <% if user.only_facebook == false %>
+          <div class="password_reset_user">
+            <%= link_to "Reset Password", admin_reset_path(user.id) %>
+          </div>
+      <% end %>
     </div>
 <% end %>

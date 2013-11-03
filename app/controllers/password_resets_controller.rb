@@ -19,7 +19,11 @@ class PasswordResetsController < ApplicationController
     if current_user.try(:admin?)
       @user = User.find_by_id(params[:user_id])
       @user.send_password_reset
+      redirect_to users_path
+    else
+      redirect_to root_path
     end
+
   end
 
   def update

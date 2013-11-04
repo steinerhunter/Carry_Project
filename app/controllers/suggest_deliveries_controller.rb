@@ -146,6 +146,11 @@ class SuggestDeliveriesController < ApplicationController
     render "pre_authorize.html.erb", :layout => false
   end
 
+  def pre_cancel
+    @accepted_suggest = AcceptedSuggest.find_by_id(params[:accepted_suggest_id])
+    render "pre_cancel.html.erb", :layout => false
+  end
+
   def authorize
     @accepted_suggest = AcceptedSuggest.find(params[:accepted_suggest_id])
     @suggest_delivery = SuggestDelivery.find(params[:suggest_delivery_id])

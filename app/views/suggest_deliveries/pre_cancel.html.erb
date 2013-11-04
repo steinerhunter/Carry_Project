@@ -1,0 +1,18 @@
+<div class="modal_title">
+  Cancel Payment Preapproval
+</div>
+<div class="modal_text">
+  You're about to be cancel a Preapproved Payment Authorization you've made to <div class="special">PayPal</div>.<br><br>
+  The above cancellation can be issued as late as 3 days prior to completion of the delivery suggestion.
+</div>
+<div class="modal_proceed">
+  <%=  link_to image_tag("Proceed.png"),
+               {:controller => "payments",
+                :action => "cancel",
+                :req_or_sugg => "suggest_delivery",
+                :accepted_task_id => @accepted_suggest.id,
+                :task_id => @accepted_suggest.suggest_delivery_id  },
+               class: "trigger" %>
+</div>
+
+

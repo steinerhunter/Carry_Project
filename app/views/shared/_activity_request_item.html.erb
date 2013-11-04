@@ -124,13 +124,10 @@
                     <% else  %>
                         <div class="confirm_me" style="right:35px">
                           <div class="bubbleInfo">
-                            <%=  link_to image_tag("Cancel.png"),
-                                         {:controller => "payments",
-                                          :action => "cancel",
-                                          :req_or_sugg => "request_delivery",
-                                          :accepted_task_id => activity_request_item.accepted_request_confirmed.id,
-                                          :task_id => activity_request_item.id  },
-                                         class: "trigger" %>
+                            <%=  link_to image_tag("Cancel.png"), pre_cancel_request_path(activity_request_item.accepted_request_confirmed.id), class:"modal-link trigger",
+                                         "data-target" => "#myModal",
+                                         "data-toggle" => "modal",
+                                         "data-backdrop" => "static" %>
                             <div class="popup" style="height:20px; width:205px; margin-top:57px;">
                               <b style="color:#d05e0b;">Cancel</b> Preapproved payment.
                               <div id="tail1" style="left:36px"></div>

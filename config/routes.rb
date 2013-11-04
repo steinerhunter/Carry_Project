@@ -38,9 +38,11 @@ TheCarryProject::Application.routes.draw do
 
   match '/pre_confirm_request/:accepted_request_id', to: 'request_deliveries#pre_confirm', as:'pre_confirm_request'
   match '/confirm_request', to:'request_deliveries#confirm'
+  match '/pre_cancel_request/:accepted_request_id', to: 'request_deliveries#pre_cancel', as:'pre_cancel_request'
 
   match '/pre_authorize_suggest/:accepted_suggest_id', to: 'suggest_deliveries#pre_authorize', as:'pre_authorize_suggest'
   match '/confirm_suggestion', to:'suggest_deliveries#confirm'
+  match '/pre_cancel_suggest/:accepted_suggest_id', to: 'suggest_deliveries#pre_cancel', as:'pre_cancel_suggest'
 
   match '/authorize_suggestion', to:'suggest_deliveries#authorize'
 

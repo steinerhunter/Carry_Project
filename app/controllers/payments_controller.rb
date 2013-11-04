@@ -107,9 +107,11 @@ class PaymentsController < ApplicationController
       if req_or_sugg == "request_delivery"
         accepted_task.cancel_accepted_request
         request_delivery.unconfirm_request
+        request_payment.destroy
       elsif req_or_sugg == "suggest_delivery"
         accepted_task.cancel_accepted_suggest
         suggest_delivery.unconfirm_suggest
+        suggest_payment.destroy
       end
       redirect_to activity_path
     else

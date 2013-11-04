@@ -138,6 +138,11 @@ class RequestDeliveriesController < ApplicationController
     render "pre_cancel.html.erb", :layout => false
   end
 
+  def pre_complete
+    @accepted_request = AcceptedRequest.find_by_id(params[:accepted_request_id])
+    render "pre_complete.html.erb", :layout => false
+  end
+
   def confirm
     @accepted_request = AcceptedRequest.find(params[:accepted_request_id])
     @request_delivery = RequestDelivery.find(params[:request_delivery_id])

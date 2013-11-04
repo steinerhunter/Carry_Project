@@ -1,0 +1,18 @@
+<div class="modal_title">
+  Delivery Completion
+</div>
+<div class="modal_text">
+  You're about to be mark this delivery request as complete.<br>
+  This will trigger  a transaction from <div class="special">PayPal</div>.<br><br>
+  <div class="special">You</div> will receive 85% of the amount.<br>
+  <div class="special">sendd.me</div> will receive 15% of the amount.<br><br>
+  By proceeding you admit to having performed the delivery request.
+</div>
+<div class="modal_proceed">
+  <%=  link_to image_tag("Proceed.png"),
+               {:controller => "request_deliveries",
+                :action => "complete",
+                :accepted_request_id => @accepted_request.id,
+                :request_delivery_id => @accepted_request.request_delivery_id  },
+               class: "trigger" %>
+</div>

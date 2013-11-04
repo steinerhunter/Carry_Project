@@ -161,12 +161,10 @@
                   <div class="needs_to_confirm">
                     <div class="confirm_me" style="right:35px">
                       <div class="bubbleInfo">
-                        <%=  link_to image_tag("confirmed.png"),
-                                     {:controller => "request_deliveries",
-                                      :action => "complete",
-                                      :accepted_request_id => activity_request_item.accepted_request_confirmed.id,
-                                      :request_delivery_id => activity_request_item.id  },
-                                     class: "trigger" %>
+                        <%=  link_to image_tag("confirmed.png"), pre_complete_request_path(activity_request_item.accepted_request_confirmed.id), class:"modal-link trigger",
+                                     "data-target" => "#myModal",
+                                     "data-toggle" => "modal",
+                                     "data-backdrop" => "static" %>
                         <div class="popup" style="height:20px; width:185px; margin-top:57px;">
                           Mark request as <b style="color:#19b522;">Complete</b>!
                           <div id="tail1" style="left:36px"></div>

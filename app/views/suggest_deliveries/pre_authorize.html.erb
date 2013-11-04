@@ -1,0 +1,17 @@
+<div class="modal_title">
+  Payment Authorization
+</div>
+<div class="modal_text">
+  You're about to be redirected to <div class="special">PayPal</div> in order to authorize future payment.<br><br>
+  By proceeding you are aware that <div class="special">sendd.me</div> takes 10% commission from the amount being authorized.
+</div>
+<div class="modal_proceed">
+  <%=  link_to image_tag("Proceed.png"),
+               {:controller => "suggest_deliveries",
+                :action => "authorize",
+                :accepted_suggest_id => @accepted_suggest.id,
+                :suggest_delivery_id => @accepted_suggest.suggest_delivery_id  },
+               class: "trigger" %>
+</div>
+
+

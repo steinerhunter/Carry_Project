@@ -1,0 +1,40 @@
+.modal_title {
+  font-family: Impact !important;
+  color:black;
+  font-size: 40px;
+  margin-bottom: 30px;
+}
+
+.modal_text {
+  font-family: Impact !important;
+  color:black;
+  font-size: 20px;
+  margin-bottom: 30px;
+  .special {
+    display: inline-block;
+    color: #2a72ed;
+  }
+}
+
+.modal_proceed {
+  text-align: center;
+}
+
+.modal, a:active, a:focus {
+  outline: 0 none;
+}
+
+.modal-header {
+  height: 25px;
+  border-bottom: 0px;
+}
+
+.modal-footer {
+}
+
+.modal-body {
+  max-height: 800px;
+  max-width: 700px;
+  margin-left: auto;
+  margin-right: auto;
+}

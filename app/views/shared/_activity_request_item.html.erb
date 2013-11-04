@@ -59,12 +59,10 @@
                               <div class="needs_to_confirm">
                                 <div class="confirm_me" style="right:35px">
                                   <div class="bubbleInfo">
-                                    <%=  link_to image_tag("confirm_me.png"),
-                                                 {:controller => "request_deliveries",
-                                                  :action => "confirm",
-                                                  :accepted_request_id => my_request_accepted.id,
-                                                  :request_delivery_id => my_request_accepted.request_delivery_id  },
-                                                 class: "trigger" %>
+                                    <%=  link_to image_tag("confirm_me.png"), pre_confirm_request_path(my_request_accepted.id), class:"modal-link trigger",
+                                                                                                                                                                "data-target" => "#myModal",
+                                                                                                                                                                "data-toggle" => "modal",
+                                                                                                                                                                "data-backdrop" => "static" %>
                                     <div class="popup" style="height:20px; width:205px; margin-top:57px;">
                                       <b style="color:#4dbeff;">Confirm</b> user for your request!
                                       <div id="tail1" style="left:36px"></div>

@@ -6,7 +6,7 @@
 <body>
     <h2>Hi there <%= @creating_user.name %>,</h2><br>
     <h3>It seems <b style="color:#279227"><%= @accepting_user.name  %></b> has accepted your request - "<b style="color:#63a2ff"><%= @request_delivery.what %></b>"!</h3>
-    <h3>Go to your <%= link_to "Activity", :controller => "activities", :action => "index", :host => "www.sendd.me" %> page in order to confirm!</h3>
+    <h3>Go to your <%= link_to "Activity Page", :controller => "activities", :action => "index", :host => "www.sendd.me" %> in order to confirm!</h3>
     <p>
     <h3>Thank you,</h3>
     <h3>Best Regards,</h3>

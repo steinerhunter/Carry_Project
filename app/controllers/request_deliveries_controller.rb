@@ -128,6 +128,11 @@ class RequestDeliveriesController < ApplicationController
     end
   end
 
+  def pre_confirm
+    @accepted_request = AcceptedRequest.find_by_id(params[:accepted_request_id])
+    render "pre_confirm.html.erb", :layout => false
+  end
+
   def confirm
     @accepted_request = AcceptedRequest.find(params[:accepted_request_id])
     @request_delivery = RequestDelivery.find(params[:request_delivery_id])

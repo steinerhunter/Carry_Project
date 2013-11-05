@@ -13,8 +13,8 @@ test:
   application_id: "APP-80W284485P519543T"
 
 production:
-  environment: "sandbox"
-  username: "salomon.omer-facilitator_api1.gmail.com"
-  password: "1380958401"
-  signature: "AKTmX5eGgu-1LRjREME7XhqcjiogApo6JtEThvMLEWnr8onZK2lNc5-U"
-  application_id: "APP-80W284485P519543T"
+  environment: "production"
+  username: "salomon.omer_api1.gmail.com"
+  password: "A2RDZ7UP6YAAVT5A"
+  signature: "AKHBx3F15DqGBpv4bzGQQW3CZk77ADu0mFztIDlSsk-4axFzxRUvuBPj"
+  application_id: "APP-3C569453B34945202"

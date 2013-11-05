@@ -130,6 +130,7 @@ class RequestDeliveriesController < ApplicationController
 
   def pre_confirm
     @accepted_request = AcceptedRequest.find_by_id(params[:accepted_request_id])
+    @request_delivery = RequestDelivery.find_by_id(@accepted_request.request_delivery_id)
     render "pre_confirm.html.erb", :layout => false
   end
 
@@ -140,6 +141,7 @@ class RequestDeliveriesController < ApplicationController
 
   def pre_complete
     @accepted_request = AcceptedRequest.find_by_id(params[:accepted_request_id])
+    @request_delivery = RequestDelivery.find_by_id(@accepted_request.request_delivery_id)
     render "pre_complete.html.erb", :layout => false
   end
 
@@ -169,8 +171,6 @@ class RequestDeliveriesController < ApplicationController
     @confirmed_user = User.find( @accepted_request.user_id)
     @request_payment = RequestPayment.find_by_request_delivery_id(@request_delivery.id)
     if @confirmed_user == current_user && @request_payment.approved
-      flash[:complete] = "You've chosen to mark <br><b>#{@request_delivery.what}</b><br> delivery request as <br><div class='complete'><b>complete!</b></div>
-                                            <div class='sub_flash_text'>A payment of <b>#{@request_delivery.cost} #{@request_delivery.currency}</b> will be transferred to you. <br></div>".html_safe
         #NotifMailer.new_complete_request(@request_creator,@confirmed_user,@request_delivery).deliver
         redirect_to :controller => 'payments',
                                   :action => 'execute',
@@ -180,7 +180,7 @@ class RequestDeliveriesController < ApplicationController
                                   :task_id => @request_delivery.id,
                                   :accepted_task_id => @accepted_request.id
     else
-      flash[:cannot] = "Only the confirmed user can complete the request."
+      redirect_to activity_url
     end
   end
 

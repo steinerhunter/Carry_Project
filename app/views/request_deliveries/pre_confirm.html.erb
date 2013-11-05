@@ -3,7 +3,7 @@
 </div>
 <div class="modal_text">
   You're about to be redirected to <div class="special">PayPal</div> in order to authorize future payment.<br><br>
-  By proceeding you are aware that <div class="special">sendd.me</div> takes 15% commission from the amount being authorized.
+  By proceeding you are aware that <div class="special">sendd.me</div> takes 15% commission from the amount being authorized (<div class="special"><%= @request_delivery.cost %> <%= @request_delivery.currency %></div>).
 </div>
 <div class="modal_proceed">
   <%=  link_to image_tag("Proceed.png"),

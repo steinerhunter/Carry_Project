@@ -13,8 +13,8 @@ test:
   application_id: "APP-80W284485P519543T"
 
 production:
-  environment: "sandbox"
-  username: "salomon.omer-facilitator_api1.gmail.com"
-  password: "1380958401"
-  signature: "AKTmX5eGgu-1LRjREME7XhqcjiogApo6JtEThvMLEWnr8onZK2lNc5-U"
-  application_id: "APP-80W284485P519543T"
+  environment: "production"
+  username: ENV['PAYPAL_LIVE_USERNAME']
+  password: ENV['PAYPAL_LIVE_PASSWORD']
+  signature: ENV['PAYPAL_LIVE_SIGNATURE']
+  application_id: ENV['PAYPAL_LIVE_APPID']

@@ -16,5 +16,5 @@ production:
   environment: "production"
   username: ENV['PAYPAL_LIVE_USERNAME']
   password: ENV['PAYPAL_LIVE_PASSWORD']
-  signature: ENV['PAYPAL_LIVE_SIGNATURE'],
-  application_id: ENV['PAYPAL_LIVE_APPID'],
+  signature: ENV['PAYPAL_LIVE_SIGNATURE']
+  application_id: ENV['PAYPAL_LIVE_APPID']

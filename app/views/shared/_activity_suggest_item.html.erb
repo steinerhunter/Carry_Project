@@ -126,12 +126,10 @@
                     <div class="needs_to_confirm">
                       <div class="confirm_me" style="right:35px">
                         <div class="bubbleInfo">
-                          <%=  link_to image_tag("confirmed.png"),
-                                       {:controller => "suggest_deliveries",
-                                        :action => "complete",
-                                        :accepted_suggest_id => activity_suggest_item.accepted_suggest_confirmed.id,
-                                        :suggest_delivery_id => activity_suggest_item.id  },
-                                       class: "trigger" %>
+                          <%=  link_to image_tag("confirmed.png"), pre_complete_suggest_path(activity_suggest_item.accepted_suggest_confirmed.id), class:"modal-link trigger",
+                                       "data-target" => "#myModal",
+                                       "data-toggle" => "modal",
+                                       "data-backdrop" => "static" %>
                           <div class="popup" style="height:20px; width:185px; margin-top:57px;">
                             Mark suggest as <b style="color:#19b522;">Complete</b>!
                             <div id="tail1" style="left:36px"></div>

@@ -1,12 +1,12 @@
 <div class="modal_title">
-  Delivery Completion
+  Delivery Task Completion
 </div>
 <div class="modal_text">
   You're about to be mark this delivery request as complete.<br>
-  This will trigger  a transaction from <div class="special">PayPal</div>.<br><br>
-  <div class="special">You</div> will receive 85% of the amount.<br>
-  <div class="special">sendd.me</div> will receive 15% of the amount.<br><br>
-  By proceeding you admit to having performed the delivery request.
+  This will trigger  a transaction from <div class="special">PayPal</div> for <div class="special"><%= @request_delivery.cost %> <%= @request_delivery.currency %></div>.<br><br>
+  <div class="special">You</div> will receive 85% of the above amount.<br>
+  <div class="special">sendd.me</div> will receive 15% of the above amount.<br><br>
+  By proceeding you admit to having performed the delivery task.
 </div>
 <div class="modal_proceed">
   <%=  link_to image_tag("Proceed.png"),

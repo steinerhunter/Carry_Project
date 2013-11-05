@@ -14,7 +14,7 @@ test:
 
 production:
   environment: "production"
-  username: "salomon.omer_api1.gmail.com"
-  password: "A2RDZ7UP6YAAVT5A"
-  signature: "AKHBx3F15DqGBpv4bzGQQW3CZk77ADu0mFztIDlSsk-4axFzxRUvuBPj"
-  application_id: "APP-3C569453B34945202"
+  username: ENV['PAYPAL_LIVE_USERNAME']
+  password: ENV['PAYPAL_LIVE_PASSWORD']
+  signature: ENV['PAYPAL_LIVE_SIGNATURE'],
+  application_id: ENV['PAYPAL_LIVE_APPID'],

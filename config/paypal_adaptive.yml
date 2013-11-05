@@ -13,8 +13,8 @@ test:
   application_id: "APP-80W284485P519543T"
 
 production:
-  environment: "production"
-  username: <%= ENV['PAYPAL_LIVE_USERNAME'] %>
-  password: <%= ENV['PAYPAL_LIVE_PASSWORD'] %>
-  signature: <%= ENV['PAYPAL_LIVE_SIGNATURE'] %>
-  application_id: <%= ENV['PAYPAL_LIVE_APPID'] %>
+  environment: "sandbox"
+  username: <%= ENV['PAYPAL_SANDBOX_USERNAME'] %>
+  password: <%= ENV['PAYPAL_SANDBOX_PASSWORD'] %>
+  signature: <%= ENV['PAYPAL_SANDBOX_SIGNATURE'] %>
+  application_id: <%= ENV['PAYPAL_SANDBOX_APPID'] %>

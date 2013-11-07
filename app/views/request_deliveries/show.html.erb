@@ -18,7 +18,7 @@
               <% if @my_phone.present? && @my_phone.verified %>
                   <b><%= link_to "Accept Request",   accept_request_delivery_path(@request_delivery, type: "accept"), method: :put %></b>
               <% else  %>
-                  <b><%=  link_to "Accept Request",   pre_verify_path(@request_delivery.id,"request_delivery"), class:"modal-link trigger",
+                  <b><%=  link_to "Accept Request",   pre_verify_request_path(@request_delivery.id), class:"modal-link trigger",
                                   "data-target" => "#myModal",
                                   "data-toggle" => "modal",
                                   "data-backdrop" => "static" %></b>

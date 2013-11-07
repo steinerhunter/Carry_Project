@@ -36,6 +36,19 @@ class PhonesController < ApplicationController
     redirect_to phone_verify_path(@phone.user_id)
   end
 
+  def pre_verify
+    @my_phone = Phone.find_by_user_id(current_user.id)
+    @req_or_sugg = params[:req_or_sugg]
+    if @req_or_sugg == "request_delivery"
+      @accepted_request = AcceptedRequest.find_by_id(params[:accepted_task_id])
+      @request_delivery = RequestDelivery.find_by_id(@accepted_request.request_delivery_id)
+    elsif @req_or_sugg == "suggest_delivery"
+      @accepted_suggest = AcceptedSuggest.find_by_id(params[:accepted_task_id])
+      @suggest_delivery = SuggestDelivery.find_by_id(@accepted_suggest.suggest_delivery_id)
+    end
+    render "pre_verify.html.erb", :layout => false
+  end
+
   def verify
     @user = User.find_by_id(params[:user_id])
     @phone = Phone.find_by_user_id(@user.id)

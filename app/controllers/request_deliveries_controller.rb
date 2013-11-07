@@ -10,6 +10,7 @@ class RequestDeliveriesController < ApplicationController
     end
     @facebook_authentication = Authentication.find_by_user_id(@request_delivery.user.id)
     @phone = Phone.find_by_user_id(@request_delivery.user.id)
+    @my_phone = Phone.find_by_user_id(current_user.id)
     @commentable = @request_delivery
     @comments = @commentable.comments
     @comment = Comment.new
@@ -90,19 +91,24 @@ class RequestDeliveriesController < ApplicationController
 
   def accept
     @request_delivery = RequestDelivery.find(params[:id])
+    @phone = Phone.find_by_user_id(current_user.id)
     type = params[:type]
     if current_user != @request_delivery.user
       if type == "accept"
-        current_user.request_accepts << @request_delivery
-        @request_delivery.accept_request
-        redirect_to :back
-        flash[:accept] = "You've chosen to accept <br><b>#{@request_delivery.what}</b><br> delivery request!<br>
+        if @phone.present?
+          if @phone.verified
+            current_user.request_accepts << @request_delivery
+            @request_delivery.accept_request
+            redirect_to :back
+            flash[:accept] = "You've chosen to accept <br><b>#{@request_delivery.what}</b><br> delivery request!<br>
                                           <div class='sub_flash_text'><b>#{@request_delivery.user.name}</b>, the creator of the request, will be notified. <br>
                                           Please allow <b>#{@request_delivery.user.name}</b> some time to get back to you.</div>".html_safe
-        @accepted_request = AcceptedRequest.find_all_by_request_delivery_id(@request_delivery.id).last
-        @creating_user = User.find_by_id(@request_delivery.user_id)
-        @accepting_user = User.find_by_id(@accepted_request.user_id)
-        NotifMailer.new_accepted_request(@creating_user,@accepting_user,@request_delivery).deliver
+            @accepted_request = AcceptedRequest.find_all_by_request_delivery_id(@request_delivery.id).last
+            @creating_user = User.find_by_id(@request_delivery.user_id)
+            @accepting_user = User.find_by_id(@accepted_request.user_id)
+            NotifMailer.new_accepted_request(@creating_user,@accepting_user,@request_delivery).deliver
+          end
+        end
       elsif type == "cancel"
         if @request_delivery.status == "Open"
           flash[:cancel] = "You cannot cancel an Open request."

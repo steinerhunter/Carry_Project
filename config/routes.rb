@@ -57,6 +57,7 @@ TheCarryProject::Application.routes.draw do
 
   match '/phone', to: 'phones#new'
   match '/send_code/:user_id', to: 'phones#send_code', as: 'send_code'
+  match '/pre_verify/:accepted_task_id/:req_or_sugg', to: 'phones#pre_verify', as: 'pre_verify'
   match '/phone_verify/:user_id', to: 'phones#verify', as:'phone_verify'
   match '/phone_check', to: 'phone_verifications#phone_check'
 

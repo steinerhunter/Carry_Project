@@ -15,7 +15,14 @@
           </div>
         <% else %>
             <div class="challenge_accepted">
-              <b><%= link_to "Accept Request",   accept_request_delivery_path(@request_delivery, type: "accept"), method: :put %></b>
+              <% if @my_phone.present? && @my_phone.verified %>
+                  <b><%= link_to "Accept Request",   accept_request_delivery_path(@request_delivery, type: "accept"), method: :put %></b>
+              <% else  %>
+                  <b><%=  link_to "Accept Request",   pre_verify_path(@request_delivery.id,"request_delivery"), class:"modal-link trigger",
+                                  "data-target" => "#myModal",
+                                  "data-toggle" => "modal",
+                                  "data-backdrop" => "static" %></b>
+              <% end  %>
             </div>
         <% end %>
     <% end  %>

@@ -1,9 +1,0 @@
-development:
-  from: ENV['TWILIO_DEMO_NUMBER']
-  sid: ENV['TWILIO_SID']
-  token: ENV['TWILIO_TOKEN']
-
-production:
-  from: ENV['TWILIO_PURCHASED_NUMBER']
-  sid: ENV['TWILIO_SID']
-  token: ENV['TWILIO_TOKEN']

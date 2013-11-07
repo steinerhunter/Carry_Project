@@ -26,12 +26,20 @@ class PhonesController < ApplicationController
     end
     @phone.generate_verification_code
 
+    if Rails.env.development?
+      @twilio_from = ENV['TWILIO_DEMO_NUMBER']
+    elsif Rails.env.production?
+      @twilio_from = ENV['TWILIO_PURCHASED_NUMBER']
+    end
+    @twilio_sid = ENV['TWILIO_SID']
+    @twilio_token = ENV['TWILIO_TOKEN']
+
     #Create and send an SMS message
-    client = Twilio::REST::Client.new TWILIO_CONFIG['sid'], TWILIO_CONFIG['token']
+    client = Twilio::REST::Client.new @twilio_sid, @twilio_token
     client.account.messages.create(
         :body  =>  "Your sendd.me verification code is #{@phone.verification_code}.",
         :to       => @phone.phone,
-        :from  => TWILIO_CONFIG['from']
+        :from  => @twilio_from
     )
     redirect_to phone_verify_path(@phone.user_id)
   end

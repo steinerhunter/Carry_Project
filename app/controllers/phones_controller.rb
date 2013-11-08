@@ -45,14 +45,24 @@ class PhonesController < ApplicationController
   end
 
   def pre_verify_request
+    @coming_from = params[:coming_from]
     @my_phone = Phone.find_by_user_id(current_user.id)
     @request_delivery = RequestDelivery.find_by_id(params[:request_delivery_id])
+    @accepted_request = AcceptedRequest.find_by_request_delivery_id(@request_delivery.id)
+    if @accepted_request.present?
+      @confirmed_user = User.find_by_id(@accepted_request.user_id)
+    end
     render "pre_verify_request.html.erb", :layout => false
   end
 
   def pre_verify_suggest
+    @coming_from = params[:coming_from]
     @my_phone = Phone.find_by_user_id(current_user.id)
     @suggest_delivery = SuggestDelivery.find_by_id(params[:suggest_delivery_id])
+    @accepted_suggest = AcceptedSuggest.find_by_suggest_delivery_id(@suggest_delivery.id)
+    if @accepted_suggest.present?
+      @confirmed_user = User.find_by_id(@accepted_suggest.user_id)
+    end
     render "pre_verify_suggest.html.erb", :layout => false
   end
 

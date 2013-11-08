@@ -3,6 +3,7 @@ class ActivitiesController < ApplicationController
 
   def index
     @users = User.all
+    @phone = Phone.find_by_user_id(current_user.id)
 
     @request_feed_items = current_user.user_request_feed
     @my_accepted_requests = AcceptedRequest.where("user_id = ?",current_user.id)

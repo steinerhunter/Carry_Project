@@ -2,8 +2,14 @@
   Phone Number Verification
 </div>
 <div class="modal_text">
-  You've chosen to accept "<div class="special"><%= @suggest_delivery.size %> Sized Items</div>"
-  by <div class="special"><%= @suggest_delivery.user.name %></div>.<br><br>
+  <% if @coming_from == "accept" %>
+      You've chosen to accept "<div class="special"><%= @suggest_delivery.size %> sized items</div>"
+      by <div class="special"><%= @suggest_delivery.user.name %></div>.<br><br>
+  <% elsif @coming_from == "confirm" %>
+      You've chosen to confirm <div class="special"><%= @confirmed_user.name %></div>
+      for "<div class="special"><%= @suggest_delivery.size %> Sized Items</div>".<br><br>
+  <% end  %>
+
   <% if @my_phone.present? %>
       In order to proceed with that, we're going to need you to verify your <div class="special">phone number (<%= @my_phone.phone %>)</div>.
   <% else  %>

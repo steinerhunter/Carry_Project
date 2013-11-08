@@ -135,9 +135,14 @@ class RequestDeliveriesController < ApplicationController
   end
 
   def pre_confirm
+    @phone = Phone.find_by_user_id(current_user.id)
     @accepted_request = AcceptedRequest.find_by_id(params[:accepted_request_id])
     @request_delivery = RequestDelivery.find_by_id(@accepted_request.request_delivery_id)
-    render "pre_confirm.html.erb", :layout => false
+    if @phone.present? && @phone.verified
+      render "pre_confirm.html.erb", :layout => false
+    else
+      redirect_to activity_path
+    end
   end
 
   def pre_cancel
@@ -152,21 +157,22 @@ class RequestDeliveriesController < ApplicationController
   end
 
   def confirm
+    @phone = Phone.find_by_user_id(current_user.id)
     @accepted_request = AcceptedRequest.find(params[:accepted_request_id])
     @request_delivery = RequestDelivery.find(params[:request_delivery_id])
     @request_creator = User.find(@request_delivery.user_id)
     @confirmed_user = User.find( @accepted_request.user_id)
-    if @request_creator == current_user
-        #NotifMailer.new_confirmed_request(@request_creator,@confirmed_user,@request_delivery).deliver
-        redirect_to :controller => 'payments',
-                                  :action => 'checkout',
-                                  :req_or_sugg => "request_delivery",
-                                  :task_creator_id => @request_creator.id,
-                                  :confirmed_user_id => @confirmed_user.id,
-                                  :task_id => @request_delivery.id,
-                                  :accepted_task_id => @accepted_request.id
+    if @request_creator == current_user && @phone.present? && @phone.verified
+      #NotifMailer.new_confirmed_request(@request_creator,@confirmed_user,@request_delivery).deliver
+      redirect_to :controller => 'payments',
+                  :action => 'checkout',
+                  :req_or_sugg => "request_delivery",
+                  :task_creator_id => @request_creator.id,
+                  :confirmed_user_id => @confirmed_user.id,
+                  :task_id => @request_delivery.id,
+                  :accepted_task_id => @accepted_request.id
     else
-      flash[:cannot] = "Only the creator of the request can confirm it."
+      redirect_to activity_path
     end
   end
 

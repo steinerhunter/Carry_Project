@@ -57,8 +57,8 @@ TheCarryProject::Application.routes.draw do
 
   match '/phone', to: 'phones#new'
   match '/send_code/:user_id', to: 'phones#send_code', as: 'send_code'
-  match '/pre_verify_request/:request_delivery_id', to: 'phones#pre_verify_request', as: 'pre_verify_request'
-  match '/pre_verify_suggest/:suggest_delivery_id', to: 'phones#pre_verify_suggest', as: 'pre_verify_suggest'
+  match '/pre_verify_request/:request_delivery_id/:coming_from', to: 'phones#pre_verify_request', as: 'pre_verify_request'
+  match '/pre_verify_suggest/:suggest_delivery_id/:coming_from', to: 'phones#pre_verify_suggest', as: 'pre_verify_suggest'
   match '/phone_verify/:user_id', to: 'phones#verify', as:'phone_verify'
   match '/phone_check', to: 'phone_verifications#phone_check'
 

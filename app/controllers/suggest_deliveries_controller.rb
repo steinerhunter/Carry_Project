@@ -10,6 +10,7 @@ class SuggestDeliveriesController < ApplicationController
     end
     @facebook_authentication = Authentication.find_by_user_id(@suggest_delivery.user.id)
     @phone = Phone.find_by_user_id(@suggest_delivery.user.id)
+    @my_phone = Phone.find_by_user_id(current_user.id)
     @commentable = @suggest_delivery
     @comments = @commentable.comments
     @comment = Comment.new
@@ -123,11 +124,12 @@ class SuggestDeliveriesController < ApplicationController
   end
 
   def confirm
+    @phone = Phone.find_by_user_id(current_user.id)
     @accepted_suggest = AcceptedSuggest.find(params[:accepted_suggest_id])
     @suggest_delivery = SuggestDelivery.find(params[:suggest_delivery_id])
     @suggest_creator = User.find(@suggest_delivery.user_id)
     @confirmed_user = User.find( @accepted_suggest.user_id)
-    if @suggest_creator == current_user
+    if @suggest_creator == current_user  && @phone.present? && @phone.verified
       if @accepted_suggest.save
         @accepted_suggest.confirm_accepted_suggest
         @suggest_delivery.confirm_suggest
@@ -135,8 +137,6 @@ class SuggestDeliveriesController < ApplicationController
                                           <div class='sub_flash_text'>For your suggestion <div class='confirmed_suggest'><b>Transport #{@suggest_delivery.size} sized items</b><br></div></div>".html_safe
         NotifMailer.new_confirmed_suggest(@suggest_creator,@confirmed_user,@suggest_delivery).deliver
       end
-    else
-      flash[:cannot] = "Only the creator of the suggestion can confirm it."
     end
     redirect_to activity_path
   end

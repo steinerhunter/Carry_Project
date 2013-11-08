@@ -31,6 +31,7 @@ class UsersController < ApplicationController
         @request_delivery.currency = session[:request_delivery_currency]
         @request_delivery.user = @user
         @request_delivery.save
+        session[:request_delivery_id] = @request_delivery.id
       elsif session[:suggest_delivery_size].present?
         @suggest_delivery = SuggestDelivery.new
         @suggest_delivery.size = session[:suggest_delivery_size]
@@ -40,10 +41,9 @@ class UsersController < ApplicationController
         @suggest_delivery.currency = session[:suggest_delivery_currency]
         @suggest_delivery.user = @user
         @suggest_delivery.save
+        session[:suggest_delivery_id] = @suggest_delivery.id
       end
       sign_in @user
-      @user.send_email_confirmation_request
-      flash.now[:signup_success] = "Thank you for registering!"
       respond_with(@user, :location => root_path)
     end
   end
@@ -51,8 +51,28 @@ class UsersController < ApplicationController
   def verify
     @user = User.find(params[:id])
     @user.send_email_confirmation_request
-    flash[:confirm_email] = "<div class='thank_you_text'>Thank you!</div> <br> We've sent a confirmation Email to: <br> <b>#{@user.email}</b>".html_safe
-    redirect_to user_path(@user.id)
+    if session[:request_delivery_what].present?
+      session[:request_delivery_what] = nil
+      session[:request_delivery_from]  = nil
+      session[:request_delivery_to] = nil
+      session[:request_delivery_cost] = nil
+      session[:request_delivery_currency] = nil
+      @request_delivery = RequestDelivery.find_by_id(session[:request_delivery_id])
+      session[:request_delivery_id] = nil
+      redirect_to request_delivery_url(@request_delivery)
+    elsif session[:suggest_delivery_size].present?
+      session[:suggest_delivery_from]  = nil
+      session[:suggest_delivery_to] = nil
+      session[:suggest_delivery_cost] = nil
+      session[:suggest_delivery_currency] = nil
+      @suggest_delivery = SuggestDelivery.find_by_id(session[:suggest_delivery_id])
+      session[:suggest_delivery_id] = nil
+      redirect_to suggest_delivery_url(@suggest_delivery)
+    else
+      url = session[:return_to] || root_path
+      session[:return_to] = nil if session[:return_to].present?
+      redirect_to url
+    end
   end
 
   def destroy

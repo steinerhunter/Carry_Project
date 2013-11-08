@@ -27,8 +27,7 @@ $('<div />').addClass('signup_errors').html(errors).appendTo("#new_user").hide()
 
 <% else %>
 
-// On successful creation of new user, redirect to main page
-
+// On successful creation of new user, redirect to email verification action
+    <% sign_in @user %>
     window.location.href = "<%= verify_path(@user.id) %>"
-
 <% end %>

@@ -43,7 +43,6 @@ class UsersController < ApplicationController
         @suggest_delivery.save
         session[:suggest_delivery_id] = @suggest_delivery.id
       end
-      sign_in @user
       respond_with(@user, :location => root_path)
     end
   end

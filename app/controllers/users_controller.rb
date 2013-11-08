@@ -50,7 +50,9 @@ class UsersController < ApplicationController
 
   def verify
     @user = User.find(params[:id])
-    @user.send_email_confirmation_request
+    if Rails.env.production?
+      @user.send_email_confirmation_request
+    end
     if session[:request_delivery_what].present?
       session[:request_delivery_what] = nil
       session[:request_delivery_from]  = nil

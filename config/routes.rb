@@ -52,7 +52,7 @@ TheCarryProject::Application.routes.draw do
 
   match '/activity', to:'activities#index'
 
-  match '/verify', to: 'users#verify'
+  match '/verify/:id', to: 'users#verify', as:'verify'
   match '/confirm/:token', to: 'confirmations#confirm', as: 'confirm'
 
   match '/phone', to: 'phones#new'

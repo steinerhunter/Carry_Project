@@ -51,6 +51,7 @@ class UsersController < ApplicationController
     @user = User.find(params[:id])
     if Rails.env.production?
       @user.send_email_confirmation_request
+      sign_in @user
     end
     if session[:request_delivery_what].present?
       session[:request_delivery_what] = nil

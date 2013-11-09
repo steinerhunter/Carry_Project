@@ -1,253 +1,87 @@
-<div class="feed_item">
-  <% if current_user.nil? %>
-    <% if request_feed_item.has_all_details %>
-        <div class="has_all_details" style="right:3px">
-          <div class="bubbleInfo">
-            <%= image_tag("has_all_details.png", class: "trigger") %>
-            <div class="popup" style="height:20px; width:315px; margin-top:57px;">
-              This request post has <b style="color:#279227">all</b> the necessary details!
-              <div id="tail1" style="left:35px"></div>
-              <div id="tail2" style="left:35px"></div>
+<% if request_feed_item.status == "Open" || request_feed_item.status == "Pending Confirmation" %>
+    <div class="feed_item" onclick="location.href='<%=request_delivery_path(request_feed_item)%>'">
+      <% if current_user.nil? %>
+          <% if request_feed_item.has_all_details %>
+              <div class="has_all_details" style="right:3px">
+                <div class="bubbleInfo">
+                  <%= image_tag("has_all_details.png", class: "trigger") %>
+                  <div class="popup" style="height:20px; width:315px; margin-top:57px;">
+                    This request post has <b style="color:#279227">all</b> the necessary details!
+                    <div id="tail1" style="left:35px"></div>
+                    <div id="tail2" style="left:35px"></div>
+                  </div>
+                </div>
+              </div>
+              </div>
+          <% end  %>
+      <% elsif (current_user.try(:admin?)) %>
+          <div class="delete_post">
+            <div class="bubbleInfo">
+              <%=  link_to image_tag("delete_post.png"), request_feed_item, method: :delete, class: "trigger" %>
+              <div class="popup" style="height:20px; width:195px; margin-top:57px;">
+                <b style="color:#FF0523;">Delete</b> your delivery request.
+                <div id="tail1" style="left:37px"></div>
+                <div id="tail2" style="left:37px"></div>
+              </div>
             </div>
           </div>
-        </div>
-        <% if request_feed_item.status == "Complete" %>
-            <div class="index_status" style="right:33px; background-color: #7f7f7f;">
-        <% elsif request_feed_item.status == "Confirmed" %>
-            <div class="index_status" style="right:33px; background-color: #1d79e2;">
-        <% else %>
-            <div class="index_status" style="right:33px; background-color: #257b2a;">
-        <% end  %>
-    <% else  %>
-        <% if request_feed_item.status == "Complete" %>
-            <div class="index_status" style="background-color: #7f7f7f;">
-        <% elsif request_feed_item.status == "Confirmed" %>
-            <div class="index_status" style="background-color: #1d79e2;">
-        <% else %>
-            <div class="index_status" style="background-color: #257b2a;">
-        <% end  %>
-    <% end %>
-      <div class="bubbleInfo">
-        <div class="trigger">
-          <% if request_feed_item.status == "Complete" %>
-              <b><%= request_feed_item.status  %></b>
-          <% elsif request_feed_item.status == "Confirmed" %>
-              <b><%= request_feed_item.status  %></b>
-          <% else %>
-              <b>Open</b>
-          <% end  %>
-        </div>
-        <% if request_feed_item.status == "Complete" %>
-            <div class="popup" style="height:20px; width:295px; margin-top:53px;">
-              This request has been marked as <b style="color:#7f7f7f">Complete</b>!
-        <% elsif request_feed_item.status == "Confirmed" %>
-            <div class="popup" style="height:20px; width:320px; margin-top:53px;">
-              Someone has been <b style="color:#1d79e2">Confirmed</b> for this request.
-        <% else %>
-            <div class="popup" style="height:20px; width:215px; margin-top:53px;">
-              This request is <b style="color:#257b2a">Open</b> for takers!
-        <% end  %>
-        <div id="tail1" style="left:35px"></div>
-        <div id="tail2" style="left:35px"></div>
-        </div>
-        </div>
-        </div>
-  <% elsif (current_user.try(:admin?)) %>
-      <div class="delete_post">
-        <div class="bubbleInfo">
-          <%=  link_to image_tag("delete_post.png"), request_feed_item, method: :delete, class: "trigger" %>
-          <div class="popup" style="height:20px; width:195px; margin-top:57px;">
-            <b style="color:#FF0523;">Delete</b> your delivery request.
-            <div id="tail1" style="left:37px"></div>
-            <div id="tail2" style="left:37px"></div>
-          </div>
-        </div>
-      </div>
-      <div class="edit_post">
-        <div class="bubbleInfo">
-          <%=  link_to image_tag("edit_post.png"), edit_request_delivery_path(request_feed_item), class: "trigger" %>
-          <div class="popup" style="height:20px; width:180px; margin-top:57px;">
-            <b style="color:#ff9054">Edit</b> your delivery request.
-            <div id="tail1" style="left:35px"></div>
-            <div id="tail2" style="left:35px"></div>
-          </div>
-        </div>
-      </div>
-      <% if request_feed_item.has_all_details %>
-          <div class="has_all_details">
+          <div class="edit_post">
             <div class="bubbleInfo">
-              <%= image_tag("has_all_details.png", class: "trigger") %>
-              <div class="popup" style="height:20px; width:315px; margin-top:57px;">
-                Your request post has <b style="color:#279227">all</b> the necessary details!
+              <%=  link_to image_tag("edit_post.png"), edit_request_delivery_path(request_feed_item), class: "trigger" %>
+              <div class="popup" style="height:20px; width:180px; margin-top:57px;">
+                <b style="color:#ff9054">Edit</b> your delivery request.
                 <div id="tail1" style="left:35px"></div>
                 <div id="tail2" style="left:35px"></div>
               </div>
             </div>
           </div>
-          <% if request_feed_item.status == "Complete" %>
-              <div class="index_status" style="right:93px;background-color: #7f7f7f;">
-          <% elsif request_feed_item.status == "Confirmed" %>
-              <div class="index_status" style="right:93px;background-color: #1d79e2;">
-          <% elsif request_feed_item.status == "Pending Confirmation" %>
-              <div class="index_status" style="right:93px;background-color: #d67a31;">
-          <% else %>
-              <div class="index_status" style="right:93px;background-color: #257b2a;">
+          <% if request_feed_item.has_all_details %>
+              <div class="has_all_details">
+                <div class="bubbleInfo">
+                  <%= image_tag("has_all_details.png", class: "trigger") %>
+                  <div class="popup" style="height:20px; width:315px; margin-top:57px;">
+                    Your request post has <b style="color:#279227">all</b> the necessary details!
+                    <div id="tail1" style="left:35px"></div>
+                    <div id="tail2" style="left:35px"></div>
+                  </div>
+                </div>
+              </div>
           <% end  %>
       <% else  %>
-          <% if request_feed_item.status == "Complete" %>
-              <div class="index_status" style="right:63px;background-color: #7f7f7f;">
-          <% elsif request_feed_item.status == "Confirmed" %>
-              <div class="index_status" style="right:63px;background-color: #1d79e2;">
-          <% elsif request_feed_item.status == "Pending Confirmation" %>
-              <div class="index_status" style="right:63px;background-color: #d67a31;">
-          <% else %>
-              <div class="index_status" style="right:63px;background-color: #257b2a;">
+          <% if request_feed_item.has_all_details %>
+              <div class="has_all_details" style="right:3px;">
+                <div class="bubbleInfo">
+                  <%= image_tag("has_all_details.png", class: "trigger") %>
+                  <div class="popup" style="height:20px; width:315px; margin-top:57px;">
+                    This request post has <b style="color:#279227">all</b> the necessary details!
+                    <div id="tail1" style="left:35px"></div>
+                    <div id="tail2" style="left:35px"></div>
+                  </div>
+                </div>
+              </div>
           <% end  %>
       <% end %>
-      <div class="bubbleInfo">
-        <% if request_feed_item.status == "Complete" %>
-            <div class="trigger">
-              <b><%= request_feed_item.status  %></b>
-            </div>
-            <div class="popup" style="height:20px; width:305px; margin-top:53px;">
-              Your request has been marked as <b style="color:#7f7f7f">Complete</b>!
-        <% elsif request_feed_item.status == "Confirmed" %>
-            <div class="trigger">
-              <b><%= request_feed_item.status  %></b>
-            </div>
-            <div class="popup" style="height:20px; width:330px; margin-top:53px;">
-              You have <b style="color:#1d79e2">Confirmed</b> someone for your request!
-        <% elsif request_feed_item.status == "Pending Confirmation" %>
-            <div class="trigger">
-              <b>Pending</b>
-            </div>
-            <div class="popup" style="height:20px; width:350px; margin-top:53px;">
-              Your request is <b style="color:#ff9054">Pending Confirmation</b> for someone!
-        <% else %>
-            <div class="trigger">
-              <b><%= request_feed_item.status  %></b>
-            </div>
-            <div class="popup" style="height:20px; width:215px; margin-top:53px;">
-              Your request is <b style="color:#257b2a">Open</b> for takers!
-        <% end  %>
-        <div id="tail1" style="left:35px"></div>
-        <div id="tail2" style="left:35px"></div>
-        </div>
-        </div>
-        </div>
-  <% else  %>
-    <% if request_feed_item.has_all_details %>
-        <div class="has_all_details" style="right:3px;">
-          <div class="bubbleInfo">
-            <%= image_tag("has_all_details.png", class: "trigger") %>
-            <div class="popup" style="height:20px; width:315px; margin-top:57px;">
-              This request post has <b style="color:#279227">all</b> the necessary details!
-              <div id="tail1" style="left:35px"></div>
-              <div id="tail2" style="left:35px"></div>
-            </div>
-          </div>
-        </div>
-        <% if request_feed_item.status == "Complete" %>
-            <div class="index_status" style="right:33px; background-color: #7f7f7f;">
-        <% elsif request_feed_item.status == "Confirmed" %>
-            <div class="index_status" style="right:33px;background-color: #1d79e2;">
-        <% elsif request_feed_item.status == "Pending Confirmation" && request_feed_item.accepted_request_not_confirmed.include?(current_user.id) %>
-            <div class="index_status" style="right:33px;background-color: #d67a31;">
-        <% else %>
-            <div class="index_status" style="right:33px;background-color: #257b2a;">
-        <% end  %>
-    <% else  %>
-        <% if request_feed_item.status == "Complete" %>
-            <div class="index_status" style="background-color: #7f7f7f;">
-        <% elsif request_feed_item.status == "Confirmed" %>
-            <div class="index_status" style="background-color: #1d79e2;">
-        <% elsif request_feed_item.status == "Pending Confirmation" && request_feed_item.accepted_request_not_confirmed.include?(current_user.id) %>
-            <div class="index_status" style="background-color: #d67a31;">
-        <% else %>
-            <div class="index_status" style="background-color: #257b2a;">
-        <% end  %>
-    <% end %>
-      <div class="bubbleInfo">
-        <div class="trigger">
-          <% if request_feed_item.status == "Complete" %>
-              <b><%= request_feed_item.status  %></b>
-          <% elsif request_feed_item.status == "Confirmed" %>
-              <b><%= request_feed_item.status  %></b>
-          <% elsif request_feed_item.status == "Pending Confirmation" && request_feed_item.accepted_request_not_confirmed.include?(current_user.id) %>
-              <b>Pending</b>
-          <% else %>
-              <b>Open</b>
-          <% end  %>
-        </div>
-        <% if request_feed_item.status == "Complete" %>
-            <% if request_feed_item.accepted_request_confirmed.other_user_for_request.id == current_user.id %>
-                <div class="popup" style="height:20px; width:295px; margin-top:53px;">
-                  You have marked this request as <b style="color:#7f7f7f">Complete</b>!
-            <% else  %>
-                <div class="popup" style="height:20px; width:295px; margin-top:53px;">
-                  This request has been marked as <b style="color:#7f7f7f">Complete</b>!
-            <% end  %>
-        <% elsif request_feed_item.status == "Confirmed" %>
-            <% if request_feed_item.accepted_request_confirmed.other_user_for_request.id == current_user.id %>
-                <div class="popup" style="height:20px; width:240px; margin-top:53px;">
-                  You are <b style="color:#1d79e2">Confirmed</b> for this request!
-            <% else  %>
-                <div class="popup" style="height:20px; width:320px; margin-top:53px;">
-                  Someone has been <b style="color:#1d79e2">Confirmed</b> for this request.
-            <% end  %>
-        <% elsif request_feed_item.status == "Pending Confirmation" && request_feed_item.accepted_request_not_confirmed.include?(current_user.id) %>
-            <div class="popup" style="height:20px; width:315px; margin-top:53px;">
-              This request is <b style="color:#ff9054">Pending Confirmation</b> for you!
-        <% else %>
-            <div class="popup" style="height:20px; width:215px; margin-top:53px;">
-              This request is <b style="color:#257b2a">Open</b> for takers!
-        <% end  %>
-        <div id="tail1" style="left:35px"></div>
-        <div id="tail2" style="left:35px"></div>
-        </div>
-        </div>
-        </div>
-  <% end %>
-  <div class="feed_item_info">
-    <div class="feed_title" style="padding-left: 10px;" onclick="location.href='<%=request_delivery_path(request_feed_item)%>'">
-      <b><%= request_feed_item.what %></b>
-    </div>
-    <div class="feed_request_data">
-      <div class="feed_cost_and_from_and_to_and_by" style="background-image: url('../assets/money_bag.png');background-color:#5f80ba;">
-        <div class="feed_mini_title">
-          <b>Reward</b>
+      <div class="feed_item_info">
+        <div class="feed_title" onclick="location.href='<%=request_delivery_path(request_feed_item)%>'">
+          <b><%= link_to request_feed_item.what, request_delivery_path(request_feed_item)  %></b>
         </div>
         <div class="feed_item_money">
-          <%= request_feed_item.cost + " " + request_feed_item.currency  %>
+          <%= request_feed_item.cost %> <%= request_feed_item.currency %>
+        </div>
+        <div class="feed_request_data">
+          <b>From</b> <%= request_feed_item.from %><br>
+          <b>To</b> <%= request_feed_item.to %><br>
+          <b>By</b> <%= link_to request_feed_item.user.name, request_feed_item.user %><br>
+          <% if request_feed_item.user.sender_reviews.any? %>
+              <% @user = request_feed_item.user %><%=render 'shared/sender_star_rating_small' %>
+              (<%= request_feed_item.user.sender_reviews.count %>)
+          <% else  %>
+              Sender not rated yet
+          <% end  %>
+          <div class="feed_item_map" onclick="location.href='<%=request_delivery_path(request_feed_item)%>'">
+            <img src="http://maps.google.com/maps/api/staticmap?size=250x180&maptype=roadmap&sensor=false&markers=color:red|label:A|<%= request_feed_item.from %>&markers=color:red|label:B|<%= request_feed_item.to %>"></img>
+          </div>
         </div>
       </div>
-      <div class="feed_cost_and_from_and_to_and_by" style="background-image: url('../assets/index_LocationA.png');">
-        <div class="feed_mini_title">
-          <b>From</b>
-        </div>
-        <div class="from_to_text">
-          <%= request_feed_item.from %>
-        </div>
       </div>
-      <div class="feed_cost_and_from_and_to_and_by" style="background-image: url('../assets/index_LocationB.png');">
-        <div class="feed_mini_title">
-          <b>To</b>
-        </div>
-        <div class="from_to_text" >
-          <%= request_feed_item.to %>
-        </div>
-      </div>
-      <div class="feed_cost_and_from_and_to_and_by" style="background-image: url('../assets/index_by.png');">
-        <div class="feed_mini_title">
-          <b>By</b>
-        </div>
-        <div class="by_whom"><%= link_to request_feed_item.user.name, request_feed_item.user  %></div>
-        <% if request_feed_item.user.sender_rating.present? %>
-            <div class="index_rating"><% @user = request_feed_item.user %><%=render 'shared/sender_star_rating' %></div>
-        <% else  %>
-            Not rated yet
-        <% end  %>
-      </div>
-    </div>
-  </div>
-  </div>
+<% end  %>

@@ -108,7 +108,16 @@
   cursor:pointer;
 }
 
+.requestposts {
+  width:950px;
+  margin-right: auto;
+  margin-left: auto;
+}
+
 .feed_item {
+  width:270px;
+  display: inline-block;
+  vertical-align: top;
   position: relative;
   background-color: #1d79e2;
   -moz-box-shadow: 5px 5px 5px #6b6b6b; /* Old Firefox */
@@ -116,29 +125,46 @@
   border:1px solid;
   border-radius:2px;
   -moz-border-radius: 0px;
-  -webkit-border-radius: 10px 10px 10px 10px;
-  border-radius: 10px 10px 10px 10px;
+  -webkit-border-radius: 6px 6px 6px 6px;
+  border-radius: 6px 6px 6px 6px;
   padding-top: 0px;
   padding-bottom: 10px;
+  margin-right: 20px;
+  margin-left: 20px;
   color: #ffffff;
   border-color: #000000;
-  margin-bottom: 5%;
+  margin-top:3%;
+  margin-bottom: 4%;
+  a {
+    color: #ffb49b;
+    text-decoration: none;
+    &:hover {
+      color: #ffffff;
+    }
+  }
+}
+
+.feed_title:hover, .feed_item_map:hover {
+  cursor:pointer;
+}
+
+.feed_item:hover {
+  background-color: #1a61ba;
+  cursor:pointer;
 }
 
 .feed_title {
   position:relative;
   text-align: left;
-  height:37px;
-  padding-top:14px;
-  font-size: 2.4em;
-  border-bottom:solid 2px;
-  border-color: #18212e;
+  padding:7px;
+  font-size: 1.4em;
+  border-color: #000000;
   background-color:#00008b;
   background-repeat: no-repeat;
   background-position: bottom left;
   -moz-border-radius: 0px;
-  -webkit-border-radius: 10px 10px 0px 0px;
-  border-radius: 10px 10px 0px 0px;
+  -webkit-border-radius: 6px 6px 0px 0px;
+  border-radius: 6px 6px 0px 0px;
   a {
     color: #ffffff;
     text-decoration: none;
@@ -146,11 +172,6 @@
       color: #f2ff5e;
     }
   }
-}
-
-.feed_title:hover {
-  background-color: #d67a31;
-  cursor:pointer;
 }
 
 .feed_mini_title {
@@ -182,6 +203,9 @@
 .feed_request_data {
   padding-right:10px;
   padding-left:10px;
+  b {
+    color:#f2ff5e;
+  }
 }
 
 .feed_from_and_to_suggest {
@@ -192,13 +216,6 @@
 .feed_can_deliver {
   margin-top: 5%;
   font-size: 1.2em;
-}
-
-.feed_item_money {
-  font-size:2.2em;
-  line-height: 150%;
-  height:75px;
-  font-weight: bold;
 }
 
 .from_to_text {
@@ -260,12 +277,9 @@
 }
 
 .feed_item_map {
-  position:absolute;
-  right:10px;
-  margin-top:63px;
+  margin-top:2px;
   border:1px solid;
   border-color: #000000;
-  z-index: 9;
 }
 
 .delete_post {
@@ -292,15 +306,15 @@
   z-index: 11;
 }
 
-.index_status {
+.feed_item_money {
   position:absolute;
-  padding:3px;
-  right:3px;
-  top:3px;
+  padding:1px;
+  left:12px;
+  bottom:164px;
   padding-left:5px;
   padding-right: 5px;
   z-index: 11;
-  background-color: #10529b;
+  background-color: #1e801b;
   background-repeat: no-repeat;
   background-position: top left;
   border:1px solid;

@@ -89,6 +89,14 @@ class User < ActiveRecord::Base
     end
   end
 
+  def sender_reviews
+    UserReview.find_all_by_to_user_id_and_job_type(self.id,"SENDER")
+  end
+
+  def transporter_reviews
+    UserReview.find_all_by_to_user_id_and_job_type(self.id,"TRANSPORTER")
+  end
+
   private
 
     def create_remember_token

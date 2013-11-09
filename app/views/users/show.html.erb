@@ -26,8 +26,8 @@
         <b>Rating</b>
       </div>
       <div class="right_box_data" style="line-height: 100%;">
-        <% if @user_transporter_reviews.any? || @user_sender_reviews.any? %>
-            <% if @user_transporter_reviews.any? %>
+        <% if @user.transporter_reviews.any? || @user.sender_reviews.any? %>
+            <% if @user.transporter_reviews.any? %>
                 <div class="rating_item">
                   <div class="rating_title">
                     Transporter Rating:
@@ -36,14 +36,14 @@
                     <b><%= @user.transporter_rating %>%</b>
                   </div>
                   <div class="num_of_votes">
-                    (<%= pluralize(@user_transporter_reviews.count, "vote") %>)
+                    (<%= pluralize(@user.transporter_reviews.count, "vote") %>)
                   </div>
                   <div class="star_rating">
                     <%=render 'shared/transporter_star_rating' %>
                   </div>
                 </div>
             <% end  %>
-            <% if @user_sender_reviews.any? %>
+            <% if @user.sender_reviews.any? %>
                 <div class="rating_item">
                   <div class="rating_title">
                     Sender Rating:
@@ -52,7 +52,7 @@
                     <b><%= @user.sender_rating %>%</b>
                   </div>
                   <div class="num_of_votes">
-                    (<%= pluralize(@user_sender_reviews.count, "vote") %>)
+                    (<%= pluralize(@user.sender_reviews.count, "vote") %>)
                   </div>
                   <div class="star_rating">
                     <%=render 'shared/sender_star_rating' %>
@@ -245,13 +245,13 @@
       <% end  %>
   </div>
   <div class="review_content_wrapper">
-    <% if @user_transporter_reviews.any? || @user_sender_reviews.any? %>
-        <% if @user_transporter_reviews.any? %>
+    <% if @user.transporter_reviews.any? || @user.sender_reviews.any? %>
+        <% if @user.transporter_reviews.any? %>
             <div class="review_content">
               <div class="as_a_something">
                 <b>As a Transporter</b>
                 </div>
-                <% @user_transporter_reviews.each do |user_transporter_review| %>
+                <% @user.transporter_reviews.each do |user_transporter_review| %>
                     <div class="mini_review">
                       <div class="mini_review_image">
                         <% if user_transporter_review.pos_or_neg == "POSITIVE" %>
@@ -270,12 +270,12 @@
                 <% end  %>
             </div>
         <% end  %>
-        <% if @user_sender_reviews.any? %>
+        <% if @user.sender_reviews.any? %>
             <div class="review_content">
               <div class="as_a_something">
                 <b> As a Sender</b>
               </div>
-                <% @user_sender_reviews.each do |user_sender_review| %>
+                <% @user.sender_reviews.each do |user_sender_review| %>
                     <div class="mini_review">
                       <div class="mini_review_image">
                         <% if user_sender_review.pos_or_neg == "POSITIVE" %>

@@ -1,5 +1,5 @@
 class RequestDelivery < ActiveRecord::Base
-  attr_accessible :from, :to, :what, :when, :more_details, :cost, :currency, :size, :sending_person, :receiving_person
+  attr_accessible :from, :to, :what, :when, :more_details, :cost, :currency, :size, :sending_person, :receiving_person, :sending_phone, :receiving_phone
   has_many :comments, :as => :commentable
   has_many :accepted_requests # just the 'relationships'
   has_many :accepted_by, through: :accepted_requests, source: :user
@@ -13,6 +13,10 @@ class RequestDelivery < ActiveRecord::Base
   validates :cost, :numericality => { :only_integer => true, :message => "Only whole numbers please..." }
   validates :currency, :presence => { :message => "It seems you left out currency..."}
   validate :date_not_in_past
+
+  VALID_PHONE_REGEX = /\A^05\d([-]{1})\d{7}$\z/i
+  validates :sending_phone, :format => { with: VALID_PHONE_REGEX, :message =>"Phone number should be like '052-1234567'"}, allow_blank: true
+  validates :receiving_phone, :format => { with: VALID_PHONE_REGEX, :message =>"Phone number should be like '052-1234567'"}, allow_blank: true
 
   default_scope order: 'request_deliveries.created_at DESC'
 

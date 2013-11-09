@@ -335,12 +335,11 @@
   }
 }
 
-.the_sender {
+.edit_sender {
   display: inline-block;
   font-size:1.4em;
   width: 212px;
   text-align: center;
-  background-image: url('SendingPerson.png');
   background-color: #10529b;
   background-repeat: no-repeat;
   background-position: bottom left;
@@ -354,12 +353,11 @@
   margin-right: 10px;
 }
 
-.the_receiver {
+.edit_receiver {
   display: inline-block;
   font-size:1.4em;
   width: 212px;
   text-align: center;
-  background-image: url('ReceivingPerson.png');
   background-color: #10529b;
   background-repeat: no-repeat;
   background-position: bottom left;

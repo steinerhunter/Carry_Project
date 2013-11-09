@@ -21,18 +21,20 @@
       </div>
       <div class="the_size_and_more_info">
         <div class="edit_sender_and_receiver">
-          <div class="the_sender">
+          <div class="edit_sender">
             <% if @request_delivery.sending_person.blank?  %>
-                <b style="color:#d67a31">Sending Person</b><br><%= f.text_field :sending_person  %>
+                <b style="color:#d67a31">Sending Person</b><br><%= f.text_field :sending_person, :placeholder => "What's his/her name?" %><br>
+                <%= f.text_field :sending_phone, :placeholder => "052-1234567" %>
             <% else %>
-                Sending Person<br><%= f.text_field :sending_person  %>
+                Sending Person<br><%= f.text_field :sending_person  %><br><%= f.text_field :sending_phone  %>
             <% end  %>
           </div>
-          <div class="the_receiver">
+          <div class="edit_receiver">
             <% if @request_delivery.receiving_person.blank?  %>
-                <b style="color:#d67a31">Receiving Person</b><br><%= f.text_field :receiving_person  %>
+                <b style="color:#d67a31">Receiving Person</b><br><%= f.text_field :receiving_person, :placeholder => "What's his/her name?"  %><br>
+                <%= f.text_field :receiving_phone, :placeholder => "052-1234567" %>
             <% else %>
-                Receiving Person<br><%= f.text_field :receiving_person  %>
+                Receiving Person<br><%= f.text_field :receiving_person  %><br><%= f.text_field :receiving_phone  %>
             <% end  %>
           </div>
           <div class="edit_deadline">

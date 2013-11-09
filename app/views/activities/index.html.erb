@@ -5,7 +5,7 @@
       </div>
       <div class="sub_activity">
         <div class="sub_activity_title">
-          My Delivery Suggestions
+          <b>My Delivery Suggestions</b>
         </div>
         <% if @suggest_feed_items.any? %>
             <%= render partial: 'shared/activity_suggest_item', collection: @suggest_feed_items %>
@@ -17,7 +17,7 @@
       </div>
       <div class="sub_activity">
         <div class="sub_activity_title">
-          Others' Delivery Suggestions
+          <b>Others' Delivery Suggestions</b>
         </div>
         <% if @my_accepted_suggest_feed_items.any? %>
             <%= render partial: 'shared/activity_suggest_item', collection: @my_accepted_suggest_feed_items %>
@@ -35,7 +35,7 @@
     </div>
     <div class="sub_activity">
       <div class="sub_activity_title">
-        My Delivery Requests
+        <b>My Delivery Requests</b>
       </div>
       <% if @request_feed_items.any? %>
           <%= render partial: 'shared/activity_request_item', collection: @request_feed_items %>
@@ -47,7 +47,7 @@
     </div>
     <div class="sub_activity">
       <div class="sub_activity_title">
-        Others' Delivery Requests
+        <b>Others' Delivery Requests</b>
       </div>
       <% if @my_accepted_request_feed_items.any? %>
           <%= render partial: 'shared/activity_request_item', collection: @my_accepted_request_feed_items %>

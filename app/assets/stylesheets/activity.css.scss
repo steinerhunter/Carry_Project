@@ -36,21 +36,14 @@
 
 .sub_activity {
   font-size:1.6em;
-  width: 90%;
-  background-color: #10529b;
-  background-repeat: no-repeat;
-  background-position: bottom left;
-  border:1px solid;
-  border-radius:4px;
-  -moz-border-radius:10px; /* Old Firefox */
+  width: 95%;
   color: #ffffff;
-  border-color: #000000;
   margin-left: auto;
   margin-right: auto;
   margin-top:10px;
   margin-bottom:40px;
   b {
-    font-size: 0.8em;
+    color: #d7f7ff
   }
 }
 
@@ -60,23 +53,15 @@
   height:25px;
   padding-top:7px;
   padding-bottom: 5px;
-  padding-left:5px;
+  padding-left:0px;
   margin-bottom:5px;
   font-size: 1.3em;
-  border-bottom:solid 1px;
-  border-color: #18212e;
-  background-color: #6a6cae;
-  background-repeat: no-repeat;
-  background-position: bottom left;
-  -moz-border-radius: 0px;
-  -webkit-border-radius: 3px 3px 0px 0px;
-  border-radius: 3px 3px 0px 0px;
 }
 
 .activity_feed_item {
   position: relative;
   width: 95%;
-  background-color: #070757;
+  background-color: #10529b;
   border:1px solid;
   border-radius:2px;
   -moz-border-radius: 0px;
@@ -87,7 +72,7 @@
   padding-left:5px;
   color: #ffffff;
   border-color: #000000;
-  margin-bottom: 1%;
+  margin-bottom: 3%;
   margin-left:auto;
   margin-right: auto;
   b {
@@ -104,6 +89,17 @@
       text-decoration: none;
     }
   }
+}
+
+.activity_created {
+  float:right;
+  font-size: 13px;
+  margin-right: 5px;
+}
+
+.activity_content {
+  margin-top:10px;
+  margin-bottom: 10px;
 }
 
 .status_and_created {

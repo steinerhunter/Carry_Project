@@ -5,9 +5,9 @@ class SuggestDelivery < ActiveRecord::Base
   has_many :accepted_by, through: :accepted_suggests, source: :user
   belongs_to :user
 
-  validates :size, :presence => { :message => "It seems you left out delivery size..."}
   validates :from, :presence => { :message => "We need to know where you're coming from..."}
   validates :to, :presence => { :message => "We need to know where you're going to..."}
+  validates :size, :presence => { :message => "It seems you left out delivery size..."}
   validates :cost, :presence => { :message => "We need to know how much you will charge..."}
   validates :cost, :numericality => { :only_integer => true, :message => "Only whole numbers please..." }
   validates :currency, :presence => { :message => "It seems you left out currency..."}

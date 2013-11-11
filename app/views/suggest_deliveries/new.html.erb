@@ -3,6 +3,18 @@
       <fieldset>
         <div class="single_step">
           <legend  style="background-image: url('../assets/car.png');"><b>Can you transport stuff?</b></legend>
+          <%= f.label :from, "What's your starting point?" %>
+          <% if session[:suggest_delivery_from].present? %>
+              <%= f.text_field :from, :placeholder => "Type origin address...", :class => "address_field", :value => session[:suggest_delivery_from] %>
+          <% else  %>
+              <%= f.text_field :from, :placeholder => "Type origin address...", :class => "address_field" %>
+          <% end  %>
+          <%= f.label :to, "Where are you getting to?" %>
+          <% if session[:suggest_delivery_to].present? %>
+              <%= f.text_field :to, :placeholder => "Type destination address...", :class => "address_field", :value => session[:suggest_delivery_to]  %>
+          <% else  %>
+              <%= f.text_field :to, :placeholder => "Type destination address...", :class => "address_field"   %>
+          <% end %>
           <%= f.label :size, "How big can you deliver?" %>
           <% if session[:suggest_delivery_size].present? %>
               <%= f.hidden_field :size, :value => session[:suggest_delivery_size]%>
@@ -32,18 +44,6 @@
               Large
             </div>
           </div>
-          <%= f.label :from, "What's your starting point?" %>
-          <% if session[:suggest_delivery_from].present? %>
-              <%= f.text_field :from, :placeholder => "Type origin address...", :class => "address_field", :value => session[:suggest_delivery_from] %>
-          <% else  %>
-              <%= f.text_field :from, :placeholder => "Type origin address...", :class => "address_field" %>
-          <% end  %>
-          <%= f.label :to, "Where are you getting to?" %>
-          <% if session[:suggest_delivery_to].present? %>
-              <%= f.text_field :to, :placeholder => "Type destination address...", :class => "address_field", :value => session[:suggest_delivery_to]  %>
-          <% else  %>
-              <%= f.text_field :to, :placeholder => "Type destination address...", :class => "address_field"   %>
-          <% end %>
           <div class="new_money">
             <%= f.label :cost, "How much will you charge for the delivery?" %>
             <% if session[:suggest_delivery_cost].present? %>

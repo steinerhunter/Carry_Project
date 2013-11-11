@@ -4,7 +4,39 @@
   margin-bottom: 15px;
 }
 
+.faq_links {
+  a {
+    color: #f2ff5e;
+    text-decoration: none;
+    &:hover {
+      color: #ffffff;
+    }
+  }
+  li {
+    color:#f2ff5e;
+  }
+}
+
+.faq_back_to_top {
+  float:right;
+  font-size: 0.9em;
+  a {
+    color: #f2ff5e;
+    text-decoration: none;
+    &:hover {
+      color: #ffffff;
+    }
+  }
+}
+
+.faq_links_title {
+  margin-bottom:5px;
+  margin-top:10px;
+  font-size:1.5em;
+}
+
 .faq_question {
+  width:400px;
   font-size: 1.4em;
   color: #f2ff5e;
   margin-top: 20px;

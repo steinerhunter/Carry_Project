@@ -22,6 +22,6 @@ class ActivitiesController < ApplicationController
     @my_suggests = SuggestDelivery.where("user_id = ?",current_user.id)
     @my_suggests_id = @my_suggests.pluck(:id)
     @my_suggests_accepted = AcceptedSuggest.find_all_by_suggest_delivery_id(@my_suggests_id)
-
   end
+
 end

@@ -1,5 +1,5 @@
 <% if suggest_feed_item.status == "Open" || suggest_feed_item.status == "Pending Confirmation" %>
-<div class="feed_item">
+    <div class="feed_item" onclick="location.href='<%=suggest_delivery_path(suggest_feed_item)%>'">
 <% if current_user.nil? %>
     <% if suggest_feed_item.has_all_details %>
         <div class="has_all_details" style="right:3px">

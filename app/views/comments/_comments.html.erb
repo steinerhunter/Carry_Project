@@ -27,8 +27,7 @@
     <% end %>
   </div>
 </div>
-
-<div class="comments_form" style="margin-top:20px;">
+<div class="comments_form" style="margin-top:12px;">
   <%= form_for [@commentable, @comment], :remote => true do |f| %>
       <% if  session[:comment_content].present? %>
           <%= f.text_area :content, :placeholder => "Type your question here..." ,:value => session[:comment_content], :rows => 1 %>

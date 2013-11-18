@@ -8,15 +8,19 @@
 
 .new_delivery_suggest_class {
   margin-top: 1%;
-  width:700px;
+  width:600px;
   margin-left: auto;
   margin-right: auto;
 }
 
 .single_step label {
-  margin-right:auto;
-  margin-left:auto;
-  font-size:30px;
+  display:inline-block;
+  text-align: left;
+  width:200px;
+  font-size:50px;
+  font-weight: bold;
+  line-height:40%;
+  color: #f2ff5e;
 }
 
 legend {
@@ -39,14 +43,20 @@ legend {
   }
 }
 
+.new_size {
+  display: inline-block;
+  width:295px;
+}
+
 .size_box {
-  width: 170px;
+  width: 60px;
   height: 70px;
   display: inline-block;
+  vertical-align: middle;
   text-align: center;
-  background-color: #a3a3a3;
+  background-color: #bcbcbc;
   background-repeat: no-repeat;
-  background-position: bottom center;
+  background-position: center center;
   border:solid 1px;
   border-radius:3px;
   -moz-border-radius:10px; /* Old Firefox */
@@ -55,20 +65,28 @@ legend {
   margin-right: auto;
   margin-left: auto;
   padding:10px;
-  font-size: 2.5em;
-  line-height:70%;
+  font-size:17px;
+  font-weight: bold;
+  line-height: 70%;
 }
 
 .size_box:hover {
+  background-color: #1a20e2;
   cursor:pointer;
 }
 
 .new_money input[type=text] {
-  width: 185px;
+  width: 95px;
+  vertical-align: middle;
+}
+
+.new_money label {
+  width:300px;
+  line-height: 110%;
 }
 
 .new_money select {
-  width:185px;
+  width:85px;
   height:45px;
   padding-top:7px;
   font-size: 1.5em;
@@ -99,9 +117,9 @@ fieldset label {
 }
 
 fieldset input[type=text] {
-  width:480px;
-  padding:8px;
-  font-size: 1.5em;
+  width:280px;
+  padding:10px;
+  font-size: 1.6em;
   border:solid 1px #000;
 }
 

@@ -1,14 +1,14 @@
 <header class="navbar navbar-inverse">
   <div class="navbar-inner">
-    <div class="container" style="width:1000px">
+    <div class="container" style="width:900px">
       <%= link_to "sendd.me", root_path, id: "logo" %>
       <div class="header_beta">
         beta
       </div>
       <nav>
         <ul class="nav pull-right" id="header_items">
-          <li id="header_transporters"><%= link_to "Find Transporters", suggestions_path  %></li>
-          <li id="header_senders"><%= link_to "Browse Senders", requests_path  %></li>
+          <li id="header_transporters"><%= link_to "Transporters", suggestions_path  %></li>
+          <li id="header_senders"><%= link_to "Senders", requests_path  %></li>
           <% if signed_in?  %>
               <% if current_user.mailbox.receipts.where(:is_read => false).where(:deleted => false).count > 0 %>
                   <li id="header_messages_unread"><%= link_to "Messages", conversations_path %></li>

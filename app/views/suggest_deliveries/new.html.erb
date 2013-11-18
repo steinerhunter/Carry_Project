@@ -2,20 +2,20 @@
   <%= form_for(@suggest_delivery, :remote => true ) do |f| %>
       <fieldset>
         <div class="single_step">
-          <legend  style="background-image: url('../assets/car.png');"><b>Can you transport stuff?</b></legend>
-          <%= f.label :from, "What's your starting point?" %>
+          <legend  style="background-image: url('../assets/car.png');"><b>New Delivery Suggestion</b></legend>
+          <%= f.label :from, "From?" %>
           <% if session[:suggest_delivery_from].present? %>
               <%= f.text_field :from, :placeholder => "Type origin address...", :class => "address_field", :value => session[:suggest_delivery_from] %>
           <% else  %>
               <%= f.text_field :from, :placeholder => "Type origin address...", :class => "address_field" %>
           <% end  %>
-          <%= f.label :to, "Where are you getting to?" %>
+          <%= f.label :to, "To?" %>
           <% if session[:suggest_delivery_to].present? %>
               <%= f.text_field :to, :placeholder => "Type destination address...", :class => "address_field", :value => session[:suggest_delivery_to]  %>
           <% else  %>
               <%= f.text_field :to, :placeholder => "Type destination address...", :class => "address_field"   %>
           <% end %>
-          <%= f.label :size, "How big can you deliver?" %>
+          <%= f.label :size, "Size?" %>
           <% if session[:suggest_delivery_size].present? %>
               <%= f.hidden_field :size, :value => session[:suggest_delivery_size]%>
           <% else  %>
@@ -24,32 +24,32 @@
           <div class="new_size">
             <div class="size_box" id="small" style="background-image: url('../assets/mouse.png');"
                  onclick="style.backgroundColor='#d05e0b';
-                         document.getElementById('medium').style.backgroundColor = '#a3a3a3';
-                         document.getElementById('large').style.backgroundColor = '#a3a3a3';
+                         document.getElementById('medium').style.backgroundColor = '#bcbcbc';
+                         document.getElementById('large').style.backgroundColor = '#bcbcbc';
                          document.getElementById('new_suggest_delivery').suggest_delivery_size.value = 'Small';">
               Small
             </div>
             <div class="size_box" id="medium" style="background-image: url('../assets/lamp.png'); margin-left:20px;"
                  onclick="style.backgroundColor='#d05e0b';
-                         document.getElementById('small').style.backgroundColor = '#a3a3a3';
-                         document.getElementById('large').style.backgroundColor = '#a3a3a3';
+                         document.getElementById('small').style.backgroundColor = '#bcbcbc';
+                         document.getElementById('large').style.backgroundColor = '#bcbcbc';
                          document.getElementById('new_suggest_delivery').suggest_delivery_size.value = 'Medium';">
               Medium
             </div>
             <div class="size_box" id="large" style="background-image: url('../assets/table.png'); margin-left:20px;"
                  onclick="style.backgroundColor='#d05e0b';
-                         document.getElementById('small').style.backgroundColor = '#a3a3a3';
-                         document.getElementById('medium').style.backgroundColor = '#a3a3a3';
+                         document.getElementById('small').style.backgroundColor = '#bcbcbc';
+                         document.getElementById('medium').style.backgroundColor = '#bcbcbc';
                          document.getElementById('new_suggest_delivery').suggest_delivery_size.value = 'Large';">
               Large
             </div>
           </div>
           <div class="new_money">
-            <%= f.label :cost, "How much will you charge for the delivery?" %>
+            <%= f.label :cost, "How much?" %>
             <% if session[:suggest_delivery_cost].present? %>
-                <%= f.text_field :cost, :placeholder => "Type an amount...", :value => session[:suggest_delivery_cost] %>
+                <%= f.text_field :cost, :placeholder => "amount...", :value => session[:suggest_delivery_cost] %>
             <% else  %>
-                <%= f.text_field :cost, :placeholder => "Type an amount..." %>
+                <%= f.text_field :cost, :placeholder => "amount..." %>
             <% end %>
             <% if session[:suggest_delivery_currency].present? %>
                 <%= f.select :currency, options_for_select(%w[ILS USD EUR], :selected =>session[:suggest_delivery_currency]) %>

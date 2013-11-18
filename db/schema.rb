@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20131108153705) do
+ActiveRecord::Schema.define(:version => 20131118192440) do
 
   create_table "accepted_requests", :force => true do |t|
     t.integer  "request_delivery_id"
@@ -177,6 +177,7 @@ ActiveRecord::Schema.define(:version => 20131108153705) do
     t.boolean  "has_all_details",      :default => false
     t.boolean  "sender_reviewed",      :default => false
     t.boolean  "transporter_reviewed", :default => false
+    t.string   "frequency"
   end
 
   add_index "suggest_deliveries", ["user_id", "created_at"], :name => "index_suggest_deliveries_on_user_id_and_created_at"

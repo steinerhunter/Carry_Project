@@ -22,7 +22,7 @@
               <%= f.text_field :to, :placeholder => "Type destination address...", :class => "address_field"   %>
           <% end  %>
           <div class="new_money">
-            <%= f.label :cost, "How much?" %>
+            <%= f.label :cost, "How much will you pay?" %>
             <% if session[:request_delivery_cost].present? %>
                     <%= f.text_field :cost, :placeholder => "Type an amount...", :value => session[:request_delivery_cost] %>
             <% else  %>
@@ -35,7 +35,7 @@
             <% end  %>
           </div>
           <div class="form_submit" style="margin-top:20px;">
-            <%= f.submit "Finish", :type => :image, :src => "assets/Post_Request.png", :class => "finish" %>
+            <%=  f.submit "Add Delivery Request" , :id => 'submit_delivery'%>
           </div>
         </div>
       </fieldset>

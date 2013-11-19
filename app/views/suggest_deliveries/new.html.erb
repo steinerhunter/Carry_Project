@@ -45,7 +45,7 @@
             </div>
           </div>
           <div class="new_money">
-            <%= f.label :cost, "How much?" %>
+            <%= f.label :cost, "How much will you charge?" %>
             <% if session[:suggest_delivery_cost].present? %>
                 <%= f.text_field :cost, :placeholder => "amount...", :value => session[:suggest_delivery_cost] %>
             <% else  %>
@@ -58,7 +58,7 @@
             <% end  %>
           </div>
           <div class="form_submit" style="margin-top: 20px;">
-            <%= f.submit "Finish", :type => :image, :src => "assets/Post_Suggest.png", :class => "finish" %>
+            <%=  f.submit "Add Delivery Suggestion" , :id => 'submit_delivery'%>
           </div>
         </div>
       </fieldset>

@@ -119,11 +119,11 @@
   background-position: bottom center;
   -moz-box-shadow: 3px 3px 3px #3d3d3d; /* Old Firefox */
   box-shadow: 3px 3px 3px #3d3d3d;
-  border:solid 3px;
-  border-radius:10px;
+  border:solid 1px;
+  border-radius:8px;
   -moz-border-radius:10px; /* Old Firefox */
   color: #ffffff;
-  border-color: #000000;
+  border-color: #4b4b4b;
 }
 
 .right_button {
@@ -137,11 +137,11 @@
   background-position: bottom center;
   -moz-box-shadow: 3px 3px 3px #3d3d3d; /* Old Firefox */
   box-shadow: 3px 3px 3px #3d3d3d;
-  border:solid 3px;
-  border-radius:10px;
+  border:solid 1px;
+  border-radius:8px;
   -moz-border-radius:10px; /* Old Firefox */
   color: #ffffff;
-  border-color: #000000;
+  border-color: #4b4b4b;
 }
 
 .left_button:hover, .right_button:hover{
@@ -187,16 +187,16 @@
 
 .signup_now {
   text-align: center;
-  width: 550px;
-  height: 75px;
-  line-height: 160%;
+  width: 520px;
+  height: 65px;
+  line-height: 200%;
   background-color: #d67a31;
   background-repeat: no-repeat;
   background-position: bottom center;
   -moz-box-shadow: 3px 3px 3px #3d3d3d; /* Old Firefox */
   box-shadow: 3px 3px 3px #3d3d3d;
-  border:solid 3px;
-  border-radius:10px;
+  border:solid 1px;
+  border-radius:7px;
   -moz-border-radius:10px; /* Old Firefox */
   color: #ffffff;
   border-color: #000000;
@@ -204,7 +204,7 @@
   margin-bottom:30px;
   margin-left: auto;
   margin-right: auto;
-  font-size:3.4em;
+  font-size:2.4em;
 }
 
 .signup_now:hover{

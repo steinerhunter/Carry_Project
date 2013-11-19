@@ -214,6 +214,21 @@
             <%= @suggest_delivery.to %>
           </div>
         </div>
+        <div class="the_size_and_frequency">
+          <div class="the_size_and_frequency_inner"  style="background-image: url('../assets/freq_small.png');text-align:left">
+            <div class="inner_title" style="display:inline-block;">
+              <b>Frequency</b>
+            </div>
+            <% if @suggest_delivery.frequency.blank? %>
+                <% if @suggest_delivery.user == current_user %>
+                    <%= render 'shared/missing' %>
+                <% end  %>
+                <b>Not set yet.</b>
+            <% else  %>
+                <b>This is a </b><b style="color: #ffa33a"><%= @suggest_delivery.frequency %></b><b> sized delivery.</b>
+            <% end %>
+          </div>
+        </div>
         <div class="post_text_title">
           <b>Need more details?</b>
         </div>

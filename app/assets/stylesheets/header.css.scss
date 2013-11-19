@@ -76,10 +76,13 @@ header {
   background-image: url('header_car.png');
   border:1px solid;
   border-bottom: 0px;
-  border-color: #1d79e2;
+  border-color: #434343;
+  background-color: #d67a31;
   background-repeat: no-repeat;
   background-position: bottom left;
   -moz-border-radius: 0px;
+  -webkit-border-radius: 7px 7px 0px 0px;
+  border-radius: 7px 7px 0px 0px;
   a {
     color: #ffffff;
     padding-left:70px;
@@ -107,10 +110,13 @@ header {
   background-image: url('header_box.png');
   border:1px solid;
   border-bottom: 0px;
-  border-color: #1d79e2;
+  border-color: #434343;
+  background-color: #d67a31;
   background-repeat: no-repeat;
   background-position: bottom left;
   -moz-border-radius: 0px;
+  -webkit-border-radius: 7px 7px 0px 0px;
+  border-radius: 7px 7px 0px 0px;
   a {
     color: #ffffff;
     padding-left:50px;
@@ -347,7 +353,7 @@ header {
   margin-left:3px;
   text-align: left;
   font-size: 0.9em;
-  background-color: #3a9930;
+  background-color: #1bbc9b;
   background-image: url('header_register.png');
   border:1px solid;
   border-bottom: 0px;

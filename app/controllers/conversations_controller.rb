@@ -18,7 +18,7 @@ class ConversationsController < ApplicationController
     recipients = User.where(email: recipient_emails).all
     @conversation = current_user.send_message(recipients, *conversation_params(:body, :subject))
     if @conversation.errors.blank?
-      flash[:new_message_sent] = "Your message was successfully sent!"
+      flash[:success] = "Great!<br><div class='sub_flash_text'>You've successfully sent your message.</div>".html_safe
       respond_to do |format|
         format.html { redirect_to activity_path }
         format.js

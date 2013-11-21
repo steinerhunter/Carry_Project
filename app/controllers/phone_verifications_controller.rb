@@ -4,15 +4,15 @@ class PhoneVerificationsController < ApplicationController
     @user = User.find_by_id(@phone.user_id)
     if @phone.present?
       if @phone.verified
-        flash[:profile_update] = "You've already confirmed your phone number."
+        flash[:failure] = "Sorry!<br><div class='sub_flash_text'>You've already confirmed your phone number.</div>".html_safe
         redirect_to user_path(@user.id)
       else
-        flash[:profile_update] = "You've successfully confirmed your phone number!"
+        flash[:success] = "Thank you!<br><div class='sub_flash_text'>Your phone number has been successfully verified..</div>".html_safe
         @phone.confirm_phone
         redirect_to user_path(@user.id)
       end
     else
-      flash[:profile_update] = "Sorry, that's an invalid verification code."
+      flash[:failure] = "Sorry!<br><div class='sub_flash_text'>That's an invalid verification code.</div>".html_safe
       redirect_to root_path
     end
   end

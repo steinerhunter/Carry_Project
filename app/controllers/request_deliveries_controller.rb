@@ -37,10 +37,10 @@ class RequestDeliveriesController < ApplicationController
     else
       @request_delivery = current_user.request_deliveries.build(params[:request_delivery])
       if @request_delivery.save
-        flash[:request_post_created] = "Thank you!<br>
-                                                      <div class='sub_flash_text'>Your delivery request was successfully added to our lists. <br>
-                                                      There are some more details to add though.<br>
-                                                      <b style=\"color:#ff9054\">Add</b> <img src=\"../assets/missing_detail.png\"> all details and get priority in our lists!</div>".html_safe
+        flash[:success] = "Thank you!<br>
+                                              <div class='sub_flash_text'>Your delivery request was successfully added to our lists. <br>
+                                              There are some more details to add though.<br>
+                                              <b style=\"color:#ff9054\">Add</b> <img src=\"../assets/missing_detail.png\"> all details and get priority in our lists!</div>".html_safe
         respond_with(@request_delivery) do |format|
           format.html { redirect_to request_delivery_url(@request_delivery)}
         end
@@ -106,15 +106,12 @@ class RequestDeliveriesController < ApplicationController
   def update
     @request_delivery = RequestDelivery.find(params[:id])
     if @request_delivery.status != "Open"
-      flash[:request_post_updated] = "Sorry!<br>
-                                                      <div class='sub_flash_text'>You cannot edit the details of your request, <br>
-                                                      Since someone has already accepted it.</div>".html_safe
+      flash[:failure] = "Sorry!<br><div class='sub_flash_text'>You cannot edit the details of your request since someone has already accepted it.</div>".html_safe
       redirect_to :back
     else
       if @request_delivery.update_attributes( params[:request_delivery])
         @request_delivery.check_all_details
-        flash[:request_post_updated] = "Thank you!<br>
-                                                      <div class='sub_flash_text'>Your details were successfully updated.</div>".html_safe
+        flash[:success] = "Thank you!<br><div class='sub_flash_text'>Your details were successfully updated.</div>".html_safe
         respond_with(@request_delivery) do |format|
           format.html { redirect_to request_delivery_url(@request_delivery)}
         end
@@ -124,12 +121,12 @@ class RequestDeliveriesController < ApplicationController
 
   def destroy
     @request_delivery = RequestDelivery.find(params[:id])
-    if @request_delivery.status == "Confirmed"
-      flash[:request_post_deleted] = "You cannot delete a confirmed request."
+    if @request_delivery.status != "Open"
+      flash[:failure] = "Sorry!<br><div class='sub_flash_text'>You cannot delete your delivery request since someone has already accepted it.</div>".html_safe
       redirect_to :back
     else
       @request_delivery.destroy
-      flash[:request_post_deleted] = "Your request was successfully deleted!"
+      flash[:success] = "Thank you!<br><div class='sub_flash_text'>Your delivery request has been successfully deleted.</div>".html_safe
       redirect_to requests_path
     end
   end
@@ -145,9 +142,10 @@ class RequestDeliveriesController < ApplicationController
             current_user.request_accepts << @request_delivery
             @request_delivery.accept_request
             redirect_to :back
-            flash[:accept] = "You've chosen to accept <br><b>#{@request_delivery.what}</b><br> delivery request!<br>
-                                          <div class='sub_flash_text'><b>#{@request_delivery.user.name}</b>, the creator of the request, will be notified. <br>
-                                          Please allow <b>#{@request_delivery.user.name}</b> some time to get back to you.</div>".html_safe
+            flash[:success] = "Thank you!<br>
+                                              <div class='sub_flash_text'>You've chosen to accept <b>#{@request_delivery.what}</b> delivery request.<br>
+                                              <b>#{@request_delivery.user.name}</b>, the creator of the request, will be notified. <br>
+                                              Now <b>#{@request_delivery.user.name}</b> must confirm you.</div>".html_safe
             @accepted_request = AcceptedRequest.find_all_by_request_delivery_id(@request_delivery.id).last
             @creating_user = User.find_by_id(@request_delivery.user_id)
             @accepting_user = User.find_by_id(@accepted_request.user_id)
@@ -156,26 +154,26 @@ class RequestDeliveriesController < ApplicationController
         end
       elsif type == "cancel"
         if @request_delivery.status == "Open"
-          flash[:cancel] = "You cannot cancel an Open request."
+          flash[:failure] = "Sorry!<br><div class='sub_flash_text'>You cannot cancel an Open request.</div>".html_safe
           redirect_to :back
         elsif @request_delivery.status == "Confirmed"
-          flash[:cancel] = "You cannot cancel a Confirmed request."
+          flash[:failure] = "Sorry!<br><div class='sub_flash_text'>You cannot cancel a Confirmed request.</div>".html_safe
           redirect_to :back
         elsif @request_delivery.status == "Complete"
-          flash[:cancel] = "You cannot cancel a Complete request."
+          flash[:failure] = "Sorry!<br><div class='sub_flash_text'>You cannot cancel a Complete request.</div>".html_safe
           redirect_to :back
         else
           current_user.request_accepts.delete(@request_delivery)
           redirect_to :back
           @request_delivery.cancel_request
-          flash[:cancel] = "You've chosen to cancel the request."
+          flash[:success] = "Thank you!<br><div class='sub_flash_text'>You've chosen to cancel your acceptance of the request.</div>".html_safe
         end
       else
         redirect_to :back
       end
     else
       redirect_to :back
-      flash[:your_own] = "You cannot accept <br> your own delivery requests!".html_safe
+      flash[:failure] = "Sorry!<br><div class='sub_flash_text'>You cannot accept your own delivery requests.</div>".html_safe
     end
   end
 
@@ -208,7 +206,9 @@ class RequestDeliveriesController < ApplicationController
     @request_creator = User.find(@request_delivery.user_id)
     @confirmed_user = User.find( @accepted_request.user_id)
     if @request_creator == current_user && @phone.present? && @phone.verified
-      #NotifMailer.new_confirmed_request(@request_creator,@confirmed_user,@request_delivery).deliver
+      if Rails.env.production?
+        NotifMailer.new_confirmed_request(@request_creator,@confirmed_user,@request_delivery).deliver
+      end
       redirect_to :controller => 'payments',
                   :action => 'checkout',
                   :req_or_sugg => "request_delivery",
@@ -228,7 +228,10 @@ class RequestDeliveriesController < ApplicationController
     @confirmed_user = User.find( @accepted_request.user_id)
     @request_payment = RequestPayment.find_by_request_delivery_id(@request_delivery.id)
     if @confirmed_user == current_user && @request_payment.approved
-        #NotifMailer.new_complete_request(@request_creator,@confirmed_user,@request_delivery).deliver
+      flash[:success] = "Great!<br><div class='sub_flash_text'>You've chosen to mark <b>#{@request_delivery.what}</b> delivery request as complete.</div>".html_safe
+      if Rails.env.production?
+        NotifMailer.new_complete_request(@request_creator,@confirmed_user,@request_delivery).deliver
+      end
         redirect_to :controller => 'payments',
                                   :action => 'execute',
                                   :req_or_sugg => "request_delivery",

@@ -28,6 +28,6 @@ $('<div />').addClass('signup_errors').html(errors).appendTo(".edit_user").hide(
 <% else %>
 
 // On successful creation of new user, redirect to main page
-window.location.href = "/"
+window.location.href = "<%= user_path(@user) %>"
 
 <% end %>

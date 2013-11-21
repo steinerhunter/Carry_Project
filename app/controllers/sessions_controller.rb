@@ -3,13 +3,13 @@ class SessionsController < ApplicationController
   respond_to :html, :js
 
   def new
-      if session[:request_delivery_what].present?
-        flash.now[:request_signin] = "<div class='sub_flash_text'>Thank you</div> for adding your request delivery details.<br><br>
-                                                                    We will store them temporarily, and post them to our database once you sign in.".html_safe
-        elsif session[:suggest_delivery_size].present?
-          flash.now[:request_signin] = "<div class='sub_flash_text'>Thank you</div> for adding your transport details.<br><br>
-                                                                      We will store them temporarily, and post them to our database once you sign in.".html_safe
-      end
+    if session[:request_delivery_what].present?
+      flash.now[:success] = "Thank you!<br><div class='sub_flash_text'>We will store your delivery request details temporarily,
+                                                    and post them to our database once you sign in.</div>".html_safe
+    elsif session[:suggest_delivery_size].present?
+      flash.now[:success] = "Thank you!<br><div class='sub_flash_text'>We will store your delivery suggestion details temporarily,
+                                                    and post them to our database once you sign in.</div>".html_safe
+    end
   end
 
   def create

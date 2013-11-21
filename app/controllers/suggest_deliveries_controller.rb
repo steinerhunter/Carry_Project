@@ -37,9 +37,10 @@ class SuggestDeliveriesController < ApplicationController
     else
       @suggest_delivery = current_user.suggest_deliveries.build(params[:suggest_delivery])
       if @suggest_delivery.save
-        flash[:suggest_post_created] = "Your suggestion was added successfully!<br>
-                                                      <div class='sub_flash_text'>There are some missing details though.<br>
-                                                      Go to <b style=\"color:#ff9054\">Edit</b> <img src=\"../assets/edit_post_big.png\"> and add them to attract more senders!</div>".html_safe
+        flash[:success] = "Thank you!<br>
+                                              <div class='sub_flash_text'>Your delivery suggestion was successfully added to our lists. <br>
+                                              There are some more details to add though.<br>
+                                              <b style=\"color:#ff9054\">Add</b> <img src=\"../assets/missing_detail.png\"> all details and get priority in our lists!</div>".html_safe
         respond_with(@suggest_delivery) do |format|
           format.html { redirect_to suggest_delivery_url(@suggest_delivery)}
         end
@@ -90,16 +91,13 @@ class SuggestDeliveriesController < ApplicationController
 
   def update
     @suggest_delivery = SuggestDelivery.find(params[:id])
-    if @suggest_delivery.status == "Confirmed"
-      flash[:request_post_updated] = "Sorry!<br>
-                                                      <div class='sub_flash_text'>You cannot edit the details of your request, <br>
-                                                      Since someone has already accepted it.</div>".html_safe
+    if @suggest_delivery.status != "Open"
+      flash[:failure] = "Sorry!<br><div class='sub_flash_text'>You cannot edit the details of your suggestion since someone has already accepted it.</div>".html_safe
       redirect_to :back
     else
       if @suggest_delivery.update_attributes( params[:suggest_delivery])
         @suggest_delivery.check_all_details
-        flash[:request_post_updated] = "Thank you!<br>
-                                                      <div class='sub_flash_text'>Your details were successfully updated.</div>".html_safe
+        flash[:success] = "Thank you!<br><div class='sub_flash_text'>Your details were successfully updated.</div>".html_safe
         respond_with(@suggest_delivery) do |format|
           format.html { redirect_to suggest_delivery_url(@suggest_delivery)}
         end
@@ -109,12 +107,12 @@ class SuggestDeliveriesController < ApplicationController
 
   def destroy
     @suggest_delivery = SuggestDelivery.find(params[:id])
-    if @suggest_delivery.status == "Confirmed"
-      flash[:suggest_post_deleted] = "You cannot delete a confirmed suggestion."
+    if @suggest_delivery.status != "Open"
+      flash[:failure] = "Sorry!<br><div class='sub_flash_text'>You cannot delete your delivery suggestion since someone has already accepted it.</div>".html_safe
       redirect_to :back
     else
       @suggest_delivery.destroy
-      flash[:suggest_post_deleted] = "Your suggestion was successfully deleted!"
+      flash[:success] = "Thank you!<br><div class='sub_flash_text'>Your delivery suggestion has been successfully deleted.</div>".html_safe
       redirect_to suggestions_path
     end
   end
@@ -127,29 +125,36 @@ class SuggestDeliveriesController < ApplicationController
         current_user.suggest_accepts << @suggest_delivery
         @suggest_delivery.accept_suggest
         redirect_to :back
-        flash[:accept] = "You've chosen to accept <br><b>#{@suggest_delivery.size} sized items</b><br> delivery suggestion!<br>
-                                              <div class='sub_flash_text'><b>#{@suggest_delivery.user.name}</b>, the creator of the suggestion, will be notified. <br>
-                                              Please allow <b>#{@suggest_delivery.user.name}</b> some time to get back to you.</div>".html_safe
+        flash[:success] = "Thank you!<br>
+                                              <div class='sub_flash_text'>You've chosen to accept <b>#{@suggest_delivery.size} sized items</b> delivery suggestion.<br>
+                                              <b>#{@suggest_delivery.user.name}</b>, the creator of the suggestion, will be notified. <br>
+                                              Now <b>#{@suggest_delivery.user.name}</b> must confirm you.</div>".html_safe
         @accepted_suggest = AcceptedSuggest.find_by_suggest_delivery_id(@suggest_delivery.id)
         @creating_user = User.find_by_id(@suggest_delivery.user_id)
         @accepting_user = User.find_by_id(@accepted_suggest.user_id)
         NotifMailer.new_accepted_suggest(@creating_user,@accepting_user,@suggest_delivery).deliver
       elsif type == "cancel"
-        if @suggest_delivery.status == "Confirmed"
-          flash[:cancel] = "You cannot cancel a confirmed suggestion."
+        if @suggest_delivery.status == "Open"
+          flash[:failure] = "Sorry!<br><div class='sub_flash_text'>You cannot cancel an Open request.</div>".html_safe
+          redirect_to :back
+        elsif @suggest_delivery.status == "Confirmed"
+          flash[:failure] = "Sorry!<br><div class='sub_flash_text'>You cannot cancel a Confirmed suggestion.</div>".html_safe
+          redirect_to :back
+        elsif @suggest_delivery.status == "Complete"
+          flash[:failure] = "Sorry!<br><div class='sub_flash_text'>You cannot cancel a Complete suggestion.</div>".html_safe
           redirect_to :back
         else
           current_user.suggest_accepts.delete(@suggest_delivery)
           redirect_to :back
           @suggest_delivery.cancel_suggest
-          flash[:cancel] = "You've chosen to cancel the suggestion."
+          flash[:success] = "Thank you!<br><div class='sub_flash_text'>You've chosen to cancel your acceptance of the suggestion.</div>".html_safe
         end
       else
         redirect_to :back
       end
     else
       redirect_to :back
-      flash[:your_own] = "You cannot accept <br> your own delivery suggestions!".html_safe
+      flash[:failure] = "Sorry!<br><div class='sub_flash_text'>You cannot accept your own delivery suggestions.</div>".html_safe
     end
   end
 
@@ -163,9 +168,11 @@ class SuggestDeliveriesController < ApplicationController
       if @accepted_suggest.save
         @accepted_suggest.confirm_accepted_suggest
         @suggest_delivery.confirm_suggest
-        flash[:confirm] = "You've chosen to confirm <br><b>#{@confirmed_user.name}</b><br>
-                                          <div class='sub_flash_text'>For your suggestion <div class='confirmed_suggest'><b>Transport #{@suggest_delivery.size} sized items</b><br></div></div>".html_safe
-        NotifMailer.new_confirmed_suggest(@suggest_creator,@confirmed_user,@suggest_delivery).deliver
+        flash[:success] = "Great!<br><div class='sub_flash_text'>You've chosen to confirm <b>#{@confirmed_user.name}</b>
+                                            For your suggestion<b> #{@suggest_delivery.size} sized items</b></div>".html_safe
+        if Rails.env.production?
+          NotifMailer.new_confirmed_suggest(@suggest_creator,@confirmed_user,@suggest_delivery).deliver
+        end
       end
     end
     redirect_to activity_path
@@ -194,7 +201,9 @@ class SuggestDeliveriesController < ApplicationController
     @suggest_creator = User.find(@suggest_delivery.user_id)
     @confirmed_user = User.find( @accepted_suggest.user_id)
     if @confirmed_user == current_user
-      #NotifMailer.new_confirmed_suggest(@suggest_creator,@confirmed_user,@suggest_delivery).deliver
+      if Rails.env.production?
+        NotifMailer.new_confirmed_suggest(@suggest_creator,@confirmed_user,@suggest_delivery).deliver
+      end
       redirect_to :controller => 'payments',
                   :action => 'checkout',
                   :req_or_sugg => "suggest_delivery",
@@ -203,7 +212,7 @@ class SuggestDeliveriesController < ApplicationController
                   :task_id => @suggest_delivery.id,
                   :accepted_task_id => @accepted_suggest.id
     else
-      flash[:cannot] = "Only the creator of the suggestion can confirm it."
+      flash[:failure] = "Sorry!<br><div class='sub_flash_text'>Only the creator of the suggestion can confirm it.</div>".html_safe
     end
   end
 
@@ -214,9 +223,10 @@ class SuggestDeliveriesController < ApplicationController
     @suggest_payment = SuggestPayment.find_by_suggest_delivery_id(@suggest_delivery.id)
     @confirmed_user = User.find( @accepted_suggest.user_id)
     if @suggest_creator == current_user && @suggest_payment.approved
-      flash[:complete] = "You've chosen to mark <br><b>#{@suggest_delivery.size} Sized Items</b><br> delivery suggestion as <br><div class='complete'><b>complete!</b></div>
-                                            <div class='sub_flash_text'>A payment of <b>#{@suggest_delivery.cost} #{@suggest_delivery.currency}</b> will be transferred to you. <br></div>".html_safe
-        #NotifMailer.new_complete_suggest(@suggest_creator,@confirmed_user,@suggest_delivery).deliver
+      flash[:success] = "Great!<br><div class='sub_flash_text'>You've chosen to mark <b>#{@suggest_delivery.size} Sized Items</b> delivery suggestion as complete.</div>".html_safe
+      if Rails.env.production?
+        NotifMailer.new_complete_suggest(@suggest_creator,@confirmed_user,@suggest_delivery).deliver
+      end
         redirect_to :controller => 'payments',
                                   :action => 'execute',
                                   :req_or_sugg => "suggest_delivery",
@@ -225,7 +235,7 @@ class SuggestDeliveriesController < ApplicationController
                                   :task_id => @suggest_delivery.id,
                                   :accepted_task_id => @accepted_suggest.id
     else
-      flash[:cannot] = "Only the creator of the suggestion can mark it as complete."
+      redirect_to activity_url
     end
   end
 

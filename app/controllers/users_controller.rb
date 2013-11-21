@@ -59,6 +59,10 @@ class UsersController < ApplicationController
       session[:request_delivery_currency] = nil
       @request_delivery = RequestDelivery.find_by_id(session[:request_delivery_id])
       session[:request_delivery_id] = nil
+      flash[:success] = "Thank you!<br>
+                                              <div class='sub_flash_text'>Your delivery request was successfully added to our lists. <br>
+                                              There are some more details to add though.<br>
+                                              <b style=\"color:#ff9054\">Add</b> <img src=\"../assets/missing_detail.png\"> all details and get priority in our lists!</div>".html_safe
       redirect_to request_delivery_url(@request_delivery)
     elsif session[:suggest_delivery_size].present?
       session[:suggest_delivery_from]  = nil
@@ -67,17 +71,22 @@ class UsersController < ApplicationController
       session[:suggest_delivery_currency] = nil
       @suggest_delivery = SuggestDelivery.find_by_id(session[:suggest_delivery_id])
       session[:suggest_delivery_id] = nil
+      flash[:success] = "Thank you!<br>
+                                              <div class='sub_flash_text'>Your delivery suggestion was successfully added to our lists. <br>
+                                              There are some more details to add though.<br>
+                                              <b style=\"color:#ff9054\">Add</b> <img src=\"../assets/missing_detail.png\"> all details and get priority in our lists!</div>".html_safe
       redirect_to suggest_delivery_url(@suggest_delivery)
     else
       url = session[:return_to] || root_path
       session[:return_to] = nil if session[:return_to].present?
+      flash[:success] = "Thank you!<br><div class='sub_flash_text'>You've successfully created your account.</div>".html_safe
       redirect_to url
     end
   end
 
   def destroy
     User.find(params[:id]).destroy
-    flash[:success] = "You've successfully deleted your account."
+    flash[:success] = "Thank you!<br><div class='sub_flash_text'>You've successfully deleted your account.</div>".html_safe
     redirect_to users_url
   end
 
@@ -86,7 +95,7 @@ class UsersController < ApplicationController
 
   def update
        if @user.update_attributes( params[:user])
-        flash[:profile_update] = "Your Profile was successfully updated!"
+        flash[:success] = "Great!<br><div class='sub_flash_text'>Your details were successfully updated.</div>".html_safe
         sign_in @user
         respond_with(@user, :location => user_path(@user))
       end

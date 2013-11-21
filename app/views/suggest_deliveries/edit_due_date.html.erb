@@ -1,0 +1,14 @@
+<div class="edit_delivery_field_wrapper">
+  <%= form_for(@suggest_delivery, :remote => true ) do |f| %>
+      <div class="edit_delivery_field_due_date">
+        <% if @suggest_delivery.when.blank? %>
+            When? <%= f.text_field :when, :placeholder => "mm/dd/yyyy", :class => "datepicker" %>
+        <% else  %>
+            Due Date <%= f.text_field :when, :placeholder => "mm/dd/yyyy", :class => "datepicker", :value => "#{@suggest_delivery.when.strftime("%d/%m/%Y")}" %>
+        <% end  %>
+      </div>
+      <div class="edit_update">
+        <%=  f.submit "Update Suggestion" , :id => 'submit_delivery'%>
+      </div>
+  <% end  %>
+</div>

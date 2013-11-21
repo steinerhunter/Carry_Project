@@ -1,16 +1,16 @@
 class RequestDeliveriesController < ApplicationController
   before_filter :signed_in_user, :except => [:show, :index, :new, :create]
-  before_filter :correct_user,   only: [:destroy, :edit, :update]
+  before_filter :correct_user,   only: [:destroy, :update]
   respond_to :html, :js
 
   def show
     @request_delivery = RequestDelivery.find(params[:id])
     if !current_user.nil?
       @accepted_request = AcceptedRequest.find_by_user_id_and_request_delivery_id(current_user.id,@request_delivery.id)
+      @my_phone = Phone.find_by_user_id(current_user.id)
     end
     @facebook_authentication = Authentication.find_by_user_id(@request_delivery.user.id)
     @phone = Phone.find_by_user_id(@request_delivery.user.id)
-    @my_phone = Phone.find_by_user_id(current_user.id)
     @commentable = @request_delivery
     @comments = @commentable.comments
     @comment = Comment.new
@@ -37,9 +37,10 @@ class RequestDeliveriesController < ApplicationController
     else
       @request_delivery = current_user.request_deliveries.build(params[:request_delivery])
       if @request_delivery.save
-        flash[:request_post_created] = "Your request was added successfully!<br>
-                                                      <div class='sub_flash_text'>There are some missing details though.<br>
-                                                      Go to <b style=\"color:#ff9054\">Edit</b> <img src=\"../assets/edit_post_big.png\"> and add them to attract more transporters!</div>".html_safe
+        flash[:request_post_created] = "Thank you!<br>
+                                                      <div class='sub_flash_text'>Your delivery request was successfully added to our lists. <br>
+                                                      There are some more details to add though.<br>
+                                                      <b style=\"color:#ff9054\">Add</b> <img src=\"../assets/missing_detail.png\"> all details and get priority in our lists!</div>".html_safe
         respond_with(@request_delivery) do |format|
           format.html { redirect_to request_delivery_url(@request_delivery)}
         end
@@ -53,23 +54,67 @@ class RequestDeliveriesController < ApplicationController
     @request_feed_items = @search.all
   end
 
-  def edit
-    @request_delivery = RequestDelivery.find(params[:id])
-    if @request_delivery.status == "Confirmed"
-      flash[:request_post_updated] = "You cannot edit a confirmed request."
-      redirect_to :back
+  def edit_cost
+    @request_delivery = RequestDelivery.find(params[:request_delivery_id])
+    if @request_delivery.user == current_user
+      render "edit_cost.html.erb", :layout => false
+    end
+  end
+
+  def edit_from
+    @request_delivery = RequestDelivery.find(params[:request_delivery_id])
+    if @request_delivery.user == current_user
+      render "edit_from.html.erb", :layout => false
+    end
+  end
+
+  def edit_to
+    @request_delivery = RequestDelivery.find(params[:request_delivery_id])
+    if @request_delivery.user == current_user
+      render "edit_to.html.erb", :layout => false
+    end
+  end
+
+  def edit_size
+    @request_delivery = RequestDelivery.find(params[:request_delivery_id])
+    if @request_delivery.user == current_user
+      render "edit_size.html.erb", :layout => false
+    end
+  end
+
+  def edit_due_date
+    @request_delivery = RequestDelivery.find(params[:request_delivery_id])
+    if @request_delivery.user == current_user
+      render "edit_due_date.html.erb", :layout => false
+    end
+  end
+
+  def edit_sending_person
+    @request_delivery = RequestDelivery.find(params[:request_delivery_id])
+    if @request_delivery.user == current_user
+      render "edit_sending_person.html.erb", :layout => false
+    end
+  end
+
+  def edit_receiving_person
+    @request_delivery = RequestDelivery.find(params[:request_delivery_id])
+    if @request_delivery.user == current_user
+      render "edit_receiving_person.html.erb", :layout => false
     end
   end
 
   def update
     @request_delivery = RequestDelivery.find(params[:id])
-    if @request_delivery.status == "Confirmed"
-      flash[:request_post_updated] = "You cannot update a confirmed request."
+    if @request_delivery.status != "Open"
+      flash[:request_post_updated] = "Sorry!<br>
+                                                      <div class='sub_flash_text'>You cannot edit the details of your request, <br>
+                                                      Since someone has already accepted it.</div>".html_safe
       redirect_to :back
     else
       if @request_delivery.update_attributes( params[:request_delivery])
         @request_delivery.check_all_details
-        flash[:request_post_updated] = "Your request was updated successfully!"
+        flash[:request_post_updated] = "Thank you!<br>
+                                                      <div class='sub_flash_text'>Your details were successfully updated.</div>".html_safe
         respond_with(@request_delivery) do |format|
           format.html { redirect_to request_delivery_url(@request_delivery)}
         end

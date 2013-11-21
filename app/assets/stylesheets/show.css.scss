@@ -29,7 +29,7 @@
   background-position: bottom left;
   -moz-box-shadow: 5px 5px 5px #6b6b6b; /* Old Firefox */
   box-shadow: 5px 5px 5px #6b6b6b;
-  border:solid 3px;
+  border:solid 1px;
   border-radius:8px;
   -moz-border-radius:10px; /* Old Firefox */
   color: #ffffff;
@@ -124,8 +124,8 @@
   background-color: #1d79e2;
   -moz-box-shadow: 5px 5px 5px #6b6b6b; /* Old Firefox */
   box-shadow: 5px 5px 5px #6b6b6b;
-  border:solid 3px;
-  border-radius:10px;
+  border:solid 1px;
+  border-radius:8px;
   -moz-border-radius:10px; /* Old Firefox */
   color: #ffffff;
   border-color: #000000;
@@ -238,8 +238,8 @@
   background-color: #1d79e2;
   -moz-box-shadow: 5px 5px 5px #6b6b6b; /* Old Firefox */
   box-shadow: 5px 5px 5px #6b6b6b;
-  border:solid 3px;
-  border-radius:10px;
+  border:solid 1px;
+  border-radius:8px;
   -moz-border-radius:10px; /* Old Firefox */
   color: #ffffff;
   border-color: #000000;
@@ -304,6 +304,7 @@
 }
 
 .the_from_and_to_inner {
+  position:relative;
   display: inline-block;
   height:100px;
   vertical-align: top;

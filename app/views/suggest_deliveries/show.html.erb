@@ -37,7 +37,7 @@
           <% if @suggest_delivery.user.transporter_reviews.any? %>
               <div class="star_rating" style="margin-top:5px;margin-bottom:5px;">
                 <% @user = @suggest_delivery.user %>
-                <%=render 'shared/transporter_star_rating' %>     (<%= @suggest_delivery.user.transporter_reviews.count %>)
+                <%=render 'shared/transporter_star_rating' %> (<%= @suggest_delivery.user.transporter_reviews.count %>)
               </div>
           <% else  %>
               <div class="not_yet_rated">
@@ -137,16 +137,6 @@
                   </div>
                 </div>
               </div>
-              <div class="edit_post_big">
-                <div class="bubbleInfo">
-                  <%=  link_to image_tag("edit_post_big.png"), edit_suggest_delivery_path(@suggest_delivery), class: "trigger" %>
-                  <div class="popup" style="height:20px; width:195px; margin-top:57px;">
-                    <b style="color:#ff9054">Edit</b> your delivery suggestion.
-                    <div id="tail1" style="left:37px"></div>
-                    <div id="tail2" style="left:37px"></div>
-                  </div>
-                </div>
-              </div>
               <% if @suggest_delivery.has_all_details %>
                   <div class="has_all_details_big">
                     <div class="bubbleInfo">
@@ -180,20 +170,51 @@
             <div class="inner_title">
               <b>Cost</b>
             </div>
+              <% if @suggest_delivery.user == current_user %>
+              <div class="missing_detail" style="top:0px">
+                <div class="bubbleInfo">
+                  <%= link_to image_tag("edit_detail.png"), edit_suggest_cost_path(@suggest_delivery.id), class:"modal-link trigger",
+                              "data-target" => "#myModal",
+                              "data-toggle" => "modal",
+                              "data-backdrop" => "static" %>
+                  <div class="popup" style="height:20px; width:310px; margin-top:56px;text-align: center;">
+                    Click to edit <b style="color:#f2ff5e">Cost</b> for this delivery suggestion.
+                    <div id="tail1" style="left:33px"></div>
+                    <div id="tail2" style="left:33px"></div>
+                  </div>
+                </div>
+              </div>
+          <% end  %>
             <div class="the_money">
               <b><%= @suggest_delivery.cost %> <%= @suggest_delivery.currency %></b>
             </div>
           </div>
-          <div class="the_money_and_the_deadline_inner" style="background-image: url('../assets/calendar_small.png');">
+          <% if @suggest_delivery.when.blank? %>
+              <div class="the_money_and_the_deadline_inner" style="background-color:#757575; background-image: url('../assets/calendar_small.png');">
+          <% else  %>
+              <div class="the_money_and_the_deadline_inner" style="background-image: url('../assets/calendar_small.png');">
+          <% end  %>
             <div class="inner_title">
               <b>Due Date</b>
             </div>
             <div class="the_date">
               <% if @suggest_delivery.when.blank? %>
                   <% if @suggest_delivery.user == current_user %>
-                      <%= render 'shared/missing_other' %>
+                      <div class="missing_detail" style="top:-12px">
+                        <div class="bubbleInfo">
+                          <%= link_to image_tag("missing_detail.png"), edit_suggest_due_date_path(@suggest_delivery.id), class:"modal-link trigger",
+                                        "data-target" => "#myModal",
+                                        "data-toggle" => "modal",
+                                        "data-backdrop" => "static" %>
+                          <div class="popup" style="height:45px; width:330px; margin-top:43px;text-align: center;">
+                            Click to add <b style="color:#f2ff5e">Due Date</b> for this delivery suggestion.<br> Add all details to get priority in our lists.
+                            <div id="tail1" style="left:33px"></div>
+                            <div id="tail2" style="left:33px"></div>
+                          </div>
+                        </div>
+                      </div>
                   <% end  %>
-                  <b style="">Not set yet.</b>
+                  <b>Not set yet.</b>
               <% else %>
                   <%= @suggest_delivery.when.strftime("%B #{@suggest_delivery.when.day.ordinalize}, %Y")%>
               <% end %>
@@ -201,31 +222,100 @@
           </div>
         </div>
         <div class="the_from_and_to">
-          <div class="the_from_and_to_inner" style="background-image: url('../assets/LocationA.png');">
+          <div class="the_from_and_to_inner" style="background-image: url('../assets/LocationA_small.png');">
             <div class="inner_title">
               <b>From</b>
             </div>
             <%= @suggest_delivery.from %>
+          <% if @suggest_delivery.user == current_user %>
+              <div class="missing_detail" style="top:1px">
+                <div class="bubbleInfo">
+                  <%= link_to image_tag("edit_detail.png"), edit_suggest_from_path(@suggest_delivery.id), class:"modal-link trigger",
+                              "data-target" => "#myModal",
+                              "data-toggle" => "modal",
+                              "data-backdrop" => "static" %>
+                  <div class="popup" style="height:20px; width:310px; margin-top:55px;text-align: center;">
+                    Click to edit <b style="color:#f2ff5e">From</b> for this delivery suggestion.
+                    <div id="tail1" style="left:33px"></div>
+                    <div id="tail2" style="left:33px"></div>
+                  </div>
+                </div>
+              </div>
+          <% end  %>
           </div>
-          <div class="the_from_and_to_inner" style="background-image: url('../assets/LocationB.png');">
+          <div class="the_from_and_to_inner" style="background-image: url('../assets/LocationB_small.png');">
             <div class="inner_title">
               <b>To</b>
             </div>
             <%= @suggest_delivery.to %>
+              <% if @suggest_delivery.user == current_user %>
+              <div class="missing_detail" style="top:1px">
+                <div class="bubbleInfo">
+                  <%= link_to image_tag("edit_detail.png"), edit_suggest_to_path(@suggest_delivery.id), class:"modal-link trigger",
+                              "data-target" => "#myModal",
+                              "data-toggle" => "modal",
+                              "data-backdrop" => "static" %>
+                  <div class="popup" style="height:20px; width:290px; margin-top:55px;text-align: center;">
+                    Click to edit <b style="color:#f2ff5e">To</b> for this delivery suggestion.
+                    <div id="tail1" style="left:33px"></div>
+                    <div id="tail2" style="left:33px"></div>
+                  </div>
+                </div>
+              </div>
+          <% end  %>
           </div>
         </div>
         <div class="the_size_and_frequency">
-          <div class="the_size_and_frequency_inner"  style="background-image: url('../assets/freq_small.png');text-align:left">
+          <% if @suggest_delivery.frequency.blank? %>
+              <div class="the_size_and_frequency_inner"  style="background-color:#757575; background-image: url('../assets/freq_small.png');text-align:left">
+          <% else  %>
+              <div class="the_size_and_frequency_inner"  style="background-image: url('../assets/freq_small.png');text-align:left">
+          <% end  %>
             <div class="inner_title" style="display:inline-block;">
               <b>Frequency</b>
             </div>
             <% if @suggest_delivery.frequency.blank? %>
                 <% if @suggest_delivery.user == current_user %>
-                    <%= render 'shared/missing' %>
+                    <div class="missing_detail" style="top:-4px">
+                      <div class="bubbleInfo">
+                        <%= link_to image_tag("missing_detail.png"), edit_freq_path(@suggest_delivery.id), class:"modal-link trigger",
+                                    "data-target" => "#myModal",
+                                    "data-toggle" => "modal",
+                                    "data-backdrop" => "static" %>
+                        <div class="popup" style="height:45px; width:340px; margin-top:35px;text-align: center;">
+                          Click to add <b style="color:#f2ff5e">Frequency</b> for this delivery suggestion.<br> Add all details to get priority in our lists.
+                          <div id="tail1" style="left:33px"></div>
+                          <div id="tail2" style="left:33px"></div>
+                        </div>
+                      </div>
+                    </div>
                 <% end  %>
                 <b>Not set yet.</b>
             <% else  %>
-                <b>This is a </b><b style="color: #ffa33a"><%= @suggest_delivery.frequency %></b><b> sized delivery.</b>
+               <% if @suggest_delivery.user == current_user %>
+                    <div class="missing_detail" style="top:-4px">
+                      <div class="bubbleInfo">
+                        <%= link_to image_tag("edit_detail.png"), edit_freq_path(@suggest_delivery.id), class:"modal-link trigger",
+                                    "data-target" => "#myModal",
+                                    "data-toggle" => "modal",
+                                    "data-backdrop" => "static" %>
+                        <div class="popup" style="height:20px; width:350px; margin-top:60px;text-align: center;">
+                          Click to edit <b style="color:#f2ff5e">Frequency</b> for this delivery suggestion.
+                          <div id="tail1" style="left:33px"></div>
+                          <div id="tail2" style="left:33px"></div>
+                        </div>
+                      </div>
+                    </div>
+                <% end  %>
+              <% if @suggest_delivery.frequency == "Single" %>
+                  <% if @suggest_delivery.when.blank? %>
+                      <b>Available </b><b style="color: #ffa33a">only once</b><b>.</b>
+                  <% else  %>
+                      <b>Available </b><b style="color: #ffa33a">only on <%= @suggest_delivery.when.strftime("%B #{@suggest_delivery.when.day.ordinalize}, %Y")%></b><b>.</b>
+                  <% end %>
+              <% else  %>
+                  <b>Available on a </b><b style="color: #ffa33a"> <%= @suggest_delivery.frequency %></b><b> basis.</b>
+              <% end %>
             <% end %>
           </div>
         </div>

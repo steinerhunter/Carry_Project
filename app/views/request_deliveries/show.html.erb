@@ -1,4 +1,4 @@
-<div class="show_delivery" xmlns="http://www.w3.org/1999/html">
+<div class="show_delivery" style="margin-top:-20px;">
   <div class="right_side">
     <% if @request_delivery.user != current_user %>
         <% if @request_delivery.status == "Complete" %>
@@ -37,7 +37,7 @@
           <% if @request_delivery.user.sender_reviews.any? %>
               <div class="star_rating" style="margin-top:5px;margin-bottom:5px;">
                 <% @user = @request_delivery.user %>
-                <%=render 'shared/sender_star_rating' %>     (<%= @request_delivery.user.sender_reviews.count %>)
+                <%=render 'shared/sender_star_rating' %> (<%= @request_delivery.user.sender_reviews.count %>)
               </div>
           <% else  %>
               <div class="not_yet_rated">
@@ -138,16 +138,6 @@
           </div>
         </div>
       </div>
-      <div class="edit_post_big">
-        <div class="bubbleInfo">
-          <%=  link_to image_tag("edit_post_big.png"), edit_request_delivery_path(@request_delivery), class: "trigger" %>
-          <div class="popup" style="height:20px; width:170px; margin-top:57px;">
-            <b style="color:#ff9054">Edit</b> your delivery request.
-            <div id="tail1" style="left:37px"></div>
-            <div id="tail2" style="left:37px"></div>
-          </div>
-        </div>
-      </div>
       <% if @request_delivery.has_all_details %>
           <div class="has_all_details_big">
             <div class="bubbleInfo">
@@ -181,20 +171,51 @@
     <div class="inner_title">
       <b>Bounty</b>
     </div>
+        <% if @request_delivery.user == current_user %>
+              <div class="missing_detail" style="top:0px">
+                <div class="bubbleInfo">
+                  <%= link_to image_tag("edit_detail.png"), edit_request_cost_path(@request_delivery.id), class:"modal-link trigger",
+                              "data-target" => "#myModal",
+                              "data-toggle" => "modal",
+                              "data-backdrop" => "static" %>
+                  <div class="popup" style="height:20px; width:310px; margin-top:56px;text-align: center;">
+                    Click to edit <b style="color:#f2ff5e">Bounty</b> for this delivery request.
+                    <div id="tail1" style="left:33px"></div>
+                    <div id="tail2" style="left:33px"></div>
+                  </div>
+                </div>
+              </div>
+          <% end  %>
     <div class="the_money">
       <b><%= @request_delivery.cost %> <%= @request_delivery.currency %></b>
     </div>
   </div>
-  <div class="the_money_and_the_deadline_inner" style="background-image: url('../assets/calendar_small.png');">
+  <% if @request_delivery.when.blank? %>
+      <div class="the_money_and_the_deadline_inner" style="background-color:#757575; background-image: url('../assets/calendar_small.png');">
+  <% else  %>
+      <div class="the_money_and_the_deadline_inner" style="background-image: url('../assets/calendar_small.png');">
+  <% end %>
     <div class="inner_title">
       <b>Due Date</b>
     </div>
     <div class="the_date">
       <% if @request_delivery.when.blank? %>
           <% if @request_delivery.user == current_user %>
-              <%= render 'shared/missing_other' %>
+              <div class="missing_detail" style="top:-12px">
+                <div class="bubbleInfo">
+                  <%= link_to image_tag("missing_detail.png"), edit_request_due_date_path(@request_delivery.id), class:"modal-link trigger",
+                              "data-target" => "#myModal",
+                              "data-toggle" => "modal",
+                              "data-backdrop" => "static" %>
+                  <div class="popup" style="height:40px; width:310px; margin-top:50px;text-align: center;">
+                    Click to add <b style="color:#f2ff5e">Due Date</b> for this delivery request.<br> Add all details to get priority in our lists.
+                    <div id="tail1" style="left:33px"></div>
+                    <div id="tail2" style="left:33px"></div>
+                  </div>
+                </div>
+              </div>
           <% end  %>
-          <b>Not set yet.</b>
+          <b>No Due Date set yet.</b>
       <% else %>
           <%= @request_delivery.when.strftime("%B #{@request_delivery.when.day.ordinalize}, %Y")%>
       <% end %>
@@ -202,62 +223,185 @@
   </div>
 </div>
 <div class="the_from_and_to">
-  <div class="the_from_and_to_inner" style="background-image: url('../assets/LocationA.png');">
+  <div class="the_from_and_to_inner" style="background-image: url('../assets/LocationA_small.png');">
     <div class="inner_title">
       <b>From</b>
     </div>
     <%= @request_delivery.from %>
+          <% if @request_delivery.user == current_user %>
+              <div class="missing_detail" style="top:1px">
+                <div class="bubbleInfo">
+                  <%= link_to image_tag("edit_detail.png"), edit_request_from_path(@request_delivery.id), class:"modal-link trigger",
+                              "data-target" => "#myModal",
+                              "data-toggle" => "modal",
+                              "data-backdrop" => "static" %>
+                  <div class="popup" style="height:20px; width:280px; margin-top:55px;text-align: center;">
+                    Click to edit <b style="color:#f2ff5e">From</b> for this delivery request.
+                    <div id="tail1" style="left:33px"></div>
+                    <div id="tail2" style="left:33px"></div>
+                  </div>
+                </div>
+              </div>
+          <% end  %>
   </div>
-  <div class="the_from_and_to_inner" style="background-image: url('../assets/LocationB.png');">
+  <div class="the_from_and_to_inner" style="background-image: url('../assets/LocationB_small.png');">
     <div class="inner_title">
       <b>To</b>
     </div>
     <%= @request_delivery.to %>
+      <% if @request_delivery.user == current_user %>
+              <div class="missing_detail" style="top:1px">
+                <div class="bubbleInfo">
+                  <%= link_to image_tag("edit_detail.png"), edit_request_to_path(@request_delivery.id), class:"modal-link trigger",
+                              "data-target" => "#myModal",
+                              "data-toggle" => "modal",
+                              "data-backdrop" => "static" %>
+                  <div class="popup" style="height:20px; width:270px; margin-top:55px;text-align: center;">
+                    Click to edit <b style="color:#f2ff5e">To</b> for this delivery request.
+                    <div id="tail1" style="left:33px"></div>
+                    <div id="tail2" style="left:33px"></div>
+                  </div>
+                </div>
+              </div>
+          <% end  %>
   </div>
 </div>
 <div class="the_sender_and_receiver">
-  <div class="the_sender_and_receiver_inner" style="background-image: url('../assets/SendingPerson.png');">
+  <% if @request_delivery.sending_person.blank? || @request_delivery.sending_phone.blank? %>
+      <div class="the_sender_and_receiver_inner" style="background-color:#757575; background-image: url('../assets/SendingPerson_small.png');">
+  <% else  %>
+      <div class="the_sender_and_receiver_inner" style="background-image: url('../assets/SendingPerson_small.png');">
+  <% end  %>
     <div class="inner_title">
       <b>Sending</b>
     </div>
     <div class="send_receive_text">
-      <% if @request_delivery.sending_person.blank? %>
+      <% if @request_delivery.sending_person.blank? || @request_delivery.sending_phone.blank?  %>
           <% if @request_delivery.user == current_user %>
-              <%= render 'shared/missing' %>
+              <div class="missing_detail" style="top:1px">
+                <div class="bubbleInfo">
+                  <%= link_to image_tag("missing_detail.png"), edit_sending_person_path(@request_delivery.id), class:"modal-link trigger",
+                              "data-target" => "#myModal",
+                              "data-toggle" => "modal",
+                              "data-backdrop" => "static" %>
+                  <div class="popup" style="height:45px; width:360px; margin-top:30px;text-align: center;">
+                    Click to add <b style="color:#f2ff5e">Sending Person</b> for this delivery request.<br> Add all details to get priority in our lists.
+                    <div id="tail1" style="left:33px"></div>
+                    <div id="tail2" style="left:33px"></div>
+                  </div>
+                </div>
+              </div>
           <% end  %>
           <b>No Sender in </b><b style="color:#6fba33">Point A</b><b> has been set.</b>
       <% else  %>
-          <b>A Sender in Point A has been set!</b>
+          <% if @request_delivery.user == current_user %>
+              <div class="missing_detail" style="top:1px">
+                <div class="bubbleInfo">
+                  <%= link_to image_tag("edit_detail.png"), edit_sending_person_path(@request_delivery.id), class:"modal-link trigger",
+                              "data-target" => "#myModal",
+                              "data-toggle" => "modal",
+                              "data-backdrop" => "static" %>
+                  <div class="popup" style="height:20px; width:360px; margin-top:55px;text-align: center;">
+                    Click to edit <b style="color:#f2ff5e">Sending Person</b> for this delivery request.
+                    <div id="tail1" style="left:33px"></div>
+                    <div id="tail2" style="left:33px"></div>
+                  </div>
+                </div>
+              </div>
+          <% end  %>
+          <b>A Sender in </b><b style="color:#6fba33">Point A</b><b> has been set!</b>
       <% end  %>
     </div>
   </div>
-  <div class="the_sender_and_receiver_inner" style="background-image: url('../assets/ReceivingPerson.png');">
+  <% if @request_delivery.receiving_person.blank? || @request_delivery.receiving_phone.blank? %>
+      <div class="the_sender_and_receiver_inner" style="background-color:#757575; background-image: url('../assets/ReceivingPerson_small.png');">
+  <% else  %>
+      <div class="the_sender_and_receiver_inner" style="background-image: url('../assets/ReceivingPerson_small.png');">
+  <% end  %>
     <div class="inner_title">
       <b>Receiving</b>
     </div>
     <div class="send_receive_text">
-      <% if @request_delivery.receiving_person.blank? %>
+      <% if @request_delivery.receiving_person.blank? || @request_delivery.receiving_phone.blank? %>
           <% if @request_delivery.user == current_user %>
-              <%= render 'shared/missing' %>
+              <div class="missing_detail" style="top:1px">
+                <div class="bubbleInfo">
+                  <%= link_to image_tag("missing_detail.png"), edit_receiving_person_path(@request_delivery.id), class:"modal-link trigger",
+                              "data-target" => "#myModal",
+                              "data-toggle" => "modal",
+                              "data-backdrop" => "static" %>
+                  <div class="popup" style="height:45px; width:380px; margin-top:30px;text-align: center;">
+                    Click to add <b style="color:#f2ff5e">Receiving Person</b> for this delivery request.<br> Add all details to get priority in our lists.
+                    <div id="tail1" style="left:33px"></div>
+                    <div id="tail2" style="left:33px"></div>
+                  </div>
+                </div>
+              </div>
           <% end  %>
           <b>No Receiver in </b><b style="color:#f35044">Point B</b><b> has been set.</b>
       <% else  %>
-          <b>A Receiver in Point B has been set!</b>
+          <% if @request_delivery.user == current_user %>
+              <div class="missing_detail" style="top:1px">
+                <div class="bubbleInfo">
+                  <%= link_to image_tag("edit_detail.png"), edit_receiving_person_path(@request_delivery.id), class:"modal-link trigger",
+                              "data-target" => "#myModal",
+                              "data-toggle" => "modal",
+                              "data-backdrop" => "static" %>
+                  <div class="popup" style="height:20px; width:380px; margin-top:55px;text-align: center;">
+                    Click to edit <b style="color:#f2ff5e">Receiving Person</b> for this delivery request.
+                    <div id="tail1" style="left:33px"></div>
+                    <div id="tail2" style="left:33px"></div>
+                  </div>
+                </div>
+              </div>
+              <% end  %>
+          <b>A Receiver in </b><b style="color:#f35044">Point B</b><b> has been set!</b>
       <% end  %>
     </div>
   </div>
 </div>
   <div class="the_size_and_frequency">
-    <div class="the_size_and_frequency_inner"  style="background-image: url('../assets/size_small.png');text-align:left">
+    <% if @request_delivery.size.blank? %>
+        <div class="the_size_and_frequency_inner"  style="background-color:#757575;background-image: url('../assets/size_small.png');text-align:left">
+    <% else  %>
+        <div class="the_size_and_frequency_inner"  style="background-image: url('../assets/size_small.png');text-align:left">
+    <% end  %>
       <div class="inner_title" style="display:inline-block;">
         <b>Size</b>
       </div>
       <% if @request_delivery.size.blank? %>
           <% if @request_delivery.user == current_user %>
-              <%= render 'shared/missing' %>
+              <div class="missing_detail" style="top:-4px">
+                <div class="bubbleInfo">
+                  <%= link_to image_tag("missing_detail.png"), edit_request_size_path(@request_delivery.id), class:"modal-link trigger",
+                              "data-target" => "#myModal",
+                              "data-toggle" => "modal",
+                              "data-backdrop" => "static" %>
+                  <div class="popup" style="height:45px; width:280px; margin-top:35px;text-align: center;">
+                    Click to add <b style="color:#f2ff5e">Size</b> for this delivery request.<br> Add all details to get priority in our lists.
+                    <div id="tail1" style="left:33px"></div>
+                    <div id="tail2" style="left:33px"></div>
+                  </div>
+                </div>
+              </div>
           <% end  %>
-        <b>Not set yet.</b>
+        <b>No Size set yet.</b>
       <% else  %>
+        <% if @request_delivery.user == current_user %>
+            <div class="missing_detail" style="top:-4px">
+              <div class="bubbleInfo">
+                <%= link_to image_tag("edit_detail.png"), edit_request_size_path(@request_delivery.id), class:"modal-link trigger",
+                            "data-target" => "#myModal",
+                            "data-toggle" => "modal",
+                            "data-backdrop" => "static" %>
+                <div class="popup" style="height:20px; width:280px; margin-top:60px;text-align: center;">
+                  Click to edit <b style="color:#f2ff5e">Size</b> for this delivery request.
+                  <div id="tail1" style="left:33px"></div>
+                  <div id="tail2" style="left:33px"></div>
+                </div>
+              </div>
+            </div>
+        <% end  %>
         <b>This is a </b><b style="color: #ffa33a"><%= @request_delivery.size %></b><b> sized delivery.</b>
       <% end %>
     </div>

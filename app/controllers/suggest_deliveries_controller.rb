@@ -1,16 +1,16 @@
 class SuggestDeliveriesController < ApplicationController
   before_filter :signed_in_user, :except => [:show, :index, :new, :create]
-  before_filter :correct_user,   only: [:destroy, :edit, :update]
+  before_filter :correct_user,   only: [:destroy, :update]
   respond_to :html, :js
 
   def show
     @suggest_delivery = SuggestDelivery.find(params[:id])
     if !current_user.nil?
       @accepted_suggest = AcceptedSuggest.find_by_user_id_and_suggest_delivery_id(current_user.id,@suggest_delivery.id)
+      @my_phone = Phone.find_by_user_id(current_user.id)
     end
     @facebook_authentication = Authentication.find_by_user_id(@suggest_delivery.user.id)
     @phone = Phone.find_by_user_id(@suggest_delivery.user.id)
-    @my_phone = Phone.find_by_user_id(current_user.id)
     @commentable = @suggest_delivery
     @comments = @commentable.comments
     @comment = Comment.new
@@ -53,23 +53,53 @@ class SuggestDeliveriesController < ApplicationController
     @suggest_feed_items = @search.all
   end
 
-  def edit
-    @suggest_delivery = SuggestDelivery.find(params[:id])
-    if @suggest_delivery.status == "Confirmed"
-      flash[:suggest_post_updated] = "You cannot edit a confirmed suggestion."
-      redirect_to :back
+  def edit_cost
+    @suggest_delivery = SuggestDelivery.find(params[:suggest_delivery_id])
+    if @suggest_delivery.user == current_user
+      render "edit_cost.html.erb", :layout => false
+    end
+  end
+
+  def edit_from
+    @suggest_delivery = SuggestDelivery.find(params[:suggest_delivery_id])
+    if @suggest_delivery.user == current_user
+      render "edit_from.html.erb", :layout => false
+    end
+  end
+
+  def edit_to
+    @suggest_delivery = SuggestDelivery.find(params[:suggest_delivery_id])
+    if @suggest_delivery.user == current_user
+      render "edit_to.html.erb", :layout => false
+    end
+  end
+
+  def edit_due_date
+    @suggest_delivery = SuggestDelivery.find(params[:suggest_delivery_id])
+    if @suggest_delivery.user == current_user
+      render "edit_due_date.html.erb", :layout => false
+    end
+  end
+
+  def edit_freq
+    @suggest_delivery = SuggestDelivery.find(params[:suggest_delivery_id])
+    if @suggest_delivery.user == current_user
+      render "edit_freq.html.erb", :layout => false
     end
   end
 
   def update
     @suggest_delivery = SuggestDelivery.find(params[:id])
     if @suggest_delivery.status == "Confirmed"
-      flash[:suggest_post_updated] = "You cannot update a confirmed suggestion."
+      flash[:request_post_updated] = "Sorry!<br>
+                                                      <div class='sub_flash_text'>You cannot edit the details of your request, <br>
+                                                      Since someone has already accepted it.</div>".html_safe
       redirect_to :back
     else
       if @suggest_delivery.update_attributes( params[:suggest_delivery])
         @suggest_delivery.check_all_details
-        flash[:suggest_post_updated] = "Your suggestion was updated successfully!"
+        flash[:request_post_updated] = "Thank you!<br>
+                                                      <div class='sub_flash_text'>Your details were successfully updated.</div>".html_safe
         respond_with(@suggest_delivery) do |format|
           format.html { redirect_to suggest_delivery_url(@suggest_delivery)}
         end

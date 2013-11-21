@@ -2,7 +2,7 @@
 <html>
 <head>
   <title><%= full_title(yield(:title)) %></title>
-  <%= stylesheet_link_tag    "application", media: "all" %>
+  <%= stylesheet_link_tag  "application", media: "all" %>
   <script src="https://maps.googleapis.com/maps/api/js?v=3.exp&sensor=false&libraries=places"></script>
   <%= javascript_include_tag "application" %>
   <%= javascript_include_tag "maps_and_date" %>
@@ -34,7 +34,7 @@
       <div class="alert alert-<%= key %>" id="flash_message">
         <%= value %>
         <div class="close_flash">
-          <%= image_tag("Close.png") %>
+          <%= image_tag("delete_post.png") %>
         </div>
       </div>
   <% end %>

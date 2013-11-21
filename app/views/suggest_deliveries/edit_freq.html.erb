@@ -1,0 +1,89 @@
+<div class="edit_delivery_field_wrapper" style="background-image: url('../assets/Freq.png');">
+  <%= form_for(@suggest_delivery, :remote => true ) do |f| %>
+      <div class="edit_delivery_field_freq">
+        <%= f.label :frequency, "Frequency?" %>
+        <%= f.hidden_field :frequency %>
+        <div class="new_freq" style="width:400px;">
+          <% if @suggest_delivery.frequency.present? && @suggest_delivery.frequency == "Single" %>
+              <div class="freq_box" id="single" style="background-color: #d05e0b; background-image: url('../assets/freq_once.png');"
+               onclick="style.backgroundColor='#d05e0b';
+                       document.getElementById('daily').style.backgroundColor = '#bcbcbc';
+                       document.getElementById('weekly').style.backgroundColor = '#bcbcbc';
+                       document.getElementById('monthly').style.backgroundColor = '#bcbcbc';
+                       document.getElementById('edit_suggest_delivery_'+<%= @suggest_delivery.id %>).suggest_delivery_frequency.value = 'Single';">
+            Single
+          </div>
+          <% else  %>
+              <div class="freq_box" id="single" style="background-image: url('../assets/freq_once.png');"
+                   onclick="style.backgroundColor='#d05e0b';
+                           document.getElementById('daily').style.backgroundColor = '#bcbcbc';
+                           document.getElementById('weekly').style.backgroundColor = '#bcbcbc';
+                           document.getElementById('monthly').style.backgroundColor = '#bcbcbc';
+                           document.getElementById('edit_suggest_delivery_'+<%= @suggest_delivery.id %>).suggest_delivery_frequency.value = 'Single';">
+                Single
+              </div>
+          <% end  %>
+          <% if @suggest_delivery.frequency.present? && @suggest_delivery.frequency == "Daily" %>
+          <div class="freq_box" id="daily" style="background-color: #d05e0b; background-image: url('../assets/freq_daily.png'); margin-left:10px;"
+               onclick="style.backgroundColor='#d05e0b';
+                       document.getElementById('single').style.backgroundColor = '#bcbcbc';
+                       document.getElementById('weekly').style.backgroundColor = '#bcbcbc';
+                       document.getElementById('monthly').style.backgroundColor = '#bcbcbc';
+                       document.getElementById('edit_suggest_delivery_'+<%= @suggest_delivery.id %>).suggest_delivery_frequency.value = 'Daily';">
+            Daily
+          </div>
+          <% else  %>
+              <div class="freq_box" id="daily" style="background-image: url('../assets/freq_daily.png'); margin-left:10px;"
+                   onclick="style.backgroundColor='#d05e0b';
+                           document.getElementById('single').style.backgroundColor = '#bcbcbc';
+                           document.getElementById('weekly').style.backgroundColor = '#bcbcbc';
+                           document.getElementById('monthly').style.backgroundColor = '#bcbcbc';
+                           document.getElementById('edit_suggest_delivery_'+<%= @suggest_delivery.id %>).suggest_delivery_frequency.value = 'Daily';">
+                Daily
+              </div>
+          <% end  %>
+         <% if @suggest_delivery.frequency.present? && @suggest_delivery.frequency == "Weekly" %>
+          <div class="freq_box" id="weekly" style="background-color: #d05e0b; background-image: url('../assets/freq_weekly.png'); margin-left:10px;"
+               onclick="style.backgroundColor='#d05e0b';
+                       document.getElementById('single').style.backgroundColor = '#bcbcbc';
+                       document.getElementById('daily').style.backgroundColor = '#bcbcbc';
+                       document.getElementById('monthly').style.backgroundColor = '#bcbcbc';
+                       document.getElementById('edit_suggest_delivery_'+<%= @suggest_delivery.id %>).suggest_delivery_frequency.value = 'Weekly';">
+            Weekly
+          </div>
+          <% else  %>
+              <div class="freq_box" id="weekly" style="background-image: url('../assets/freq_weekly.png'); margin-left:10px;"
+                   onclick="style.backgroundColor='#d05e0b';
+                           document.getElementById('single').style.backgroundColor = '#bcbcbc';
+                           document.getElementById('daily').style.backgroundColor = '#bcbcbc';
+                           document.getElementById('monthly').style.backgroundColor = '#bcbcbc';
+                           document.getElementById('edit_suggest_delivery_'+<%= @suggest_delivery.id %>).suggest_delivery_frequency.value = 'Weekly';">
+                Weekly
+              </div>
+          <% end  %>
+           <% if @suggest_delivery.frequency.present? && @suggest_delivery.frequency == "Monthly" %>
+          <div class="freq_box" id="monthly" style="background-color: #d05e0b; background-image: url('../assets/freq_monthly.png'); margin-left:10px;"
+               onclick="style.backgroundColor='#d05e0b';
+                       document.getElementById('single').style.backgroundColor = '#bcbcbc';
+                       document.getElementById('daily').style.backgroundColor = '#bcbcbc';
+                       document.getElementById('weekly').style.backgroundColor = '#bcbcbc';
+                       document.getElementById('edit_suggest_delivery_'+<%= @suggest_delivery.id %>).suggest_delivery_frequency.value = 'Monthly';">
+            Monthly
+          </div>
+          <% else  %>
+              <div class="freq_box" id="monthly" style="background-image: url('../assets/freq_monthly.png'); margin-left:10px;"
+                   onclick="style.backgroundColor='#d05e0b';
+                           document.getElementById('single').style.backgroundColor = '#bcbcbc';
+                           document.getElementById('daily').style.backgroundColor = '#bcbcbc';
+                           document.getElementById('weekly').style.backgroundColor = '#bcbcbc';
+                           document.getElementById('edit_suggest_delivery_'+<%= @suggest_delivery.id %>).suggest_delivery_frequency.value = 'Monthly';">
+                Monthly
+              </div>
+          <% end  %>
+        </div>
+      </div>
+      <div class="edit_update">
+        <%=  f.submit "Update Request" , :id => 'submit_delivery'%>
+      </div>
+  <% end  %>
+</div>

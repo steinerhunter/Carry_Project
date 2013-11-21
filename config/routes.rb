@@ -35,11 +35,28 @@ TheCarryProject::Application.routes.draw do
   match '/request', to:'request_deliveries#new'
   match '/requests', to:'request_deliveries#index'
 
+  match '/edit_request_cost/:request_delivery_id', to:'request_deliveries#edit_cost', as:'edit_request_cost'
+  match '/edit_request_from/:request_delivery_id', to:'request_deliveries#edit_from', as:'edit_request_from'
+  match '/edit_request_to/:request_delivery_id', to:'request_deliveries#edit_to', as:'edit_request_to'
+  match '/edit_request_size/:request_delivery_id', to:'request_deliveries#edit_size', as:'edit_request_size'
+  match '/edit_request_due_date/:request_delivery_id', to:'request_deliveries#edit_due_date', as:'edit_request_due_date'
+  match '/edit_sending_person/:request_delivery_id', to:'request_deliveries#edit_sending_person', as:'edit_sending_person'
+  match '/edit_receiving_person/:request_delivery_id', to:'request_deliveries#edit_receiving_person', as:'edit_receiving_person'
+
   match '/pre_confirm_request/:accepted_request_id', to: 'request_deliveries#pre_confirm', as:'pre_confirm_request'
   match '/confirm_request', to:'request_deliveries#confirm'
   match '/pre_cancel_request/:accepted_request_id', to: 'request_deliveries#pre_cancel', as:'pre_cancel_request'
   match '/pre_complete_request/:accepted_request_id', to: 'request_deliveries#pre_complete', as:'pre_complete_request'
   match '/complete_request', to:'request_deliveries#complete'
+
+  match '/suggest', to:'suggest_deliveries#new'
+  match '/suggestions', to:'suggest_deliveries#index'
+
+  match '/edit_suggest_cost/:suggest_delivery_id', to:'suggest_deliveries#edit_cost', as:'edit_suggest_cost'
+  match '/edit_suggest_from/:suggest_delivery_id', to:'suggest_deliveries#edit_from', as:'edit_suggest_from'
+  match '/edit_suggest_to/:suggest_delivery_id', to:'suggest_deliveries#edit_to', as:'edit_suggest_to'
+  match '/edit_suggest_due_date/:suggest_delivery_id', to:'suggest_deliveries#edit_due_date', as:'edit_suggest_due_date'
+  match '/edit_freq/:suggest_delivery_id', to:'suggest_deliveries#edit_freq', as:'edit_freq'
 
   match '/pre_authorize_suggest/:accepted_suggest_id', to: 'suggest_deliveries#pre_authorize', as:'pre_authorize_suggest'
   match '/confirm_suggestion', to:'suggest_deliveries#confirm'
@@ -47,9 +64,6 @@ TheCarryProject::Application.routes.draw do
   match '/pre_cancel_suggest/:accepted_suggest_id', to: 'suggest_deliveries#pre_cancel', as:'pre_cancel_suggest'
   match '/pre_complete_suggest/:accepted_suggest_id', to: 'suggest_deliveries#pre_complete', as:'pre_complete_suggest'
   match '/complete_suggestion', to:'suggest_deliveries#complete'
-
-  match '/suggest', to:'suggest_deliveries#new'
-  match '/suggestions', to:'suggest_deliveries#index'
 
   match '/activity', to:'activities#index'
 

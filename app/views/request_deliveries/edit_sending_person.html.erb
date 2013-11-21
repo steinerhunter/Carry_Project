@@ -1,0 +1,22 @@
+<div class="edit_delivery_field_wrapper" style=" background-image: url('../assets/SendingPerson.png');">
+  <%= form_for(@request_delivery, :remote => true ) do |f| %>
+      <div class="edit_delivery_field_sending_receiving_person">
+        <div class="edit_delivery_title">
+          Sending Person
+        </div>
+        <% if @request_delivery.sending_person.blank?  %>
+            <%= f.label :sending_person, "Name?" %><%= f.text_field :sending_person, :placeholder => "Jon Snow" %><br>
+            <%= f.label :sending_phone, "Phone?" %><%= f.text_field :sending_phone, :placeholder => "052-1234567" %>
+        <% else %>
+            <%= f.label :sending_person, "Name?" %><%= f.text_field :sending_person %><br>
+            <%= f.label :sending_phone, "Phone?" %><%= f.text_field :sending_phone %>
+        <% end  %>
+      </div>
+      <div class="edit_delivery_confidential">
+        The above details will remain confidential until you've confirmed someone for this delivery request.
+      </div>
+      <div class="edit_update">
+        <%=  f.submit "Update Request" , :id => 'submit_delivery'%>
+      </div>
+  <% end  %>
+</div>

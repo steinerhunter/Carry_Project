@@ -1,0 +1,10 @@
+<div class="edit_delivery_field_wrapper" style="background-image: url('../assets/money.png');">
+  <%= form_for(@suggest_delivery, :remote => true ) do |f| %>
+      <div class="edit_delivery_field_cost" style="font-size: 30px;">
+            How much will you charge?<%= f.text_field :cost  %><%= f.select :currency, options_for_select(%w[ILS USD EUR], :selected => @suggest_delivery.currency) %>
+      </div>
+      <div class="edit_update">
+        <%= f.submit "Update Request" , :id => 'submit_delivery' %>
+      </div>
+  <% end  %>
+</div>

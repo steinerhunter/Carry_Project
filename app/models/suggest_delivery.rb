@@ -1,5 +1,5 @@
 class SuggestDelivery < ActiveRecord::Base
-  attr_accessible :from, :to, :when, :more_details, :size, :cost, :currency
+  attr_accessible :from, :to, :when, :more_details, :size, :cost, :currency, :frequency
   has_many :comments, :as => :commentable
   has_many :accepted_suggests # just the 'relationships'
   has_many :accepted_by, through: :accepted_suggests, source: :user

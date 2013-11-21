@@ -1,0 +1,10 @@
+<div class="edit_delivery_field_wrapper" style="background-image: url('../assets/LocationB.png');">
+  <%= form_for(@suggest_delivery, :remote => true ) do |f| %>
+      <div class="edit_delivery_field_to">
+        <%= f.label :to, "To?" %><%= f.text_field :to  %>
+      </div>
+      <div class="edit_update">
+        <%= f.submit "Update Suggestion" , :id => 'submit_delivery' %>
+      </div>
+  <% end  %>
+</div>

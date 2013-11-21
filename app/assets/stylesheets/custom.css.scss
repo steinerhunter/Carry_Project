@@ -70,8 +70,8 @@ p {
   background-color: #1d79e2;
   -moz-box-shadow: 5px 5px 5px #6b6b6b; /* Old Firefox */
   box-shadow: 5px 5px 5px #6b6b6b;
-  border:solid 3px;
-  border-radius:10px;
+  border:solid 1px;
+  border-radius:8px;
   -moz-border-radius:10px; /* Old Firefox */
   color: #ffffff;
   border-color: #18212e;
@@ -87,8 +87,8 @@ p {
   background-color: #1d79e2;
   -moz-box-shadow: 5px 5px 5px #6b6b6b; /* Old Firefox */
   box-shadow: 5px 5px 5px #6b6b6b;
-  border:solid 3px;
-  border-radius:10px;
+  border:solid 1px;
+  border-radius:8px;
   -moz-border-radius:10px; /* Old Firefox */
   color: #ffffff;
   border-color: #18212e;
@@ -115,8 +115,8 @@ p {
   background-color: #1d79e2;
   -moz-box-shadow: 5px 5px 5px #6b6b6b; /* Old Firefox */
   box-shadow: 5px 5px 5px #6b6b6b;
-  border:solid 3px;
-  border-radius:10px;
+  border:solid 1px;
+  border-radius:8px;
   -moz-border-radius:10px; /* Old Firefox */
   color: #ffffff;
   border-color: #18212e;
@@ -128,7 +128,7 @@ p {
   text-align: center;
   width: 240px;
   height: 35px;
-  line-height: 200%;
+  vertical-align: middle;
   background-color: #d67a31;
   background-repeat: no-repeat;
   background-position: bottom center;

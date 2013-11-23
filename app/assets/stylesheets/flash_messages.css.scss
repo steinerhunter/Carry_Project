@@ -61,3 +61,14 @@
     margin-bottom: 10px;
   }
 }
+
+.close_flash {
+  position:absolute;
+  top:-7px;
+  right:4px;
+  text-align: center;
+}
+
+.close_flash:hover {
+     cursor:pointer;
+}

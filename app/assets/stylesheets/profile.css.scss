@@ -196,11 +196,10 @@
 .control_panel_item {
   position:relative;
   display: inline-block;
-  width: 250px;
+  width: 200px;
   font-size:18px;
   margin-top: 10px;
   text-align: center;
-  background-color: #10529b;
   background-repeat: no-repeat;
   background-position: bottom left;
   border:1px solid;
@@ -210,12 +209,42 @@
   color: #ffffff;
   border-color: #000000;
   a {
-    color: #ffffff;
-    text-decoration: none;
+    color: #ffffff !important;
+    text-decoration: none !important;
     &:hover {
-      color: #f2ff5e;
+      color: #f2ff5e !important;
     }
   }
+}
+
+.verify_item {
+  position:relative;
+  display: inline-block;
+  width: 140px;
+  font-size:17px;
+  text-align: center;
+  background-color: #d67a31;
+  background-repeat: no-repeat;
+  background-position: bottom left;
+  border:1px solid;
+  border-radius:4px;
+  -moz-border-radius:10px; /* Old Firefox */
+  padding: 3px;
+  color: #ffffff;
+  border-color: #000000;
+  a {
+    color: #ffffff !important;
+    text-decoration: none !important;
+    &:hover {
+      color: #f2ff5e !important;
+    }
+  }
+}
+
+.control_panel_item:hover, .verify_item:hover {
+  background-color: #1d79e2 !important;
+  color: #f2ff5e !important;
+  text-decoration: none !important;
 }
 
 .rating_item {

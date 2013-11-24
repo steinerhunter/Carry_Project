@@ -29,7 +29,12 @@ class RequestDelivery < ActiveRecord::Base
   end
 
   def check_all_details
-    if self.when.present? && self.more_details.present? && self.size.present? && self.sending_person.present? && self.receiving_person.present?
+    if
+          self.size.present? &&
+          self.sending_person.present? &&
+          self.receiving_person.present? &&
+          self.sending_phone.present? &&
+          self.receiving_phone.present?
       self.update_attribute(:has_all_details,true)
     else
       self.update_attribute(:has_all_details,false)

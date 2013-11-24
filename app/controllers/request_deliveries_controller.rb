@@ -51,7 +51,7 @@ class RequestDeliveriesController < ApplicationController
 
   def index
     @search = RequestDelivery.search(params[:search])
-    @request_feed_items = @search.all
+    @request_feed_items = @search.all.sort_by { |a| a.has_all_details ? 0 : 1}
   end
 
   def edit_cost

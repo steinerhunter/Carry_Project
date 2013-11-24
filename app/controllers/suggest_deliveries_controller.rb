@@ -49,9 +49,8 @@ class SuggestDeliveriesController < ApplicationController
   end
 
   def index
-    #@suggest_feed_items = SuggestDelivery.all
     @search = SuggestDelivery.search(params[:search])
-    @suggest_feed_items = @search.all
+    @suggest_feed_items = @search.all.sort_by { |a| a.has_all_details ? 0 : 1}
   end
 
   def edit_cost

@@ -24,7 +24,7 @@ class SuggestDelivery < ActiveRecord::Base
   end
 
   def check_all_details
-    if self.when.present? && self.more_details.present?
+    if self.when.present? && self.frequency.present?
       self.update_attribute(:has_all_details,true)
     else
       self.update_attribute(:has_all_details,false)

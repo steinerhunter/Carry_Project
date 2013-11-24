@@ -24,16 +24,6 @@
         </div>
       </div>
     </div>
-    <div class="edit_post">
-      <div class="bubbleInfo">
-        <%=  link_to image_tag("edit_post.png"), edit_suggest_delivery_path(suggest_feed_item), class: "trigger" %>
-        <div class="popup" style="height:20px; width:200px; margin-top:57px;">
-          <b style="color:#ff9054">Edit</b> your delivery suggestion.
-          <div id="tail1" style="left:35px"></div>
-          <div id="tail2" style="left:35px"></div>
-        </div>
-      </div>
-    </div>
     <% if suggest_feed_item.has_all_details %>
         <div class="has_all_details">
           <div class="bubbleInfo">

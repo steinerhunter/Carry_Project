@@ -14,16 +14,19 @@
               <b style="font-size:33px"><%= link_to "Cancel Acceptance", accept_suggest_delivery_path(@suggest_delivery, type: "cancel"), method: :put %></b>
             </div>
         <% else %>
-            <div class="challenge_accepted" style="font-size:2.4em">
               <% if @my_phone.present? && @my_phone.verified %>
-                  <b><%= link_to "Accept Suggestion",   accept_suggest_delivery_path(@suggest_delivery, type: "accept"), method: :put %></b>
+                  <b><%= link_to "Accept Suggestion",   accept_suggest_delivery_path(@suggest_delivery, type: "accept"), method: :put, class:"challenge_accepted", style: "font-size:32px" %></b>
               <% else  %>
-                  <b><%=  link_to "Accept Suggestion",   pre_verify_suggest_path(@suggest_delivery.id,"accept"), class:"modal-link trigger",
+                  <% if current_user.nil? %>
+                      <% store_location %>
+                      <b><%= link_to "Accept Suggestion", signin_path, class: "challenge_accepted", style: "font-size:32px" %></b>
+                 <% else  %>
+                  <b><%=  link_to "Accept Suggestion",   pre_verify_suggest_path(@suggest_delivery.id,"accept"), class:"challenge_accepted modal-link trigger", style: "font-size:32px",
                                   "data-target" => "#myModal",
                                   "data-toggle" => "modal",
                                   "data-backdrop" => "static" %></b>
+                  <% end  %>
               <% end  %>
-            </div>
         <% end %>
     <% end  %>
     <div id="current-delivery-map"></div>

@@ -14,16 +14,19 @@
               <b style="font-size:33px"><%= link_to "Cancel Acceptance", accept_request_delivery_path(@request_delivery, type: "cancel"), method: :put %></b>
             </div>
         <% else %>
-            <div class="challenge_accepted">
               <% if @my_phone.present? && @my_phone.verified %>
-                  <b><%= link_to "Accept Request",   accept_request_delivery_path(@request_delivery, type: "accept"), method: :put %></b>
+                  <b><%= link_to "Accept Request", accept_request_delivery_path(@request_delivery, type: "accept"), method: :put, class: "challenge_accepted" %></b>
               <% else  %>
-                  <b><%=  link_to "Accept Request",   pre_verify_request_path(@request_delivery.id,"accept"), class:"modal-link trigger",
-                                  "data-target" => "#myModal",
-                                  "data-toggle" => "modal",
-                                  "data-backdrop" => "static" %></b>
+                  <% if current_user.nil? %>
+                      <% store_location %>
+                      <b><%= link_to "Accept Request", signin_path, class: "challenge_accepted" %></b>
+                   <% else %>
+                      <b><%=  link_to "Accept Request", pre_verify_request_path(@request_delivery.id,"accept"), class:"challenge_accepted modal-link trigger",
+                                        "data-target" => "#myModal",
+                                        "data-toggle" => "modal",
+                                        "data-backdrop" => "static" %></b>
+                  <% end %>
               <% end  %>
-            </div>
         <% end %>
     <% end  %>
     <div id="current-delivery-map"></div>

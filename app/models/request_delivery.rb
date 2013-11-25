@@ -29,7 +29,7 @@ class RequestDelivery < ActiveRecord::Base
   end
 
   def check_all_details
-    if
+    if self.when.present? &&
           self.size.present? &&
           self.sending_person.present? &&
           self.receiving_person.present? &&

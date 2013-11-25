@@ -14,9 +14,5 @@
                     var autocomplete = new google.maps.places.Autocomplete(input);
                 }
             });
-        $('.datepicker').datepicker({
-            format: 'dd/mm/yyyy'
-        });
-
     }
 })(jQuery);

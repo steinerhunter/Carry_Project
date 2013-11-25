@@ -217,8 +217,23 @@
                         </div>
                       </div>
                   <% end  %>
-                  <b>Not set yet.</b>
+                  <b>No Due Date set yet.</b>
               <% else %>
+                  <% if @suggest_delivery.user == current_user %>
+                      <div class="missing_detail" style="top:-12px">
+                        <div class="bubbleInfo">
+                          <%= link_to image_tag("edit_detail.png"), edit_suggest_due_date_path(@suggest_delivery.id), class:"modal-link trigger",
+                                        "data-target" => "#myModal",
+                                        "data-toggle" => "modal",
+                                        "data-backdrop" => "static" %>
+                          <div class="popup" style="height:20px; width:330px; margin-top:68px;text-align: center;">
+                            Click to edit <b style="color:#f2ff5e">Due Date</b> for this delivery suggestion.
+                            <div id="tail1" style="left:33px"></div>
+                            <div id="tail2" style="left:33px"></div>
+                          </div>
+                        </div>
+                      </div>
+                  <% end  %>
                   <%= @suggest_delivery.when.strftime("%B #{@suggest_delivery.when.day.ordinalize}, %Y")%>
               <% end %>
             </div>

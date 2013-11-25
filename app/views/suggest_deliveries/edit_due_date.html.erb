@@ -1,10 +1,10 @@
-<div class="edit_delivery_field_wrapper">
+<div class="edit_delivery_field_wrapper" style="background-image: url('../assets/Calendar.png');">
   <%= form_for(@suggest_delivery, :remote => true ) do |f| %>
       <div class="edit_delivery_field_due_date">
         <% if @suggest_delivery.when.blank? %>
             When? <%= f.text_field :when, :placeholder => "mm/dd/yyyy", :class => "datepicker" %>
         <% else  %>
-            Due Date <%= f.text_field :when, :placeholder => "mm/dd/yyyy", :class => "datepicker", :value => "#{@suggest_delivery.when.strftime("%d/%m/%Y")}" %>
+            When? <%= f.text_field :when, :placeholder => "mm/dd/yyyy", :class => "datepicker", :value => "#{@suggest_delivery.when.strftime("%d/%m/%Y")}" %>
         <% end  %>
       </div>
       <div class="edit_update">

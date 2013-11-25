@@ -220,6 +220,21 @@
           <% end  %>
           <b>No Due Date set yet.</b>
       <% else %>
+         <% if @request_delivery.user == current_user %>
+              <div class="missing_detail" style="top:-12px">
+                <div class="bubbleInfo">
+                  <%= link_to image_tag("edit_detail.png"), edit_request_due_date_path(@request_delivery.id), class:"modal-link trigger",
+                              "data-target" => "#myModal",
+                              "data-toggle" => "modal",
+                              "data-backdrop" => "static" %>
+                  <div class="popup" style="height:20px; width:310px; margin-top:70px;text-align: center;">
+                    Click to edit <b style="color:#f2ff5e">Due Date</b> for this delivery request.
+                    <div id="tail1" style="left:33px"></div>
+                    <div id="tail2" style="left:33px"></div>
+                  </div>
+                </div>
+              </div>
+          <% end  %>
           <%= @request_delivery.when.strftime("%B #{@request_delivery.when.day.ordinalize}, %Y")%>
       <% end %>
     </div>

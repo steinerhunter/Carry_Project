@@ -29,7 +29,11 @@
               <% end  %>
         <% end %>
     <% end  %>
-    <div id="current-delivery-map"></div>
+    <% if @suggest_delivery.user != current_user %>
+        <div id="current-delivery-map"></div>
+    <% else %>
+        <div id="current-delivery-map" style="margin-top: 0px;"></div>
+    <% end  %>
     <div class="extra_info">
       <div class="extra_info_title" style="background-image: url('../assets/open.png');">
         <b>Suggested By</b>

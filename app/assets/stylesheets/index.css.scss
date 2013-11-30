@@ -39,9 +39,29 @@
   border-color: #000000;
 }
 
-#search_button {
-  padding-bottom: 8px;
-  margin-left:20px;
+#submit_filter {
+  text-align: center;
+  width: 80px;
+  height: 30px;
+  background-color: #d67a31;
+  background-repeat: no-repeat;
+  background-position: bottom center;
+  -moz-box-shadow: 3px 3px 3px #3d3d3d; /* Old Firefox */
+  box-shadow: 3px 3px 3px #3d3d3d;
+  border:solid 1px;
+  border-radius:7px;
+  -moz-border-radius:10px; /* Old Firefox */
+  color: #ffffff;
+  border-color: #000000;
+  margin-top:2px;
+  margin-bottom:10px;
+  margin-left: 20px;
+  font-size:17px;
+  font-weight: bold;
+}
+
+#submit_filter:hover {
+  background-color: #1d79e2;
 }
 
 .myfield_search label {

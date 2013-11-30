@@ -1,7 +1,7 @@
 <div class="edit_delivery_field_wrapper" style="background-image: url('../assets/LocationA.png');">
-  <%= form_for(@request_delivery, :remote => true ) do |f| %>
+  <%= form_for(@request_delivery, :remote => true, :html => { :id => "edit_from" }) do |f| %>
       <div class="edit_delivery_field_from">
-        <%= f.label :from, "From?" %><%= f.text_field :from  %>
+        <%= f.label :from, "From?" %><%= f.text_field :from, :value => @request_delivery.from, :class => "address_field" %>
       </div>
       <div class="edit_update">
         <%= f.submit "Update Request" , :id => 'submit_delivery' %>

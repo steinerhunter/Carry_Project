@@ -64,14 +64,14 @@ class RequestDeliveriesController < ApplicationController
   def edit_from
     @request_delivery = RequestDelivery.find(params[:request_delivery_id])
     if @request_delivery.user == current_user
-      render "edit_from.html.erb", :layout => false
+      render "edit_from.html.erb", :layout => "empty"
     end
   end
 
   def edit_to
     @request_delivery = RequestDelivery.find(params[:request_delivery_id])
     if @request_delivery.user == current_user
-      render "edit_to.html.erb", :layout => false
+      render "edit_to.html.erb", :layout => "empty"
     end
   end
 

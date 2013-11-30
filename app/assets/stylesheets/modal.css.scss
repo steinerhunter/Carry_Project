@@ -39,5 +39,13 @@
 
 .modal {
   background-color: #1d79e2;
-  z-index: 9990;
+  z-index: 30;
+}
+
+.modal-backdrop {
+  z-index: 20;
+}
+
+.pac-container {
+  z-index: 1200 !important;
 }

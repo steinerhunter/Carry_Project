@@ -1,4 +1,4 @@
-(function($) {
+$(document).ready(function() {
     $.fn.mapsAndDate = function(options) {
         options = $.extend({
             submitButton: ""
@@ -15,4 +15,4 @@
                 }
             });
     }
-})(jQuery);
+});

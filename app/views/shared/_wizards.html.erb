@@ -4,10 +4,16 @@
             $("#new_request_delivery").mapsAndDate()
         });
     </script>
-     <% elsif controller.controller_name == 'request_deliveries' && controller.action_name == 'edit' %>
+ <% elsif controller.controller_name == 'request_deliveries' && controller.action_name == 'edit_from' %>
+     <script type="text/javascript">
+         $(document).ready(function(){
+             $("#edit_from").mapsAndDate()
+         });
+     </script>
+     <% elsif controller.controller_name == 'request_deliveries' && controller.action_name == 'edit_to' %>
          <script type="text/javascript">
              $(document).ready(function(){
-                 $(".edit_request_delivery").mapsAndDate()
+                 $("#edit_to").mapsAndDate()
              });
          </script>
  <% elsif controller.controller_name == 'request_deliveries' && controller.action_name == 'index' %>
@@ -22,10 +28,16 @@
             $("#new_suggest_delivery").mapsAndDate()
         });
     </script>
- <% elsif controller.controller_name == 'suggest_deliveries' && controller.action_name == 'edit' %>
+ <% elsif controller.controller_name == 'suggest_deliveries' && controller.action_name == 'edit_from' %>
      <script type="text/javascript">
          $(document).ready(function(){
-             $(".edit_suggest_delivery").mapsAndDate()
+             $("#edit_from").mapsAndDate()
+         });
+     </script>
+ <% elsif controller.controller_name == 'suggest_deliveries' && controller.action_name == 'edit_to' %>
+     <script type="text/javascript">
+         $(document).ready(function(){
+             $("#edit_to").mapsAndDate()
          });
      </script>
  <% elsif controller.controller_name == 'suggest_deliveries' && controller.action_name == 'index' %>

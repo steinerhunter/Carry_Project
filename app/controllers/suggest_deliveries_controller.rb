@@ -63,14 +63,14 @@ class SuggestDeliveriesController < ApplicationController
   def edit_from
     @suggest_delivery = SuggestDelivery.find(params[:suggest_delivery_id])
     if @suggest_delivery.user == current_user
-      render "edit_from.html.erb", :layout => false
+      render "edit_from.html.erb", :layout => "empty"
     end
   end
 
   def edit_to
     @suggest_delivery = SuggestDelivery.find(params[:suggest_delivery_id])
     if @suggest_delivery.user == current_user
-      render "edit_to.html.erb", :layout => false
+      render "edit_to.html.erb", :layout => "empty"
     end
   end
 

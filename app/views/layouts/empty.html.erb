@@ -2,10 +2,12 @@
 <html>
 <head>
   <%= javascript_include_tag "datepicker2" %>
+  <%= javascript_include_tag "no_enter" %>
+  <%= render 'shared/wizards' %>
 </head>
 <body>
 <div class="wrapper">
-  <div class="top_container" style="width:450px;">
+  <div class="top_container" style="width:500px;">
     <%= yield %>
   </div>
 </div>

@@ -2,7 +2,7 @@
   <%= form_tag  phone_check_path %>
   <fieldset>
     <div class="single_step">
-      <legend style="background-image: url('../assets/phone_title.png');"><b>Verify your phone number</b></legend>
+      <legend style="background-image: url('../assets/phone_title.png');"><b style="padding-left:50px;">Verify your phone number</b></legend>
       <div class="phone_text">
         We've sent a <b style="color:#f2ff5e">6-digit verification code</b> <br>to the phone number you've provided.
       </div>
@@ -14,7 +14,7 @@
         <%= text_field_tag :verification_code  %>
       </div>
       <div class="form_submit" style="margin-top:21px;">
-        <%= submit_tag "Submit", :type => :image, :src => "../assets/Verify_Phone.png", :class => "finish" %>
+        <%=  submit_tag "Verify Phone" , :id => 'submit_delivery' %>
       </div>
     </div>
     <div class="by_signing_up">

@@ -1,5 +1,5 @@
 <%= form_for :message, url: [:reply, conversation], :remote => true, :html => { :id => "new_reply" }  do |f| %>
     <%= f.hidden_field :subject, :value => "Reply" %>
     <%= f.text_area :body, :rows => 3, :placeholder => "Type your message here..."    %>
-    <%= f.submit "Reply", :type => :image, :src => "../assets/Reply.png"  %>
+    <%=  f.submit "Reply" , :id => 'submit_delivery'%>
 <% end %>

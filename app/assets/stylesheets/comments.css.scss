@@ -61,7 +61,7 @@
 
 .comment_item {
   position: relative;
-  margin-bottom: 5px;
+  margin-bottom: 15px;
 }
 
 .comment_content {
@@ -110,4 +110,28 @@
       text-decoration: none;
     }
   }
+}
+
+#add_comment {
+  text-align: center;
+  width: 50px;
+  height: 45px;
+  background-color: #d67a31;
+  background-repeat: no-repeat;
+  background-position: bottom center;
+  -moz-box-shadow: 3px 3px 3px #3d3d3d; /* Old Firefox */
+  box-shadow: 3px 3px 3px #3d3d3d;
+  border:solid 1px;
+  border-radius:7px;
+  -moz-border-radius:10px; /* Old Firefox */
+  color: #ffffff;
+  border-color: #000000;
+  margin-bottom:10px;
+  margin-left: auto;
+  margin-right: auto;
+  font-size:17px;
+}
+
+#add_comment:hover {
+  background-color: #1d79e2;
 }

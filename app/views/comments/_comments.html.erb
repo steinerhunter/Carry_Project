@@ -34,6 +34,6 @@
       <% else  %>
           <%= f.text_area :content, :placeholder => "Type your question here..." , :rows => 1 %>
       <% end  %>
-      <%= f.submit "Add", :type => :image, :src => "../assets/add.png" %>
+      <%=  f.submit "Add" , :id => 'add_comment'%>
   <% end %>
 </div>

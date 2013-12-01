@@ -6,12 +6,12 @@
   The above cancellation can be issued as late as 3 days prior to completion of your delivery request.
 </div>
 <div class="modal_proceed">
-  <%=  link_to image_tag("Proceed.png"),
+<%=  link_to "Cancel Payment",
                {:controller => "payments",
                 :action => "cancel",
                 :req_or_sugg => "request_delivery",
                 :accepted_task_id => @accepted_request.id,
-                :task_id => @accepted_request.request_delivery_id  },
+                :task_id => @accepted_request.request_delivery_id  }, :id => "submit_activity",
                class: "trigger" %>
 </div>
 

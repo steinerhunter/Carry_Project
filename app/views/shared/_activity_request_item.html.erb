@@ -10,16 +10,6 @@
           </div>
         </div>
       </div>
-      <div class="edit_post">
-        <div class="bubbleInfo">
-          <%=  link_to image_tag("edit_post.png"), edit_request_delivery_path(activity_request_item), class: "trigger" %>
-          <div class="popup" style="height:20px; width:170px; margin-top:57px;">
-            <b style="color:#ff9054">Edit</b> your delivery request.
-            <div id="tail1" style="left:35px"></div>
-            <div id="tail2" style="left:35px"></div>
-          </div>
-        </div>
-      </div>
     <% if activity_request_item.has_all_details %>
         <div class="has_all_details">
           <div class="bubbleInfo">
@@ -175,6 +165,12 @@
                                                                            activity_request_item.accepted_request_confirmed.other_user_for_request  %></b> is confirmed!
                   </div>
                 </div>
+                 <div class="send_messages_to_users" style="background-color: #7b337a;border:1px solid;border-color: #000000;">
+                  <div class="needs_to_confirm">
+                    Call transporter (<b style="color:#f2ff5e"><%= link_to activity_request_item.accepted_request_confirmed.other_user_for_request.name,
+                                                                                activity_request_item.accepted_request_confirmed.other_user_for_request  %></b>) at <b style="color:#f2ff5e"><%= activity_request_item.user.phone.phone %></b>.
+                  </div>
+                </div>
                 </div>
             <% elsif activity_request_item.accepted_request_confirmed.other_user_for_request == current_user  %>
               <div class="activity_content">
@@ -213,7 +209,26 @@
                     <b style="color:#f2ff5e"><%= link_to activity_request_item.user.name, activity_request_item.user  %></b> has confirmed you!
                   </div>
                 </div>
-      </div>
+                <div class="send_messages_to_users" style="background-color: #7b337a;border:1px solid;border-color: #000000;">
+                  <div class="needs_to_confirm">
+                    Call sender (<b style="color:#f2ff5e"><%= link_to activity_request_item.user.name, activity_request_item.user  %></b>) at <b style="color:#f2ff5e"><%= activity_request_item.user.phone.phone %></b>.
+                  </div>
+                </div>
+                <% if activity_request_item.sending_person.present? && activity_request_item.sending_phone.present? %>
+                    <div class="send_messages_to_users" style="background-color: #7b337a;border:1px solid;border-color: #000000;">
+                      <div class="needs_to_confirm">
+                        Call Sending Person (<b style="color:#f2ff5e"><%= activity_request_item.sending_person %></b>) at <b style="color:#f2ff5e"><%= activity_request_item.sending_phone %></b>.
+                      </div>
+                    </div>
+                <% end %>
+                <% if activity_request_item.receiving_person.present? && activity_request_item.receiving_phone.present? %>
+                    <div class="send_messages_to_users" style="background-color: #7b337a;border:1px solid;border-color: #000000;">
+                      <div class="needs_to_confirm">
+                        Call Receiving Person (<b style="color:#f2ff5e"><%= activity_request_item.receiving_person %></b>) at <b style="color:#f2ff5e"><%= activity_request_item.receiving_phone %></b>.
+                      </div>
+                    </div>
+                <% end %>
+              </div>
             <% else  %>
                 <br>
                 <div class="send_messages_to_users" style="background-color: #0b5aff;">

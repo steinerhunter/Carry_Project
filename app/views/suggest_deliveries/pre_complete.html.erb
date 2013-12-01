@@ -9,10 +9,10 @@
   By proceeding you admit to having performed the delivery task.
 </div>
 <div class="modal_proceed">
-  <%=  link_to image_tag("Proceed.png"),
+<%=  link_to "Complete Delivery",
                {:controller => "suggest_deliveries",
                 :action => "complete",
                 :accepted_suggest_id => @accepted_suggest.id,
-                :suggest_delivery_id => @accepted_suggest.suggest_delivery_id  },
+                :suggest_delivery_id => @accepted_suggest.suggest_delivery_id  }, :id => "submit_activity",
                class: "trigger" %>
 </div>

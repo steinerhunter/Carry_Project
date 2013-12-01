@@ -97,6 +97,10 @@ class User < ActiveRecord::Base
     UserReview.find_all_by_to_user_id_and_job_type(self.id,"TRANSPORTER")
   end
 
+  def phone
+     Phone.find_by_user_id(self.id)
+  end
+
   private
 
     def create_remember_token

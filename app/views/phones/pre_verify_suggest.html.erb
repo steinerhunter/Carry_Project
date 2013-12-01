@@ -20,15 +20,15 @@
 </div>
 <div class="modal_proceed">
   <% if @my_phone.present? %>
-      <%=  link_to image_tag("verify_now_popup.png"),
+      <%=  link_to "Verify Phone",
                    {:controller => "phones",
                     :action => "verify",
-                    :user_id => current_user.id } %>
+                    :user_id => current_user.id }, :class =>"verify_item" %>
   <% else  %>
-      <%=  link_to image_tag("add_now_popup.png"),
+     <%=  link_to "Add Phone",
                    {:controller => "phones",
                     :action => "new",
-                    :user_id => current_user.id } %>
+                    :user_id => current_user.id }, :class =>"verify_item"  %>
   <% end  %>
 </div>
 

@@ -6,11 +6,11 @@
   By proceeding you are aware that <div class="special">sendd.me</div> takes 15% commission from the amount being authorized (<div class="special"><%= @request_delivery.cost %> <%= @request_delivery.currency %></div>).
 </div>
 <div class="modal_proceed">
-  <%=  link_to image_tag("Proceed.png"),
+<%=  link_to "Proceed to PayPal",
                {:controller => "request_deliveries",
                 :action => "confirm",
                 :accepted_request_id => @accepted_request.id,
-                :request_delivery_id => @accepted_request.request_delivery_id  },
+                :request_delivery_id => @accepted_request.request_delivery_id  }, :id => "submit_activity",
                class: "trigger" %>
 </div>
 

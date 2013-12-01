@@ -10,16 +10,6 @@
           </div>
         </div>
       </div>
-      <div class="edit_post">
-        <div class="bubbleInfo">
-          <%=  link_to image_tag("edit_post.png"), edit_suggest_delivery_path(activity_suggest_item), class: "trigger" %>
-          <div class="popup" style="height:20px; width:195px; margin-top:57px;">
-            <b style="color:#ff9054">Edit</b> your delivery suggestion.
-            <div id="tail1" style="left:35px"></div>
-            <div id="tail2" style="left:35px"></div>
-          </div>
-        </div>
-      </div>
     <% if activity_suggest_item.has_all_details %>
         <div class="has_all_details">
           <div class="bubbleInfo">
@@ -177,6 +167,11 @@
                          Payment is approved!
                     </div>
                   </div>
+                    <div class="send_messages_to_users" style="background-color: #7b337a;border:1px solid;border-color: #000000;">
+                      <div class="needs_to_confirm">
+                        Call sender (<b style="color:#f2ff5e"><%= link_to activity_suggest_item.user.name, activity_suggest_item.user  %></b>) at <b style="color:#f2ff5e"><%= activity_suggest_item.user.phone.phone %></b>.
+                      </div>
+                    </div>
                   </div>
                   <div class="activity_status">
                     <center><%= image_tag("Activity_Confirmed.png")%></center>
@@ -221,6 +216,12 @@
                       <b style="color:#f2ff5e">You</b> have approved the payment!
                     </div>
                   </div>
+                    <div class="send_messages_to_users" style="background-color: #7b337a;border:1px solid;border-color: #000000;">
+                      <div class="needs_to_confirm">
+                        Call transporter (<b style="color:#f2ff5e"><%= link_to activity_suggest_item.accepted_suggest_confirmed.other_user_for_suggest.name,
+                                                                               activity_suggest_item.accepted_suggest_confirmed.other_user_for_suggest  %></b>) at <b style="color:#f2ff5e"><%= activity_suggest_item.user.phone.phone %></b>.
+                      </div>
+                    </div>
                 </div>
                   <div class="activity_status">
                     <center><%= image_tag("Activity_Confirmed.png")%></center>

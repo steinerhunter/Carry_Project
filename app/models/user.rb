@@ -98,7 +98,7 @@ class User < ActiveRecord::Base
   end
 
   def phone
-     Phone.find_by_user_id(self.id)
+     Phone.find_by_user_id(self.id).phone
   end
 
   private

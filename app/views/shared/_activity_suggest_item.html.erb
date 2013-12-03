@@ -169,7 +169,9 @@
                   </div>
                     <div class="send_messages_to_users" style="background-color: #7b337a;border:1px solid;border-color: #000000;">
                       <div class="needs_to_confirm">
-                        Call sender (<b style="color:#f2ff5e"><%= link_to activity_suggest_item.user.name, activity_suggest_item.user  %></b>) at <b style="color:#f2ff5e"><%= activity_suggest_item.user.phone.phone %></b>.
+                        Call sender (<b style="color:#f2ff5e"><%= link_to activity_suggest_item.accepted_suggest_confirmed.other_user_for_suggest.name,
+                                                                                                                activity_suggest_item.accepted_suggest_confirmed.other_user_for_suggest  %>
+                                                                                                        </b>) at <b style="color:#f2ff5e"><%= activity_suggest_item.accepted_suggest_confirmed.other_user_for_suggest.phone %></b>.
                       </div>
                     </div>
                   </div>
@@ -218,8 +220,7 @@
                   </div>
                     <div class="send_messages_to_users" style="background-color: #7b337a;border:1px solid;border-color: #000000;">
                       <div class="needs_to_confirm">
-                        Call transporter (<b style="color:#f2ff5e"><%= link_to activity_suggest_item.accepted_suggest_confirmed.other_user_for_suggest.name,
-                                                                               activity_suggest_item.accepted_suggest_confirmed.other_user_for_suggest  %></b>) at <b style="color:#f2ff5e"><%= activity_suggest_item.user.phone.phone %></b>.
+                        Call transporter (<b style="color:#f2ff5e"><%= link_to activity_suggest_item.user.name, activity_suggest_item.user  %></b>) at <b style="color:#f2ff5e"><%= activity_suggest_item.user.phone %></b>.
                       </div>
                     </div>
                 </div>

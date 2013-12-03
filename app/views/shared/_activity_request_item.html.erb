@@ -168,14 +168,15 @@
                  <div class="send_messages_to_users" style="background-color: #7b337a;border:1px solid;border-color: #000000;">
                   <div class="needs_to_confirm">
                     Call transporter (<b style="color:#f2ff5e"><%= link_to activity_request_item.accepted_request_confirmed.other_user_for_request.name,
-                                                                                activity_request_item.accepted_request_confirmed.other_user_for_request  %></b>) at <b style="color:#f2ff5e"><%= activity_request_item.user.phone.phone %></b>.
+                                                                                                activity_request_item.accepted_request_confirmed.other_user_for_request  %>
+                                                                                       </b>) at <b style="color:#f2ff5e"><%= activity_request_item.accepted_request_confirmed.other_user_for_request.phone %></b>.
                   </div>
                 </div>
                 </div>
             <% elsif activity_request_item.accepted_request_confirmed.other_user_for_request == current_user  %>
               <div class="activity_content">
                 You are confirmed for this delivery request! <br>
-                After successfully completing it, click 'Complete Task'.
+                After successfully completing it, click 'Complete Task'
                 <div class="send_messages_to_users" style="background-color: #257b2a;border:1px solid;border-color: #000000;">
                   <div class="needs_to_confirm">
                     <div class="confirm_me" style="right:35px">
@@ -211,7 +212,7 @@
                 </div>
                 <div class="send_messages_to_users" style="background-color: #7b337a;border:1px solid;border-color: #000000;">
                   <div class="needs_to_confirm">
-                    Call sender (<b style="color:#f2ff5e"><%= link_to activity_request_item.user.name, activity_request_item.user  %></b>) at <b style="color:#f2ff5e"><%= activity_request_item.user.phone.phone %></b>.
+                    Call sender (<b style="color:#f2ff5e"><%= link_to activity_request_item.user.name, activity_request_item.user  %></b>) at <b style="color:#f2ff5e"><%= activity_request_item.user.phone %></b>.
                   </div>
                 </div>
                 <% if activity_request_item.sending_person.present? && activity_request_item.sending_phone.present? %>

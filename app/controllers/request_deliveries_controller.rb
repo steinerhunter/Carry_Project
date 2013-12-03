@@ -206,9 +206,6 @@ class RequestDeliveriesController < ApplicationController
     @request_creator = User.find(@request_delivery.user_id)
     @confirmed_user = User.find( @accepted_request.user_id)
     if @request_creator == current_user && @phone.present? && @phone.verified
-      if Rails.env.production?
-        NotifMailer.new_confirmed_request(@request_creator,@confirmed_user,@request_delivery).deliver
-      end
       redirect_to :controller => 'payments',
                   :action => 'checkout',
                   :req_or_sugg => "request_delivery",

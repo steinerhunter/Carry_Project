@@ -214,7 +214,9 @@ class PaymentsController < ApplicationController
     req_or_sugg = params[:req_or_sugg]
     if req_or_sugg == "request_delivery"
       accepted_request = AcceptedRequest.find_by_id(params[:accepted_task_id])
+      confirmed_user = accepted_request.other_user_for_request
       request_delivery = RequestDelivery.find_by_id(accepted_request.request_delivery_id)
+      request_creator = request_delivery.user
       request_payment = RequestPayment.find_by_request_delivery_id(request_delivery.id)
       details_data = {
           "preapprovalKey" => request_payment.preapprovalKey,
@@ -222,7 +224,9 @@ class PaymentsController < ApplicationController
       }
     elsif req_or_sugg == "suggest_delivery"
       accepted_suggest = AcceptedSuggest.find_by_id(params[:accepted_task_id])
+      confirmed_user = accepted_suggest.other_user_for_suggest
       suggest_delivery = SuggestDelivery.find_by_id(accepted_suggest.suggest_delivery_id)
+      suggest_creator = suggest_delivery.user
       suggest_payment = SuggestPayment.find_by_suggest_delivery_id(suggest_delivery.id)
       details_data = {
           "preapprovalKey" => suggest_payment.preapprovalKey,
@@ -240,6 +244,9 @@ class PaymentsController < ApplicationController
         if request_payment.status == "ACTIVE" && request_payment.approved == true
           accepted_request.confirm_accepted_request
           request_delivery.confirm_request
+          if Rails.env.production?
+            NotifMailer.new_confirmed_request(request_creator,confirmed_user,request_delivery).deliver
+          end
         end
       elsif req_or_sugg == "suggest_delivery"
         suggest_payment.approved = preapproval_details_response["approved"]
@@ -248,6 +255,9 @@ class PaymentsController < ApplicationController
         if suggest_payment.status == "ACTIVE" && suggest_payment.approved == true
           accepted_suggest.confirm_accepted_suggest
           suggest_delivery.confirm_suggest
+          if Rails.env.production?
+            NotifMailer.new_confirmed_suggest(suggest_creator,confirmed_user,suggest_delivery).deliver
+          end
         end
       end
       redirect_to activity_url

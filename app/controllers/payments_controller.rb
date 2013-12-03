@@ -13,11 +13,13 @@ class PaymentsController < ApplicationController
       accepted_task = AcceptedRequest.find_by_id(params[:accepted_task_id])
       request_payment = RequestPayment.find_by_request_delivery_id(request_delivery.id)
       amount = request_delivery.cost.to_f
+      currency = request_delivery.currency
     elsif req_or_sugg == "suggest_delivery"
       suggest_delivery = SuggestDelivery.find_by_id(params[:task_id])
       accepted_task = AcceptedSuggest.find_by_id(params[:accepted_task_id])
       suggest_payment = SuggestPayment.find_by_suggest_delivery_id(suggest_delivery.id)
       amount = suggest_delivery.cost.to_f
+      currency = suggest_delivery.currency
     end
     seller_amount = 0.85*amount.to_f
     commission_amount = 0.15*amount.to_f
@@ -27,7 +29,7 @@ class PaymentsController < ApplicationController
     data = {
         "returnUrl" => details_url(accepted_task,req_or_sugg),
         "requestEnvelope" => { "errorLanguage" => "en_US" },
-        "currencyCode" => "USD",
+        "currencyCode" => currency,
         "receiverList"=> {
             "receiver"=> [
                 { "email" => confirmed_user.email, "amount" => seller_amount, "primary" => false },
@@ -36,6 +38,7 @@ class PaymentsController < ApplicationController
         },
         "maxAmountPerPayment" => amount,
         "maxNumberOfPayments" => 1,
+        "maxTotalAmountOfAllPayments" => amount,
         "cancelUrl" => activity_url,
         "ipnNotificationUrl" => ipn_notification_url,
         "startingDate" => Time.now

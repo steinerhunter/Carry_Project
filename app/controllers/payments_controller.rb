@@ -42,7 +42,7 @@ class PaymentsController < ApplicationController
         "cancelUrl" => activity_url,
         "ipnNotificationUrl" => ipn_notification_url,
         "startingDate" => Time.now,
-        "endingDate" => 11.months.from_.now
+        "endingDate" => 11.months.from_now
     }
 
     preapproval_response = preapproval_request.preapproval(data)

@@ -219,14 +219,25 @@
               </div>
           <% end %>
       <% else  %>
-          <div class="bubbleInfo">
-            <%= image_tag("profile_item_not_verified.png", class: "trigger") %>
-            <div class="popup" style="height:20px; width:320px; margin-top:57px;">
-              User hasn't verified Mobile Phone Number yet.
-              <div id="tail1" style="left:71px"></div>
-              <div id="tail2" style="left:71px"></div>
-            </div>
-          </div>
+          <% if @phone.nil? || @phone.verified == false %>
+              <div class="bubbleInfo">
+                <%= image_tag("profile_item_not_verified.png", class: "trigger") %>
+                <div class="popup" style="height:20px; width:320px; margin-top:57px;">
+                  User hasn't verified Mobile Phone Number yet.
+                  <div id="tail1" style="left:71px"></div>
+                  <div id="tail2" style="left:71px"></div>
+                </div>
+              </div>
+          <% else  %>
+              <div class="bubbleInfo">
+                <%= image_tag("profile_item_verified.png", class: "trigger") %>
+                <div class="popup" style="height:20px; width:235px; margin-top:57px;">
+                  User's Phone number is <b style="color:#279227">verified</b>!
+                  <div id="tail1" style="left:71px"></div>
+                  <div id="tail2" style="left:71px"></div>
+                </div>
+              </div>
+          <% end  %>
       <% end  %>
     </div>
   </div>

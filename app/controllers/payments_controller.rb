@@ -256,7 +256,7 @@ class PaymentsController < ApplicationController
           accepted_suggest.confirm_accepted_suggest
           suggest_delivery.confirm_suggest
           if Rails.env.production?
-            NotifMailer.new_confirmed_suggest(suggest_creator,confirmed_user,suggest_delivery).deliver
+            NotifMailer.new_authorized_suggest(suggest_creator,confirmed_user,suggest_delivery).deliver
           end
         end
       end

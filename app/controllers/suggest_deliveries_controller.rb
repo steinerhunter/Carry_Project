@@ -200,9 +200,6 @@ class SuggestDeliveriesController < ApplicationController
     @suggest_creator = User.find(@suggest_delivery.user_id)
     @confirmed_user = User.find( @accepted_suggest.user_id)
     if @confirmed_user == current_user
-      if Rails.env.production?
-        NotifMailer.new_confirmed_suggest(@suggest_creator,@confirmed_user,@suggest_delivery).deliver
-      end
       redirect_to :controller => 'payments',
                   :action => 'checkout',
                   :req_or_sugg => "suggest_delivery",

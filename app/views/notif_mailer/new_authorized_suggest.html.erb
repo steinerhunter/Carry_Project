@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta content="text/html; charset=UTF-8" http-equiv="Content-Type" />
+</head>
+<body>
+    <h2>Hi there <%= @creating_user.name %>,</h2><br>
+    <h3>It seems <b style="color:#279227"><%= @accepting_user.name  %></b> has authorized the payment for your suggestion - "<b style="color:#63a2ff"><%= @suggest_delivery.size %> Sized Items</b>"!</h3>
+    <h3>You can go ahead and contact <%= @creating_user.name  %> on <b style="color:#f2ff5e"><%= @creating_user.phone %></b> - to set a time and a place.</h3>
+    <h3>Go to your <%= link_to "Activity Page", :controller => "activities", :action => "index", :host => "www.sendd.me" %> once you've completed the delivery.</h3>
+    <p>
+    <h3>Thank you,</h3>
+    <h3>Best Regards,</h3>
+    <h3>sendd.me Support</h3>
+    </p>
+</body>
+</html>

@@ -20,9 +20,9 @@ class Phone < ActiveRecord::Base
   end
 
   def normalize_number
-    self.phone = self.phone.tr('^A-Za-z0-9', '')
-    self.phone = self.phone[1..-1]
-    self.phone = "+972" + self.phone
+    self.normalized_phone = self.phone.tr('^A-Za-z0-9', '')
+    self.normalized_phone = self.normalized_phone[1..-1]
+    self.normalized_phone = "+972" + self.normalized_phone
     self.save!
   end
 

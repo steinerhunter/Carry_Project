@@ -38,7 +38,7 @@ class PhonesController < ApplicationController
     client = Twilio::REST::Client.new @twilio_sid, @twilio_token
     client.account.messages.create(
         :body  =>  "Your sendd.me verification code is #{@phone.verification_code}.",
-        :to       => @phone.phone,
+        :to       => @phone.normalized_phone,
         :from  => @twilio_from
     )
     redirect_to phone_verify_path(@phone.user_id)

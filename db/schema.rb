@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20131118192440) do
+ActiveRecord::Schema.define(:version => 20131205180007) do
 
   create_table "accepted_requests", :force => true do |t|
     t.integer  "request_delivery_id"
@@ -96,6 +96,7 @@ ActiveRecord::Schema.define(:version => 20131118192440) do
     t.boolean  "verified",          :default => false
     t.datetime "created_at",                           :null => false
     t.datetime "updated_at",                           :null => false
+    t.string   "normalized_phone"
   end
 
   add_index "phones", ["user_id"], :name => "index_phones_on_user_id", :unique => true

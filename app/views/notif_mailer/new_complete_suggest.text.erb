@@ -1,1 +1,8 @@
-BLAH BLAH
+Hi there <%= @accepting_user.name %>,
+It seems <%= @creating_user.name  %> has completed their suggestion - "<%= @suggest_delivery.size %> Sized Items"!
+That means your delivery has reached its destination!
+Go to your <%= link_to "Activity Page", :controller => "activities", :action => "index", :host => "www.sendd.me" %> and rate <%= @accepting_user.name  %> as a transporter.
+
+Thank you,
+Best Regards,
+sendd.me Support

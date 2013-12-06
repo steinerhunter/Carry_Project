@@ -132,14 +132,17 @@ class PaymentsController < ApplicationController
       request_delivery = RequestDelivery.find_by_id(params[:task_id])
       accepted_task = AcceptedRequest.find_by_id(params[:accepted_task_id])
       request_payment = RequestPayment.find_by_request_delivery_id(request_delivery.id)
+      confirmed_user = accepted_task.other_user_for_request
+      request_creator = request_delivery.user
       task = request_delivery
       amount = request_delivery.cost.to_f
       seller_amount = 0.85*amount.to_f
       commission_amount = 0.15*amount.to_f
+      currency = request_delivery.currency
       preapproval_data = {
           "returnUrl" => details_url(accepted_task,req_or_sugg),
           "requestEnvelope" => { "errorLanguage" => "en_US" },
-          "currencyCode" => "USD",
+          "currencyCode" => currency,
           "receiverList"=> {
               "receiver"=> [
                   { "email" => confirmed_user.email, "amount" => seller_amount, "primary" => false },
@@ -151,18 +154,25 @@ class PaymentsController < ApplicationController
           "preapprovalKey" => request_payment.preapprovalKey,
           "actionType" => "PAY"
       }
+      details_data = {
+          "preapprovalKey" => request_payment.preapprovalKey,
+          "requestEnvelope" => { "errorLanguage" => "en_US" },
+      }
     elsif req_or_sugg == "suggest_delivery"
       suggest_delivery = SuggestDelivery.find_by_id(params[:task_id])
       accepted_task= AcceptedSuggest.find_by_id(params[:accepted_task_id])
       suggest_payment = SuggestPayment.find_by_suggest_delivery_id(suggest_delivery.id)
+      confirmed_user = accepted_task.other_user_for_request
+      request_creator = suggest_delivery.user
       task = suggest_delivery
       amount = suggest_delivery.cost.to_f
       seller_amount = 0.85*amount.to_f
       commission_amount = 0.15*amount.to_f
+      currency = suggest_delivery.currency
       preapproval_data = {
           "returnUrl" => details_url(accepted_task,req_or_sugg),
           "requestEnvelope" => { "errorLanguage" => "en_US" },
-          "currencyCode" => "USD",
+          "currencyCode" => currency,
           "receiverList"=> {
               "receiver"=> [
                   { "email" => task_creator.email, "amount" => seller_amount, "primary" => false },
@@ -174,40 +184,91 @@ class PaymentsController < ApplicationController
           "preapprovalKey" => suggest_payment.preapprovalKey,
           "actionType" => "PAY"
       }
+      details_data = {
+          "preapprovalKey" => suggest_payment.preapprovalKey,
+          "requestEnvelope" => { "errorLanguage" => "en_US" },
+      }
+    end
+
+    preapproval_details = PaypalAdaptive::Request.new
+    preapproval_details_response = preapproval_details.preapproval_details(details_data)
+    cancel_flag = false
+
+    if preapproval_details_response.success?
+      if req_or_sugg == "request_delivery"
+        request_payment.approved = preapproval_details_response["approved"]
+        request_payment.status = preapproval_details_response["status"]
+        request_payment.save
+        if request_payment.status == "ACTIVE" && request_payment.approved == true
+        elsif request_payment.status == "CANCELED"
+          accepted_task.cancel_accepted_request
+          request_delivery.unconfirm_request
+          request_payment.destroy
+          cancel_flag = true
+        end
+      elsif req_or_sugg == "suggest_delivery"
+        suggest_payment.approved = preapproval_details_response["approved"]
+        suggest_payment.status = preapproval_details_response["status"]
+        suggest_payment.save
+        if suggest_payment.status == "ACTIVE" && suggest_payment.approved == true
+        elsif suggest_payment.status == "CANCELED"
+          accepted_task.cancel_accepted_suggest
+          suggest_delivery.unconfirm_suggest
+          suggest_payment.destroy
+          cancel_flag = true
+        end
+      end
+    else
+      session[:error] = preapproval_details_response#pay_response.errors.first['message']
+      redirect_to fail_url
     end
 
     preapproval_request = PaypalAdaptive::Request.new
-
     confirm_preapproval_response = preapproval_request.pay(preapproval_data)
 
-    if confirm_preapproval_response.success?
+    if cancel_flag == true
       if req_or_sugg == "request_delivery"
-        accepted_task.complete_accepted_request
-        request_delivery.complete_request
-        redirect_to :controller => 'user_reviews',
-                    :action => 'new',
-                    :from_user_id => confirmed_user.id,
-                    :to_user_id => task_creator.id,
-                    :req_or_sugg => req_or_sugg,
-                    :job_type => "SENDER",
-                    :task_id => task.id
+        flash[:failure] = "Sorry!<br><div class='sub_flash_text'>It seems the sender has cancelled the Preapproved Payment.</div>".html_safe
       elsif req_or_sugg == "suggest_delivery"
-        accepted_task.complete_accepted_suggest
-        suggest_delivery.complete_suggest
-        redirect_to :controller => 'user_reviews',
-                    :action => 'new',
-                    :from_user_id => task_creator.id,
-                    :to_user_id => confirmed_user.id,
-                    :req_or_sugg => req_or_sugg,
-                    :job_type => "SENDER",
-                    :task_id => task.id
+        flash[:failure] = "Sorry!<br><div class='sub_flash_text'>It seems the transporter has cancelled the Preapproved Payment.</div>".html_safe
       end
-
+      redirect_to activity_url
     else
-      session[:error] = confirm_preapproval_response#pay_response.errors.first['message']
-      redirect_to fail_url
+      if confirm_preapproval_response.success?
+        if req_or_sugg == "request_delivery"
+          if Rails.env.production?
+            NotifMailer.new_complete_request(request_creator,confirmed_user,request_delivery).deliver
+          end
+          accepted_task.complete_accepted_request
+          request_delivery.complete_request
+          redirect_to :controller => 'user_reviews',
+                      :action => 'new',
+                      :from_user_id => confirmed_user.id,
+                      :to_user_id => task_creator.id,
+                      :req_or_sugg => req_or_sugg,
+                      :job_type => "SENDER",
+                      :task_id => task.id
+        elsif req_or_sugg == "suggest_delivery"
+          if Rails.env.production?
+            NotifMailer.new_complete_request(suggest_creator,confirmed_user,suggest_delivery).deliver
+          end
+          accepted_task.complete_accepted_suggest
+          suggest_delivery.complete_suggest
+          redirect_to :controller => 'user_reviews',
+                      :action => 'new',
+                      :from_user_id => task_creator.id,
+                      :to_user_id => confirmed_user.id,
+                      :req_or_sugg => req_or_sugg,
+                      :job_type => "SENDER",
+                      :task_id => task.id
+        end
+      else
+        session[:error] = confirm_preapproval_response#pay_response.errors.first['message']
+        redirect_to fail_url
+      end
     end
   end
+
 
   def details
     preapproval_details = PaypalAdaptive::Request.new

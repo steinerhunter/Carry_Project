@@ -132,6 +132,8 @@ class PaymentsController < ApplicationController
       request_delivery = RequestDelivery.find_by_id(params[:task_id])
       accepted_task = AcceptedRequest.find_by_id(params[:accepted_task_id])
       request_payment = RequestPayment.find_by_request_delivery_id(request_delivery.id)
+      confirmed_user = accepted_task.other_user_for_request
+      request_creator = request_delivery.user
       task = request_delivery
       amount = request_delivery.cost.to_f
       seller_amount = 0.85*amount.to_f
@@ -160,6 +162,8 @@ class PaymentsController < ApplicationController
       suggest_delivery = SuggestDelivery.find_by_id(params[:task_id])
       accepted_task= AcceptedSuggest.find_by_id(params[:accepted_task_id])
       suggest_payment = SuggestPayment.find_by_suggest_delivery_id(suggest_delivery.id)
+      confirmed_user = accepted_task.other_user_for_request
+      request_creator = suggest_delivery.user
       task = suggest_delivery
       amount = suggest_delivery.cost.to_f
       seller_amount = 0.85*amount.to_f
@@ -223,11 +227,18 @@ class PaymentsController < ApplicationController
     confirm_preapproval_response = preapproval_request.pay(preapproval_data)
 
     if cancel_flag == true
-      flash[:failure] = "Sorry!<br><div class='sub_flash_text'>It seems the Preapproved Payment has been cancelled.</div>".html_safe
+      if req_or_sugg == "request_delivery"
+        flash[:failure] = "Sorry!<br><div class='sub_flash_text'>It seems the sender has cancelled the Preapproved Payment.</div>".html_safe
+      elsif req_or_sugg == "suggest_delivery"
+        flash[:failure] = "Sorry!<br><div class='sub_flash_text'>It seems the transporter has cancelled the Preapproved Payment.</div>".html_safe
+      end
       redirect_to activity_url
     else
       if confirm_preapproval_response.success?
         if req_or_sugg == "request_delivery"
+          if Rails.env.production?
+            NotifMailer.new_complete_request(request_creator,confirmed_user,request_delivery).deliver
+          end
           accepted_task.complete_accepted_request
           request_delivery.complete_request
           redirect_to :controller => 'user_reviews',
@@ -238,6 +249,9 @@ class PaymentsController < ApplicationController
                       :job_type => "SENDER",
                       :task_id => task.id
         elsif req_or_sugg == "suggest_delivery"
+          if Rails.env.production?
+            NotifMailer.new_complete_request(suggest_creator,confirmed_user,suggest_delivery).deliver
+          end
           accepted_task.complete_accepted_suggest
           suggest_delivery.complete_suggest
           redirect_to :controller => 'user_reviews',

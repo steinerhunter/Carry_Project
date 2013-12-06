@@ -226,9 +226,6 @@ class RequestDeliveriesController < ApplicationController
     @request_payment = RequestPayment.find_by_request_delivery_id(@request_delivery.id)
     if @confirmed_user == current_user && @request_payment.approved
       flash[:success] = "Great!<br><div class='sub_flash_text'>You've chosen to mark <b>#{@request_delivery.what}</b> delivery request as complete.</div>".html_safe
-      if Rails.env.production?
-        NotifMailer.new_complete_request(@request_creator,@confirmed_user,@request_delivery).deliver
-      end
         redirect_to :controller => 'payments',
                                   :action => 'execute',
                                   :req_or_sugg => "request_delivery",

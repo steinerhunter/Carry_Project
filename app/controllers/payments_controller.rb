@@ -195,7 +195,7 @@ class PaymentsController < ApplicationController
         request_payment.status = preapproval_details_response["status"]
         request_payment.save
         if request_payment.status == "ACTIVE" && request_payment.approved == true
-        elsif request_payment.status == "CANCELED "
+        elsif request_payment.status == "CANCELED"
           accepted_task.cancel_accepted_request
           request_delivery.unconfirm_request
           request_payment.destroy
@@ -207,7 +207,7 @@ class PaymentsController < ApplicationController
         suggest_payment.status = preapproval_details_response["status"]
         suggest_payment.save
         if suggest_payment.status == "ACTIVE" && suggest_payment.approved == true
-        elsif suggest_payment.status == "CANCELED "
+        elsif suggest_payment.status == "CANCELED"
           accepted_task.cancel_accepted_suggest
           suggest_delivery.unconfirm_suggest
           suggest_payment.destroy

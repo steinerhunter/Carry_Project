@@ -6,7 +6,7 @@
                 <div class="bubbleInfo">
                   <%= image_tag("has_all_details.png", class: "trigger") %>
                   <div class="popup" style="height:20px; width:315px; margin-top:57px;">
-                    This request post has <b style="color:#279227">all</b> the necessary details!
+                    This 1 request post has <b style="color:#279227">all</b> the necessary details!
                     <div id="tail1" style="left:35px"></div>
                     <div id="tail2" style="left:35px"></div>
                 </div>
@@ -29,7 +29,7 @@
                 <div class="bubbleInfo">
                   <%= image_tag("has_all_details.png", class: "trigger") %>
                   <div class="popup" style="height:20px; width:315px; margin-top:57px;">
-                    Your request post has <b style="color:#279227">all</b> the necessary details!
+                    Your admin request post has <b style="color:#279227">all</b> the necessary details!
                     <div id="tail1" style="left:35px"></div>
                     <div id="tail2" style="left:35px"></div>
                   </div>
@@ -37,12 +37,24 @@
               </div>
           <% end  %>
       <% else  %>
-          <% if request_feed_item.has_all_details %>
+      <% if request_feed_item.has_all_details %>
               <div class="has_all_details" style="right:3px;">
                 <div class="bubbleInfo">
                   <%= image_tag("has_all_details.png", class: "trigger") %>
                   <div class="popup" style="height:20px; width:315px; margin-top:57px;">
                     This request post has <b style="color:#279227">all</b> the necessary details!
+                    <div id="tail1" style="left:35px"></div>
+                    <div id="tail2" style="left:35px"></div>
+                  </div>
+                </div>
+              </div>
+          <% end  %>
+          <% if request_feed_item.has_all_details  && request_feed_item.user == current_user %>
+              <div class="has_all_details" style="right:3px;">
+                <div class="bubbleInfo">
+                  <%= image_tag("has_all_details.png", class: "trigger") %>
+                  <div class="popup" style="height:20px; width:315px; margin-top:57px;">
+                    Your request post has <b style="color:#279227">all</b> the necessary details!
                     <div id="tail1" style="left:35px"></div>
                     <div id="tail2" style="left:35px"></div>
                   </div>

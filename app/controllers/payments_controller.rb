@@ -136,10 +136,11 @@ class PaymentsController < ApplicationController
       amount = request_delivery.cost.to_f
       seller_amount = 0.85*amount.to_f
       commission_amount = 0.15*amount.to_f
+      currency = request_delivery.currency
       preapproval_data = {
           "returnUrl" => details_url(accepted_task,req_or_sugg),
           "requestEnvelope" => { "errorLanguage" => "en_US" },
-          "currencyCode" => "USD",
+          "currencyCode" => currency,
           "receiverList"=> {
               "receiver"=> [
                   { "email" => confirmed_user.email, "amount" => seller_amount, "primary" => false },
@@ -151,6 +152,10 @@ class PaymentsController < ApplicationController
           "preapprovalKey" => request_payment.preapprovalKey,
           "actionType" => "PAY"
       }
+      details_data = {
+          "preapprovalKey" => request_payment.preapprovalKey,
+          "requestEnvelope" => { "errorLanguage" => "en_US" },
+      }
     elsif req_or_sugg == "suggest_delivery"
       suggest_delivery = SuggestDelivery.find_by_id(params[:task_id])
       accepted_task= AcceptedSuggest.find_by_id(params[:accepted_task_id])
@@ -159,10 +164,11 @@ class PaymentsController < ApplicationController
       amount = suggest_delivery.cost.to_f
       seller_amount = 0.85*amount.to_f
       commission_amount = 0.15*amount.to_f
+      currency = suggest_delivery.currency
       preapproval_data = {
           "returnUrl" => details_url(accepted_task,req_or_sugg),
           "requestEnvelope" => { "errorLanguage" => "en_US" },
-          "currencyCode" => "USD",
+          "currencyCode" => currency,
           "receiverList"=> {
               "receiver"=> [
                   { "email" => task_creator.email, "amount" => seller_amount, "primary" => false },
@@ -174,10 +180,47 @@ class PaymentsController < ApplicationController
           "preapprovalKey" => suggest_payment.preapprovalKey,
           "actionType" => "PAY"
       }
+      details_data = {
+          "preapprovalKey" => suggest_payment.preapprovalKey,
+          "requestEnvelope" => { "errorLanguage" => "en_US" },
+      }
+    end
+
+    preapproval_details = PaypalAdaptive::Request.new
+    preapproval_details_response = preapproval_details.preapproval_details(details_data)
+
+    if preapproval_details_response.success?
+      if req_or_sugg == "request_delivery"
+        request_payment.approved = preapproval_details_response["approved"]
+        request_payment.status = preapproval_details_response["status"]
+        request_payment.save
+        if request_payment.status == "ACTIVE" && request_payment.approved == true
+        elsif request_payment.status == "CANCELED "
+          accepted_task.cancel_accepted_request
+          request_delivery.unconfirm_request
+          request_payment.destroy
+          flash[:failure] = "Sorry!<br><div class='sub_flash_text'>It seems the Preapproved Payment has been cancelled.</div>".html_safe
+          redirect_to activity_url
+        end
+      elsif req_or_sugg == "suggest_delivery"
+        suggest_payment.approved = preapproval_details_response["approved"]
+        suggest_payment.status = preapproval_details_response["status"]
+        suggest_payment.save
+        if suggest_payment.status == "ACTIVE" && suggest_payment.approved == true
+        elsif suggest_payment.status == "CANCELED "
+          accepted_task.cancel_accepted_suggest
+          suggest_delivery.unconfirm_suggest
+          suggest_payment.destroy
+          flash[:failure] = "Sorry!<br><div class='sub_flash_text'>It seems the Preapproved Payment has been cancelled.</div>".html_safe
+          redirect_to activity_url
+        end
+      end
+    else
+      session[:error] = preapproval_details_response#pay_response.errors.first['message']
+      redirect_to fail_url
     end
 
     preapproval_request = PaypalAdaptive::Request.new
-
     confirm_preapproval_response = preapproval_request.pay(preapproval_data)
 
     if confirm_preapproval_response.success?
@@ -202,7 +245,6 @@ class PaymentsController < ApplicationController
                     :job_type => "SENDER",
                     :task_id => task.id
       end
-
     else
       session[:error] = confirm_preapproval_response#pay_response.errors.first['message']
       redirect_to fail_url

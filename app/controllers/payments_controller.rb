@@ -188,6 +188,7 @@ class PaymentsController < ApplicationController
 
     preapproval_details = PaypalAdaptive::Request.new
     preapproval_details_response = preapproval_details.preapproval_details(details_data)
+    cancel_flag = false
 
     if preapproval_details_response.success?
       if req_or_sugg == "request_delivery"
@@ -199,8 +200,7 @@ class PaymentsController < ApplicationController
           accepted_task.cancel_accepted_request
           request_delivery.unconfirm_request
           request_payment.destroy
-          flash[:failure] = "Sorry!<br><div class='sub_flash_text'>It seems the Preapproved Payment has been cancelled.</div>".html_safe
-          redirect_to activity_url
+          cancel_flag = true
         end
       elsif req_or_sugg == "suggest_delivery"
         suggest_payment.approved = preapproval_details_response["approved"]
@@ -211,8 +211,7 @@ class PaymentsController < ApplicationController
           accepted_task.cancel_accepted_suggest
           suggest_delivery.unconfirm_suggest
           suggest_payment.destroy
-          flash[:failure] = "Sorry!<br><div class='sub_flash_text'>It seems the Preapproved Payment has been cancelled.</div>".html_safe
-          redirect_to activity_url
+          cancel_flag = true
         end
       end
     else
@@ -223,33 +222,39 @@ class PaymentsController < ApplicationController
     preapproval_request = PaypalAdaptive::Request.new
     confirm_preapproval_response = preapproval_request.pay(preapproval_data)
 
-    if confirm_preapproval_response.success?
-      if req_or_sugg == "request_delivery"
-        accepted_task.complete_accepted_request
-        request_delivery.complete_request
-        redirect_to :controller => 'user_reviews',
-                    :action => 'new',
-                    :from_user_id => confirmed_user.id,
-                    :to_user_id => task_creator.id,
-                    :req_or_sugg => req_or_sugg,
-                    :job_type => "SENDER",
-                    :task_id => task.id
-      elsif req_or_sugg == "suggest_delivery"
-        accepted_task.complete_accepted_suggest
-        suggest_delivery.complete_suggest
-        redirect_to :controller => 'user_reviews',
-                    :action => 'new',
-                    :from_user_id => task_creator.id,
-                    :to_user_id => confirmed_user.id,
-                    :req_or_sugg => req_or_sugg,
-                    :job_type => "SENDER",
-                    :task_id => task.id
-      end
+    if cancel_flag == true
+      flash[:failure] = "Sorry!<br><div class='sub_flash_text'>It seems the Preapproved Payment has been cancelled.</div>".html_safe
+      redirect_to activity_url
     else
-      session[:error] = confirm_preapproval_response#pay_response.errors.first['message']
-      redirect_to fail_url
+      if confirm_preapproval_response.success?
+        if req_or_sugg == "request_delivery"
+          accepted_task.complete_accepted_request
+          request_delivery.complete_request
+          redirect_to :controller => 'user_reviews',
+                      :action => 'new',
+                      :from_user_id => confirmed_user.id,
+                      :to_user_id => task_creator.id,
+                      :req_or_sugg => req_or_sugg,
+                      :job_type => "SENDER",
+                      :task_id => task.id
+        elsif req_or_sugg == "suggest_delivery"
+          accepted_task.complete_accepted_suggest
+          suggest_delivery.complete_suggest
+          redirect_to :controller => 'user_reviews',
+                      :action => 'new',
+                      :from_user_id => task_creator.id,
+                      :to_user_id => confirmed_user.id,
+                      :req_or_sugg => req_or_sugg,
+                      :job_type => "SENDER",
+                      :task_id => task.id
+        end
+      else
+        session[:error] = confirm_preapproval_response#pay_response.errors.first['message']
+        redirect_to fail_url
+      end
     end
   end
+
 
   def details
     preapproval_details = PaypalAdaptive::Request.new

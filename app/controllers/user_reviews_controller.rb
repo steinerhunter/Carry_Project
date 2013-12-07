@@ -20,21 +20,21 @@ class UserReviewsController < ApplicationController
         if @user_review.req_or_sugg == "suggest_delivery"
           @suggest_delivery = SuggestDelivery.find_by_id(@user_review.task_id)
           @suggest_delivery.sender_reviewed = true
-          @suggest_delivery.save
+          @suggest_delivery.save(validate:false)
         elsif @user_review.req_or_sugg == "request_delivery"
           @request_delivery = RequestDelivery.find_by_id(@user_review.task_id)
           @request_delivery.sender_reviewed = true
-          @request_delivery.save
+          @request_delivery.save(validate:false)
         end
       elsif @user_review.job_type == "TRANSPORTER"
         if @user_review.req_or_sugg == "suggest_delivery"
           @suggest_delivery = SuggestDelivery.find_by_id(@user_review.task_id)
           @suggest_delivery.transporter_reviewed = true
-          @suggest_delivery.save
+          @suggest_delivery.save(validate:false)
         elsif @user_review.req_or_sugg == "request_delivery"
           @request_delivery = RequestDelivery.find_by_id(@user_review.task_id)
           @request_delivery.transporter_reviewed = true
-          @request_delivery.save
+          @request_delivery.save(validate:false)
         end
         respond_with(@user_review, :location => root_path)
       end

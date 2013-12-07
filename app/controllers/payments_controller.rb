@@ -33,9 +33,10 @@ class PaymentsController < ApplicationController
         "receiverList"=> {
             "receiver"=> [
                 { "email" => confirmed_user.email, "amount" => seller_amount, "primary" => false },
-                { "email" => "salomon.omer-facilitator@gmail.com", "amount" =>commission_amount, "primary" => false }
+                { "email" => ENV['PAYMENTS_MAIL'], "amount" =>commission_amount, "primary" => false }
             ]
         },
+        ENV['PAYPAL_LIVE_USERNAME']
         "maxAmountPerPayment" => amount,
         "maxNumberOfPayments" => 1,
         "maxTotalAmountOfAllPayments" => amount,
@@ -146,7 +147,7 @@ class PaymentsController < ApplicationController
           "receiverList"=> {
               "receiver"=> [
                   { "email" => confirmed_user.email, "amount" => seller_amount, "primary" => false },
-                  { "email" => "salomon.omer-facilitator@gmail.com", "amount" =>commission_amount, "primary" => false }
+                  { "email" => ENV['PAYMENTS_MAIL'], "amount" =>commission_amount, "primary" => false }
               ]
           },
           "cancelUrl" => activity_url,
@@ -176,7 +177,7 @@ class PaymentsController < ApplicationController
           "receiverList"=> {
               "receiver"=> [
                   { "email" => task_creator.email, "amount" => seller_amount, "primary" => false },
-                  { "email" => "salomon.omer-facilitator@gmail.com", "amount" =>commission_amount, "primary" => false }
+                  { "email" => ENV['PAYMENTS_MAIL'], "amount" =>commission_amount, "primary" => false }
               ]
           },
           "cancelUrl" => activity_url,

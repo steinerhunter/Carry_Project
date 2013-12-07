@@ -1,24 +1,11 @@
 <% if request_feed_item.status == "Open" || request_feed_item.status == "Pending Confirmation" %>
     <div class="feed_item" onclick="location.href='<%=request_delivery_path(request_feed_item)%>'">
-      <% if current_user.nil? %>
-          <% if request_feed_item.has_all_details %>
-              <div class="has_all_details" style="right:3px">
-                <div class="bubbleInfo">
-                  <%= image_tag("has_all_details.png", class: "trigger") %>
-                  <div class="popup" style="height:20px; width:315px; margin-top:57px;">
-                    This 1 request post has <b style="color:#279227">all</b> the necessary details!
-                    <div id="tail1" style="left:35px"></div>
-                    <div id="tail2" style="left:35px"></div>
-                </div>
-              </div>
-              </div>
-          <% end  %>
-      <% elsif (current_user.try(:admin?)) %>
+      <% if (current_user.try(:admin?)) %>
           <div class="delete_post">
             <div class="bubbleInfo">
               <%=  link_to image_tag("delete_post.png"), request_feed_item, method: :delete, class: "trigger" %>
-              <div class="popup" style="height:20px; width:195px; margin-top:57px;">
-                <b style="color:#FF0523;">Delete</b> your delivery request.
+              <div class="popup" style="height:20px; width:165px; margin-top:57px;">
+                <b style="color:#FF0523;">Delete</b> delivery request.
                 <div id="tail1" style="left:37px"></div>
                 <div id="tail2" style="left:37px"></div>
               </div>
@@ -29,16 +16,16 @@
                 <div class="bubbleInfo">
                   <%= image_tag("has_all_details.png", class: "trigger") %>
                   <div class="popup" style="height:20px; width:315px; margin-top:57px;">
-                    Your admin request post has <b style="color:#279227">all</b> the necessary details!
+                    This request post has <b style="color:#279227">all</b> the necessary details!
                     <div id="tail1" style="left:35px"></div>
                     <div id="tail2" style="left:35px"></div>
                   </div>
                 </div>
               </div>
           <% end  %>
-      <% else  %>
-      <% if request_feed_item.has_all_details %>
-              <div class="has_all_details" style="right:3px;">
+      <% elsif current_user.nil? || current_user.present? && request_feed_item.user != current_user %>
+          <% if request_feed_item.has_all_details %>
+              <div class="has_all_details" style="right:3px">
                 <div class="bubbleInfo">
                   <%= image_tag("has_all_details.png", class: "trigger") %>
                   <div class="popup" style="height:20px; width:315px; margin-top:57px;">
@@ -49,7 +36,8 @@
                 </div>
               </div>
           <% end  %>
-          <% if request_feed_item.has_all_details  && request_feed_item.user == current_user %>
+      <% elsif request_feed_item.user == current_user %>
+          <% if request_feed_item.has_all_details %>
               <div class="has_all_details" style="right:3px;">
                 <div class="bubbleInfo">
                   <%= image_tag("has_all_details.png", class: "trigger") %>
@@ -84,5 +72,5 @@
           </div>
         </div>
       </div>
-      </div>
+    </div>
 <% end  %>

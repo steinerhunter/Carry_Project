@@ -194,11 +194,13 @@
     <div class="profile_verified_action">
       <% if @user == current_user  %>
           <% if @phone.nil? %>
+              <% store_location %>
               <%=  link_to "Add Phone",
                            {:controller => "phones",
                             :action => "new",
                             :user_id => current_user.id }, class:"verify_item" %>
               <% elsif @phone.verified == false %>
+              <% store_location %>
               <%=  link_to "Verify Phone",
                            {:controller => "phones",
                             :action => "verify",

@@ -21,6 +21,7 @@
                       <% store_location %>
                       <b><%= link_to "Accept Suggestion", signin_path, class: "challenge_accepted", style: "font-size:32px" %></b>
                  <% else  %>
+                  <% store_location %>
                   <b><%=  link_to "Accept Suggestion",   pre_verify_suggest_path(@suggest_delivery.id,"accept"), class:"challenge_accepted modal-link trigger", style: "font-size:32px",
                                   "data-target" => "#myModal",
                                   "data-toggle" => "modal",

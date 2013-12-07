@@ -21,6 +21,7 @@
                       <% store_location %>
                       <b><%= link_to "Accept Request", signin_path, class: "challenge_accepted" %></b>
                    <% else %>
+                      <% store_location %>
                       <b><%=  link_to "Accept Request", pre_verify_request_path(@request_delivery.id,"accept"), class:"challenge_accepted modal-link trigger",
                                         "data-target" => "#myModal",
                                         "data-toggle" => "modal",

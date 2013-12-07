@@ -36,7 +36,6 @@ class PaymentsController < ApplicationController
                 { "email" => ENV['PAYMENTS_MAIL'], "amount" =>commission_amount, "primary" => false }
             ]
         },
-        ENV['PAYPAL_LIVE_USERNAME']
         "maxAmountPerPayment" => amount,
         "maxNumberOfPayments" => 1,
         "maxTotalAmountOfAllPayments" => amount,

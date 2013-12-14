@@ -17,6 +17,9 @@
   <%= render 'shared/maps' %>
   <%= csrf_meta_tags %>
   <%= render 'layouts/shim' %>
+  <meta property="og:title" content= "sendd.me">
+  <meta property="og:description" content= "Everyone deserves a second hand chance.">
+  <meta property="og:image" content= "https://www.sendd.me/">
 </head>
 <%= render 'layouts/background' %>
 <% if  controller.controller_name == 'static_pages' && controller.action_name == 'home' %>

@@ -23,7 +23,7 @@
             Transporter
           </div>
 	   <li><%= link_to "When do I get paid for the task?", faq_path(:anchor =>'faq_question12'), class:"smoothScroll" %></li>
-     <li><%= link_to "I didn't recieve the money even though the Sender said he sent it ?", faq_path(:anchor =>'faq_question25'), class:"smoothScroll" %></li>
+     <li><%= link_to "I didn't receive the money even though the Sender said he sent it.", faq_path(:anchor =>'faq_question25'), class:"smoothScroll" %></li>
 	   <li><%= link_to "Do I need to pay taxes?", faq_path(:anchor =>'faq_question13'), class:"smoothScroll" %></li>
 	   <li><%= link_to "How do I know there is nothing illegal in the package I'm delivering?", faq_path(:anchor =>'faq_question14'), class:"smoothScroll" %></li>
 	   <li><%= link_to "Can I delete my Delivery Suggestions?", faq_path(:anchor =>'faq_question15'), class:"smoothScroll" %></li>
@@ -249,11 +249,12 @@
       <%= link_to "Back to top".html_safe, faq_path(:anchor =>'faq_top'), class:"smoothScroll" %>
     </div>
     <div class="faq_question">
-     I didn't recieve the money even though the Sender said he sent it ?
+     I didn't receive the money even though the Sender said he sent it.
     </div>
-<div class="faq_answer">
-  You need to check that the account you are signed in is connected to your PayPal account, if not then add it.
-      </div>
+    <div class="faq_answer">
+      You need to check that the email address you used to sign up to sendd.me is associated with your with PayPal account.<br>
+      If not, you can add it (In fact, you can have up to 8 different email addresses associated with a single PayPal account).
+    </div>
     <a name="faq_question13"></a>
     <div class="faq_back_to_top">
       <%= link_to "Back to top".html_safe, faq_path(:anchor =>'faq_top'), class:"smoothScroll" %>

@@ -1,30 +1,26 @@
 <div class="activity_feed_item">
-<% if (current_user.try(:admin?)) %>
-      <div class="delete_post">
-        <div class="bubbleInfo">
-          <%=  link_to image_tag("delete_post.png"), activity_suggest_item, method: :delete, class: "trigger" %>
-          <div class="popup" style="height:20px; width:215px; margin-top:57px;">
-            <b style="color:#FF0523;">Delete</b> your delivery suggestion.
-            <div id="tail1" style="left:37px"></div>
-            <div id="tail2" style="left:37px"></div>
-          </div>
+<% if activity_suggest_item.has_all_details %>
+    <div class="has_all_details">
+      <div class="bubbleInfo">
+        <%= image_tag("has_all_details.png", class: "trigger") %>
+        <div class="popup" style="height:20px; width:305px; margin-top:57px;">
+          <% if activity_suggest_item.user == current_user %>
+              Your suggestion has <b style="color:#279227">all</b> the necessary details!
+          <% else  %>
+              This suggestion has <b style="color:#279227">all</b> the necessary details!
+          <% end  %>
+          <div id="tail1" style="left:35px"></div>
+          <div id="tail2" style="left:35px"></div>
         </div>
       </div>
-    <% if activity_suggest_item.has_all_details %>
-        <div class="has_all_details">
-          <div class="bubbleInfo">
-            <%= image_tag("has_all_details.png", class: "trigger") %>
-            <div class="popup" style="height:20px; width:305px; margin-top:57px;">
-              Your suggestion has <b style="color:#279227">all</b> the necessary details!
-              <div id="tail1" style="left:35px"></div>
-              <div id="tail2" style="left:35px"></div>
-            </div>
-          </div>
-        </div>
-    <% end %>
-  <% end %>
+    </div>
+<% end %>
   <div class="activity_feed_item_info">
-  <div class="activity_created">
+  <% if activity_suggest_item.has_all_details %>
+      <div class="activity_created" style="margin-right:35px;">
+  <% else %>
+      <div class="activity_created">
+  <% end  %>
     Created: <%= activity_suggest_item.created_at.strftime("%d/%m/%Y") %>
   </div>
     <%= link_to activity_suggest_item.size + " sized items", suggest_delivery_path(activity_suggest_item) %>

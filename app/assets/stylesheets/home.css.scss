@@ -47,21 +47,42 @@
   margin: 0 0 52px 0;
 }
 
-.top_tagline {
-  width: 850px;
+.main_logo {
+  width: 950px;
   text-align: center;
-  font-size:4em;
-  margin-top:60px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.top_tagline {
+  width: 950px;
+  text-align: center;
+  font-size:30px;
+  line-height: 110%;
+  margin-top:10px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.home_movie {
+  width: 800px;
+  margin-top: 20px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.home_movie_internal {
+  width: 660px;
   margin-left: auto;
   margin-right: auto;
 }
 
 .subtop_tagline {
-  width: 900px;
-  text-align: center;
-  font-size:2em;
+  width: 750px;
+  text-align: left;
+  font-size:24px;
   line-height:100%;
-  margin-top:40px;
+  margin-top:-80px;
   margin-left: auto;
   margin-right: auto;
 }

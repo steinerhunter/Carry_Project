@@ -23,6 +23,7 @@
             Transporter
           </div>
 	   <li><%= link_to "When do I get paid for the task?", faq_path(:anchor =>'faq_question12'), class:"smoothScroll" %></li>
+     <li><%= link_to "I didn't recieve the money even though the Sender said he sent it ?", faq_path(:anchor =>'faq_question25'), class:"smoothScroll" %></li>
 	   <li><%= link_to "Do I need to pay taxes?", faq_path(:anchor =>'faq_question13'), class:"smoothScroll" %></li>
 	   <li><%= link_to "How do I know there is nothing illegal in the package I'm delivering?", faq_path(:anchor =>'faq_question14'), class:"smoothScroll" %></li>
 	   <li><%= link_to "Can I delete my Delivery Suggestions?", faq_path(:anchor =>'faq_question15'), class:"smoothScroll" %></li>
@@ -32,7 +33,7 @@
             Sender
           </div>
 	   <li><%= link_to "How can I trust the person I am passing my package with?", faq_path(:anchor =>'faq_question18'), class:"smoothScroll" %></li>
-	   <li><%= link_to "Can I delete my Delivery Requests?", faq_path(:anchor =>'faq_question19'), class:"smoothScroll" %></li>
+     <li><%= link_to "Can I delete my Delivery Requests?", faq_path(:anchor =>'faq_question19'), class:"smoothScroll" %></li>
 	   <li><%= link_to "How can I contact the Transporter about the delivery?", faq_path(:anchor =>'faq_question20'), class:"smoothScroll" %></li>
 	   <li><%= link_to "How much will it cost me to have something delivered?", faq_path(:anchor =>'faq_question21'), class:"smoothScroll" %></li>
 	   <li><%= link_to "How do I pay the Transporter?", faq_path(:anchor =>'faq_question22'), class:"smoothScroll" %></li>
@@ -243,6 +244,16 @@
         <li>Your own Delivery Suggestion accepted and confirmed by a Sender.</li>
       </ul>
     </div>
+ <a name="faq_question25"></a>
+    <div class="faq_back_to_top">
+      <%= link_to "Back to top".html_safe, faq_path(:anchor =>'faq_top'), class:"smoothScroll" %>
+    </div>
+    <div class="faq_question">
+     I didn't recieve the money even though the Sender said he sent it ?
+    </div>
+<div class="faq_answer">
+  You need to check that the account you are signed in is connected to your PayPal account, if not then add it.
+      </div>
     <a name="faq_question13"></a>
     <div class="faq_back_to_top">
       <%= link_to "Back to top".html_safe, faq_path(:anchor =>'faq_top'), class:"smoothScroll" %>

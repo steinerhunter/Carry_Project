@@ -6,9 +6,7 @@
     <b>Everyone deserves a second hand chance.</b>
   </div>
   <div class="home_movie">
-    <div class="home_movie_internal">
-      <iframe width="700" height="467" src="http://www.wideo.co/embed/1334011386782453326?height=360&width=640" frameborder="0" allowfullscreen ></iframe>
-    </div>
+    <%= link_to image_tag("Wideo.png"), "http://www.wideo.co/view/1334011386782453326", onclick: "var w = window.open(this.href); w.focus(); return false;" %>
   </div>
   <div class="subtop_tagline">
     <b>sendd.me</b> is here to help with your second hand pick ups.<br>

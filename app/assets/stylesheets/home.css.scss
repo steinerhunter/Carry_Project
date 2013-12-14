@@ -66,15 +66,14 @@
 
 .home_movie {
   width: 800px;
+  text-align: center;
   margin-top: 20px;
   margin-left: auto;
   margin-right: auto;
 }
 
-.home_movie_internal {
-  width: 660px;
-  margin-left: auto;
-  margin-right: auto;
+.home_movie:hover {
+  cursor:pointer;
 }
 
 .subtop_tagline {
@@ -82,7 +81,7 @@
   text-align: left;
   font-size:24px;
   line-height:100%;
-  margin-top:-80px;
+  margin-top:20px;
   margin-left: auto;
   margin-right: auto;
 }

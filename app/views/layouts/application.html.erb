@@ -21,6 +21,9 @@
   <meta property="og:title" content= "sendd.me">
   <meta property="og:description" content= "Everyone deserves a second hand chance.">
   <meta property="og:image" content= "https://www.sendd.me/assets/ForFB-059d53c08b275cbc2e2735200318c25a.png">
+  <% if Rails.env.production? %>
+      <%= render 'shared/analytics' %>
+  <% end  %>
 </head>
 <%= render 'layouts/background' %>
 <% if  controller.controller_name == 'static_pages' && controller.action_name == 'home' %>
@@ -50,8 +53,5 @@
 <%= render 'layouts/footer' %>
 </div>
   <%= render 'modals/modal' %>
-  <% if Rails.env.production? %>
-    <%= render 'shared/analytics' %>
-  <% end  %>
 </body>
 </html>

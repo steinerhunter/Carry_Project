@@ -2,6 +2,21 @@
 <html>
 <head>
   <title><%= full_title(yield(:title)) %></title>
+  <%= stylesheet_link_tag  "application", media: "all" %>
+  <script src="https://maps.googleapis.com/maps/api/js?v=3.exp&sensor=false&libraries=places"></script>
+  <%= javascript_include_tag "application" %>
+  <%= javascript_include_tag "maps_and_date" %>
+  <%= javascript_include_tag "no_enter" %>
+  <%= javascript_include_tag "div_fade" %>
+  <%= javascript_include_tag "flash_fade" %>
+  <%= javascript_include_tag "modal" %>
+  <%= javascript_include_tag "smoothscroll" %>
+  <%= javascript_include_tag "popup" %>
+  <%= javascript_include_tag "bootstrap-datepicker" %>
+  <%= render 'shared/wizards' %>
+  <%= render 'shared/maps' %>
+  <%= csrf_meta_tags %>
+  <%= render 'layouts/shim' %>
   <meta property="og:url" content= "https://www.sendd.me">
   <meta property="og:title" content= "sendd.me">
   <meta property="og:description" content= "Everyone deserves a second hand chance.">

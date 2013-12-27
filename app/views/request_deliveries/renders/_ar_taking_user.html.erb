@@ -1,5 +1,5 @@
-<% if @request_delivery.has_all_details %>
-    <% if @request_delivery.status == "Taken" %>
+<% if @request_delivery.status == "Taken" %>
+    <% if @request_delivery.has_all_details %>
         <div class="ready_to_go_wrapper">
           <%=  link_to "Confirm Details",
                        {:controller => "request_deliveries",
@@ -7,106 +7,149 @@
                         :request_delivery_id => @request_delivery.id},
                        :class =>"ready_to_go" %>
         </div>
-    <% elsif @request_delivery.status == "ReceiverConfirmed" %>
-        <div class="ready_to_go_wrapper" style="margin-bottom: 20px;">
-          <%=  link_to "OK, I got the item!",
-                       {:controller => "request_deliveries",
-                        :action => "got_the_item",
-                        :request_delivery_id => @request_delivery.id},
-                       :class =>"ok_got_it" %>
-        </div>
-    <% elsif @request_delivery.status == "WaitingForTransporter" %>
+    <% end  %>
         <div class="giveaway_status_wrapper">
           <div class="giveaway_status_title">
-            Locating Transporters
+            Waiting for details
             <div class="giveaway_status_data">
-              We're currently locating Transporters for your pick up.<br>
-              Don't worry! We'll find some in no time.
+              We're waiting for <b style="color:#f2ff5e">You</b> to add the missing details (<b style="color:#f2ff5e">To</b> and
+              <b style="color:#f2ff5e"> Delivery Option</b>) and confirm.
             </div>
           </div>
         </div>
-    <% elsif @request_delivery.status == "Pending Confirmation" %>
-        <div class="giveaway_status_wrapper">
-          <div class="giveaway_status_title">
-            Choose a Transporter
-            <div class="giveaway_status_data">
-              These Transporters are ready to go pick up your item! <br>
-              In order to proceed, you must confirm one of them.
-            </div>
-          </div>
+<% elsif @request_delivery.status == "ReceiverConfirmed" && @request_delivery.delivery_type == "myself" %>
+    <div class="the_transporter">
+      <div class="the_transporter_inner"  style="background-image: url('../assets/transporting_small.png');text-align:left">
+        <div class="inner_title" style="padding-left: 55px;" >
+          <b>Transporting</b>
         </div>
-        <% @my_giveaway_accepted.each do |acceptance| %>
-            <div class="show_accepting_user_wrapper" style="margin-bottom: 20px;">
-              <div class="show_accepting_user">
-                <div class="confirm_transporter_wrapper">
-                  <% if @my_phone.present? && @my_phone.verified %>
-                      <%=  link_to "Confirm Transporter", pre_confirm_request_path(acceptance.id), class:"confirm_transporter modal-link trigger",
-                                   "data-target" => "#myModal",
-                                   "data-toggle" => "modal",
-                                   "data-backdrop" => "static" %>
-                  <% else  %>
-                      <%=  link_to "Confirm Transporter", pre_verify_request_path(acceptance.request_delivery_id,"confirm"), class:"confirm_transporter modal-link trigger",
-                                   "data-target" => "#myModal",
-                                   "data-toggle" => "modal",
-                                   "data-backdrop" => "static" %>
-                  <% end  %>
+        <b>We have </b><b style="color:#f2ff5e">You</b><b> picking up this item from </b><b style="color:#6fba33"> Point A</b>
+        <b> (from <%= link_to @request_delivery.user.name, @request_delivery.user %>) and deliverying it to</b><b style="color:#f35044"> Point B</b>
+        <b> (to </b><b style="color:#f2ff5e">You</b><b>).</b><br>
+      </div>
+    </div>
+    <div class="ready_to_go_wrapper" style="margin-bottom: 20px;">
+      <%=  link_to "OK, I got the item!",
+                   {:controller => "request_deliveries",
+                    :action => "got_the_item",
+                    :request_delivery_id => @request_delivery.id},
+                   :class =>"ok_got_it" %>
+    </div>
+    <div class="giveaway_status_wrapper">
+      <div class="giveaway_status_title">
+        Waiting for pick up
+        <div class="giveaway_status_data">
+          We're waiting for <b style="color:#f2ff5e">You</b> to go and pick up the item <b><%= link_to @request_delivery.user.name, @request_delivery.user %></b> is giving away.
+        </div>
+      </div>
+    </div>
+<% elsif @request_delivery.status == "WaitingForTransporter" %>
+    <div class="giveaway_status_wrapper">
+      <div class="giveaway_status_title">
+        Locating Transporters
+        <div class="giveaway_status_data">
+          We're currently locating Transporters for your pick up.<br>
+          Don't worry! We'll find some in no time.
+        </div>
+      </div>
+    </div>
+<% elsif @request_delivery.status == "Pending Confirmation" %>
+    <div class="giveaway_status_wrapper">
+      <div class="giveaway_status_title">
+        Choose a Transporter
+        <div class="giveaway_status_data">
+          These Transporters are ready to go pick up your item! <br>
+          In order to proceed, you must confirm one of them.
+        </div>
+      </div>
+    </div>
+    <% @my_giveaway_accepted.each do |acceptance| %>
+        <div class="show_accepting_user_wrapper" style="margin-bottom: 20px;">
+          <div class="show_accepting_user">
+            <div class="confirm_transporter_wrapper">
+              <% if @my_phone.present? && @my_phone.verified %>
+                  <%=  link_to "Confirm Transporter", pre_confirm_request_path(acceptance.id), class:"confirm_transporter modal-link trigger",
+                               "data-target" => "#myModal",
+                               "data-toggle" => "modal",
+                               "data-backdrop" => "static" %>
+              <% else  %>
+                  <%=  link_to "Confirm Transporter", pre_verify_request_path(acceptance.request_delivery_id,"confirm"), class:"confirm_transporter modal-link trigger",
+                               "data-target" => "#myModal",
+                               "data-toggle" => "modal",
+                               "data-backdrop" => "static" %>
+              <% end  %>
+            </div>
+            <div class="chat_gravatar" style="float:left; width:50px; text-align: center; margin-right: 8px;">
+              <% if facebook_authorization(acceptance.other_user_for_request)  %>
+                  <%= link_to facebook_profile_photo(acceptance.other_user_for_request,"chat"), acceptance.other_user_for_request %>
+              <% else  %>
+                  <%=  link_to chat_gravatar_for(acceptance.other_user_for_request), acceptance.other_user_for_request  %>
+              <% end  %>
+            </div>
+            <b><%= link_to acceptance.other_user_for_request.name, acceptance.other_user_for_request  %></b>
+            <% if acceptance.other_user_for_request.transporter_reviews.any? %>
+                <div class="star_rating" style="margin-top:5px;margin-bottom:5px;">
+                  <% @user = acceptance.other_user_for_request %>
+                  <%=render 'shared/transporter_star_rating' %> (<%= acceptance.other_user_for_request.transporter_reviews.count %>)
                 </div>
-                <div class="chat_gravatar" style="float:left; width:50px; text-align: center; margin-right: 8px;">
-                  <% if facebook_authorization(acceptance.other_user_for_request)  %>
-                      <%= link_to facebook_profile_photo(acceptance.other_user_for_request,"chat"), acceptance.other_user_for_request %>
-                  <% else  %>
-                      <%=  link_to chat_gravatar_for(acceptance.other_user_for_request), acceptance.other_user_for_request  %>
-                  <% end  %>
+            <% else  %>
+                <div class="not_yet_rated">
+                  Transporter not rated yet
                 </div>
-                <b><%= link_to acceptance.other_user_for_request.name, acceptance.other_user_for_request  %></b>
-                <% if acceptance.other_user_for_request.transporter_reviews.any? %>
-                    <div class="star_rating" style="margin-top:5px;margin-bottom:5px;">
-                      <% @user = acceptance.other_user_for_request %>
-                      <%=render 'shared/transporter_star_rating' %> (<%= acceptance.other_user_for_request.transporter_reviews.count %>)
-                    </div>
-                <% else  %>
-                    <div class="not_yet_rated">
-                      Transporter not rated yet
-                    </div>
-                <% end  %>
-              </div>
-            </div>
-        <% end  %>
-    <% elsif @request_delivery.status == "Confirmed" %>
-        <div class="the_transporter">
-          <div class="the_transporter_inner"  style="background-image: url('../assets/transporting_small.png');text-align:left">
-            <div class="inner_title" style="padding-left: 55px;" >
-              <b>Transporting</b>
-            </div>
-            <b>We have <%= link_to @transporter.name, @transporter  %></b><b> picking up this item from </b><b style="color:#6fba33"> Point A</b>
-            <b> (from <%= link_to @request_delivery.user.name, @request_delivery.user %>) and deliverying it to</b><b style="color:#f35044"> Point B</b>
-            <b> (to </b><b style="color:#f2ff5e">You</b><b>).</b><br>
-            <b style="color:#f2ff5e">You</b><b> can call him/her  at</b><b style="color:#f2ff5e"> <%= @transporter.phone %></b><b>.</b>
+            <% end  %>
           </div>
-        </div>
-        <div class="giveaway_status_wrapper">
-          <div class="giveaway_status_title">
-            Transporter on the way!
-            <div class="giveaway_status_data">
-              You've confirmed <%= link_to @transporter.name, @transporter %>
-              to pick up your item. <br>
-              Once the pick up is complete, the PayPal transaction you've authorized will take place.
-            </div>
-          </div>
-        </div>
-    <% elsif @request_delivery.status == "Complete" %>
-        <div class="the_transporter">
-          <div class="the_transporter_inner"  style="background-image: url('../assets/transporting_small.png');text-align:left">
-            <div class="inner_title" style="padding-left: 55px;" >
-              <b>Transporting</b>
-            </div>
-            <b>We've had <%= link_to @transporter.name, @transporter  %></b><b> picking up this item from </b><b style="color:#6fba33"> Point A</b>
-            <b> (from <%= link_to @request_delivery.user.name, @request_delivery.user %>) and deliverying it to</b><b style="color:#f35044"> Point B</b>
-            <b> (to </b><b style="color:#f2ff5e">You</b><b>).</b><br>
-          </div>
-        </div>
-        <div class="ready_to_go_wrapper" style="margin-bottom: 20px;">
-          <%=  link_to "Go get other stuff!", giveaways_path, class: "go_get_other" %>
         </div>
     <% end  %>
+<% elsif @request_delivery.status == "Confirmed" %>
+    <div class="the_transporter">
+      <div class="the_transporter_inner"  style="background-image: url('../assets/transporting_small.png');text-align:left">
+        <div class="inner_title" style="padding-left: 55px;" >
+          <b>Transporting</b>
+        </div>
+        <b>We have <%= link_to @transporter.name, @transporter  %></b><b> picking up this item from </b><b style="color:#6fba33"> Point A</b>
+        <b> (from <%= link_to @request_delivery.user.name, @request_delivery.user %>) and deliverying it to</b><b style="color:#f35044"> Point B</b>
+        <b> (to </b><b style="color:#f2ff5e">You</b><b>).</b><br>
+        <b style="color:#f2ff5e">You</b><b> can call him/her  at</b><b style="color:#f2ff5e"> <%= @transporter.phone %></b><b>.</b>
+      </div>
+    </div>
+    <div class="giveaway_status_wrapper">
+      <div class="giveaway_status_title">
+        Transporter on the way!
+        <div class="giveaway_status_data">
+          You've confirmed <%= link_to @transporter.name, @transporter %>
+          to pick up your item. <br>
+          Once the pick up is complete, the PayPal transaction you've authorized will take place.
+        </div>
+      </div>
+    </div>
+<% elsif @request_delivery.status == "Complete" %>
+    <div class="the_transporter">
+      <div class="the_transporter_inner"  style="background-image: url('../assets/transporting_small.png');text-align:left">
+        <div class="inner_title" style="padding-left: 55px;" >
+          <b>Transporting</b>
+        </div>
+        <% if @request_delivery.delivery_type == "myself" %>
+            <b>We've had </b><b style="color:#f2ff5e">You</b><b> picking up this item from </b><b style="color:#6fba33"> Point A</b>
+        <% elsif @request_delivery.delivery_type == "senddme" %>
+            <b>We've had <%= link_to @transporter.name, @transporter  %></b><b> picking up this item from </b><b style="color:#6fba33"> Point A</b>
+        <% end  %>
+        <b> (from <%= link_to @request_delivery.user.name, @request_delivery.user %>) and deliverying it to</b><b style="color:#f35044"> Point B</b>
+        <b> (to </b><b style="color:#f2ff5e">You</b><b>).</b><br>
+      </div>
+    </div>
+    <div class="ready_to_go_wrapper" style="margin-bottom: 20px;">
+      <%=  link_to "Go get other stuff!", giveaways_path, class: "go_get_other" %>
+    </div>
+    <div class="giveaway_status_wrapper">
+      <div class="giveaway_status_title">
+        Item received!
+        <div class="giveaway_status_data">
+          <% if @request_delivery.delivery_type == "myself" %>
+              You've successfully picked up <b style="color:#f2ff5e"><%= @request_delivery.what %></b> from <b><%= link_to @request_delivery.user.name, @request_delivery.user %></b>!
+          <% elsif @request_delivery.delivery_type == "senddme" %>
+              <b>We've had <%= link_to @transporter.name, @transporter  %></b><b> picking up this item from </b><b style="color:#6fba33"> Point A</b>
+          <% end  %>
+        </div>
+      </div>
+    </div>
 <% end  %>

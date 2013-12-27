@@ -15,9 +15,7 @@
       </div>
     </div>
     <b>Which</b><b style="color:#f2ff5e"> Delivery </b><b>option do you prefer?</b>
-<% elsif @request_delivery.status == "ReceiverConfirmed" ||
-        @request_delivery.status == "WaitingForTransporter" ||
-        @request_delivery.status == "Pending Confirmation" %>
+<% elsif @non_editable %>
     <% if @request_delivery.delivery_type == "myself" %>
         <b>You've chosen</b><b style="color:#f2ff5e"> Self Pick up</b><b>.</b>
         <div class="delivery_price" style="margin-top: 15px;">Price: Free</div>

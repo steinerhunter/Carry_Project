@@ -1,7 +1,7 @@
-<div class="giveaway_status">
+<div class="giveaway_statusbar">
   <%= render 'request_deliveries/renders/status_bar' %>
 </div>
-<div class="show_delivery" style="margin-top:-35px;">
+  <div class="show_delivery" style="margin-top:0px;">
   <div class="right_side">
     <%= render 'request_deliveries/renders/upper_right_bar' %>
     <%= render 'request_deliveries/renders/map' %>
@@ -42,7 +42,7 @@
 <% if @taking_user == current_user %>
     <%= render 'request_deliveries/renders/delivery_for_taking_user' %>
 <% elsif @request_delivery.user == current_user  %>
-    <%= render 'request_deliveries/renders/delivery_for_taking_user' %>
+    <%= render 'request_deliveries/renders/delivery_for_giver' %>
 <% else  %>
     <%= render 'request_deliveries/renders/money_for_transporters' %>
 <% end %>
@@ -62,12 +62,4 @@
 <% elsif @request_delivery.user == current_user  %>
       <%= render 'request_deliveries/renders/ar_giving_user' %>
   <% end  %>
-<% if @request_delivery.status == "Open" || @request_delivery.status == "Taken" %>
-    <div class="post_text_title">
-      <b>Need more details?</b>
-    </div>
-    <div class="show_comments">
-      <%= render 'comments/comments' %>
-    </div>
-<% end  %>
 </div>

@@ -1,5 +1,4 @@
 .show_delivery {
-  margin-bottom: 40px;;
 }
 
 .right_side {
@@ -584,8 +583,9 @@
  }
 
  .giveaway_status_data {
-   margin-top: 15px;
+   margin-top: 25px;
    font-size:20px;
+   line-height: 110%;
    a {
      color: #f2ff5e !important;
      text-decoration: none !important;
@@ -595,6 +595,9 @@
    }
  }
 
+ .giveaway_statusbar {
+   margin-bottom:20px;
+ }
 .post_text_user {
   width:100%;
   text-align: center;

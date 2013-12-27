@@ -33,8 +33,7 @@ class PaymentsController < ApplicationController
         "receiverList"=> {
             "receiver"=> [
                 { "email" => confirmed_user.email, "amount" => seller_amount, "primary" => false },
-                { "email" => "salomon.omer-facilitator@gmail.com", "amount" =>commission_amount, "primary" => false }
-                #{ "email" => ENV['PAYMENTS_MAIL'], "amount" =>commission_amount, "primary" => false }
+                { "email" => ENV['PAYMENTS_MAIL'], "amount" =>commission_amount, "primary" => false }
             ]
         },
         "maxAmountPerPayment" => amount,
@@ -42,8 +41,8 @@ class PaymentsController < ApplicationController
         "maxTotalAmountOfAllPayments" => amount,
         "cancelUrl" => activity_url,
         "ipnNotificationUrl" => ipn_notification_url,
-        "startingDate" => Time.now
-        #"endingDate" => 11.months.from_now
+        "startingDate" => Time.now,
+        "endingDate" => 11.months.from_now
     }
 
     preapproval_response = preapproval_request.preapproval(data)
@@ -147,8 +146,7 @@ class PaymentsController < ApplicationController
           "receiverList"=> {
               "receiver"=> [
                   { "email" => confirmed_user.email, "amount" => seller_amount, "primary" => false },
-                  { "email" => "salomon.omer-facilitator@gmail.com", "amount" =>commission_amount, "primary" => false }
-                  #{ "email" => ENV['PAYMENTS_MAIL'], "amount" =>commission_amount, "primary" => false }
+                  { "email" => ENV['PAYMENTS_MAIL'], "amount" =>commission_amount, "primary" => false }
               ]
           },
           "cancelUrl" => activity_url,

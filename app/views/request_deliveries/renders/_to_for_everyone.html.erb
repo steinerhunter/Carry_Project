@@ -25,7 +25,7 @@
     <% else %>
         <b><%= link_to @taking_user.name, @taking_user %> hasn't added </b><b style="color:#f2ff5e">To</b><b> detail yet.</b>
     <% end %>
-<% elsif @request_delivery.status == "ReceiverConfirmed" || @request_delivery.status == "WaitingForTransporter" || @request_delivery.status == "Pending Confirmation" %>
+<% elsif @non_editable %>
     <%= @request_delivery.to %>
 <% else %>
     <% if @taking_user == current_user %>

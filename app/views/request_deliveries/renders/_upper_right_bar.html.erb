@@ -1,15 +1,5 @@
 <% if @taking_user == current_user %>
-    <% if @request_delivery.status == "Complete" %>
-        <div class="challenge_complete">
-          <b style="font-size:33px">Complete</b>
-        </div>
-    <% elsif @request_delivery.status == "ReceiverConfirmed" ||
-            @request_delivery.status == "WaitingForTransporter" ||
-            @request_delivery.status == "Pending Confirmation" %>
-        <div class="challenge_confirmed">
-          <b style="font-size:33px">Confirmed</b>
-        </div>
-    <% elsif @request_delivery.status == "Taken" && @my_taken_giveaway.present?  %>
+    <% if @request_delivery.status == "Taken" && @my_taken_giveaway.present?  %>
         <b><%= link_to "I don't want it!", take_request_delivery_path(@request_delivery, type: "cancel"), method: :put, class: "challenge_accepted",
                        style: "background-color: #d67a31; background-image: url('../assets/challenge_cancelled.png');" %></b>
     <% end %>

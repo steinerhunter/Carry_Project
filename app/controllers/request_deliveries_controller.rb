@@ -21,12 +21,22 @@ class RequestDeliveriesController < ApplicationController
         @transporter = @request_delivery.accepted_request_confirmed.other_user_for_request
       end
       @my_phone = Phone.find_by_user_id(current_user.id)
+
       @show_bounty = (@request_delivery.status == "WaitingForTransporter" ||
                                         @request_delivery.status == "Pending Confirmation") &&
                                         @request_delivery.user != current_user &&
                                         @taking_user != current_user
-      @big_sender_receiver = @request_delivery.status == "ReceiverConfirmed" || @request_delivery.status == "Confirmed"
+
+      @non_editable = @request_delivery.status == "ReceiverConfirmed" ||
+                                         @request_delivery.status == "WaitingForTransporter" ||
+                                         @request_delivery.status == "Pending Confirmation" ||
+                                         @request_delivery.status == "Complete"
+
+      @big_sender_receiver = @request_delivery.status == "ReceiverConfirmed" ||
+                                                          @request_delivery.status == "Confirmed"
+
       @my_giveaway_accepted = AcceptedRequest.find_all_by_request_delivery_id(@request_delivery.id)
+
       if @request_delivery.status != "Open" &&
             @request_delivery.status != "WaitingForTransporter" &&
             @request_delivery.status != "Pending Confirmation" &&

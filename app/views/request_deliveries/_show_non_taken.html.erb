@@ -1,7 +1,6 @@
-<div class="giveaway_status">
-  <%= image_tag("StatusBarOpen.png") %>
+<div class="giveaway_statusbar">
 </div>
-<div class="show_delivery" style="margin-top:-35px;">
+<div class="show_delivery" style="margin-top:0px;">
   <div class="right_side">
     <% if @request_delivery.user != current_user %>
         <% if @request_delivery.status == "Open" %>
@@ -199,9 +198,6 @@
           </div>
       <% end  %>
     </div>
-  </div>
-  <div class="giveaway_status">
-    Your delivery request hasn't been accepted by anyone yet. Try filling out all the request's details.
   </div>
   <div class="post_text_title">
     <b>Need more details?</b>

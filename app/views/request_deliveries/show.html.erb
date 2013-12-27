@@ -1,6 +1,4 @@
-<% if (@my_taken_giveaway.present? && @my_taken_giveaway.taken && @my_taken_giveaway.user_id == current_user.id) ||
-            (current_user == @request_delivery.user && (@request_delivery.status == "Taken" || @request_delivery.status == "ReceiverConfirmed" || @request_delivery.status == "Complete")) ||
-              @request_delivery.status == "WaitingForTransporter" || @request_delivery.status == "Pending Confirmation" || @request_delivery.status == "Confirmed" %>
+<% if @request_delivery.status != "Open" %>
     <%= render 'show_taken' %>
 <% else  %>
     <%= render 'show_non_taken' %>

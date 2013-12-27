@@ -1,13 +1,42 @@
 class RequestDeliveriesController < ApplicationController
-  before_filter :signed_in_user, :except => [:show, :index, :new, :create]
+  before_filter :signed_in_user, :except => [:show, :index_takers, :index_transporters, :new, :create]
   before_filter :correct_user,   only: [:destroy, :update]
   respond_to :html, :js
 
   def show
     @request_delivery = RequestDelivery.find(params[:id])
-    if !current_user.nil?
+    if current_user.nil?
+      if @request_delivery.status != "Open" && @request_delivery.status != "WaitingForTransporter"
+        redirect_to root_path
+      end
+    else
+      @my_taken_giveaway = TakenGiveaway.find_by_user_id_and_request_delivery_id(current_user.id,@request_delivery.id)
+      @any_taken_giveaway = TakenGiveaway.find_by_request_delivery_id(@request_delivery.id)
+      if @any_taken_giveaway.present?
+        @taking_user = User.find_by_id(@any_taken_giveaway.user_id)
+      end
       @accepted_request = AcceptedRequest.find_by_user_id_and_request_delivery_id(current_user.id,@request_delivery.id)
+      @someone_is_confirmed = AcceptedRequest.find_by_request_delivery_id_and_confirmed(@request_delivery.id,true)
+      if @someone_is_confirmed
+        @transporter = @request_delivery.accepted_request_confirmed.other_user_for_request
+      end
       @my_phone = Phone.find_by_user_id(current_user.id)
+      @show_bounty = (@request_delivery.status == "WaitingForTransporter" ||
+                                        @request_delivery.status == "Pending Confirmation") &&
+                                        @request_delivery.user != current_user &&
+                                        @taking_user != current_user
+      @big_sender_receiver = @request_delivery.status == "ReceiverConfirmed" || @request_delivery.status == "Confirmed"
+      @my_giveaway_accepted = AcceptedRequest.find_all_by_request_delivery_id(@request_delivery.id)
+      if @request_delivery.status != "Open" &&
+            @request_delivery.status != "WaitingForTransporter" &&
+            @request_delivery.status != "Pending Confirmation" &&
+            @request_delivery.user != current_user &&
+            @transporter != current_user &&
+            @any_taken_giveaway.present? &&
+            @any_taken_giveaway.taken &&
+            @any_taken_giveaway.user_id != current_user.id
+        redirect_to root_path
+      end
     end
     @facebook_authentication = Authentication.find_by_user_id(@request_delivery.user.id)
     @phone = Phone.find_by_user_id(@request_delivery.user.id)
@@ -35,12 +64,32 @@ class RequestDeliveriesController < ApplicationController
        session[:request_delivery_currency] = @request_delivery.currency
       end
     else
+      @phone = Phone.find_by_user_id(current_user.id)
       @request_delivery = current_user.request_deliveries.build(params[:request_delivery])
       if @request_delivery.save
-        flash[:success] = "Thank you!<br>
-                                              <div class='sub_flash_text'>Your delivery request was successfully added to our lists. <br>
-                                              There are some more details to add though.<br>
-                                              <b style=\"color:#ff9054\">Add</b> <img src=\"../assets/missing_detail.png\"> all details and get priority in our lists!</div>".html_safe
+        @request_delivery.set_giver
+        if @phone.present?
+          if @phone.verified
+            @request_delivery.publish
+            flash[:success] = "Thank you!<br>
+                                              <div class='sub_flash_text'>Your giveaway was successfully added to our lists. <br>
+                                              Let's see who wants to take it!</div>".html_safe
+          else
+            @request_delivery.unpublish
+            flash[:success] = "Thank you!<br>
+                                              <div class='sub_flash_text'>Your giveaway was successfully added to our lists. <br><br>
+                                              Before publishing it, we require that you verify your <b style=\"color:#1a2cff\">phone number</b>.<br>
+                                              It shall remain confidential to everyone, until someone comes to pick up the item from you.<br><br>
+                                              <a class='verify_item' href=\"/phone_verify/#{current_user.id}\">Verify Phone</a></div>".html_safe
+          end
+        else
+          @request_delivery.unpublish
+          flash[:success] = "Thank you!<br>
+                                              <div class='sub_flash_text'>Your giveaway was successfully added to our lists. <br><br>
+                                              Before publishing it, we require that you <br>add your <b style=\"color:#1a2cff\">phone number</b> and verify it.<br><br>
+                                              It shall remain confidential to everyone, <br>except for the person who picks up the item from you.<br><br>
+                                              <a class='verify_item' href=\"/phones/new?user_id=#{current_user.id}\">Add Phone</a></div>".html_safe
+        end
         respond_with(@request_delivery) do |format|
           format.html { redirect_to request_delivery_url(@request_delivery)}
         end
@@ -49,8 +98,15 @@ class RequestDeliveriesController < ApplicationController
 
   end
 
-  def index
-    @search = RequestDelivery.search(params[:search])
+  def index_takers
+    @open_requests = RequestDelivery.where("status = ?","Open")
+    @search = @open_requests.search(params[:search])
+    @request_feed_items = @search.all.sort_by { |a| a.has_all_details ? 0 : 1}
+  end
+
+  def index_transporters
+    @transporter_requests = RequestDelivery.where("status = ? OR status = ?","WaitingForTransporter","Pending Confirmation")
+    @search = @transporter_requests.search(params[:search])
     @request_feed_items = @search.all.sort_by { |a| a.has_all_details ? 0 : 1}
   end
 
@@ -61,6 +117,13 @@ class RequestDeliveriesController < ApplicationController
     end
   end
 
+  def edit_what
+    @request_delivery = RequestDelivery.find(params[:request_delivery_id])
+    if @request_delivery.user == current_user
+      render "edit_what.html.erb", :layout => "empty"
+    end
+  end
+
   def edit_from
     @request_delivery = RequestDelivery.find(params[:request_delivery_id])
     if @request_delivery.user == current_user
@@ -68,9 +131,20 @@ class RequestDeliveriesController < ApplicationController
     end
   end
 
+  def edit_delivery
+    @request_delivery = RequestDelivery.find(params[:request_delivery_id])
+    @my_taken_giveaway = TakenGiveaway.find_by_user_id_and_request_delivery_id(current_user.id,@request_delivery.id)
+    @taking_user = User.find_by_id(@my_taken_giveaway.user_id)
+    if @taking_user == current_user
+      render "edit_delivery.html.erb", :layout => "empty"
+    end
+  end
+
   def edit_to
     @request_delivery = RequestDelivery.find(params[:request_delivery_id])
-    if @request_delivery.user == current_user
+    @my_taken_giveaway = TakenGiveaway.find_by_user_id_and_request_delivery_id(current_user.id,@request_delivery.id)
+    @taking_user = User.find_by_id(@my_taken_giveaway.user_id)
+    if @taking_user == current_user
       render "edit_to.html.erb", :layout => "empty"
     end
   end
@@ -105,10 +179,20 @@ class RequestDeliveriesController < ApplicationController
 
   def update
     @request_delivery = RequestDelivery.find(params[:id])
-    if @request_delivery.status != "Open"
-      flash[:failure] = "Sorry!<br><div class='sub_flash_text'>You cannot edit the details of your request since someone has already accepted it.</div>".html_safe
+    @my_taken_giveaway = TakenGiveaway.find_by_user_id_and_request_delivery_id(current_user.id,@request_delivery.id)
+    if @request_delivery.status == "Open" && @request_delivery.user != current_user
+      flash[:failure] = "Sorry!<br><div class='sub_flash_text'>Only the owner of this giveaway can edit its details.</div>".html_safe
+      redirect_to :back
+    elsif @my_taken_giveaway.present? && @request_delivery.status == "Taken" && @my_taken_giveaway.user_id != current_user.id
+      flash[:failure] = "Sorry!<br><div class='sub_flash_text'>Someone has decided to take this giveaway, so you cannot edit its details.</div>".html_safe
       redirect_to :back
     else
+      @request_delivery.assign_attributes( params[:request_delivery])
+      if @request_delivery.to_changed?
+        @request_delivery.calculate_distance
+        @request_delivery.set_cost
+        @request_delivery.update_attribute(:delivery_type, nil)
+      end
       if @request_delivery.update_attributes( params[:request_delivery])
         @request_delivery.check_all_details
         flash[:success] = "Thank you!<br><div class='sub_flash_text'>Your details were successfully updated.</div>".html_safe
@@ -122,17 +206,96 @@ class RequestDeliveriesController < ApplicationController
   def destroy
     @request_delivery = RequestDelivery.find(params[:id])
     if @request_delivery.status != "Open"
-      flash[:failure] = "Sorry!<br><div class='sub_flash_text'>You cannot delete your delivery request since someone has already accepted it.</div>".html_safe
+      flash[:failure] = "Sorry!<br><div class='sub_flash_text'>You cannot delete your giveaway since someone has already accepted it.</div>".html_safe
       redirect_to :back
     else
       @request_delivery.destroy
-      flash[:success] = "Thank you!<br><div class='sub_flash_text'>Your delivery request has been successfully deleted.</div>".html_safe
-      redirect_to requests_path
+      flash[:success] = "Thank you!<br><div class='sub_flash_text'>Your giveaway has been successfully deleted.</div>".html_safe
+      redirect_to giveaways_path
     end
+  end
+
+  def take
+    @request_delivery = RequestDelivery.find(params[:id])
+    @phone = Phone.find_by_user_id(current_user.id)
+    type = params[:type]
+    if current_user != @request_delivery.user
+      if type == "take"
+        if @phone.present?
+          if @phone.verified
+            current_user.request_takes << @request_delivery
+            @request_delivery.take_request
+            redirect_to :back
+            flash[:success] = "Thank you!<br>
+                                              <div class='sub_flash_text'>You've chosen to take <b style=\"color:#1a2cff\">#{@request_delivery.what}</b> item giveaway.<br>
+                                              <b style=\"color:#1a2cff\">#{@request_delivery.user.name}</b>, the giving person, will be notified. <br>
+                                              In order to proceed, there are some details that we need.<br>
+                                              <b style=\"color:#ff9054\">Add</b> <img src=\"../assets/missing_detail.png\"> them and <b style=\"color:#1a2cff\">#{@request_delivery.what}</b> is coming your way!</div>".html_safe
+            @taken_giveaway = TakenGiveaway.find_all_by_request_delivery_id(@request_delivery.id).last
+            @creating_user = User.find_by_id(@request_delivery.user_id)
+            @taking_user = User.find_by_id(@taken_giveaway.user_id)
+            if Rails.env.production?
+              NotifMailer.new_taken_giveaway(@creating_user,@taking_user,@request_delivery).deliver
+            end
+          end
+        end
+      elsif type == "cancel"
+        if @request_delivery.status == "Open"
+          flash[:failure] = "Sorry!<br><div class='sub_flash_text'>You cannot cancel an Open request.</div>".html_safe
+          redirect_to :back
+        elsif @request_delivery.status == "Confirmed"
+          flash[:failure] = "Sorry!<br><div class='sub_flash_text'>You cannot cancel a Confirmed request.</div>".html_safe
+          redirect_to :back
+        elsif @request_delivery.status == "Complete"
+          flash[:failure] = "Sorry!<br><div class='sub_flash_text'>You cannot cancel a Complete request.</div>".html_safe
+          redirect_to :back
+        else
+          current_user.request_takes.delete(@request_delivery)
+          redirect_to :back
+          @request_delivery.untake_request
+          flash[:success] = "Thank you!<br><div class='sub_flash_text'>You've decided not to take this giveaway.</div>".html_safe
+        end
+      else
+        redirect_to :back
+      end
+    else
+      redirect_to :back
+      flash[:failure] = "Sorry!<br><div class='sub_flash_text'>You cannot take your own giveaways.</div>".html_safe
+    end
+  end
+
+  def get_the_item
+    @request_delivery = RequestDelivery.find(params[:request_delivery_id])
+    @taken_giveaway = TakenGiveaway.find_by_request_delivery_id(@request_delivery.id)
+    @taking_user = User.find_by_id(@taken_giveaway.user_id)
+    if @taking_user == current_user && @request_delivery.status == "Taken" && @request_delivery.has_all_details
+      if @request_delivery.delivery_type == "senddme" && @request_delivery.cost.to_i > 0
+        @request_delivery.wait_for_transporter
+        flash[:success] = "Thank you!<br><div class='sub_flash_text'>You're now confirmed for this giveaway.<br>
+        Now it's time to set you up with a Transporter.</div>".html_safe
+      elsif @request_delivery.delivery_type == "myself"
+        @request_delivery.get_the_item
+        flash[:success] = "Thank you!<br><div class='sub_flash_text'>You're now confirmed for this giveaway.<br>
+        You can call <b style=\"color:#1a2cff\">#{@request_delivery.user.name}</b>, the giving person, and set a time for a pick up.</div>".html_safe
+      end
+    end
+    redirect_to :back
+  end
+
+  def got_the_item
+    @request_delivery = RequestDelivery.find(params[:request_delivery_id])
+    @taken_giveaway = TakenGiveaway.find_by_request_delivery_id(@request_delivery.id)
+    @taking_user = User.find_by_id(@taken_giveaway.user_id)
+    if @taking_user == current_user && @request_delivery.status == "ReceiverConfirmed" && @request_delivery.has_all_details
+      @request_delivery.got_the_item
+    end
+    redirect_to :back
   end
 
   def accept
     @request_delivery = RequestDelivery.find(params[:id])
+    @taken_giveaway = TakenGiveaway.find_all_by_request_delivery_id(@request_delivery.id).last
+    @taking_user = User.find_by_id(@taken_giveaway.user_id)
     @phone = Phone.find_by_user_id(current_user.id)
     type = params[:type]
     if current_user != @request_delivery.user
@@ -143,13 +306,15 @@ class RequestDeliveriesController < ApplicationController
             @request_delivery.accept_request
             redirect_to :back
             flash[:success] = "Thank you!<br>
-                                              <div class='sub_flash_text'>You've chosen to accept <b>#{@request_delivery.what}</b> delivery request.<br>
-                                              <b>#{@request_delivery.user.name}</b>, the creator of the request, will be notified. <br>
-                                              Now <b>#{@request_delivery.user.name}</b> must confirm you.</div>".html_safe
+                                              <div class='sub_flash_text'>You've chosen to accept <b style=\"color:#1a2cff\">#{@request_delivery.what}</b> pick up.<br>
+                                              <b style=\"color:#1a2cff\">#{@taking_user.name}</b>, the person interested in the pick up, will be notified. <br>
+                                              Now <b style=\"color:#1a2cff\">#{@taking_user.name}</b> must confirm you.</div>".html_safe
             @accepted_request = AcceptedRequest.find_all_by_request_delivery_id(@request_delivery.id).last
             @creating_user = User.find_by_id(@request_delivery.user_id)
             @accepting_user = User.find_by_id(@accepted_request.user_id)
-            NotifMailer.new_accepted_request(@creating_user,@accepting_user,@request_delivery).deliver
+            if Rails.env.production?
+              NotifMailer.new_accepted_request(@creating_user,@accepting_user,@request_delivery).deliver
+            end
           end
         end
       elsif type == "cancel"
@@ -165,8 +330,8 @@ class RequestDeliveriesController < ApplicationController
         else
           current_user.request_accepts.delete(@request_delivery)
           redirect_to :back
-          @request_delivery.cancel_request
-          flash[:success] = "Thank you!<br><div class='sub_flash_text'>You've chosen to cancel your acceptance of the request.</div>".html_safe
+          @request_delivery.unaccept_request
+          flash[:success] = "Thank you!<br><div class='sub_flash_text'>You've chosen not to pick up this item.</div>".html_safe
         end
       else
         redirect_to :back
@@ -203,13 +368,13 @@ class RequestDeliveriesController < ApplicationController
     @phone = Phone.find_by_user_id(current_user.id)
     @accepted_request = AcceptedRequest.find(params[:accepted_request_id])
     @request_delivery = RequestDelivery.find(params[:request_delivery_id])
-    @request_creator = User.find(@request_delivery.user_id)
+    @confirmed_taker = @request_delivery.confirmed_taker
     @confirmed_user = User.find( @accepted_request.user_id)
-    if @request_creator == current_user && @phone.present? && @phone.verified
+    if @confirmed_taker == current_user && @phone.present? && @phone.verified
       redirect_to :controller => 'payments',
                   :action => 'checkout',
                   :req_or_sugg => "request_delivery",
-                  :task_creator_id => @request_creator.id,
+                  :task_creator_id => @confirmed_taker.id,
                   :confirmed_user_id => @confirmed_user.id,
                   :task_id => @request_delivery.id,
                   :accepted_task_id => @accepted_request.id
@@ -242,7 +407,9 @@ class RequestDeliveriesController < ApplicationController
 
   def correct_user
     @request_delivery = current_user.request_deliveries.find_by_id(params[:id])
-    redirect_to :back if @request_delivery.nil? && !current_user.try(:admin?)
+    @taken_giveaway = current_user.request_takes.find_by_id(params[:id])
+    @waiting_for_transporter = RequestDelivery.find_by_id_and_status(params[:id],"WaitingForTransporter")
+    redirect_to :back if @request_delivery.nil? && @taken_giveaway.nil? && @waiting_for_transporter.nil? && !current_user.try(:admin?)
   end
 
 end

@@ -2,7 +2,7 @@
   <div class="search_title">
     <b>Delivery Requests</b>
   </div>
-  <%= form_for @search, :url => requests_path, :html => {:method => :get} do |f| %>
+  <%= form_for @search, :url => giveaways_path, :html => {:method => :get} do |f| %>
       <div class="search_fields">
         <div class="myfield_search">
           <%= f.label :from_contains, "From" %>

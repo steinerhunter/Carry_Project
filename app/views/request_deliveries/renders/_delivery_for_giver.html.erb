@@ -1,0 +1,9 @@
+<% if @request_delivery.delivery_type.blank? %>
+    <b><%= link_to @taking_user.name, @taking_user %> hasn't chosen a </b><b style="color:#f2ff5e">Delivery</b><b> option  yet.</b>
+<% else  %>
+    <% if @request_delivery.delivery_type == "myself" %>
+        <b><%= link_to @taking_user.name, @taking_user %> has chosen </b><b style="color:#f2ff5e">Self Delivery</b><b>.</b>
+    <% elsif @request_delivery.delivery_type == "senddme" %>
+        <b><%= link_to @taking_user.name, @taking_user %> has chosen </b><b style="color:#f2ff5e">Delivery by sendd.me</b><b>.</b>
+    <% end  %>
+<% end  %>

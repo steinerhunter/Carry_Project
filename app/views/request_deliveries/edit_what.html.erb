@@ -1,0 +1,10 @@
+<div class="edit_delivery_field_wrapper" style="background-image: url('../assets/box_large.png');">
+  <%= form_for(@request_delivery, :remote => true, :html => { :id => "edit_what" }) do |f| %>
+      <div class="edit_delivery_field_what">
+        <%= f.label :what, "Item?" %><%= f.text_field :what, :value => @request_delivery.what %>
+      </div>
+      <div class="edit_update">
+        <%= f.submit "Update Details" , :id => 'submit_delivery' %>
+      </div>
+  <% end  %>
+</div>

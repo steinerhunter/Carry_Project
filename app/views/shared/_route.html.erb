@@ -1,0 +1,104 @@
+<% if controller.controller_name == 'request_deliveries' && controller.action_name == 'show' %>
+    <script type="text/javascript">
+
+        var directionDisplay;
+        var directionsService = new google.maps.DirectionsService();
+        var map;
+        var myLatlng = new google.maps.LatLng(32.830361000000000000,34.974337999999990000);
+        var myOrigin = '<%= @request_delivery.from %>';
+        var myDestination = '<%= @request_delivery.to %>';
+
+        function initialize() {
+            directionsDisplay = new google.maps.DirectionsRenderer();
+            var mapOptions = {
+                zoom: 5,
+                center: new google.maps.LatLng(37.651429,25.267043),
+                mapTypeId: google.maps.MapTypeId.ROADMAP
+            };
+            map = new google.maps.Map(document.getElementById('current-delivery-map'), mapOptions);
+            directionsDisplay.setMap(map);
+            calcRoute();
+            // calculateDistances()
+        }
+
+        function calcRoute() {
+            var request = {
+                origin:myOrigin,
+                destination:myDestination,
+                travelMode: google.maps.DirectionsTravelMode.DRIVING,
+            };
+            directionsService.route(request, function(response, status) {
+                if (status == google.maps.DirectionsStatus.OK) {
+                    directionsDisplay.setDirections(response);
+                }
+            });
+        }
+
+        function calculateDistances() {
+            var service = new google.maps.DistanceMatrixService();
+            service.getDistanceMatrix(
+                    {
+                        origins: [myOrigin],
+                        destinations: [myDestination],
+                        travelMode: google.maps.TravelMode.DRIVING,
+                        unitSystem: google.maps.UnitSystem.METRIC,
+                        avoidHighways: false,
+                        avoidTolls: false
+                    }, callback);
+        }
+
+        function callback(response, status) {
+            if (status != google.maps.DistanceMatrixStatus.OK) {
+                alert('Error was: ' + status);
+            } else {
+                var origins = response.originAddresses;
+                var destinations = response.destinationAddresses;
+                var mySpecialID = document.getElementById('mySpecialID');
+                mySpecialID.innerHTML = '';
+
+                    var results = response.rows[0].elements;
+                        mySpecialID.innerHTML += origins[0] + ' to ' + destinations[0]
+                                + ': ' + results[0].distance.text + ' in '
+                                + results[0].duration.text + '<br>';
+            }
+        }
+
+        google.maps.event.addDomListener(window, 'load', initialize);
+
+    </script>
+<% elsif controller.controller_name == 'suggest_deliveries' && controller.action_name == 'show' %>
+    <script type="text/javascript">
+
+        var directionDisplay;
+        var directionsService = new google.maps.DirectionsService();
+        var map;
+        var myLatlng = new google.maps.LatLng(32.830361000000000000,34.974337999999990000);
+
+        function initialize() {
+            directionsDisplay = new google.maps.DirectionsRenderer();
+            var mapOptions = {
+                zoom: 5,
+                center: new google.maps.LatLng(37.651429,25.267043),
+                mapTypeId: google.maps.MapTypeId.ROADMAP
+            };
+            map = new google.maps.Map(document.getElementById('current-delivery-map'), mapOptions);
+            directionsDisplay.setMap(map);
+            calcRoute();
+        }
+
+        function calcRoute() {
+            var request = {
+                origin:"<%= @suggest_delivery.from %>",
+                destination:"<%= @suggest_delivery.from %>",
+                travelMode: google.maps.DirectionsTravelMode.DRIVING,
+            };
+            directionsService.route(request, function(response, status) {
+                if (status == google.maps.DirectionsStatus.OK) {
+                    directionsDisplay.setDirections(response);
+                }
+            });
+        }
+        google.maps.event.addDomListener(window, 'load', initialize);
+
+    </script>
+<% end %>

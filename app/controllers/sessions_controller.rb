@@ -4,7 +4,7 @@ class SessionsController < ApplicationController
 
   def new
     if session[:request_delivery_what].present?
-      flash.now[:success] = "Thank you!<br><div class='sub_flash_text'>We will store your delivery request details temporarily,
+      flash.now[:success] = "Thank you!<br><div class='sub_flash_text'>We will store your giveaway details temporarily,
                                                     and post them to our database once you sign in.</div>".html_safe
     elsif session[:suggest_delivery_size].present?
       flash.now[:success] = "Thank you!<br><div class='sub_flash_text'>We will store your delivery suggestion details temporarily,

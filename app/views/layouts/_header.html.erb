@@ -7,8 +7,8 @@
       </div>
       <nav>
         <ul class="nav pull-right" id="header_items">
-          <li id="header_transporters"><%= link_to "Transporters", suggestions_path  %></li>
-          <li id="header_senders"><%= link_to "Pick ups", requests_path  %></li>
+          <li id="header_transporters"><%= link_to "Pick ups", pickups_path  %></li>
+          <li id="header_senders"><%= link_to "Giveaways", giveaways_path  %></li>
           <% if signed_in?  %>
               <% if current_user.mailbox.receipts.where(:is_read => false).where(:deleted => false).count > 0 %>
                   <li id="header_messages_unread"><%= link_to "Messages", conversations_path %></li>

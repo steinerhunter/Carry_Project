@@ -9,6 +9,8 @@ class PhoneVerificationsController < ApplicationController
       else
         flash[:success] = "Thank you!<br><div class='sub_flash_text'>Your phone number has been successfully verified.</div>".html_safe
         @phone.confirm_phone
+        RequestDelivery.update_all({:status => "Open"}, {:user_id => @user.id})
+        RequestDelivery.update_all({:sending_phone => @phone.phone}, {:user_id => @user.id})
         redirect_to  session[:return_to] || root_path
       end
     else

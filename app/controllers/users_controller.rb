@@ -58,11 +58,30 @@ class UsersController < ApplicationController
       session[:request_delivery_cost] = nil
       session[:request_delivery_currency] = nil
       @request_delivery = RequestDelivery.find_by_id(session[:request_delivery_id])
+      @request_delivery.set_giver
       session[:request_delivery_id] = nil
-      flash[:success] = "Thank you!<br>
-                                              <div class='sub_flash_text'>Your delivery request was successfully added to our lists. <br>
-                                              There are some more details to add though.<br>
-                                              <b style=\"color:#ff9054\">Add</b> <img src=\"../assets/missing_detail.png\"> all details and get priority in our lists!</div>".html_safe
+      if @phone.present?
+        if @phone.verified
+          @request_delivery.publish
+          flash[:success] = "Thank you!<br>
+                                              <div class='sub_flash_text'>Your giveaway was successfully added to our lists. <br>
+                                              Let's see who wants to take it!</div>".html_safe
+        else
+          @request_delivery.unpublish
+          flash[:success] = "Thank you!<br>
+                                              <div class='sub_flash_text'>Your giveaway was successfully added to our lists. <br><br>
+                                              Before publishing it, we require that you verify your <b style=\"color:#1a2cff\">phone number</b>.<br>
+                                              It shall remain confidential to everyone, until someone comes to pick up the item from you.<br><br>
+                                              <a class='verify_item' href=\"/phone_verify/#{current_user.id}\">Verify Phone</a></div>".html_safe
+        end
+      else
+        @request_delivery.unpublish
+        flash[:success] = "Thank you!<br>
+                                              <div class='sub_flash_text'>Your giveaway was successfully added to our lists. <br><br>
+                                              Before publishing it, we require that you <br>add your <b style=\"color:#1a2cff\">phone number</b> and verify it.<br><br>
+                                              It shall remain confidential to everyone, <br>except for the person who picks up the item from you.<br><br>
+                                              <a class='verify_item' href=\"/phones/new?user_id=#{current_user.id}\">Add Phone</a></div>".html_safe
+      end
       redirect_to request_delivery_url(@request_delivery)
     elsif session[:suggest_delivery_size].present?
       session[:suggest_delivery_from]  = nil
@@ -94,11 +113,11 @@ class UsersController < ApplicationController
   end
 
   def update
-       if @user.update_attributes( params[:user])
-        flash[:success] = "Great!<br><div class='sub_flash_text'>Your details were successfully updated.</div>".html_safe
-        sign_in @user
-        respond_with(@user, :location => user_path(@user))
-      end
+    if @user.update_attributes( params[:user])
+      flash[:success] = "Great!<br><div class='sub_flash_text'>Your details were successfully updated.</div>".html_safe
+      sign_in @user
+      respond_with(@user, :location => user_path(@user))
+    end
   end
 
   def index
@@ -114,13 +133,13 @@ class UsersController < ApplicationController
 
   private
 
-    def correct_user
-      @user = User.find(params[:id])
-      redirect_to :back unless current_user?(@user) && !current_user.only_facebook
-    end
+  def correct_user
+    @user = User.find(params[:id])
+    redirect_to :back unless current_user?(@user) && !current_user.only_facebook
+  end
 
-    def admin_user
-      redirect_to root_path unless current_user.admin?
-    end
+  def admin_user
+    redirect_to root_path unless current_user.admin?
+  end
 
 end

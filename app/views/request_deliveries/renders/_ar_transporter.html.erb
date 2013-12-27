@@ -1,0 +1,19 @@
+<% if @request_delivery.status == "Confirmed" %>
+    <div class="the_transporter">
+      <div class="the_transporter_inner"  style="background-image: url('../assets/transporting_small.png');text-align:left">
+        <div class="inner_title" style="padding-left: 55px;" >
+          <b>Transporting</b>
+        </div>
+        <b>We have </b><b style="color:#f2ff5e">You</b><b> picking up this item from </b><b style="color:#6fba33"> Point A</b>
+        <b> (from <%= link_to @request_delivery.user.name, @request_delivery.user %>) and deliverying it to</b><b style="color:#f35044"> Point B</b>
+        <b> (to <%= link_to @taking_user.name, @taking_user %>).</b><br>
+        <b>They can call you at</b><b style="color:#f2ff5e"> <%= @transporter.phone %></b><b>.</b>
+      </div>
+    </div>
+    <div class="delivery_complete_wrapper">
+      <%=  link_to "OK, item delivered!", pre_complete_request_path(@request_delivery.accepted_request_confirmed.id), class:"delivery_complete  modal-link trigger",
+                   "data-target" => "#myModal",
+                   "data-toggle" => "modal",
+                   "data-backdrop" => "static" %>
+    </div>
+<% end  %>

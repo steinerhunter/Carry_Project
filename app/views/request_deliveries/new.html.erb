@@ -2,40 +2,50 @@
   <%= form_for(@request_delivery, :remote => true) do |f| %>
       <fieldset>
         <div class="single_step">
-          <legend style="background-image: url('../assets/box.png');"><b>New Delivery Request</b></legend>
-          <%= f.label :what, "What?" %>
+          <legend style="background-image: url('../assets/give_legend.png');"><b>I have something to give.</b></legend>
+          <%= f.label :what, "What can you give?" %>
           <% if session[:request_delivery_what].present? %>
-                <%= f.text_field :what, :placeholder => "Type delivery contents...", :value => session[:request_delivery_what]   %>
+                <%= f.text_field :what, :placeholder => "A Microwave", :value => session[:request_delivery_what]   %>
           <% else  %>
-                <%= f.text_field :what, :placeholder => "Type delivery contents..."   %>
+                <%= f.text_field :what, :placeholder => "A Microwave"   %>
           <% end %>
-          <%= f.label :from, "From?" %>
+          <%= f.label :from, "Where is it?" %>
           <% if session[:request_delivery_from].present? %>
-                <%= f.text_field :from, :placeholder => "Type origin address...", :class => "address_field", :value => session[:request_delivery_from] %>
+                <%= f.text_field :from, :placeholder => "5 Lincoln Rd, NY", :class => "address_field", :value => session[:request_delivery_from] %>
           <% else %>
-              <%= f.text_field :from, :placeholder => "Type origin address...", :class => "address_field" %>
+              <%= f.text_field :from, :placeholder => "5 Lincoln Rd, NY", :class => "address_field" %>
           <% end  %>
-          <%= f.label :to, "To?" %>
-          <% if session[:request_delivery_to].present? %>
-                <%= f.text_field :to, :placeholder => "Type destination address...", :class => "address_field", :value => session[:request_delivery_to]   %>
+          <%= f.label :size, "How big is it?" %>
+          <% if session[:request_delivery_size].present? %>
+              <%= f.hidden_field :size, :value => session[:request_delivery_size]%>
           <% else  %>
-              <%= f.text_field :to, :placeholder => "Type destination address...", :class => "address_field"   %>
+              <%= f.hidden_field :size %>
           <% end  %>
-          <div class="new_money">
-            <%= f.label :cost, "How much will you pay?" %>
-            <% if session[:request_delivery_cost].present? %>
-                    <%= f.text_field :cost, :placeholder => "Type an amount...", :value => session[:request_delivery_cost] %>
-            <% else  %>
-                <%= f.text_field :cost, :placeholder => "amount..." %>
-            <% end %>
-            <% if session[:request_delivery_currency].present? %>
-                <%= f.select :currency, options_for_select(%w[ILS USD EUR], :selected => @request_delivery.currency) %>
-            <% else  %>
-                <%= f.select :currency, options_for_select(%w[ILS USD EUR], :selected =>"ILS") %>
-            <% end  %>
+          <div class="new_size">
+            <div class="size_box" id="small" style="background-image: url('../assets/mouse.png');"
+                 onclick="style.backgroundColor='#d05e0b';
+                         document.getElementById('medium').style.backgroundColor = '#a03eff';
+                         document.getElementById('large').style.backgroundColor = '#a03eff';
+                         document.getElementById('new_request_delivery').request_delivery_size.value = 'Small';">
+              Small
+            </div>
+            <div class="size_box" id="medium" style="background-image: url('../assets/lamp.png'); margin-left:20px;"
+                 onclick="style.backgroundColor='#d05e0b';
+                         document.getElementById('small').style.backgroundColor = '#a03eff';
+                         document.getElementById('large').style.backgroundColor = '#a03eff';
+                         document.getElementById('new_request_delivery').request_delivery_size.value = 'Medium';">
+              Medium
+            </div>
+            <div class="size_box" id="large" style="background-image: url('../assets/table.png'); margin-left:20px;"
+                 onclick="style.backgroundColor='#d05e0b';
+                         document.getElementById('small').style.backgroundColor = '#a03eff';
+                         document.getElementById('medium').style.backgroundColor = '#a03eff';
+                         document.getElementById('new_request_delivery').request_delivery_size.value = 'Large';">
+              Large
+            </div>
           </div>
           <div class="form_submit" style="margin-top:20px;">
-            <%=  f.submit "Add Delivery Request" , :id => 'submit_delivery'%>
+            <%=  f.submit "Add My Item" , :id => 'submit_delivery'%>
           </div>
         </div>
       </fieldset>

@@ -1,0 +1,49 @@
+<% if @request_delivery.to.blank? %>
+    <div class="the_from_and_to_inner" style="background-color:#757575; background-image: url('../assets/LocationB_small.png');">
+<% else  %>
+    <div class="the_from_and_to_inner" style="background-image: url('../assets/LocationB_small.png');">
+<% end  %>
+<div class="inner_title">
+  <b>To</b>
+</div>
+<% if @request_delivery.to.blank? %>
+    <% if @taking_user == current_user %>
+        <div class="missing_detail" style="top:1px">
+          <div class="bubbleInfo">
+            <%= link_to image_tag("missing_detail.png"), edit_request_to_path(@request_delivery.id), class:"modal-link trigger",
+                        "data-target" => "#myModal",
+                        "data-toggle" => "modal",
+                        "data-backdrop" => "static" %>
+            <div class="popup" style="height:19px; width:235px; margin-top:60px;text-align: center;">
+              Click to add <b style="color:#f2ff5e">To</b> for this giveaway.
+              <div id="tail1" style="left:33px"></div>
+              <div id="tail2" style="left:33px"></div>
+            </div>
+          </div>
+        </div>
+        <b>Where do you want it delivered to?</b>
+    <% else %>
+        <b><%= link_to @taking_user.name, @taking_user %> hasn't added </b><b style="color:#f2ff5e">To</b><b> detail yet.</b>
+    <% end %>
+<% elsif @request_delivery.status == "ReceiverConfirmed" || @request_delivery.status == "WaitingForTransporter" || @request_delivery.status == "Pending Confirmation" %>
+    <%= @request_delivery.to %>
+<% else %>
+    <% if @taking_user == current_user %>
+        <div class="missing_detail" style="top:1px">
+          <div class="bubbleInfo">
+            <%= link_to image_tag("edit_detail.png"), edit_request_to_path(@request_delivery.id), class:"modal-link trigger",
+                        "data-target" => "#myModal",
+                        "data-toggle" => "modal",
+                        "data-backdrop" => "static" %>
+            <div class="popup" style="height:16px; width:225px; margin-top:65px;text-align: center;">
+              Click to edit <b style="color:#f2ff5e">To</b> for this giveaway.
+              <div id="tail1" style="left:33px"></div>
+              <div id="tail2" style="left:33px"></div>
+            </div>
+          </div>
+        </div>
+    <% end  %>
+    <%= @request_delivery.to %>
+<% end %>
+</div>
+</div>

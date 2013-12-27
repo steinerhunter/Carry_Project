@@ -1,0 +1,73 @@
+<div class="giveaway_status">
+  <%= render 'request_deliveries/renders/status_bar' %>
+</div>
+<div class="show_delivery" style="margin-top:-35px;">
+  <div class="right_side">
+    <%= render 'request_deliveries/renders/upper_right_bar' %>
+    <%= render 'request_deliveries/renders/map' %>
+    <%= render 'request_deliveries/renders/extra_info' %>
+  </div>
+</div>
+<div class="show_data">
+<div class="show_title">
+  <% if (current_user?(@request_delivery.user)) || (current_user.try(:admin?)) %>
+      <%= render 'request_deliveries/renders/delete_post' %>
+  <% else  %>
+      <%= render 'request_deliveries/renders/has_all_details' %>
+  <% end %>
+  <b style="padding-left: 20px;"><%= @request_delivery.what %></b>
+</div>
+<div class="the_deadline_and_money">
+<div class="the_from_and_to_inner" style="font-size: 20px; background-image: url('../assets/what_small.png');">
+  <div class="inner_title">
+    <b>Item</b>
+  </div>
+  <%= @request_delivery.what %>
+</div>
+<% if @show_bounty %>
+    <div class="the_money_and_the_deadline_inner" style="background-image: url('../assets/money_small.png');">
+    <div class="inner_title">
+      <b>Bounty</b>
+    </div>
+<% else %>
+    <% if @request_delivery.delivery_type.blank? || @request_delivery.to.blank? %>
+        <div class="the_money_and_the_deadline_inner" style="background-color:#757575; background-image: url('../assets/delivery_small.png');">
+    <% else  %>
+        <div class="the_money_and_the_deadline_inner" style="background-image: url('../assets/delivery_small.png');">
+    <% end %>
+    <div class="inner_title">
+      <b>Delivery</b>
+    </div>
+<% end  %>
+<% if @taking_user == current_user %>
+    <%= render 'request_deliveries/renders/delivery_for_taking_user' %>
+<% elsif @request_delivery.user == current_user  %>
+    <%= render 'request_deliveries/renders/delivery_for_taking_user' %>
+<% else  %>
+    <%= render 'request_deliveries/renders/money_for_transporters' %>
+<% end %>
+</div>
+</div>
+<div class="the_from_and_to">
+<%= render 'request_deliveries/renders/from_for_everyone' %>
+<%= render 'request_deliveries/renders/to_for_everyone' %>
+<div class="the_sender_and_receiver">
+  <%= render 'request_deliveries/renders/giving_for_everyone' %>
+  <%= render 'request_deliveries/renders/receiving_for_everyone' %>
+</div>
+<% if @taking_user == current_user %>
+      <%= render 'request_deliveries/renders/ar_taking_user' %>
+<% elsif @transporter == current_user %>
+      <%= render 'request_deliveries/renders/ar_transporter' %>
+<% elsif @request_delivery.user == current_user  %>
+      <%= render 'request_deliveries/renders/ar_giving_user' %>
+  <% end  %>
+<% if @request_delivery.status == "Open" || @request_delivery.status == "Taken" %>
+    <div class="post_text_title">
+      <b>Need more details?</b>
+    </div>
+    <div class="show_comments">
+      <%= render 'comments/comments' %>
+    </div>
+<% end  %>
+</div>

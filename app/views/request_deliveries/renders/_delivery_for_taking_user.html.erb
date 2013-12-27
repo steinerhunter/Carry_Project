@@ -1,0 +1,49 @@
+<% if @request_delivery.to.blank? %>
+    <b>You can choose </b><b style="color:#f2ff5e">Delivery </b><b>option after adding </b><b style="color:#f2ff5e">To </b><b>detail.</b>
+<% elsif @request_delivery.delivery_type.blank? %>
+    <div class="missing_detail" style="top:1px">
+      <div class="bubbleInfo">
+        <%= link_to image_tag("missing_detail.png"), edit_request_delivery_path(@request_delivery.id), class:"modal-link trigger",
+                    "data-target" => "#myModal",
+                    "data-toggle" => "modal",
+                    "data-backdrop" => "static" %>
+        <div class="popup" style="height:19px; width:325px; margin-top:62px;text-align: center;">
+          Click to choose<b style="color:#f2ff5e"> Delivery</b> option for this giveaway.
+          <div id="tail1" style="left:33px"></div>
+          <div id="tail2" style="left:33px"></div>
+        </div>
+      </div>
+    </div>
+    <b>Which</b><b style="color:#f2ff5e"> Delivery </b><b>option do you prefer?</b>
+<% elsif @request_delivery.status == "ReceiverConfirmed" ||
+        @request_delivery.status == "WaitingForTransporter" ||
+        @request_delivery.status == "Pending Confirmation" %>
+    <% if @request_delivery.delivery_type == "myself" %>
+        <b>You've chosen</b><b style="color:#f2ff5e"> Self Pick up</b><b>.</b>
+        <div class="delivery_price" style="margin-top: 15px;">Price: Free</div>
+    <% elsif @request_delivery.delivery_type == "senddme" %>
+        <b>By a</b><b style="color:#f2ff5e"> sendd.me Transporter</b><b>.</b>
+        <div class="delivery_price" style="margin-top: 15px;">Price: <%= @request_delivery.cost %> ILS</div>
+    <% end  %>
+<% else %>
+    <div class="missing_detail" style="top:1px">
+      <div class="bubbleInfo">
+        <%= link_to image_tag("edit_detail.png"), edit_request_delivery_path(@request_delivery.id), class:"modal-link trigger",
+                    "data-target" => "#myModal",
+                    "data-toggle" => "modal",
+                    "data-backdrop" => "static" %>
+        <div class="popup" style="height:19px; width:325px; margin-top:62px;text-align: center;">
+          Click to edit<b style="color:#f2ff5e"> Delivery</b> option for this giveaway.
+          <div id="tail1" style="left:33px"></div>
+          <div id="tail2" style="left:33px"></div>
+        </div>
+      </div>
+    </div>
+    <% if @request_delivery.delivery_type == "myself" %>
+        <b>You've chosen</b><b style="color:#f2ff5e"> Self Pick up</b><b>.</b>
+        <div class="delivery_price" style="margin-top: 15px;">Price: Free</div>
+    <% elsif @request_delivery.delivery_type == "senddme" %>
+        <b>By a</b><b style="color:#f2ff5e"> sendd.me Transporter</b><b>.</b>
+        <div class="delivery_price" style="margin-top: 15px;">Price: <%= @request_delivery.cost %> ILS</div>
+    <% end  %>
+<% end %>

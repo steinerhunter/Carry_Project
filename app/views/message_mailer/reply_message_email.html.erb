@@ -6,9 +6,11 @@
   <body>
     <h2>Hi there <%= @message.recipients.first.name %>,</h2><br>
     <h3>It seems <b style="color:#279227"><%= @message.sender.name  %></b> has replied to one of your messages!</h3>
-    <h3>Why don't you go to <%= link_to "www.sendd.me", root_url %> and see for yourself?</h3> <br>
+    <h3>Go to your <%= link_to "Messages Page", :controller => "conversations", :action => "index", :host => "www.sendd.me" %> to read it!</h3>
     <p>
-        <h3>Yours, Someone</h3>
+    <h3>Thank you,</h3>
+    <h3>Best Regards,</h3>
+    <h3>sendd.me Support</h3>
     </p>
   </body>
 </html>

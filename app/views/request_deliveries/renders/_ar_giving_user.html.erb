@@ -1,0 +1,30 @@
+<% if @request_delivery.status == "Taken" %>
+    <b>We're waiting for <%= link_to @taking_user.name, @taking_user %> to add the missing details and confirm.</b>
+<% elsif @request_delivery.status == "ReceiverConfirmed" && @request_delivery.delivery_type == "myself" %>
+    <b>We're waiting for <%= link_to @taking_user.name, @taking_user %> to come and pick up the item you're giving away.</b>
+<% elsif @request_delivery.status == "Confirmed" %>
+    <div class="the_transporter">
+      <div class="the_transporter_inner"  style="background-image: url('../assets/transporting_small.png');text-align:left">
+        <div class="inner_title" style="padding-left: 55px;" >
+          <b>Transporting</b>
+        </div>
+        <b>We have <%= link_to @transporter.name, @transporter  %></b><b> picking up this item from </b><b style="color:#6fba33"> Point A</b>
+        <b> (from </b><b style="color:#f2ff5e">You</b><b>) and deliverying it to</b><b style="color:#f35044"> Point B</b>
+        <b> (to <%= link_to @taking_user.name, @taking_user %>).</b><br>
+        <b style="color:#f2ff5e">You</b><b> can call him/her  at</b><b style="color:#f2ff5e"> <%= @transporter.phone %></b><b>.</b>
+      </div>
+    </div>
+    <div class="giveaway_status_wrapper">
+      <div class="giveaway_status_title">
+        Transporter on the way!
+        <div class="giveaway_status_data">
+          <%= link_to @taking_user.name, @taking_user  %>has confirmed <%= link_to @transporter.name, @transporter %>
+          to pick up the item you're giving away. <br>
+        </div>
+      </div>
+    </div>
+<% elsif @request_delivery.status == "Complete" %>
+    <div class="ready_to_go_wrapper" style="margin-bottom: 20px;">
+      <%=  link_to "Give away more stuff!", request_path, class: "go_get_other", style: "padding:26px;padding-top:5px;padding-bottom:5px;"%>
+    </div>
+<% end  %>

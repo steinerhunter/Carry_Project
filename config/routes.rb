@@ -5,6 +5,7 @@ TheCarryProject::Application.routes.draw do
   resources :sessions, only: [:new, :create, :destroy]
   resources :request_deliveries, only: [:create, :show, :edit, :update, :destroy] do
     put :accept, on: :member
+    put :take, on: :member
     resources :comments
   end
   resources :suggest_deliveries, only: [:create, :show, :edit, :update, :destroy] do
@@ -33,10 +34,15 @@ TheCarryProject::Application.routes.draw do
   match '/faq',    to: 'static_pages#faq'
 
   match '/request', to:'request_deliveries#new'
-  match '/requests', to:'request_deliveries#index'
+  match '/giveaways', to:'request_deliveries#index_takers'
+  match '/pickups', to:'request_deliveries#index_transporters'
 
+  match '/get_the_item/:request_delivery_id', to:'request_deliveries#get_the_item', as: 'get_the_item'
+  match '/got_the_item/:request_delivery_id', to:'request_deliveries#got_the_item', as: 'got_the_item'
   match '/edit_request_cost/:request_delivery_id', to:'request_deliveries#edit_cost', as:'edit_request_cost'
+  match '/edit_request_what/:request_delivery_id', to:'request_deliveries#edit_what', as:'edit_request_what'
   match '/edit_request_from/:request_delivery_id', to:'request_deliveries#edit_from', as:'edit_request_from'
+  match '/edit_request_delivery/:request_delivery_id', to:'request_deliveries#edit_delivery', as:'edit_request_delivery'
   match '/edit_request_to/:request_delivery_id', to:'request_deliveries#edit_to', as:'edit_request_to'
   match '/edit_request_size/:request_delivery_id', to:'request_deliveries#edit_size', as:'edit_request_size'
   match '/edit_request_due_date/:request_delivery_id', to:'request_deliveries#edit_due_date', as:'edit_request_due_date'

@@ -14,6 +14,8 @@ class User < ActiveRecord::Base
   has_secure_password
   acts_as_messageable
   has_many :request_deliveries, dependent: :destroy
+  has_many :taken_giveaways
+  has_many :request_takes, through: :taken_giveaways, source: :request_delivery
   has_many :accepted_requests
   has_many :request_accepts, through: :accepted_requests, source: :request_delivery
   has_many :authentications

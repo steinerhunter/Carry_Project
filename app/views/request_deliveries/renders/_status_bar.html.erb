@@ -1,0 +1,21 @@
+<% if @taking_user == current_user || @request_delivery.user == current_user %>
+    <% if @request_delivery.status == "Taken" %>
+        <%= image_tag("StatusBarAccepted.png") %>
+    <% elsif @request_delivery.status == "ReceiverConfirmed" ||
+            @request_delivery.status == "WaitingForTransporter" ||
+            @request_delivery.status == "Pending Confirmation" %>
+        <%= image_tag("StatusBarConfirmed.png") %>
+    <% elsif @request_delivery.status == "Complete" %>
+        <%= image_tag("StatusBarComplete.png") %>
+    <% end  %>
+<% else %>
+    <% if @request_delivery.status == "Confirmed" %>
+        <%= image_tag("StatusBarConfirmed.png") %>
+    <% elsif @accepted_request.present? && @request_delivery.status == "Pending Confirmation" %>
+        <%= image_tag("StatusBarAccepted.png") %>
+    <% elsif @request_delivery.status == "ReceiverConfirmed" ||
+            @request_delivery.status == "WaitingForTransporter" ||
+            @request_delivery.status == "Pending Confirmation" %>
+        <%= image_tag("StatusBarOpen.png") %>
+    <% end  %>
+<% end %>

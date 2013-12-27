@@ -1,0 +1,35 @@
+<% if @big_sender_receiver %>
+    <div class="the_sender_and_receiver_inner" style="background-image: url('../assets/ReceivingPerson_small.png');height:150px;">
+<% else %>
+    <div class="the_sender_and_receiver_inner" style="background-image: url('../assets/ReceivingPerson_small.png');">
+<% end  %>
+<div class="inner_title">
+  <b>Receiving</b>
+</div>
+<div class="send_receive_text">
+  <% if @big_sender_receiver %>
+      <% if @taking_user == current_user %>
+          <b>We have </b><b style="color:#f2ff5e">You</b><b> receiving this item in </b><b style="color:#f35044">Point B</b><b>!</b><br><br>
+          <b style="color:#f2ff5e"><%= link_to @request_delivery.user.name, @request_delivery.user %></b><b> can call you at</b><b style="color:#f2ff5e">
+  <%= @taking_user.phone %></b><b>.</b>
+      <% else %>
+          <b>We have </b><b style="color:#f2ff5e"><%= link_to @taking_user.name, @taking_user %></b><b> receiving this item in </b><b style="color:#f35044">Point B</b><b>!</b><br><br>
+          <b>You can call him/her at</b><br><b style="color:#f2ff5e"> <%= @taking_user.phone %></b><b>.</b>
+      <% end %>
+  <% else %>
+      <% if @taking_user == current_user %>
+          <% if @request_delivery.status == "Complete" %>
+              <b>We've had </b><b style="color:#f2ff5e">You</b><b> receiving this item in </b><b style="color:#f35044">Point B</b><b>!</b>
+          <% else %>
+              <b>We have </b><b style="color:#f2ff5e">You</b><b> receiving this item in </b><b style="color:#f35044">Point B</b><b>!</b>
+          <% end  %>
+      <% else %>
+          <% if @request_delivery.status == "Complete" %>
+              <b>We've had </b><b style="color:#f2ff5e"><%= link_to @taking_user.name, @taking_user %></b><b> receiving this item in </b><b style="color:#f35044">Point B</b><b>!</b>
+          <% else %>
+              <b>We have </b><b style="color:#f2ff5e"><%= link_to @taking_user.name, @taking_user %></b><b> receiving this item in </b><b style="color:#f35044">Point B</b><b>!</b>
+          <% end  %>
+      <% end %>
+  <% end  %>
+</div>
+</div>

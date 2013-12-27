@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20131205180007) do
+ActiveRecord::Schema.define(:version => 20131222180557) do
 
   create_table "accepted_requests", :force => true do |t|
     t.integer  "request_delivery_id"
@@ -135,6 +135,9 @@ ActiveRecord::Schema.define(:version => 20131205180007) do
     t.boolean  "transporter_reviewed", :default => false
     t.string   "sending_phone"
     t.string   "receiving_phone"
+    t.string   "delivery_type"
+    t.string   "distance_text"
+    t.integer  "distance_value"
   end
 
   add_index "request_deliveries", ["user_id", "created_at"], :name => "index_request_deliveries_on_user_id_and_created_at"
@@ -196,6 +199,9 @@ ActiveRecord::Schema.define(:version => 20131205180007) do
   add_index "suggest_payments", ["suggest_delivery_id", "user_id"], :name => "index_suggest_payments_on_suggest_delivery_id_and_user_id", :unique => true
   add_index "suggest_payments", ["suggest_delivery_id"], :name => "index_suggest_payments_on_suggest_delivery_id"
   add_index "suggest_payments", ["user_id"], :name => "index_suggest_payments_on_user_id"
+
+# Could not dump table "taken_giveaways" because of following StandardError
+#   Unknown type 'bool' for column 'taken'
 
   create_table "user_reviews", :force => true do |t|
     t.integer  "from_user_id"

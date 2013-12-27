@@ -1,0 +1,14 @@
+<% if @taking_user == current_user %>
+    <% if @request_delivery.status == "ReceiverConfirmed" ||
+            @request_delivery.status == "WaitingForTransporter" ||
+            @request_delivery.status == "Pending Confirmation" ||
+            @request_delivery.status == "Complete" %>
+        <div id="current-delivery-map" style="height:387px;margin-top: 20px;"></div>
+    <% else  %>
+        <div id="current-delivery-map" style="height:387px;"></div>
+    <% end  %>
+<% elsif @request_delivery.user != current_user %>
+    <div id="current-delivery-map" style="height:387px;margin-top: 70px;"></div>
+<% else %>
+    <div id="current-delivery-map" style="height: 452px; margin-top: 0px;"></div>
+<% end  %>

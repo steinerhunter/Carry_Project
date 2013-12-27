@@ -2,7 +2,10 @@
   Phone Number Verification
 </div>
 <div class="modal_text">
-  <% if @coming_from == "accept" %>
+  <% if @coming_from == "take" %>
+      So You'd like to take "<div class="special"><%= @request_delivery.what %></div>"
+      given by <div class="special"><%= @request_delivery.user.name %></div>.<br><br>
+  <% elsif @coming_from == "accept" %>
       You've chosen to accept "<div class="special"><%= @request_delivery.what %></div>"
       by <div class="special"><%= @request_delivery.user.name %></div>.<br><br>
   <% elsif @coming_from == "confirm" %>
@@ -16,7 +19,8 @@
       In order to proceed with that, we're going to need you to add your <div class="special">phone number</div> and verify it.
   <% end  %>
   <br><br>
-  Your phone remains confidential until a Transporter is confirmed for your Delivery Request.
+  Your phone remains confidential to eveyrone, except for <div class="special"><%= @request_delivery.user.name  %></div>.<br>
+  We require this from all of our members in order to maintain a trusted, secure community.
 </div>
 <div class="modal_proceed">
   <% if @my_phone.present? %>

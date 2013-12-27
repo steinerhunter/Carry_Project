@@ -13,6 +13,7 @@ gem 'omniauth'
 gem 'omniauth-facebook'
 gem 'paypal_adaptive'
 gem 'twilio-ruby'
+gem 'httparty'
 
 group :development, :test do
   gem 'sqlite3', '1.3.5'

@@ -145,7 +145,30 @@
   border:solid 1px #000;
 }
 
-.edit_delivery_field_from label {
+
+.edit_delivery_field_what label {
+  width:60px;
+  display:inline-block;
+  text-align: center;
+  font-size:50px;
+  font-weight: bold;
+  line-height:130%;
+  background-repeat: no-repeat;
+  background-position: bottom left;
+  padding-left:30px;
+  color: #f2ff5e;
+}
+
+.edit_delivery_field_what input[type=text] {
+  vertical-align: middle;
+  width:170px;
+  font-size: 20px;
+  padding:12px;
+  margin-bottom:18px;
+  margin-left: 100px;
+  border:solid 1px #000;
+
+}.edit_delivery_field_from label {
   width:60px;
   display:inline-block;
   text-align: center;
@@ -210,7 +233,7 @@
   border:solid 1px #000;
 }
 
-.edit_delivery_field_size {
+.edit_delivery_field_delivery {
   label {
     width:430px;
     font-size:35px;
@@ -219,7 +242,7 @@
     color: #f2ff5e;
     margin-bottom: 30px;
     display: inline-block;
-    padding-left:10px;
+    padding-left:15px;
   }
   display:inline-block;
   width:400px;
@@ -229,6 +252,44 @@
   line-height:40%;
   color: #f2ff5e;
   text-align: center;
+}
+
+.new_delivery {
+  display: inline-block;
+  width:355px;
+}
+
+.delivery_box {
+  width: 160px;
+  height: 50px;
+  display: inline-block;
+  vertical-align: bottom;
+  text-align: center;
+  background-color: #a03eff;
+  background-repeat: no-repeat;
+  background-position: center center;
+  border:solid 1px;
+  border-radius:3px;
+  -moz-border-radius:10px; /* Old Firefox */
+  color: #ffffff;
+  border-color: #18212e;
+  margin-right: auto;
+  margin-left: auto;
+  padding:10px;
+  padding-top: 120px;
+  font-size:19px;
+  font-weight: bold;
+  line-height: 90%;
+}
+
+.delivery_box:hover {
+  background-color: #1a20e2;
+  cursor:pointer;
+}
+
+.delivery_price {
+  margin-top:5px;
+  color: #f2ff5e;
 }
 
 .edit_delivery_field_freq {

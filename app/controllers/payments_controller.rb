@@ -13,7 +13,7 @@ class PaymentsController < ApplicationController
       accepted_task = AcceptedRequest.find_by_id(params[:accepted_task_id])
       request_payment = RequestPayment.find_by_request_delivery_id(request_delivery.id)
       amount = request_delivery.cost.to_f
-      currency = request_delivery.currency
+      currency = "USD"
     elsif req_or_sugg == "suggest_delivery"
       suggest_delivery = SuggestDelivery.find_by_id(params[:task_id])
       accepted_task = AcceptedSuggest.find_by_id(params[:accepted_task_id])
@@ -33,7 +33,8 @@ class PaymentsController < ApplicationController
         "receiverList"=> {
             "receiver"=> [
                 { "email" => confirmed_user.email, "amount" => seller_amount, "primary" => false },
-                { "email" => ENV['PAYMENTS_MAIL'], "amount" =>commission_amount, "primary" => false }
+                { "email" => "salomon.omer-facilitator@gmail.com", "amount" =>commission_amount, "primary" => false }
+                #{ "email" => ENV['PAYMENTS_MAIL'], "amount" =>commission_amount, "primary" => false }
             ]
         },
         "maxAmountPerPayment" => amount,
@@ -41,8 +42,8 @@ class PaymentsController < ApplicationController
         "maxTotalAmountOfAllPayments" => amount,
         "cancelUrl" => activity_url,
         "ipnNotificationUrl" => ipn_notification_url,
-        "startingDate" => Time.now,
-        "endingDate" => 11.months.from_now
+        "startingDate" => Time.now
+        #"endingDate" => 11.months.from_now
     }
 
     preapproval_response = preapproval_request.preapproval(data)
@@ -138,7 +139,7 @@ class PaymentsController < ApplicationController
       amount = request_delivery.cost.to_f
       seller_amount = 0.85*amount.to_f
       commission_amount = 0.15*amount.to_f
-      currency = request_delivery.currency
+      currency = "USD"
       preapproval_data = {
           "returnUrl" => details_url(accepted_task,req_or_sugg),
           "requestEnvelope" => { "errorLanguage" => "en_US" },
@@ -146,7 +147,8 @@ class PaymentsController < ApplicationController
           "receiverList"=> {
               "receiver"=> [
                   { "email" => confirmed_user.email, "amount" => seller_amount, "primary" => false },
-                  { "email" => ENV['PAYMENTS_MAIL'], "amount" =>commission_amount, "primary" => false }
+                  { "email" => "salomon.omer-facilitator@gmail.com", "amount" =>commission_amount, "primary" => false }
+                  #{ "email" => ENV['PAYMENTS_MAIL'], "amount" =>commission_amount, "primary" => false }
               ]
           },
           "cancelUrl" => activity_url,
@@ -321,7 +323,7 @@ class PaymentsController < ApplicationController
           end
         end
       end
-      redirect_to activity_url
+      redirect_to request_delivery_url(request_delivery)
     else
       session[:error] = preapproval_details_response#pay_response.errors.first['message']
       redirect_to fail_url

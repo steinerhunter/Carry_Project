@@ -1,0 +1,212 @@
+<div class="giveaway_status">
+  <%= image_tag("StatusBarOpen.png") %>
+</div>
+<div class="show_delivery" style="margin-top:-35px;">
+  <div class="right_side">
+    <% if @request_delivery.user != current_user %>
+        <% if @request_delivery.status == "Open" %>
+            <% if @my_phone.present? && @my_phone.verified %>
+                <b><%= link_to "I'll take it!", take_request_delivery_path(@request_delivery, type: "take"), method: :put, class: "challenge_accepted",
+                               style: "background-color:#257b2a; background-image: url('../assets/challenge_accepted.png');" %></b>
+            <% else  %>
+                <% if current_user.nil? %>
+                    <% store_location %>
+                    <b><%= link_to "I'll take it!", signin_path, class: "challenge_accepted" %></b>
+                <% else %>
+                    <% store_location %>
+                    <b><%=  link_to "I'll take it!", pre_verify_request_path(@request_delivery.id,"take"), class:"challenge_accepted modal-link trigger",
+                                    "data-target" => "#myModal",
+                                    "data-toggle" => "modal",
+                                    "data-backdrop" => "static" %></b>
+                <% end %>
+            <% end  %>
+        <% end %>
+    <% end  %>
+    <% if @request_delivery.user != current_user %>
+        <div id="current-delivery-map" style="height:340px;"></div>
+    <% else %>
+        <div id="current-delivery-map" style="margin-top: 0px;"></div>
+    <% end  %>
+    <div class="extra_info">
+      <div class="extra_info_title" style="background-image: url('../assets/give_small.png');">
+        <b>Given By</b>
+      </div>
+      <div class="extra_info_data">
+        <div class="post_text_user">
+          <b><%= link_to @request_delivery.user.name, @request_delivery.user %></b>
+        </div>
+        <div class="posted_by">
+          <div class="four_icons">
+            <div class="chat_gravatar" style="float:right; width:50px; text-align: center;padding-left:13px;">
+              <% if facebook_authorization(@request_delivery.user)  %>
+                  <%= link_to facebook_profile_photo(@request_delivery.user,"chat"), @request_delivery.user %>
+              <% else  %>
+                  <%=  link_to chat_gravatar_for(@request_delivery.user), @request_delivery.user  %>
+              <% end  %>
+            </div>
+            <div class="verified_details">
+              <div class="verified_item">
+                <% if @request_delivery.user.email_confirmed %>
+                    <div class="bubbleInfo">
+                      <%= image_tag("VerifiedEmail.png", :class => "trigger") %>
+                      <div class="popup" style="text-align: left;">
+                        User has <b style="color:#279227">verified</b> his/her Email Address.
+                        <div id="tail1" style="left:47px;"></div>
+                        <div id="tail2" style="left:47px;"></div>
+                      </div>
+                    </div>
+                <% else %>
+                    <div class="bubbleInfo">
+                      <%= image_tag("NonVerifiedEmail.png", :class => "trigger") %>
+                      <div class="popup" style="text-align: left;">
+                        User has <b style="color: #d67a31">not verified</b> his/her Email Address.
+                        <div id="tail1" style="left:47px;"></div>
+                        <div id="tail2" style="left:47px;"></div>
+                      </div>
+                    </div>
+                <% end  %>
+              </div>
+              <div class="verified_item">
+                <% if @phone.present? && @phone.verified %>
+                    <div class="bubbleInfo">
+                      <%= image_tag("VerifiedPhone.png", :class => "trigger")%>
+                      <div class="popup" style="text-align: left;">
+                        User has <b style="color: #279227">verified</b> his/her Phone Number.
+                        <div id="tail1" style="left:47px;"></div>
+                        <div id="tail2" style="left:47px;"></div>
+                      </div>
+                    </div>
+                <% else %>
+                    <div class="bubbleInfo">
+                      <%= image_tag("NonVerifiedPhone.png", :class => "trigger")%>
+                      <div class="popup" style="text-align: left;">
+                        User has <b style="color: #d67a31">not verified</b> his/her Phone Number.
+                        <div id="tail1" style="left:47px;"></div>
+                        <div id="tail2" style="left:47px;"></div>
+                      </div>
+                    </div>
+                <% end %>
+              </div>
+              <div class="verified_item">
+                <% if @facebook_authentication.present? %>
+                    <div class="bubbleInfo">
+                      <%= image_tag("VerifiedFB.png", :class => "trigger")%>
+                      <div class="popup" style="text-align: left;">
+                        User has <b style="color:#279227">verified</b> his/her Facebook Account.
+                        <div id="tail1" style="left:47px;"></div>
+                        <div id="tail2" style="left:47px;"></div>
+                      </div>
+                    </div>
+                <% else %>
+                    <div class="bubbleInfo">
+                      <%= image_tag("NonVerifiedFB.png", :class => "trigger")%>
+                      <div class="popup" style="text-align: left;">
+                        User has <b style="color: #d67a31">not verified</b> his/her Facebook Account.
+                        <div id="tail1" style="left:47px;"></div>
+                        <div id="tail2" style="left:47px;"></div>
+                      </div>
+                    </div>
+                <% end  %>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="show_data">
+  <div class="show_title">
+    <% if (current_user?(@request_delivery.user)) || (current_user.try(:admin?)) %>
+        <div class="delete_post_big">
+          <div class="bubbleInfo">
+            <%=  link_to image_tag("delete_post_big.png"), @request_delivery, method: :delete, class: "trigger" %>
+            <div class="popup" style="height:15px; width:160px; margin-top:67px;text-align: center;">
+              <b style="color:#FF0523">Delete</b> your giveaway.
+              <div id="tail1" style="left:37px"></div>
+              <div id="tail2" style="left:37px"></div>
+            </div>
+          </div>
+        </div>
+        <% if @request_delivery.has_all_details %>
+            <div class="has_all_details_big">
+              <div class="bubbleInfo">
+                <%= image_tag("has_all_details_big.png", class: "trigger") %>
+                <div class="popup" style="height:20px; width:315px; margin-top:57px;">
+                  Your request post has <b style="color:#279227">all</b> the necessary details!
+                  <div id="tail1" style="left:37px"></div>
+                  <div id="tail2" style="left:37px"></div>
+                </div>
+              </div>
+            </div>
+        <% end %>
+    <% else  %>
+        <% if @request_delivery.has_all_details %>
+            <div class="has_all_details_big" style="right:3px;">
+              <div class="bubbleInfo">
+                <%= image_tag("has_all_details_big.png", class: "trigger") %>
+                <div class="popup" style="height:20px; width:320px; margin-top:57px;">
+                  This request post has <b style="color:#279227">all</b> the necessary details!
+                  <div id="tail1" style="left:37px"></div>
+                  <div id="tail2" style="left:37px"></div>
+                </div>
+              </div>
+            </div>
+        <% end %>
+    <% end %>
+    <b style="padding-left: 20px;"><%= @request_delivery.what %></b>
+  </div>
+  <div class="the_from_and_to">
+    <div class="the_from_and_to_inner" style="font-size: 20px; background-image: url('../assets/what_small.png');">
+    <div class="inner_title">
+      <b>Item</b>
+    </div>
+    <%= @request_delivery.what %>
+    <% if @request_delivery.user == current_user %>
+        <div class="missing_detail" style="top:1px">
+          <div class="bubbleInfo">
+            <%= link_to image_tag("edit_detail.png"), edit_request_what_path(@request_delivery.id), class:"modal-link trigger",
+                        "data-target" => "#myModal",
+                        "data-toggle" => "modal",
+                        "data-backdrop" => "static" %>
+            <div class="popup" style="height:15px; width:245px; margin-top:65px;text-align: center;">
+              Click to edit <b style="color:#f2ff5e">Item</b> for this giveaway.
+              <div id="tail1" style="left:33px"></div>
+              <div id="tail2" style="left:33px"></div>
+            </div>
+          </div>
+        </div>
+    <% end  %>
+  </div>
+    <div class="the_from_and_to_inner" style="background-image: url('../assets/LocationA_small.png');">
+      <div class="inner_title">
+        <b>From</b>
+      </div>
+      <%= @request_delivery.from %>
+      <% if @request_delivery.user == current_user %>
+          <div class="missing_detail" style="top:1px">
+            <div class="bubbleInfo">
+              <%= link_to image_tag("edit_detail.png"), edit_request_from_path(@request_delivery.id), class:"modal-link trigger",
+                          "data-target" => "#myModal",
+                          "data-toggle" => "modal",
+                          "data-backdrop" => "static" %>
+              <div class="popup" style="height:15px; width:245px; margin-top:65px;text-align: center;">
+                Click to edit <b style="color:#f2ff5e">From</b> for this giveaway.
+                <div id="tail1" style="left:33px"></div>
+                <div id="tail2" style="left:33px"></div>
+              </div>
+            </div>
+          </div>
+      <% end  %>
+    </div>
+  </div>
+  <div class="giveaway_status">
+    Your delivery request hasn't been accepted by anyone yet. Try filling out all the request's details.
+  </div>
+  <div class="post_text_title">
+    <b>Need more details?</b>
+  </div>
+  <div class="show_comments">
+    <%= render 'comments/comments' %>
+  </div>
+</div>

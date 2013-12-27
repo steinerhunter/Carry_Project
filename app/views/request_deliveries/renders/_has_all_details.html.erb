@@ -1,0 +1,12 @@
+<% if @request_delivery.has_all_details %>
+    <div class="has_all_details_big">
+      <div class="bubbleInfo">
+        <%= image_tag("has_all_details_big.png", class: "trigger") %>
+        <div class="popup" style="height:17px; width:300px; margin-top:61px; text-align: center;">
+          This giveaway has <b style="color:#279227">all</b> the necessary details!
+          <div id="tail1" style="left:37px"></div>
+          <div id="tail2" style="left:37px"></div>
+        </div>
+      </div>
+    </div>
+<% end %>

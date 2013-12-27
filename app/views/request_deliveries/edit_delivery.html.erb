@@ -1,0 +1,47 @@
+<div class="edit_delivery_field_wrapper" style=" background-image: url('../assets/Delivery.png');">
+  <%= form_for(@request_delivery, :remote => true ) do |f| %>
+      <div class="edit_delivery_field_delivery">
+        <%= f.label :delivery_type, "Which delivery option do you prefer?" %>
+       <%= f.hidden_field :delivery_type %>
+        <div class="new_delivery" style="width:400px;">
+          <% if @request_delivery.delivery_type.present? && @request_delivery.delivery_type == "myself" %>
+              <div class="delivery_box" id="myself" style="background-color: #d05e0b; background-image: url('../assets/delivery_myself.png');"
+                   onclick="style.backgroundColor='#d05e0b';
+                           document.getElementById('senddme').style.backgroundColor = '#a03eff';
+                           document.getElementById('edit_request_delivery_'+<%= @request_delivery.id %>).request_delivery_delivery_type.value = 'myself';">
+                I'll come to get the item myself.
+                <div class="delivery_price">Price: Free</div>
+              </div>
+          <% else  %>
+              <div class="delivery_box" id="myself" style="background-image: url('../assets/delivery_myself.png');"
+                   onclick="style.backgroundColor='#d05e0b';
+                           document.getElementById('senddme').style.backgroundColor = '#a03eff';
+                           document.getElementById('edit_request_delivery_'+<%= @request_delivery.id %>).request_delivery_delivery_type.value = 'myself';">
+                I'll come to get the item myself.
+                <div class="delivery_price">Price: Free</div>
+              </div>
+          <% end  %>
+          <% if @request_delivery.delivery_type.present? && @request_delivery.delivery_type == "senddme" %>
+          <div class="delivery_box" id="senddme" style="background-color: #d05e0b; background-image: url('../assets/delivery_senddme.png'); margin-left:20px;"
+               onclick="style.backgroundColor='#d05e0b';
+                       document.getElementById('myself').style.backgroundColor = '#a03eff';
+                       document.getElementById('edit_request_delivery_'+<%= @request_delivery.id %>).request_delivery_delivery_type.value = 'senddme';">
+            I'd like someone to get it for me.
+            <div class="delivery_price">Price: <%= @request_delivery.cost %> ILS</div>
+          </div>
+          <% else  %>
+              <div class="delivery_box" id="senddme" style="background-image: url('../assets/delivery_senddme.png'); margin-left:20px;"
+                   onclick="style.backgroundColor='#d05e0b';
+                           document.getElementById('myself').style.backgroundColor = '#a03eff';
+                           document.getElementById('edit_request_delivery_'+<%= @request_delivery.id %>).request_delivery_delivery_type.value = 'senddme';">
+                I'd like someone to get it for me.
+                <div class="delivery_price">Price: <%= @request_delivery.cost %> ILS</div>
+              </div>
+          <% end  %>
+        </div>
+      </div>
+      <div class="edit_update">
+        <%=  f.submit "Update Request" , :id => 'submit_delivery'%>
+      </div>
+  <% end  %>
+</div>

@@ -1,0 +1,36 @@
+<% if @taking_user == current_user %>
+    <% if @request_delivery.status == "Complete" %>
+        <div class="challenge_complete">
+          <b style="font-size:33px">Complete</b>
+        </div>
+    <% elsif @request_delivery.status == "ReceiverConfirmed" ||
+            @request_delivery.status == "WaitingForTransporter" ||
+            @request_delivery.status == "Pending Confirmation" %>
+        <div class="challenge_confirmed">
+          <b style="font-size:33px">Confirmed</b>
+        </div>
+    <% elsif @request_delivery.status == "Taken" && @my_taken_giveaway.present?  %>
+        <b><%= link_to "I don't want it!", take_request_delivery_path(@request_delivery, type: "cancel"), method: :put, class: "challenge_accepted",
+                       style: "background-color: #d67a31; background-image: url('../assets/challenge_cancelled.png');" %></b>
+    <% end %>
+<% elsif @request_delivery.user != current_user  %>
+    <% if @request_delivery.status == "Pending Confirmation" && @accepted_request.present?  %>
+        <b><%= link_to "I won't pick it up!", accept_request_delivery_path(@request_delivery, type: "cancel"), method: :put, class: "challenge_accepted",
+                       style: "background-color: #d67a31; font-size: 35px; background-image: url('../assets/challenge_cancelled.png');" %></b>
+    <% elsif @request_delivery.status == "WaitingForTransporter" || @request_delivery.status == "Pending Confirmation" %>
+        <% if @my_phone.present? && @my_phone.verified %>
+            <b><%= link_to "I'll pick it up!", accept_request_delivery_path(@request_delivery, type: "accept"), method: :put, class: "challenge_accepted" %></b>
+        <% else  %>
+            <% if current_user.nil? %>
+                <% store_location %>
+                <b><%= link_to "I'll pick it up!", signin_path, class: "challenge_accepted" %></b>
+            <% else %>
+                <% store_location %>
+                <b><%=  link_to "I'll pick it up!", pre_verify_request_path(@request_delivery.id,"accept"), class:"challenge_accepted modal-link trigger",
+                                "data-target" => "#myModal",
+                                "data-toggle" => "modal",
+                                "data-backdrop" => "static" %></b>
+            <% end %>
+        <% end  %>
+    <% end %>
+<% end  %>

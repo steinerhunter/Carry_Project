@@ -139,7 +139,7 @@ class RequestDelivery < ActiveRecord::Base
     self.update_attribute(:status, "Complete")
   end
 
-  def transporter_reviewed
+  def review_transporter
     self.update_attribute(:transporter_reviewed, true)
     self.update_attribute(:status, "TransporterReviewed")
   end

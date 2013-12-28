@@ -37,7 +37,7 @@ class UserReviewsController < ApplicationController
           @suggest_delivery.save(validate:false)
         elsif @user_review.req_or_sugg == "request_delivery"
           @request_delivery = RequestDelivery.find_by_id(@user_review.task_id)
-          @request_delivery.transporter_reviewed
+          @request_delivery.review_transporter
         end
         respond_with(@user_review, :location => root_path)
       end

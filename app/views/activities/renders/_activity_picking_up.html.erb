@@ -1,0 +1,14 @@
+<div class="activity_data">
+  <div class="activity_title" style="background-image: url('../assets/box.png');">
+    <b style="padding-left: 70px;">My Pick Ups</b>
+  </div>
+  <div class="sub_activity">
+    <% if @my_accepted_request_feed_items.any? %>
+        <%= render partial: 'shared/activity_request_item', collection: @my_accepted_request_feed_items.sort_by(&:updated_at).reverse %> %>
+    <% else  %>
+        <div class="no_active">
+          You haven't accepted any Pick ups yet.
+        </div>
+    <% end  %>
+  </div>
+</div>

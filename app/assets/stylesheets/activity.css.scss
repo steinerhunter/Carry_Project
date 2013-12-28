@@ -1,6 +1,9 @@
 
 .activity_data {
-  width: 48%;
+  width: 31%;
+  display: inline-block;
+  vertical-align: top;
+  margin-right: 15px;
   background-color: #1d79e2;
   -moz-box-shadow: 5px 5px 5px #6b6b6b; /* Old Firefox */
   box-shadow: 5px 5px 5px #6b6b6b;
@@ -14,9 +17,9 @@
 .activity_title {
   position:relative;
   text-align: left;
-  height:35px;
+  height:37px;
   padding-top:14px;
-  font-size: 2.6em;
+  font-size: 30px;
   border-bottom:solid 2px;
   border-color: #18212e;
   background-color:#00008b;
@@ -92,14 +95,37 @@
 }
 
 .activity_created {
-  float:right;
-  font-size: 13px;
-  margin-right: 5px;
+  position: absolute;
+  font-size: 12px;
+  right:2px;
+  bottom:2px;
+}
+
+.activity_status_inner {
+  text-align: center;
+  width: 220px;
+  background-color: #d05e0b;
+  background-repeat: no-repeat;
+  background-position: bottom center;
+  border:solid 1px;
+  border-radius:7px;
+  -moz-border-radius:10px; /* Old Firefox */
+  color: #ffffff;
+  border-color: #000000;
+  margin-top:10px;
+  margin-bottom:10px;
+  margin-left: auto;
+  margin-right: auto;
+  padding-top: 5px;
+  padding-bottom: 5px;
+  font-size:23px;
+  font-weight: bold;
 }
 
 .activity_content {
   margin-top:10px;
   margin-bottom: 10px;
+  font-size:15px;
 }
 
 .status_and_created {

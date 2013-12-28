@@ -1,0 +1,14 @@
+<div class="activity_data">
+  <div class="activity_title" style="background-image: url('../assets/give_small.png');">
+    <b style="padding-left: 70px;">My Giveaways</b>
+  </div>
+  <div class="sub_activity">
+    <% if @request_feed_items.any? %>
+        <%= render partial: 'shared/activity_request_item', collection: @my_taken_feed_items.sort_by(&:updated_at).reverse %>
+    <% else  %>
+        <div class="no_active">
+          You don't have any posted Giveaways.
+        </div>
+    <% end  %>
+  </div>
+</div>

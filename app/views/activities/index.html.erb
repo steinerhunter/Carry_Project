@@ -1,62 +1,6 @@
 <div class="index_activity">
-    <div class="activity_data" style="float:right">
-      <div class="activity_title" style="background-image: url('../assets/car.png');">
-        <b style="padding-left: 70px;">Delivery Suggestions</b>
-      </div>
-      <div class="sub_activity">
-        <div class="sub_activity_title">
-          <b>My Delivery Suggestions</b>
-        </div>
-        <% if @suggest_feed_items.any? %>
-            <%= render partial: 'shared/activity_suggest_item', collection: @suggest_feed_items %>
-        <% else  %>
-            <div class="no_active">
-                No active delivery suggestions by you.
-            </div>
-        <% end  %>
-      </div>
-      <div class="sub_activity">
-        <div class="sub_activity_title">
-          <b>Others' Delivery Suggestions</b>
-        </div>
-        <% if @my_accepted_suggest_feed_items.any? %>
-            <%= render partial: 'shared/activity_suggest_item', collection: @my_accepted_suggest_feed_items %>
-        <% else  %>
-            <div class="no_active">
-              No active delivery suggestions by others.
-            </div>
-        <% end  %>
-      </div>
-    </div>
-
-  <div class="activity_data">
-    <div class="activity_title" style="background-image: url('../assets/box.png');">
-      <b style="padding-left: 70px;">Delivery Requests</b>
-    </div>
-    <div class="sub_activity">
-      <div class="sub_activity_title">
-        <b>My Delivery Requests</b>
-      </div>
-      <% if @request_feed_items.any? %>
-          <%= render partial: 'shared/activity_request_item', collection: @request_feed_items %>
-      <% else  %>
-          <div class="no_active">
-            No active delivery requests by you.
-          </div>
-      <% end  %>
-    </div>
-    <div class="sub_activity">
-      <div class="sub_activity_title">
-        <b>Others' Delivery Requests</b>
-      </div>
-      <% if @my_accepted_request_feed_items.any? %>
-          <%= render partial: 'shared/activity_request_item', collection: @my_accepted_request_feed_items %>
-      <% else  %>
-          <div class="no_active">
-            No active delivery requests by others.
-          </div>
-      <% end  %>
-    </div>
-  </div>
+  <%= render 'activities/renders/activity_giving' %>
+  <%= render 'activities/renders/activity_taking' %>
+  <%= render 'activities/renders/activity_picking_up' %>
 </div>
 

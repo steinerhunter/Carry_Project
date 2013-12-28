@@ -10,6 +10,10 @@ class ActivitiesController < ApplicationController
     @my_accepted_requests_id = @my_accepted_requests.pluck(:request_delivery_id)
     @my_accepted_request_feed_items = RequestDelivery.find_all_by_id(@my_accepted_requests_id)
 
+    @my_taken_items = TakenGiveaway.where("user_id = ?",current_user.id)
+    @my_taken_items_id = @my_taken_items.pluck(:request_delivery_id)
+    @my_taken_feed_items = RequestDelivery.find_all_by_id(@my_taken_items_id)
+
     @my_requests = RequestDelivery.where("user_id = ?",current_user.id)
     @my_requests_id = @my_requests.pluck(:id)
     @my_requests_accepted = AcceptedRequest.find_all_by_request_delivery_id(@my_requests_id)

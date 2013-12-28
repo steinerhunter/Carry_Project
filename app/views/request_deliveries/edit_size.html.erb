@@ -1,22 +1,22 @@
-<div class="edit_delivery_field_wrapper" style=" background-image: url('../assets/Size.png');">
+<div class="edit_delivery_field_wrapper" style=" text-align:center;background-image: url('../assets/Size.png');">
   <%= form_for(@request_delivery, :remote => true ) do |f| %>
       <div class="edit_delivery_field_size">
-        <%= f.label :size, "How big is your delivery?" %>
+        <%= f.label :size, "How big is your item?" %>
        <%= f.hidden_field :size %>
-        <div class="new_size" style="width:400px;">
+        <div class="new_size" style="width:300px;text-align: center;margin-left: auto;margin-right: auto;margin-top:20px;">
           <% if @request_delivery.size.present? && @request_delivery.size == "Small" %>
               <div class="size_box" id="small" style="background-color: #d05e0b; background-image: url('../assets/mouse.png');"
                    onclick="style.backgroundColor='#d05e0b';
-                           document.getElementById('medium').style.backgroundColor = '#bcbcbc';
-                           document.getElementById('large').style.backgroundColor = '#bcbcbc';
+                           document.getElementById('medium').style.backgroundColor = '#a03eff';
+                           document.getElementById('large').style.backgroundColor = '#a03eff';
                            document.getElementById('edit_request_delivery_'+<%= @request_delivery.id %>).request_delivery_size.value = 'Small';">
                 Small
               </div>
           <% else  %>
               <div class="size_box" id="small" style="background-image: url('../assets/mouse.png');"
                    onclick="style.backgroundColor='#d05e0b';
-                           document.getElementById('medium').style.backgroundColor = '#bcbcbc';
-                           document.getElementById('large').style.backgroundColor = '#bcbcbc';
+                           document.getElementById('medium').style.backgroundColor = '#a03eff';
+                           document.getElementById('large').style.backgroundColor = '#a03eff';
                            document.getElementById('edit_request_delivery_'+<%= @request_delivery.id %>).request_delivery_size.value = 'Small';">
                 Small
               </div>
@@ -24,16 +24,16 @@
           <% if @request_delivery.size.present? && @request_delivery.size == "Medium" %>
           <div class="size_box" id="medium" style="background-color: #d05e0b; background-image: url('../assets/lamp.png'); margin-left:20px;"
                onclick="style.backgroundColor='#d05e0b';
-                       document.getElementById('small').style.backgroundColor = '#bcbcbc';
-                       document.getElementById('large').style.backgroundColor = '#bcbcbc';
+                       document.getElementById('small').style.backgroundColor = '#a03eff';
+                       document.getElementById('large').style.backgroundColor = '#a03eff';
                        document.getElementById('edit_request_delivery_'+<%= @request_delivery.id %>).request_delivery_size.value = 'Medium';">
             Medium
           </div>
           <% else  %>
               <div class="size_box" id="medium" style="background-image: url('../assets/lamp.png'); margin-left:20px;"
                    onclick="style.backgroundColor='#d05e0b';
-                           document.getElementById('small').style.backgroundColor = '#bcbcbc';
-                           document.getElementById('large').style.backgroundColor = '#bcbcbc';
+                           document.getElementById('small').style.backgroundColor = '#a03eff';
+                           document.getElementById('large').style.backgroundColor = '#a03eff';
                            document.getElementById('edit_request_delivery_'+<%= @request_delivery.id %>).request_delivery_size.value = 'Medium';">
                 Medium
               </div>
@@ -41,16 +41,16 @@
           <% if @request_delivery.size.present? && @request_delivery.size == "Large" %>
           <div class="size_box" id="large" style="background-color: #d05e0b; background-image: url('../assets/table.png'); margin-left:20px;"
                onclick="style.backgroundColor='#d05e0b';
-                       document.getElementById('small').style.backgroundColor = '#bcbcbc';
-                       document.getElementById('medium').style.backgroundColor = '#bcbcbc';
+                       document.getElementById('small').style.backgroundColor = '#a03eff';
+                       document.getElementById('medium').style.backgroundColor = '#a03eff';
                        document.getElementById('edit_request_delivery_'+<%= @request_delivery.id %>).request_delivery_size.value = 'Large';">
             Large
           </div>
           <% else  %>
               <div class="size_box" id="large" style="background-image: url('../assets/table.png'); margin-left:20px;"
                    onclick="style.backgroundColor='#d05e0b';
-                           document.getElementById('small').style.backgroundColor = '#bcbcbc';
-                           document.getElementById('medium').style.backgroundColor = '#bcbcbc';
+                           document.getElementById('small').style.backgroundColor = '#a03eff';
+                           document.getElementById('medium').style.backgroundColor = '#a03eff';
                            document.getElementById('edit_request_delivery_'+<%= @request_delivery.id %>).request_delivery_size.value = 'Large';">
                 Large
               </div>
@@ -58,7 +58,7 @@
         </div>
       </div>
       <div class="edit_update">
-        <%=  f.submit "Update Request" , :id => 'submit_delivery'%>
+        <%=  f.submit "Update Details" , :id => 'submit_delivery'%>
       </div>
   <% end  %>
 </div>

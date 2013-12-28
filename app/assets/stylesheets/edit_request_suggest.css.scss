@@ -167,8 +167,21 @@
   margin-bottom:18px;
   margin-left: 100px;
   border:solid 1px #000;
+}
 
-}.edit_delivery_field_from label {
+.edit_delivery_field_size label {
+  display:inline-block;
+  text-align: center;
+  font-size:35px;
+  font-weight: bold;
+  line-height:130%;
+  background-repeat: no-repeat;
+  background-position: bottom left;
+  padding-left:15px;
+  color: #f2ff5e;
+}
+
+.edit_delivery_field_from label {
   width:60px;
   display:inline-block;
   text-align: center;

@@ -18,11 +18,13 @@
   <b style="padding-left: 20px;"><%= @request_delivery.what %></b>
 </div>
 <div class="the_deadline_and_money">
-<div class="the_from_and_to_inner" style="font-size: 20px; background-image: url('../assets/what_small.png');">
+<div class="the_from_and_to_inner" style="font-size: 20px; background-image: url('../assets/size_small.png');">
   <div class="inner_title">
-    <b>Item</b>
+    <b>Size</b>
   </div>
-  <%= @request_delivery.what %>
+  <div class="delivery_size">
+    <%= @request_delivery.size %>
+  </div>
 </div>
 <% if @show_bounty %>
     <div class="the_money_and_the_deadline_inner" style="background-image: url('../assets/money_small.png');">

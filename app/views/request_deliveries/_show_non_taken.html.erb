@@ -156,20 +156,22 @@
     <b style="padding-left: 20px;"><%= @request_delivery.what %></b>
   </div>
   <div class="the_from_and_to">
-    <div class="the_from_and_to_inner" style="font-size: 20px; background-image: url('../assets/what_small.png');">
+    <div class="the_from_and_to_inner" style="font-size: 20px; background-image: url('../assets/size_small.png');">
     <div class="inner_title">
-      <b>Item</b>
+      <b>Size</b>
     </div>
-    <%= @request_delivery.what %>
+      <div class="delivery_size">
+        <%= @request_delivery.size %>
+      </div>
     <% if @request_delivery.user == current_user %>
         <div class="missing_detail" style="top:1px">
           <div class="bubbleInfo">
-            <%= link_to image_tag("edit_detail.png"), edit_request_what_path(@request_delivery.id), class:"modal-link trigger",
+            <%= link_to image_tag("edit_detail.png"), edit_request_size_path(@request_delivery.id), class:"modal-link trigger",
                         "data-target" => "#myModal",
                         "data-toggle" => "modal",
                         "data-backdrop" => "static" %>
             <div class="popup" style="height:15px; width:245px; margin-top:65px;text-align: center;">
-              Click to edit <b style="color:#f2ff5e">Item</b> for this giveaway.
+              Click to edit <b style="color:#f2ff5e">Size</b> for this giveaway.
               <div id="tail1" style="left:33px"></div>
               <div id="tail2" style="left:33px"></div>
             </div>

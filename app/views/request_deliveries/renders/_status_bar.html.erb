@@ -2,7 +2,7 @@
     <% if @request_delivery.status == "Taken" %>
         <%= image_tag("StatusBarWanted.png") %>
     <% elsif @request_delivery.status == "ReceiverConfirmed" %>
-        <%= image_tag("StatusBarTransporterConfirmedLess.png") %>
+        <%= image_tag("StatusBarTransporterFoundLess.png") %>
     <% elsif @request_delivery.status == "WaitingForTransporter" ||
                        @request_delivery.status == "Pending Confirmation" %>
         <%= image_tag("StatusBarDetailsConfirmed.png") %>
@@ -21,7 +21,7 @@
         <% if @request_delivery.status == "Taken" %>
         <%= image_tag("StatusBarWantedLess.png") %>
     <% elsif @request_delivery.status == "ReceiverConfirmed" %>
-        <%= image_tag("StatusBarTransporterConfirmedLess.png") %>
+        <%= image_tag("StatusBarTransporterFoundLess.png") %>
     <% elsif @request_delivery.status == "WaitingForTransporter" ||
                        @request_delivery.status == "Pending Confirmation" %>
         <%= image_tag("StatusBarDetailsConfirmedLess.png") %>

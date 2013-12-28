@@ -10,7 +10,7 @@
 </div>
 <div class="show_data">
 <div class="show_title">
-  <% if (current_user?(@request_delivery.user)) || (current_user.try(:admin?)) %>
+  <% if ((current_user?(@request_delivery.user)) || (current_user.try(:admin?))) && @request_delivery.status == "Open" %>
       <%= render 'request_deliveries/renders/delete_post' %>
   <% else  %>
       <%= render 'request_deliveries/renders/has_all_details' %>
@@ -61,5 +61,7 @@
       <%= render 'request_deliveries/renders/ar_transporter' %>
 <% elsif @request_delivery.user == current_user  %>
       <%= render 'request_deliveries/renders/ar_giving_user' %>
+  <% else  %>
+      <%= render 'request_deliveries/renders/ar_potential_transporter' %>
   <% end  %>
 </div>

@@ -139,6 +139,11 @@ class RequestDelivery < ActiveRecord::Base
     self.update_attribute(:status, "Complete")
   end
 
+  def transporter_reviewed
+    self.update_attribute(:transporter_reviewed, true)
+    self.update_attribute(:status, "TransporterReviewed")
+  end
+
   def confirmed_taker
     @giveaway = TakenGiveaway.find_by_request_delivery_id_and_taken(self.id,true)
     User.find_by_id(@giveaway.user_id)

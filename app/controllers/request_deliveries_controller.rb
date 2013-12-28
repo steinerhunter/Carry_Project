@@ -23,14 +23,21 @@ class RequestDeliveriesController < ApplicationController
       @my_phone = Phone.find_by_user_id(current_user.id)
 
       @show_bounty = (@request_delivery.status == "WaitingForTransporter" ||
-                                        @request_delivery.status == "Pending Confirmation") &&
+                                        @request_delivery.status == "Pending Confirmation" ||
+                                        @request_delivery.status == "Confirmed" ||
+                                        @request_delivery.status == "Complete" ||
+                                        @request_delivery.status == "TransporterReviewed") &&
                                         @request_delivery.user != current_user &&
                                         @taking_user != current_user
 
       @non_editable = @request_delivery.status == "ReceiverConfirmed" ||
                                          @request_delivery.status == "WaitingForTransporter" ||
                                          @request_delivery.status == "Pending Confirmation" ||
-                                         @request_delivery.status == "Complete"
+                                         @request_delivery.status == "Complete" ||
+                                         @request_delivery.status == "TransporterReviewed"
+
+      @after_delivery = @request_delivery.status == "Complete" ||
+                                              @request_delivery.status == "TransporterReviewed"
 
       @big_sender_receiver = @request_delivery.status == "ReceiverConfirmed" ||
                                                           @request_delivery.status == "Confirmed"

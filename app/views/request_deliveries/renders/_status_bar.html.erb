@@ -1,26 +1,46 @@
-<% if @taking_user == current_user || @request_delivery.user == current_user %>
+<% if @taking_user == current_user %>
     <% if @request_delivery.status == "Taken" %>
         <%= image_tag("StatusBarWanted.png") %>
     <% elsif @request_delivery.status == "ReceiverConfirmed" %>
         <%= image_tag("StatusBarTransporterConfirmedLess.png") %>
     <% elsif @request_delivery.status == "WaitingForTransporter" ||
                        @request_delivery.status == "Pending Confirmation" %>
-        <%= image_tag("StatusBarConfirmed.png") %>
+        <%= image_tag("StatusBarDetailsConfirmed.png") %>
+    <% elsif @request_delivery.status == "Confirmed" %>
+        <%= image_tag("StatusBarTransporterFound.png") %>
     <% elsif @request_delivery.status == "Complete" %>
         <% if @request_delivery.delivery_type == "myself" %>
             <%= image_tag("StatusBarItemReceivedLess.png") %>
         <% elsif @request_delivery.delivery_type == "senddme" %>
             <%= image_tag("StatusBarItemReceived.png") %>
         <% end  %>
+    <% elsif @request_delivery.status == "TransporterReviewed" %>
+        <%= image_tag("StatusBarTransporterReviewed.png") %>
+    <% end  %>
+<% elsif @request_delivery.user == current_user  %>
+        <% if @request_delivery.status == "Taken" %>
+        <%= image_tag("StatusBarWantedLess.png") %>
+    <% elsif @request_delivery.status == "ReceiverConfirmed" %>
+        <%= image_tag("StatusBarTransporterConfirmedLess.png") %>
+    <% elsif @request_delivery.status == "WaitingForTransporter" ||
+                       @request_delivery.status == "Pending Confirmation" %>
+        <%= image_tag("StatusBarDetailsConfirmedLess.png") %>
+    <% elsif @request_delivery.status == "Confirmed" %>
+        <%= image_tag("StatusBarTransporterFoundLess.png") %>
+    <% elsif @after_delivery %>
+            <%= image_tag("StatusBarItemReceivedLess.png") %>
     <% end  %>
 <% else %>
     <% if @request_delivery.status == "Confirmed" %>
-        <%= image_tag("StatusBarConfirmed.png") %>
+        <%= image_tag("StatusBarConfirmedForPickUp.png") %>
     <% elsif @accepted_request.present? && @request_delivery.status == "Pending Confirmation" %>
-        <%= image_tag("StatusBarAccepted.png") %>
-    <% elsif @request_delivery.status == "ReceiverConfirmed" ||
-            @request_delivery.status == "WaitingForTransporter" ||
+        <%= image_tag("StatusBarPickUpAccepted.png") %>
+    <% elsif @request_delivery.status == "WaitingForTransporter" ||
             @request_delivery.status == "Pending Confirmation" %>
-        <%= image_tag("StatusBarOpen.png") %>
+        <%= image_tag("StatusBarPickUpOpen.png") %>
+    <% elsif @request_delivery.status == "Complete" %>
+        <%= image_tag("StatusBarItemDelivered.png") %>
+    <% elsif @request_delivery.status == "TransporterReviewed" %>
+        <%= image_tag("StatusBarTransporterReviewed.png") %>
     <% end  %>
 <% end %>

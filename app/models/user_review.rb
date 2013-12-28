@@ -7,8 +7,8 @@ class UserReview < ActiveRecord::Base
   validates :req_or_sugg, :presence => true
   validates :task_id, :presence => true
   validates :job_type, :presence => true
-  validates :pos_or_neg, :presence => { :message => "Your experience was either Good or Bad, right?"}
-  validates :review_content, :presence => { :message => "Please add a sentence about your experience..."}
+  validates :pos_or_neg, :presence => { :message => "Your Transporter was either Good or Bad, right?"}
+  validates :review_content, :presence => { :message => "Please add a sentence about your Transporter."}
 
   def from_user
     User.find_by_id(self.from_user_id)

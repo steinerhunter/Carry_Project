@@ -1,0 +1,21 @@
+<% if @accepted_request.present? && @request_delivery.status == "Pending Confirmation" %>
+    <div class="giveaway_status_wrapper">
+      <div class="giveaway_status_title">
+        Pick up Accepted
+        <div class="giveaway_status_data">
+          You've chosen to accept this Pick up request.<br>
+          Please be patient until <%= link_to @taking_user.name, @taking_user %> confirms you.
+        </div>
+      </div>
+    </div>
+<% elsif @request_delivery.status == "WaitingForTransporter" ||
+        @request_delivery.status == "Pending Confirmation" %>
+    <div class="giveaway_status_wrapper">
+      <div class="giveaway_status_title">
+        Pick up Open
+        <div class="giveaway_status_data">
+          This Pick up request is open for grabs!
+        </div>
+      </div>
+    </div>
+<% end %>

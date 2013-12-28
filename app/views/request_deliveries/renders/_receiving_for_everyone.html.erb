@@ -18,13 +18,13 @@
       <% end %>
   <% else %>
       <% if @taking_user == current_user %>
-          <% if @request_delivery.status == "Complete" %>
+          <% if @after_delivery %>
               <b>We've had </b><b style="color:#f2ff5e">You</b><b> receiving this item in </b><b style="color:#f35044">Point B</b><b>!</b>
           <% else %>
               <b>We have </b><b style="color:#f2ff5e">You</b><b> receiving this item in </b><b style="color:#f35044">Point B</b><b>!</b>
           <% end  %>
       <% else %>
-          <% if @request_delivery.status == "Complete" %>
+          <% if @after_delivery %>
               <b>We've had </b><b style="color:#f2ff5e"><%= link_to @taking_user.name, @taking_user %></b><b> receiving this item in </b><b style="color:#f35044">Point B</b><b>!</b>
           <% else %>
               <b>We have </b><b style="color:#f2ff5e"><%= link_to @taking_user.name, @taking_user %></b><b> receiving this item in </b><b style="color:#f35044">Point B</b><b>!</b>

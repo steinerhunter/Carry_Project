@@ -8,15 +8,15 @@
                        :class =>"ready_to_go" %>
         </div>
     <% end  %>
-        <div class="giveaway_status_wrapper">
-          <div class="giveaway_status_title">
-            Waiting for details
-            <div class="giveaway_status_data">
-              We're waiting for <b style="color:#f2ff5e">You</b> to add the missing details (<b style="color:#f2ff5e">To</b> and
-              <b style="color:#f2ff5e"> Delivery Option</b>) and confirm.
-            </div>
-          </div>
+    <div class="giveaway_status_wrapper">
+      <div class="giveaway_status_title">
+        Waiting for details
+        <div class="giveaway_status_data">
+          We're waiting for <b style="color:#f2ff5e">You</b> to add the missing details (<b style="color:#f2ff5e">To</b> and
+          <b style="color:#f2ff5e"> Delivery Option</b>) and confirm.
         </div>
+      </div>
+    </div>
 <% elsif @request_delivery.status == "ReceiverConfirmed" && @request_delivery.delivery_type == "myself" %>
     <div class="the_transporter">
       <div class="the_transporter_inner"  style="background-image: url('../assets/transporting_small.png');text-align:left">
@@ -114,7 +114,7 @@
     </div>
     <div class="giveaway_status_wrapper">
       <div class="giveaway_status_title">
-        Transporter on the way!
+        Transporter on the way
         <div class="giveaway_status_data">
           You've confirmed <%= link_to @transporter.name, @transporter %>
           to pick up your item. <br>
@@ -137,18 +137,51 @@
         <b> (to </b><b style="color:#f2ff5e">You</b><b>).</b><br>
       </div>
     </div>
-    <div class="ready_to_go_wrapper" style="margin-bottom: 20px;">
-      <%=  link_to "Go get other stuff!", giveaways_path, class: "go_get_other" %>
+    <div class="review_transporter_wrapper" style="margin-bottom: 20px;">
+      <%=  link_to "Review Transporter", review_path(@request_delivery.id), class:"review_transporter modal-link trigger",
+                   "data-target" => "#myModal",
+                   "data-toggle" => "modal",
+                   "data-backdrop" => "static" %>
     </div>
     <div class="giveaway_status_wrapper">
       <div class="giveaway_status_title">
-        Item received!
+        Item received
         <div class="giveaway_status_data">
           <% if @request_delivery.delivery_type == "myself" %>
               You've successfully picked up <b style="color:#f2ff5e"><%= @request_delivery.what %></b> from <b><%= link_to @request_delivery.user.name, @request_delivery.user %></b>!
           <% elsif @request_delivery.delivery_type == "senddme" %>
-              <b>We've had <%= link_to @transporter.name, @transporter  %></b><b> picking up this item from </b><b style="color:#6fba33"> Point A</b>
+              We've had <b><%= link_to @transporter.name, @transporter  %></b> picking up <b style="color:#f2ff5e"><%= @request_delivery.what %></b> from <b><%= link_to @request_delivery.user.name, @request_delivery.user %></b>
+              to <b style="color:#f2ff5e">You</b>.<br>
+              The PayPal transaction has been successful.<br>
+              Please take a few seconds to review <b><%= link_to @transporter.name, @transporter  %></b>.
           <% end  %>
+        </div>
+      </div>
+    </div>
+<% elsif @request_delivery.status == "TransporterReviewed" %>
+    <div class="the_transporter">
+      <div class="the_transporter_inner"  style="background-image: url('../assets/transporting_small.png');text-align:left">
+        <div class="inner_title" style="padding-left: 55px;" >
+          <b>Transporting</b>
+        </div>
+        <% if @request_delivery.delivery_type == "myself" %>
+            <b>We've had </b><b style="color:#f2ff5e">You</b><b> picking up this item from </b><b style="color:#6fba33"> Point A</b>
+        <% elsif @request_delivery.delivery_type == "senddme" %>
+            <b>We've had <%= link_to @transporter.name, @transporter  %></b><b> picking up this item from </b><b style="color:#6fba33"> Point A</b>
+        <% end  %>
+        <b> (from <%= link_to @request_delivery.user.name, @request_delivery.user %>) and deliverying it to</b><b style="color:#f35044"> Point B</b>
+        <b> (to </b><b style="color:#f2ff5e">You</b><b>).</b><br>
+      </div>
+    </div>
+    <div class="ready_to_go_wrapper" style="margin-bottom: 20px;">
+      <%=  link_to "Go get more stuff", giveaways_path, class: "go_get_other" %>
+    </div>
+    <div class="giveaway_status_wrapper">
+      <div class="giveaway_status_title">
+        Transporter Reviewed
+        <div class="giveaway_status_data">
+          Thank you for reviewing <b><%= link_to @transporter.name, @transporter  %></b>!<br>
+          Go ahead, get other stuff!
         </div>
       </div>
     </div>

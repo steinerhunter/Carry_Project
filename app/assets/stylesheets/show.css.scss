@@ -439,6 +439,53 @@
   cursor:pointer;
 }
 
+.review_transporter_wrapper {
+  width: 530px;
+  margin-top: 10px;
+  margin-bottom: 15px;
+  line-height: 30px;
+  text-align: center;
+  margin-right: auto;
+  margin-left: auto;
+  a {
+    color: #ffffff !important;
+    text-decoration: none !important;
+    &:hover {
+      color: #f2ff5e !important;
+    }
+  }
+
+}.review_transporter {
+  text-align: center;
+  width: 520px;
+  height: 65px;
+  line-height: 140%;
+  background-color: #257b2a;
+  background-repeat: no-repeat;
+  background-position: bottom center;
+  -moz-box-shadow: 3px 3px 3px #3d3d3d; /* Old Firefox */
+  box-shadow: 3px 3px 3px #3d3d3d;
+  border:solid 1px;
+  border-radius:7px;
+  -moz-border-radius:10px; /* Old Firefox */
+  color: #ffffff;
+  border-color: #000000;
+  margin-top:10px;
+  margin-bottom:10px;
+  margin-left: auto;
+  margin-right: auto;
+  padding:45px;
+  padding-top: 5px;
+  padding-bottom: 5px;
+  font-size:45px;
+  font-weight: bold;
+}
+
+.review_transporter:hover{
+  background-color: #1d79e2;
+  cursor:pointer;
+}
+
  .ok_got_it {
      text-align: center;
      width: 520px;

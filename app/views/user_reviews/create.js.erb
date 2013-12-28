@@ -24,6 +24,5 @@ $('<div />').addClass('user_review_errors').html(errors).appendTo("#new_user_rev
 <% else %>
 
 // On successful creation of new user review, redirect to main page
-    <% url = activity_path %>
-    window.location.href = "<%= url %>"
+    window.location.href = "<%=request_delivery_url(@request_delivery) %>"
 <% end %>

@@ -88,7 +88,7 @@ TheCarryProject::Application.routes.draw do
 
   match "empty_trash" => "users#empty_trash"
 
-  match '/review', to: 'user_reviews#new'
+  match '/review/:request_delivery_id', to: 'user_reviews#new', as:'review'
 
   # Facebook authentication
   match '/auth/new' => 'authentications#new'

@@ -1,5 +1,5 @@
 <% if @request_delivery.status == "Confirmed" %>
-    <div class="the_transporter">
+    <div class="the_transporter" xmlns="http://www.w3.org/1999/html">
       <div class="the_transporter_inner"  style="background-image: url('../assets/transporting_small.png');text-align:left">
         <div class="inner_title" style="padding-left: 55px;" >
           <b>Transporting</b>
@@ -15,5 +15,58 @@
                    "data-target" => "#myModal",
                    "data-toggle" => "modal",
                    "data-backdrop" => "static" %>
+    </div>
+    <div class="giveaway_status_wrapper">
+      <div class="giveaway_status_title">
+        Confirmed for Pick up
+        <div class="giveaway_status_data">
+          You are confirmed for this Pick up! <br>
+          You should call <%= link_to @request_delivery.user.name, @request_delivery.user  %> and <%= link_to @taking_user.name, @taking_user %> and set up pick up and delivery times.
+        </div>
+      </div>
+    </div>
+<% elsif @request_delivery.status == "Complete" %>
+    <div class="the_transporter">
+      <div class="the_transporter_inner"  style="background-image: url('../assets/transporting_small.png');text-align:left">
+        <div class="inner_title" style="padding-left: 55px;" >
+          <b>Transporting</b>
+        </div>
+        <b>We've had </b><b style="color:#f2ff5e">You</b><b> picking up this item from </b><b style="color:#6fba33"> Point A</b>
+        <b> (from <%= link_to @request_delivery.user.name, @request_delivery.user %>) and deliverying it to</b><b style="color:#f35044"> Point B</b>
+        <b> (to <%= link_to @taking_user.name, @taking_user %>).</b><br>
+      </div>
+    </div>
+    <div class="giveaway_status_wrapper">
+      <div class="giveaway_status_title">
+        Item Delivered
+        <div class="giveaway_status_data">
+          You've delivered the item. <br>
+          The PayPal transaction has been successful.<br>
+          We're now waiting for <b><%= link_to @taking_user.name, @taking_user %></b> to submit your review.
+        </div>
+      </div>
+    </div>
+<% elsif @request_delivery.status == "TransporterReviewed" %>
+    <div class="the_transporter">
+      <div class="the_transporter_inner"  style="background-image: url('../assets/transporting_small.png');text-align:left">
+        <div class="inner_title" style="padding-left: 55px;" >
+          <b>Transporting</b>
+        </div>
+        <b>We've had </b><b style="color:#f2ff5e">You</b><b> picking up this item from </b><b style="color:#6fba33"> Point A</b>
+        <b> (from <%= link_to @request_delivery.user.name, @request_delivery.user %>) and deliverying it to</b><b style="color:#f35044"> Point B</b>
+        <b> (to <%= link_to @taking_user.name, @taking_user %>).</b><br>
+      </div>
+    </div>
+    <div class="ready_to_go_wrapper" style="margin-bottom: 20px;">
+      <%=  link_to "Pick up more stuff", pickups_path, class: "go_get_other" %>
+    </div>
+    <div class="giveaway_status_wrapper">
+      <div class="giveaway_status_title">
+        Transporter Reviewed
+        <div class="giveaway_status_data">
+          <b><%= link_to @taking_user.name, @taking_user %></b> has posted a review about you!
+          Go ahead, help other people with their Pick ups!
+        </div>
+      </div>
     </div>
 <% end  %>

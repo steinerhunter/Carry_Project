@@ -1,23 +1,16 @@
 <div class="search_posts">
   <div class="search_title">
-    <b>Delivery Requests</b>
+    <b>Giveaways</b>
   </div>
   <%= form_for @search, :url => giveaways_path, :html => {:method => :get} do |f| %>
       <div class="search_fields">
         <div class="myfield_search">
-          <%= f.label :from_contains, "From" %>
+          <%= f.label :from_contains, "I'm looking for stuff from" %>
           <%= f.text_field :from_contains, :class => "address_field" %>
-          <%= f.label :to_contains, "To" %>
-          <%= f.text_field :to_contains, :class => "address_field" %>
           <%=  f.submit "Filter" , :id => 'submit_filter'%>
         </div>
       </div>
   <% end %>
-</div>
-<div class="add_your_own">
-  <div class="transport_button_index"  onclick="location.href='/suggest'">
-    <b>Pick up for someone.</b>
-  </div>
 </div>
 <div class="requestposts">
   <% if @request_feed_items.any? %>

@@ -11,6 +11,13 @@ class NotifMailer < ActionMailer::Base
     mail(:to => user.email, :subject => "Password Reset Instructions")
   end
 
+  def new_comment(creating_user,commenting_user,request_delivery)
+    @creating_user = creating_user
+    @commenting_user = commenting_user
+    @request_delivery = request_delivery
+    mail(:to => @creating_user.email, :subject => "#{commenting_user.name} has commented on your giveaway!")
+  end
+
   def new_taken_giveaway(creating_user,taking_user,request_delivery)
     @creating_user = creating_user
     @taking_user = taking_user

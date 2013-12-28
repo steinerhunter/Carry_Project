@@ -18,10 +18,12 @@ class CommentsController < ApplicationController
       session[:comment_content] = nil
       @comment.user_id = current_user.id
       if @comment.save
+        if Rails.env.production?
+          NotifMailer.new_comment(@commentable.user,@comment.user,@commentable).deliver
+        end
         respond_with @commentable, :location => @commentable
       end
     end
-
   end
 
   def destroy

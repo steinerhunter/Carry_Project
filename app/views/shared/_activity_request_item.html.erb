@@ -1,4 +1,4 @@
-<div class="activity_feed_item" xmlns="http://www.w3.org/1999/html">
+<div class="activity_feed_item" xmlns="http://www.w3.org/1999/html" xmlns="http://www.w3.org/1999/html">
 <% if activity_request_item.has_all_details %>
     <div class="has_all_details">
       <div class="bubbleInfo">
@@ -42,7 +42,7 @@
             Giveaway <br> Wanted
           </div>
           You want this Giveaway - no problem!<br>
-          We just need  you to add where <b style="color:#f2ff5e">To</b> and select <b style="color:#f2ff5e">Delivery Option</b>.
+          We just need  you to add where <b style="color:#f2ff5e">To</b> and select a <b style="color:#f2ff5e">Delivery Option</b>.
           <div class="activity_created">
             Updated: <%= activity_request_item.updated_at.strftime("%d/%m/%Y") %>
           </div>
@@ -50,15 +50,15 @@
     <% end  %>
 <% elsif activity_request_item.status == "ReceiverConfirmed" %>
     <% if activity_request_item.user == current_user  %>
-    <div class="activity_content">
-      <div class="activity_status_inner">
-        Transporter <br> Found
-      </div>
-      Your Giveaway is to be picked up by <b><%= link_to activity_request_item.confirmed_taker.name, activity_request_item.confirmed_taker  %></b>.
-      <div class="activity_created">
-        Updated: <%= activity_request_item.updated_at.strftime("%d/%m/%Y") %>
-      </div>
-    </div>
+        <div class="activity_content">
+          <div class="activity_status_inner">
+            Transporter <br> Found
+          </div>
+          Your Giveaway is to be picked up by <b><%= link_to activity_request_item.confirmed_taker.name, activity_request_item.confirmed_taker  %></b>.
+          <div class="activity_created">
+            Updated: <%= activity_request_item.updated_at.strftime("%d/%m/%Y") %>
+          </div>
+        </div>
     <% elsif activity_request_item.confirmed_taker == current_user %>
         <div class="activity_content">
           <div class="activity_status_inner">
@@ -72,16 +72,29 @@
         </div>
     <% end  %>
 <% elsif activity_request_item.status == "WaitingForTransporter" %>
-    <div class="activity_content">
-      <div class="activity_status_inner">
-        Details <br> Confirmed
-      </div>
-      <b><%= link_to activity_request_item.confirmed_taker.name, activity_request_item.confirmed_taker  %></b> has confirmed his/her details for your Giveaway.<br>
-      We're now locating a Transporter for the Pick up.
-      <div class="activity_created">
-        Updated: <%= activity_request_item.updated_at.strftime("%d/%m/%Y") %>
-      </div>
-    </div>
+    <% if activity_request_item.user == current_user  %>
+        <div class="activity_content">
+          <div class="activity_status_inner">
+            Details <br> Confirmed
+          </div>
+          <b><%= link_to activity_request_item.confirmed_taker.name, activity_request_item.confirmed_taker  %></b> has confirmed his/her details for your Giveaway.<br>
+          We're now locating a Transporter for the Pick up.
+          <div class="activity_created">
+            Updated: <%= activity_request_item.updated_at.strftime("%d/%m/%Y") %>
+          </div>
+        </div>
+    <% elsif activity_request_item.confirmed_taker == current_user %>
+        <div class="activity_content">
+          <div class="activity_status_inner">
+            Details <br> Confirmed
+          </div>
+          You've confirmed where <b style="color:#f2ff5e">To</b> and a <b style="color:#f2ff5e">Delivery Option</b>.<br>
+          We're now locating a Transporter for the Pick up.
+          <div class="activity_created">
+            Updated: <%= activity_request_item.updated_at.strftime("%d/%m/%Y") %>
+          </div>
+        </div>
+    <% end %>
 <% elsif activity_request_item.status == "Pending Confirmation" %>
     <% if activity_request_item.user == current_user  %>
         <div class="activity_content">
@@ -96,16 +109,14 @@
         </div>
     <% elsif activity_request_item.confirmed_taker == current_user %>
         <div class="activity_content">
-          Your delivery request has been accepted!<br>
-          After confirming someone, you will be redirected to PayPal for Preapproved Payment Authorization.
-          <% @my_requests_accepted.each do |my_request_accepted| %>
-              <% @users.each do |user| %>
-                  <% if user.id == my_request_accepted.user_id &&
-                          activity_request_item.id == my_request_accepted.request_delivery_id &&
-                          my_request_accepted.confirmed == false %>
-
-                  <% end  %>
-              <% end  %>
+          <div class="activity_status_inner">
+            Details <br> Confirmed
+          </div>
+          You've got Pick up offers:<br>
+          <% activity_request_item.possible_transporters.each do |possible_transporter| %>
+              <div class="possible_transporter">
+                <b><%= link_to possible_transporter.name, possible_transporter %></b> can pick it up!
+              </div>
           <% end  %>
         </div>
     <% else  %>
@@ -127,37 +138,14 @@
           </div>
         </div>
     <% elsif activity_request_item.confirmed_taker == current_user %>
-        <div class="activity_content">
-          You have confirmed this person for your delivery request! <br>
-          You now must wait until he/she has completed the task.
-          <div class="send_messages_to_users" style="background-color: #257b2a;border:1px solid;border-color: #000000;">
-            <div class="needs_to_confirm">
-              <% if activity_request_item.when.present? && (Time.now + 3.days > activity_request_item.when)%>
-              <% else  %>
-                  <div class="confirm_me" style="right:35px">
-                    <div class="bubbleInfo">
-                      <%=  link_to image_tag("Cancel.png"), pre_cancel_request_path(activity_request_item.accepted_request_confirmed.id), class:"modal-link trigger",
-                                   "data-target" => "#myModal",
-                                   "data-toggle" => "modal",
-                                   "data-backdrop" => "static" %>
-                      <div class="popup" style="height:20px; width:205px; margin-top:57px;">
-                        <b style="color:#d05e0b;">Cancel</b> Preapproved payment.
-                        <div id="tail1" style="left:36px"></div>
-                        <div id="tail2" style="left:36px"></div>
-                      </div>
-                    </div>
-                  </div>
-              <% end  %>
-              <b style="color:#f2ff5e"><%= link_to activity_request_item.accepted_request_confirmed.other_user_for_request.name,
-                                                   activity_request_item.accepted_request_confirmed.other_user_for_request  %></b> is confirmed!
-            </div>
+            <div class="activity_content">
+          <div class="activity_status_inner">
+            Transporter <br> Found
           </div>
-          <div class="send_messages_to_users" style="background-color: #7b337a;border:1px solid;border-color: #000000;">
-            <div class="needs_to_confirm">
-              Call transporter (<b style="color:#f2ff5e"><%= link_to activity_request_item.accepted_request_confirmed.other_user_for_request.name,
-                                                                     activity_request_item.accepted_request_confirmed.other_user_for_request  %>
-            </b>) at <b style="color:#f2ff5e"><%= activity_request_item.accepted_request_confirmed.other_user_for_request.phone %></b>.
-            </div>
+          You've confirmed <b><%= link_to activity_request_item.accepted_request_confirmed.other_user_for_request.name,
+                                                                              activity_request_item.accepted_request_confirmed.other_user_for_request  %></b> for the Pick up!
+          <div class="activity_created">
+            Updated: <%= activity_request_item.updated_at.strftime("%d/%m/%Y") %>
           </div>
         </div>
     <% elsif activity_request_item.accepted_request_confirmed.other_user_for_request == current_user  %>
@@ -242,8 +230,7 @@
               <div class="activity_status_inner">
                 Item <br> Received
               </div>
-              This Giveaway has been picked up by <b><%= link_to activity_request_item.accepted_request_confirmed.other_user_for_request.name, activity_request_item.accepted_request_confirmed.other_user_for_request %></b>
-              and delivered to <b><%= link_to activity_request_item.confirmed_taker.name, activity_request_item.confirmed_taker  %></b>.
+              You have successfully picked up the Giveaway from <b><%= link_to activity_request_item.user.name, activity_request_item.user  %></b>.
               <div class="activity_created">
                 Updated: <%= activity_request_item.updated_at.strftime("%d/%m/%Y") %>
               </div>
@@ -255,16 +242,12 @@
             Item <br> Received
           </div>
           Your Giveaway has been picked up by <b><%= link_to activity_request_item.accepted_request_confirmed.other_user_for_request.name, activity_request_item.accepted_request_confirmed.other_user_for_request %></b>
-          and delivered to <b><%= link_to activity_request_item.confirmed_taker.name, activity_request_item.confirmed_taker  %></b>.
+          and successfully delivered to <b style="color:#f2ff5e">You</b>!<br>
+          Please take a few seconds to review him/her.
           <div class="activity_created">
             Updated: <%= activity_request_item.updated_at.strftime("%d/%m/%Y") %>
           </div>
         </div>
-    <% end  %>
-    <% if activity_request_item.user == current_user %>
-
-    <% elsif activity_request_item.accepted_request_confirmed.other_user_for_request == current_user  %>
-
     <% end  %>
 <% elsif activity_request_item.status == "TransporterReviewed" %>
     <% if activity_request_item.user == current_user %>
@@ -278,6 +261,16 @@
           </div>
         </div>
     <% elsif activity_request_item.confirmed_taker == current_user %>
+        <div class="activity_content">
+          <div class="activity_status_inner">
+            Transporter <br> Reviewed
+          </div>
+          You've reviewed <b><%= link_to activity_request_item.accepted_request_confirmed.other_user_for_request.name, activity_request_item.accepted_request_confirmed.other_user_for_request %></b>.<br>
+          Thank you!
+          <div class="activity_created">
+            Updated: <%= activity_request_item.updated_at.strftime("%d/%m/%Y") %>
+          </div>
+        </div>
     <% end  %>
 <% end  %>
 </div>

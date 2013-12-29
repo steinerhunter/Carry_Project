@@ -149,6 +149,12 @@ class RequestDelivery < ActiveRecord::Base
     User.find_by_id(@giveaway.user_id)
   end
 
+  def possible_transporters
+    @accepted_requests = AcceptedRequest.where("request_delivery_id = ?",self.id)
+    @accepted_requests_user_id = @accepted_requests.pluck(:user_id)
+    User.find_all_by_id(@accepted_requests_user_id)
+  end
+
   def accepted_request_confirmed
     AcceptedRequest.find_by_request_delivery_id_and_confirmed(self.id, true)
   end

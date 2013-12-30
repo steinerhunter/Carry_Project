@@ -36,6 +36,9 @@
         <b> (to <%= link_to @taking_user.name, @taking_user %>).</b><br>
       </div>
     </div>
+    <div class="ready_to_go_wrapper" style="margin-bottom: 20px;">
+      <%=  link_to "Pick up more stuff!", pickups_path, class: "go_get_other", style: "padding:56px;padding-top:5px;padding-bottom:5px;"%>
+    </div>
     <div class="giveaway_status_wrapper">
       <div class="giveaway_status_title">
         Item Delivered

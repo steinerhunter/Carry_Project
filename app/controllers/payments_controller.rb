@@ -13,7 +13,7 @@ class PaymentsController < ApplicationController
       accepted_task = AcceptedRequest.find_by_id(params[:accepted_task_id])
       request_payment = RequestPayment.find_by_request_delivery_id(request_delivery.id)
       amount = request_delivery.cost.to_f
-      currency = request_delivery.currency
+      currency = "USD"
     elsif req_or_sugg == "suggest_delivery"
       suggest_delivery = SuggestDelivery.find_by_id(params[:task_id])
       accepted_task = AcceptedSuggest.find_by_id(params[:accepted_task_id])
@@ -21,8 +21,8 @@ class PaymentsController < ApplicationController
       amount = suggest_delivery.cost.to_f
       currency = suggest_delivery.currency
     end
-    seller_amount = 0.85*amount.to_f
-    commission_amount = 0.15*amount.to_f
+    seller_amount = (0.85*amount.to_f*100).round / 100.0
+    commission_amount = (0.15*amount.to_f*100).round / 100.0
 
     preapproval_request = PaypalAdaptive::Request.new
 
@@ -133,12 +133,12 @@ class PaymentsController < ApplicationController
       accepted_task = AcceptedRequest.find_by_id(params[:accepted_task_id])
       request_payment = RequestPayment.find_by_request_delivery_id(request_delivery.id)
       confirmed_user = accepted_task.other_user_for_request
-      request_creator = request_delivery.user
+      request_creator = request_delivery.confirmed_taker
       task = request_delivery
       amount = request_delivery.cost.to_f
-      seller_amount = 0.85*amount.to_f
-      commission_amount = 0.15*amount.to_f
-      currency = request_delivery.currency
+      seller_amount = (0.85*amount.to_f*100).round / 100.0
+      commission_amount = (0.15*amount.to_f*100).round / 100.0
+      currency = "USD"
       preapproval_data = {
           "returnUrl" => details_url(accepted_task,req_or_sugg),
           "requestEnvelope" => { "errorLanguage" => "en_US" },
@@ -166,8 +166,8 @@ class PaymentsController < ApplicationController
       request_creator = suggest_delivery.user
       task = suggest_delivery
       amount = suggest_delivery.cost.to_f
-      seller_amount = 0.85*amount.to_f
-      commission_amount = 0.15*amount.to_f
+      seller_amount = (0.85*amount.to_f*100).round / 100.0
+      commission_amount = (0.15*amount.to_f*100).round / 100.0
       currency = suggest_delivery.currency
       preapproval_data = {
           "returnUrl" => details_url(accepted_task,req_or_sugg),
@@ -241,13 +241,7 @@ class PaymentsController < ApplicationController
           end
           accepted_task.complete_accepted_request
           request_delivery.complete_request
-          redirect_to :controller => 'user_reviews',
-                      :action => 'new',
-                      :from_user_id => confirmed_user.id,
-                      :to_user_id => task_creator.id,
-                      :req_or_sugg => req_or_sugg,
-                      :job_type => "SENDER",
-                      :task_id => task.id
+          redirect_to request_delivery_url(request_delivery)
         elsif req_or_sugg == "suggest_delivery"
           if Rails.env.production?
             NotifMailer.new_complete_request(suggest_creator,confirmed_user,suggest_delivery).deliver
@@ -277,7 +271,7 @@ class PaymentsController < ApplicationController
       accepted_request = AcceptedRequest.find_by_id(params[:accepted_task_id])
       confirmed_user = accepted_request.other_user_for_request
       request_delivery = RequestDelivery.find_by_id(accepted_request.request_delivery_id)
-      request_creator = request_delivery.user
+      request_creator = request_delivery.confirmed_taker
       request_payment = RequestPayment.find_by_request_delivery_id(request_delivery.id)
       details_data = {
           "preapprovalKey" => request_payment.preapprovalKey,

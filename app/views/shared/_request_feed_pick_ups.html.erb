@@ -1,0 +1,23 @@
+<div class="search_posts">
+  <div class="search_title">
+    <b>Pick Ups</b>
+  </div>
+  <%= form_for @search, :url => pickups_path, :html => {:method => :get} do |f| %>
+      <div class="search_fields">
+        <div class="myfield_search">
+          <%= f.label :from_contains, "From" %>
+          <%= f.text_field :from_contains, :class => "address_field" %>
+          <%= f.label :to_contains, "To" %>
+          <%= f.text_field :to_contains, :class => "address_field" %>
+          <%=  f.submit "Filter" , :id => 'submit_filter'%>
+        </div>
+      </div>
+  <% end %>
+</div>
+<div class="requestposts">
+  <% if @request_feed_items.any? %>
+      <%= render partial: 'shared/request_feed_pick_ups_item', collection: @request_feed_items %>
+  <% else  %>
+      <h3><center>No Pick ups available at the moment!</center></h3>
+  <% end  %>
+</div>

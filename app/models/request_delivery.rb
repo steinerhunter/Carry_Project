@@ -84,6 +84,7 @@ class RequestDelivery < ActiveRecord::Base
   def set_cost
     @cost = self.distance_value / 1000 + 20
     self.update_attribute(:cost,@cost)
+    self.update_attribute(:currency,"ILS")
   end
 
   def get_the_item

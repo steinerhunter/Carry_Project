@@ -1,0 +1,21 @@
+<div class="search_posts">
+  <div class="search_title">
+    <b>Giveaways</b>
+  </div>
+  <%= form_for @search, :url => giveaways_path, :html => {:method => :get} do |f| %>
+      <div class="search_fields">
+        <div class="myfield_search">
+          <%= f.label :from_contains, "I'm looking for stuff from" %>
+          <%= f.text_field :from_contains, :class => "address_field" %>
+          <%=  f.submit "Filter" , :id => 'submit_filter'%>
+        </div>
+      </div>
+  <% end %>
+</div>
+<div class="requestposts">
+  <% if @request_feed_items.any? %>
+      <%= render partial: 'shared/request_feed_takers_item', collection: @request_feed_items %>
+  <% else  %>
+      <h3><center>No Giveaways available at the moment!</center></h3>
+  <% end  %>
+</div>

@@ -98,7 +98,7 @@
   position: absolute;
   font-size: 12px;
   right:2px;
-  bottom:2px;
+  bottom:-2px;
 }
 
 .activity_status_inner {
@@ -195,6 +195,7 @@
   background-position: bottom center;
   border:solid 1px;
   border-color: #000000;
+  border-radius:4px;
   padding:3px;
   margin-right: 5px;
   margin-top:3px;

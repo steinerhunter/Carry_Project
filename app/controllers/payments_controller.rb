@@ -13,7 +13,7 @@ class PaymentsController < ApplicationController
       accepted_task = AcceptedRequest.find_by_id(params[:accepted_task_id])
       request_payment = RequestPayment.find_by_request_delivery_id(request_delivery.id)
       amount = request_delivery.cost.to_f
-      currency = "USD"
+      currency = request_delivery.currency
     elsif req_or_sugg == "suggest_delivery"
       suggest_delivery = SuggestDelivery.find_by_id(params[:task_id])
       accepted_task = AcceptedSuggest.find_by_id(params[:accepted_task_id])
@@ -138,7 +138,7 @@ class PaymentsController < ApplicationController
       amount = request_delivery.cost.to_f
       seller_amount = 0.85*amount.to_f
       commission_amount = 0.15*amount.to_f
-      currency = "USD"
+      currency = request_delivery.currency
       preapproval_data = {
           "returnUrl" => details_url(accepted_task,req_or_sugg),
           "requestEnvelope" => { "errorLanguage" => "en_US" },

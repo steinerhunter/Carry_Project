@@ -21,7 +21,7 @@
         <div class="delivery_price" style="margin-top: 15px;">Price: Free</div>
     <% elsif @request_delivery.delivery_type == "senddme" %>
         <b>By a</b><b style="color:#f2ff5e"> sendd.me Transporter</b><b>.</b>
-        <div class="delivery_price" style="margin-top: 15px;">Price: <%= @request_delivery.cost %> ILS</div>
+        <div class="delivery_price">Price: <%= @request_delivery.cost %> <%= @request_delivery.currency %></div>
     <% end  %>
 <% else %>
     <div class="missing_detail" style="top:1px">

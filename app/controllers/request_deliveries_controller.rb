@@ -5,16 +5,14 @@ class RequestDeliveriesController < ApplicationController
 
   def show
     @request_delivery = RequestDelivery.find(params[:id])
+    @taking_user = @request_delivery.confirmed_taker
     if current_user.nil?
-      if @request_delivery.status != "Open" && @request_delivery.status != "WaitingForTransporter"
+      if @request_delivery.status != "Open" && @request_delivery.status != "WaitingForTransporter" && @request_delivery.status != "Pending Confirmation"
         redirect_to root_path
       end
     else
       @my_taken_giveaway = TakenGiveaway.find_by_user_id_and_request_delivery_id(current_user.id,@request_delivery.id)
       @any_taken_giveaway = TakenGiveaway.find_by_request_delivery_id(@request_delivery.id)
-      if @any_taken_giveaway.present?
-        @taking_user = User.find_by_id(@any_taken_giveaway.user_id)
-      end
       @accepted_request = AcceptedRequest.find_by_user_id_and_request_delivery_id(current_user.id,@request_delivery.id)
       @someone_is_confirmed = AcceptedRequest.find_by_request_delivery_id_and_confirmed(@request_delivery.id,true)
       if @someone_is_confirmed
@@ -55,7 +53,20 @@ class RequestDeliveriesController < ApplicationController
         redirect_to root_path
       end
     end
+
     @facebook_authentication = Authentication.find_by_user_id(@request_delivery.user.id)
+    @facebook_share_giveaway_owner = "https://www.facebook.com/sharer/sharer.php?s=100&p[url]="+request_delivery_url(@request_delivery)+
+                                                                               "&p[images][0]=https://www.sendd.me/assets/ForFB-059d53c08b275cbc2e2735200318c25a.png&p[title]=sendd.me Giveaway"+
+                                                                               "&p[summary]=I'm giving away "+@request_delivery.what+". Can you think of anyone who might be interested?"
+    @facebook_share_giveaway_other = "https://www.facebook.com/sharer/sharer.php?s=100&p[url]="+request_delivery_url(@request_delivery)+
+                                                                              "&p[images][0]=https://www.sendd.me/assets/ForFB-059d53c08b275cbc2e2735200318c25a.png&p[title]=sendd.me Giveaway"+
+                                                                              "&p[summary]=Someone is giving away "+@request_delivery.what+". Can you think of anyone who might be interested?"
+    @facebook_share_pick_up_owner = "https://www.facebook.com/sharer/sharer.php?s=100&p[url]="+request_delivery_url(@request_delivery)+
+                                                                             "&p[images][0]=https://www.sendd.me/assets/ForFB-059d53c08b275cbc2e2735200318c25a.png&p[title]=sendd.me Pick Up"+
+                                                                             "&p[summary]=I need to pick something up, willing to pay "+@request_delivery.cost+" "+@request_delivery.currency+" for it. Can you think of anyone who might be interested?"
+    @facebook_share_pick_up_other = "https://www.facebook.com/sharer/sharer.php?s=100&p[url]="+request_delivery_url(@request_delivery)+
+                                                                            "&p[images][0]=https://www.sendd.me/assets/ForFB-059d53c08b275cbc2e2735200318c25a.png&p[title]=sendd.me Pick Up"+
+                                                                            "&p[summary]=Someone needs to pick something up, and they're willing to pay "+@request_delivery.cost+" "+@request_delivery.currency+" for it. Can you think of anyone who might be interested?"
     @phone = Phone.find_by_user_id(@request_delivery.user.id)
     @commentable = @request_delivery
     @comments = @commentable.comments
@@ -222,7 +233,7 @@ class RequestDeliveriesController < ApplicationController
 
   def destroy
     @request_delivery = RequestDelivery.find(params[:id])
-    if @request_delivery.status != "Open"
+    if @request_delivery.status != "Open" && @request_delivery.status != "Unpublished"
       flash[:failure] = "Sorry!<br><div class='sub_flash_text'>You cannot delete your giveaway since someone has already accepted it.</div>".html_safe
       redirect_to :back
     else
@@ -237,7 +248,7 @@ class RequestDeliveriesController < ApplicationController
     @phone = Phone.find_by_user_id(current_user.id)
     type = params[:type]
     if current_user != @request_delivery.user
-      if type == "take"
+      if type == "take" && @request_delivery.status == "Open"
         if @phone.present?
           if @phone.verified
             current_user.request_takes << @request_delivery

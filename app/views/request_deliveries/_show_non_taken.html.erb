@@ -157,28 +157,28 @@
   </div>
   <div class="the_from_and_to">
     <div class="the_from_and_to_inner" style="font-size: 20px; background-image: url('../assets/size_small.png');">
-    <div class="inner_title">
-      <b>Size</b>
-    </div>
+      <div class="inner_title">
+        <b>Size</b>
+      </div>
       <div class="delivery_size">
         <%= @request_delivery.size %>
       </div>
-    <% if @request_delivery.user == current_user %>
-        <div class="missing_detail" style="top:1px">
-          <div class="bubbleInfo">
-            <%= link_to image_tag("edit_detail.png"), edit_request_size_path(@request_delivery.id), class:"modal-link trigger",
-                        "data-target" => "#myModal",
-                        "data-toggle" => "modal",
-                        "data-backdrop" => "static" %>
-            <div class="popup" style="height:15px; width:245px; margin-top:65px;text-align: center;">
-              Click to edit <b style="color:#f2ff5e">Size</b> for this giveaway.
-              <div id="tail1" style="left:33px"></div>
-              <div id="tail2" style="left:33px"></div>
+      <% if @request_delivery.user == current_user %>
+          <div class="missing_detail" style="top:1px">
+            <div class="bubbleInfo">
+              <%= link_to image_tag("edit_detail.png"), edit_request_size_path(@request_delivery.id), class:"modal-link trigger",
+                          "data-target" => "#myModal",
+                          "data-toggle" => "modal",
+                          "data-backdrop" => "static" %>
+              <div class="popup" style="height:15px; width:245px; margin-top:65px;text-align: center;">
+                Click to edit <b style="color:#f2ff5e">Size</b> for this giveaway.
+                <div id="tail1" style="left:33px"></div>
+                <div id="tail2" style="left:33px"></div>
+              </div>
             </div>
           </div>
-        </div>
-    <% end  %>
-  </div>
+      <% end  %>
+    </div>
     <div class="the_from_and_to_inner" style="background-image: url('../assets/LocationA_small.png');">
       <div class="inner_title">
         <b>From</b>
@@ -201,6 +201,39 @@
       <% end  %>
     </div>
   </div>
+  <% if @request_delivery.status == "Open" %>
+      <div class="ready_to_go_wrapper" style="margin-bottom: 20px;">
+        <% if @request_delivery.user == current_user  %>
+            <a href="<%= @facebook_share_giveaway_owner %>" target="_blank" class="facebook_share">
+              Find this Giveaway a home - Share on Facebook
+            </a>
+        <% else %>
+            <a href="<%= @facebook_share_giveaway_other %>" target="_blank" class="facebook_share">
+              Find this Giveaway a home - Share on Facebook
+            </a>
+        <% end  %>
+      </div>
+  <% elsif @request_delivery.status == "Unpublished" %>
+      <% if @request_delivery.user == current_user  %>
+          <% if @my_phone.present? %>
+              <div class="unpublished_thanks">
+                Thank you for giving away things!<br> In order for others to see your Giveaway, we're going to need you to verify your phone number (<%= @my_phone.phone %>).<br><br>
+                <center><%=  link_to "Verify Phone",
+                                     {:controller => "phones",
+                                      :action => "verify",
+                                      :user_id => current_user.id }, :class =>"verify_item" %></center><br>
+              </div>
+          <% else  %>
+              <div class="unpublished_thanks">
+                Thank you for giving away things!<br> In order for others to see your Giveaway, we're going to need you to add your phone number and verify it.<br><br>
+                <center><%=  link_to "Add Phone",
+                                     {:controller => "phones",
+                                      :action => "new",
+                                      :user_id => current_user.id }, :class =>"verify_item"  %></center><br>
+              </div>
+          <% end  %>
+      <% end %>
+  <% end  %>
   <div class="post_text_title">
     <b>Need more details?</b>
   </div>

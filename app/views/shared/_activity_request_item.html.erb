@@ -1,4 +1,4 @@
-<div class="activity_feed_item" xmlns="http://www.w3.org/1999/html" xmlns="http://www.w3.org/1999/html">
+<div class="activity_feed_item">
 <% if activity_request_item.has_all_details %>
     <div class="has_all_details">
       <div class="bubbleInfo">
@@ -15,7 +15,30 @@
 <%= link_to activity_request_item.what, request_delivery_path(activity_request_item)  %>
 <div class="status_and_created">
 <div class="activity_status">
-<% if activity_request_item.status == "Open" %>
+<% if activity_request_item.status == "Unpublished" %>
+    <div class="activity_content">
+      <div class="activity_status_inner">
+        Giveaway <br> Unpublished
+      </div>
+      Your Giveaway has not been published on our lists yet.<br>
+      <% if @phone.present? %>
+          In order to publish it with that, we're going to need you to verify your phone number (<%= @phone.phone %>).<br>
+          <center><%=  link_to "Verify Phone",
+                       {:controller => "phones",
+                        :action => "verify",
+                        :user_id => current_user.id }, :class =>"verify_item" %></center>
+      <% else  %>
+          In order to proceed with that, we're going to need you to add your phone number and verify it.<br>
+          <center><%=  link_to "Add Phone",
+                       {:controller => "phones",
+                        :action => "new",
+                        :user_id => current_user.id }, :class =>"verify_item"  %></center>
+      <% end  %>
+      <div class="activity_created">
+        Created: <%= activity_request_item.created_at.strftime("%d/%m/%Y") %>
+      </div>
+    </div>
+<% elsif activity_request_item.status == "Open" %>
     <div class="activity_content">
       <div class="activity_status_inner">
         Giveaway <br> Open

@@ -10,7 +10,7 @@
                            document.getElementById('senddme').style.backgroundColor = '#a03eff';
                            document.getElementById('edit_request_delivery_'+<%= @request_delivery.id %>).request_delivery_delivery_type.value = 'myself';">
                 I'll come to get the item myself.
-                <div class="delivery_price">Price: Free</div>
+                <div class="delivery_price">Free</div>
               </div>
           <% else  %>
               <div class="delivery_box" id="myself" style="background-image: url('../assets/delivery_myself.png');"
@@ -18,7 +18,7 @@
                            document.getElementById('senddme').style.backgroundColor = '#a03eff';
                            document.getElementById('edit_request_delivery_'+<%= @request_delivery.id %>).request_delivery_delivery_type.value = 'myself';">
                 I'll come to get the item myself.
-                <div class="delivery_price">Price: Free</div>
+                <div class="delivery_price">Free</div>
               </div>
           <% end  %>
           <% if @request_delivery.delivery_type.present? && @request_delivery.delivery_type == "senddme" %>
@@ -27,7 +27,7 @@
                        document.getElementById('myself').style.backgroundColor = '#a03eff';
                        document.getElementById('edit_request_delivery_'+<%= @request_delivery.id %>).request_delivery_delivery_type.value = 'senddme';">
             I'd like someone to get it for me.
-            <div class="delivery_price">Price: <%= @request_delivery.cost %> ILS</div>
+            <div class="delivery_price"><%= @request_delivery.cost %> ILS</div>
           </div>
           <% else  %>
               <div class="delivery_box" id="senddme" style="background-image: url('../assets/delivery_senddme.png'); margin-left:20px;"
@@ -35,7 +35,7 @@
                            document.getElementById('myself').style.backgroundColor = '#a03eff';
                            document.getElementById('edit_request_delivery_'+<%= @request_delivery.id %>).request_delivery_delivery_type.value = 'senddme';">
                 I'd like someone to get it for me.
-                <div class="delivery_price">Price: <%= @request_delivery.cost %> ILS</div>
+                <div class="delivery_price"><%= @request_delivery.cost %> ILS</div>
               </div>
           <% end  %>
         </div>

@@ -309,6 +309,37 @@
   }
 }
 
+.facebook_share {
+  cursor:pointer;
+  text-align: right;
+  background-image: url('SignUpWithFacebook.png');
+  background-color: #19264f;
+  background-repeat: no-repeat;
+  background-position: middle left;
+  border:solid 1px;
+  border-radius:5px;
+  -moz-border-radius:3px; /* Old Firefox */
+  color: #ffffff;
+  border-color: #000000;
+  padding:57px;
+  padding-top:9px;
+  padding-bottom:6px;
+  margin-top:10px;
+  margin-right: auto;
+  margin-left: auto;
+  font-size: 19px;
+}
+
+.facebook_share:hover{
+  background-color: #27378d;
+  cursor:pointer;
+}
+
+.unpublished_thanks {
+  padding:5px;
+  font-size: 17px;;
+}
+
 .the_from_and_to {
   width: 100%;
   margin-top: 5px;

@@ -1,4 +1,4 @@
-<% if @request_delivery.status != "Open" %>
+<% if @request_delivery.status != "Open" && @request_delivery.status != "Unpublished" %>
     <%= render 'show_taken' %>
 <% else  %>
     <%= render 'show_non_taken' %>

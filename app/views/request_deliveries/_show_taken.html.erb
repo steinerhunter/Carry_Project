@@ -59,7 +59,7 @@
 </div>
 <% if @taking_user == current_user %>
       <%= render 'request_deliveries/renders/ar_taking_user' %>
-<% elsif @transporter == current_user %>
+<% elsif @transporter == current_user && !current_user.nil? %>
       <%= render 'request_deliveries/renders/ar_transporter' %>
 <% elsif @request_delivery.user == current_user  %>
       <%= render 'request_deliveries/renders/ar_giving_user' %>

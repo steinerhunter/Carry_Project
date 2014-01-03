@@ -5,7 +5,9 @@ class RequestDeliveriesController < ApplicationController
 
   def show
     @request_delivery = RequestDelivery.find(params[:id])
-    @taking_user = @request_delivery.confirmed_taker
+    if @request_delivery.status != "Open" && @request_delivery.status != "Unpublished"
+      @taking_user = @request_delivery.confirmed_taker
+    end
     if current_user.nil?
       if @request_delivery.status != "Open" && @request_delivery.status != "WaitingForTransporter" && @request_delivery.status != "Pending Confirmation"
         redirect_to root_path
@@ -55,18 +57,25 @@ class RequestDeliveriesController < ApplicationController
     end
 
     @facebook_authentication = Authentication.find_by_user_id(@request_delivery.user.id)
-    @facebook_share_giveaway_owner = "https://www.facebook.com/sharer/sharer.php?s=100&p[url]="+request_delivery_url(@request_delivery)+
-                                                                               "&p[images][0]=https://www.sendd.me/assets/ForFB-059d53c08b275cbc2e2735200318c25a.png&p[title]=sendd.me Giveaway"+
-                                                                               "&p[summary]=I'm giving away "+@request_delivery.what+". Can you think of anyone who might be interested?"
-    @facebook_share_giveaway_other = "https://www.facebook.com/sharer/sharer.php?s=100&p[url]="+request_delivery_url(@request_delivery)+
-                                                                              "&p[images][0]=https://www.sendd.me/assets/ForFB-059d53c08b275cbc2e2735200318c25a.png&p[title]=sendd.me Giveaway"+
-                                                                              "&p[summary]=Someone is giving away "+@request_delivery.what+". Can you think of anyone who might be interested?"
-    @facebook_share_pick_up_owner = "https://www.facebook.com/sharer/sharer.php?s=100&p[url]="+request_delivery_url(@request_delivery)+
-                                                                             "&p[images][0]=https://www.sendd.me/assets/ForFB-059d53c08b275cbc2e2735200318c25a.png&p[title]=sendd.me Pick Up"+
-                                                                             "&p[summary]=I need to pick something up, willing to pay "+@request_delivery.cost+" "+@request_delivery.currency+" for it. Can you think of anyone who might be interested?"
-    @facebook_share_pick_up_other = "https://www.facebook.com/sharer/sharer.php?s=100&p[url]="+request_delivery_url(@request_delivery)+
-                                                                            "&p[images][0]=https://www.sendd.me/assets/ForFB-059d53c08b275cbc2e2735200318c25a.png&p[title]=sendd.me Pick Up"+
-                                                                            "&p[summary]=Someone needs to pick something up, and they're willing to pay "+@request_delivery.cost+" "+@request_delivery.currency+" for it. Can you think of anyone who might be interested?"
+
+    @facebook_sharer_url = "https://www.facebook.com/sharer/sharer.php?s=100&p[url]="
+    @facebook_image = "&p[images][0]=https://www.sendd.me/assets/ForFB-059d53c08b275cbc2e2735200318c25a.png"
+    @facebook_title_giveaway = "&p[title]=sendd.me Giveaway"
+    @facebook_title_pick_up = "&p[title]=sendd.me Pick Up"
+    @facebook_summary_giveaway_owner = "&p[summary]=I'm giving away "+@request_delivery.what+". Can you think of anyone who might be interested?"
+    @facebook_summary_giveaway_other = "&p[summary]=Someone is giving away "+@request_delivery.what+". Can you think of anyone who might be interested?"
+    if @request_delivery.cost.present?
+      @facebook_summary_pick_up_owner = "&p[summary]=I need to pick something up, willing to pay "+@request_delivery.cost+" "+@request_delivery.currency+" for it. Can you think of anyone who might be interested?"
+      @facebook_summary_pick_up_other = "&p[summary]=Someone needs to pick something up, and they're willing to pay "+@request_delivery.cost+" "+@request_delivery.currency+" for it. Can you think of anyone who might be interested?"
+    end
+
+    @facebook_share_giveaway_owner = @facebook_sharer_url+request_delivery_url(@request_delivery)+@facebook_image+@facebook_title_giveaway+@facebook_summary_giveaway_owner
+    @facebook_share_giveaway_other = @facebook_sharer_url+request_delivery_url(@request_delivery)+@facebook_image+@facebook_title_giveaway+@facebook_summary_giveaway_other
+    if @request_delivery.cost.present?
+      @facebook_share_pick_up_owner = @facebook_sharer_url+request_delivery_url(@request_delivery)+@facebook_image+@facebook_title_pick_up+@facebook_summary_pick_up_owner
+      @facebook_share_pick_up_other = @facebook_sharer_url+request_delivery_url(@request_delivery)+@facebook_image+@facebook_title_pick_up+@facebook_summary_pick_up_other
+    end
+
     @phone = Phone.find_by_user_id(@request_delivery.user.id)
     @commentable = @request_delivery
     @comments = @commentable.comments

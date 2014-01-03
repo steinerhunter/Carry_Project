@@ -101,13 +101,13 @@ header {
   }
 }
 
-#header_senders {
+#header_takers {
   position:relative;
-  width:140px;
+  width:125px;
   margin-left:3px;
   text-align: left;
   font-size: 0.9em;
-  background-image: url('header_box.png');
+  background-image: url('header_find.png');
   border:1px solid;
   border-bottom: 0px;
   border-color: #434343;
@@ -125,7 +125,41 @@ header {
     &:hover {
       color: #f2ff5e;
       text-decoration: none;
-      background-image: url('header_box.png');
+      background-image: url('header_find.png');
+      background-repeat: no-repeat;
+      background-position: bottom left;
+      background-color:#00008b;
+      -webkit-border-radius: 7px 7px 0px 0px;
+      border-radius: 7px 7px 0px 0px;
+    }
+  }
+}
+
+#header_givers {
+  position:relative;
+  width:135px;
+  margin-left:3px;
+  text-align: left;
+  font-size: 0.9em;
+  background-image: url('header_give.png');
+  border:1px solid;
+  border-bottom: 0px;
+  border-color: #434343;
+  background-color: #d67a31;
+  background-repeat: no-repeat;
+  background-position: bottom left;
+  -moz-border-radius: 0px;
+  -webkit-border-radius: 7px 7px 0px 0px;
+  border-radius: 7px 7px 0px 0px;
+  a {
+    color: #ffffff;
+    padding-left:50px;
+    text-decoration: none;
+    border-color: #000000;
+    &:hover {
+      color: #f2ff5e;
+      text-decoration: none;
+      background-image: url('header_give.png');
       background-repeat: no-repeat;
       background-position: bottom left;
       background-color:#00008b;
@@ -319,7 +353,7 @@ header {
 #header_sign_in {
   position:relative;
   width:110px;
-  margin-left:33px;
+  margin-left:13px;
   text-align: left;
   font-size: 0.9em;
   background-image: url('header_sign_in.png');

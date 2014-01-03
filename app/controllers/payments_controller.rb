@@ -21,8 +21,8 @@ class PaymentsController < ApplicationController
       amount = suggest_delivery.cost.to_f
       currency = suggest_delivery.currency
     end
-    seller_amount = (0.85*amount.to_f*100).round / 100.0
-    commission_amount = (0.15*amount.to_f*100).round / 100.0
+    seller_amount = (0.9*amount.to_f*100).round / 100.0
+    commission_amount = (0.1*amount.to_f*100).round / 100.0
 
     preapproval_request = PaypalAdaptive::Request.new
 
@@ -136,8 +136,8 @@ class PaymentsController < ApplicationController
       request_creator = request_delivery.confirmed_taker
       task = request_delivery
       amount = request_delivery.cost.to_f
-      seller_amount = (0.85*amount.to_f*100).round / 100.0
-      commission_amount = (0.15*amount.to_f*100).round / 100.0
+      seller_amount = (0.9*amount.to_f*100).round / 100.0
+      commission_amount = (0.1*amount.to_f*100).round / 100.0
       currency = "USD"
       preapproval_data = {
           "returnUrl" => details_url(accepted_task,req_or_sugg),
@@ -166,8 +166,8 @@ class PaymentsController < ApplicationController
       request_creator = suggest_delivery.user
       task = suggest_delivery
       amount = suggest_delivery.cost.to_f
-      seller_amount = (0.85*amount.to_f*100).round / 100.0
-      commission_amount = (0.15*amount.to_f*100).round / 100.0
+      seller_amount = (0.9*amount.to_f*100).round / 100.0
+      commission_amount = (0.1*amount.to_f*100).round / 100.0
       currency = suggest_delivery.currency
       preapproval_data = {
           "returnUrl" => details_url(accepted_task,req_or_sugg),

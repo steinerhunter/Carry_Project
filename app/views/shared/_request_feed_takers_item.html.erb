@@ -57,9 +57,15 @@
       <b>From</b> <%= request_feed_takers_item.from %><br>
       <b>Size</b> <%= request_feed_takers_item.size %><br>
       <b>Given By</b> <%= link_to request_feed_takers_item.user.name, request_feed_takers_item.user %><br>
-      <div class="feed_item_map" onclick="location.href='<%=request_delivery_path(request_feed_takers_item)%>'">
-        <img src="http://maps.google.com/maps/api/staticmap?size=250x180&maptype=roadmap&sensor=false&markers=color:green|label:A|<%= request_feed_takers_item.from %>&markers=color:red|label:B|<%= request_feed_takers_item.to %>"></img>
-      </div>
+        <% if request_feed_takers_item.attachment.present? %>
+          <div class="feed_item_thumb" onclick="location.href='<%=request_delivery_path(request_feed_takers_item)%>'">
+            <%= image_tag request_feed_takers_item.attachment_url(:thumb).to_s  %>
+          </div>
+        <% else  %>
+          <div class="feed_item_map" onclick="location.href='<%=request_delivery_path(request_feed_takers_item)%>'">
+            <img src="http://maps.google.com/maps/api/staticmap?size=250x180&maptype=roadmap&sensor=false&markers=color:green|label:A|<%= request_feed_takers_item.from %>&markers=color:red|label:B|<%= request_feed_takers_item.to %>"></img>
+          </div>
+        <% end  %>
     </div>
   </div>
 </div>

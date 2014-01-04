@@ -59,14 +59,18 @@ class RequestDeliveriesController < ApplicationController
     @facebook_authentication = Authentication.find_by_user_id(@request_delivery.user.id)
 
     @facebook_sharer_url = "https://www.facebook.com/sharer/sharer.php?s=100&p[url]="
-    @facebook_image = "&p[images][0]=https://www.sendd.me/assets/ForFB-059d53c08b275cbc2e2735200318c25a.png"
+    if @request_delivery.attachment.present?
+      @facebook_image = @request_delivery.attachment_url(:facebook_share).to_s
+    else
+      @facebook_image = "&p[images][0]=https://www.sendd.me/assets/ForFB-059d53c08b275cbc2e2735200318c25a.png"
+    end
     @facebook_title_giveaway = "&p[title]=sendd.me Giveaway"
     @facebook_title_pick_up = "&p[title]=sendd.me Pick Up"
     @facebook_summary_giveaway_owner = "&p[summary]=I'm giving away "+@request_delivery.what+". Can you think of anyone who might be interested?"
     @facebook_summary_giveaway_other = "&p[summary]=Someone is giving away "+@request_delivery.what+". Can you think of anyone who might be interested?"
     if @request_delivery.cost.present?
-      @facebook_summary_pick_up_owner = "&p[summary]=I need to pick something up, willing to pay "+@request_delivery.cost+" "+@request_delivery.currency+" for it. Can you think of anyone who might be interested?"
-      @facebook_summary_pick_up_other = "&p[summary]=Someone needs to pick something up, and they're willing to pay "+@request_delivery.cost+" "+@request_delivery.currency+" for it. Can you think of anyone who might be interested?"
+      @facebook_summary_pick_up_owner = "&p[summary]=I need to pick up "+@request_delivery.what+", willing to pay "+@request_delivery.cost+" "+@request_delivery.currency+" for it. Can you think of anyone who might be interested?"
+      @facebook_summary_pick_up_other = "&p[summary]=Someone needs to pick up "+@request_delivery.what+", and they're willing to pay "+@request_delivery.cost+" "+@request_delivery.currency+" for it. Can you think of anyone who might be interested?"
     end
 
     @facebook_share_giveaway_owner = @facebook_sharer_url+request_delivery_url(@request_delivery)+@facebook_image+@facebook_title_giveaway+@facebook_summary_giveaway_owner
@@ -96,9 +100,7 @@ class RequestDeliveriesController < ApplicationController
       if @request_delivery.valid?
        session[:request_delivery_what] = @request_delivery.what
        session[:request_delivery_from] = @request_delivery.from
-       session[:request_delivery_to] = @request_delivery.to
-       session[:request_delivery_cost] = @request_delivery.cost
-       session[:request_delivery_currency] = @request_delivery.currency
+       session[:request_delivery_size] = @request_delivery.size
       end
     else
       @phone = Phone.find_by_user_id(current_user.id)
@@ -158,6 +160,13 @@ class RequestDeliveriesController < ApplicationController
     @request_delivery = RequestDelivery.find(params[:request_delivery_id])
     if @request_delivery.user == current_user
       render "edit_what.html.erb", :layout => "empty"
+    end
+  end
+
+  def edit_picture
+    @request_delivery = RequestDelivery.find(params[:request_delivery_id])
+    if @request_delivery.user == current_user
+      render "edit_picture.html.erb", :layout => "empty"
     end
   end
 

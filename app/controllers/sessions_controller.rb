@@ -20,9 +20,7 @@ class SessionsController < ApplicationController
         @request_delivery = RequestDelivery.new
         @request_delivery.what = session[:request_delivery_what]
         @request_delivery.from = session[:request_delivery_from]
-        @request_delivery.to = session[:request_delivery_to]
-        @request_delivery.cost = session[:request_delivery_cost]
-        @request_delivery.currency = session[:request_delivery_currency]
+        @request_delivery.size = session[:request_delivery_size]
         @request_delivery.user = user
         @request_delivery.save
       elsif session[:suggest_delivery_size].present?

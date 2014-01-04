@@ -1,5 +1,5 @@
 <div class="new_delivery_request_class">
-  <%= form_for(@request_delivery, :remote => true) do |f| %>
+  <%= form_for(@request_delivery, :remote => true,:html => {:multipart => true }) do |f| %>
       <fieldset>
         <div class="single_step">
           <legend style="background-image: url('../assets/give_legend.png');"><b>I have something to give.</b></legend>
@@ -44,6 +44,8 @@
               Large
             </div>
           </div>
+          <%= f.label :attachment, "What does it look like?" %>
+          <%= f.file_field :attachment %>
           <div class="form_submit" style="margin-top:20px;">
             <%=  f.submit "Add My Item" , :id => 'submit_delivery'%>
           </div>

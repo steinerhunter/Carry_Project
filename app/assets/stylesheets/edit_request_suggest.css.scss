@@ -146,11 +146,11 @@
 }
 
 
-.edit_delivery_field_what label {
-  width:60px;
+.edit_delivery_field_attachment label {
+  width:450px;
   display:inline-block;
-  text-align: center;
-  font-size:50px;
+  text-align: left;
+  font-size:35px;
   font-weight: bold;
   line-height:130%;
   background-repeat: no-repeat;
@@ -159,14 +159,12 @@
   color: #f2ff5e;
 }
 
-.edit_delivery_field_what input[type=text] {
+.edit_delivery_field_attachment input[type=file] {
   vertical-align: middle;
-  width:170px;
-  font-size: 20px;
+  width:270px;
+  font-size: 17px;
   padding:12px;
-  margin-bottom:18px;
-  margin-left: 100px;
-  border:solid 1px #000;
+  margin-left: 90px;
 }
 
 .edit_delivery_field_size label {

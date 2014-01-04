@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20131222180557) do
+ActiveRecord::Schema.define(:version => 20140103213002) do
 
   create_table "accepted_requests", :force => true do |t|
     t.integer  "request_delivery_id"
@@ -138,6 +138,7 @@ ActiveRecord::Schema.define(:version => 20131222180557) do
     t.string   "delivery_type"
     t.string   "distance_text"
     t.integer  "distance_value"
+    t.string   "attachment"
   end
 
   add_index "request_deliveries", ["user_id", "created_at"], :name => "index_request_deliveries_on_user_id_and_created_at"

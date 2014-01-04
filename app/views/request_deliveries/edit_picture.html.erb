@@ -1,0 +1,10 @@
+<div class="edit_delivery_field_wrapper" style="background-image: url('../assets/Picture.png');">
+  <%= form_for(@request_delivery, :remote => true, :html => { :id => "edit_picture", :multipart => true }) do |f| %>
+      <div class="edit_delivery_field_attachment">
+        <%= f.label :attachment, "What does it look like?" %><%= f.file_field :attachment %>
+      </div>
+      <div class="edit_update">
+        <%= f.submit "Update Details" , :id => 'submit_delivery' %>
+      </div>
+  <% end  %>
+</div>

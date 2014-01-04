@@ -14,6 +14,10 @@ gem 'omniauth-facebook'
 gem 'paypal_adaptive'
 gem 'twilio-ruby'
 gem 'httparty'
+gem 'carrierwave'
+gem "mini_magick", "~> 3.7.0"
+gem 'fog', '~> 1.0.0'
+gem 'remotipart', '~> 1.2'
 
 group :development, :test do
   gem 'sqlite3', '1.3.5'

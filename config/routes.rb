@@ -41,6 +41,7 @@ TheCarryProject::Application.routes.draw do
   match '/got_the_item/:request_delivery_id', to:'request_deliveries#got_the_item', as: 'got_the_item'
   match '/edit_request_cost/:request_delivery_id', to:'request_deliveries#edit_cost', as:'edit_request_cost'
   match '/edit_request_what/:request_delivery_id', to:'request_deliveries#edit_what', as:'edit_request_what'
+  match '/edit_request_picture/:request_delivery_id', to:'request_deliveries#edit_picture', as:'edit_request_picture'
   match '/edit_request_from/:request_delivery_id', to:'request_deliveries#edit_from', as:'edit_request_from'
   match '/edit_request_delivery/:request_delivery_id', to:'request_deliveries#edit_delivery', as:'edit_request_delivery'
   match '/edit_request_to/:request_delivery_id', to:'request_deliveries#edit_to', as:'edit_request_to'

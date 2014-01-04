@@ -1,7 +1,7 @@
 <div class="giveaway_statusbar">
   <%= render 'request_deliveries/renders/status_bar' %>
 </div>
-  <div class="show_delivery" style="margin-top:0px;">
+<div class="show_delivery" style="margin-top:0px;">
   <div class="right_side">
     <%= render 'request_deliveries/renders/upper_right_bar' %>
     <%= render 'request_deliveries/renders/map' %>
@@ -9,61 +9,101 @@
   </div>
 </div>
 <div class="show_data">
-<div class="show_title">
-  <% if ((current_user?(@request_delivery.user)) || (current_user.try(:admin?))) && @request_delivery.status == "Open" %>
-      <%= render 'request_deliveries/renders/delete_post' %>
-  <% else  %>
-      <%= render 'request_deliveries/renders/has_all_details' %>
-  <% end %>
-  <b style="padding-left: 20px;"><%= @request_delivery.what %></b>
-</div>
-<div class="the_deadline_and_money">
-<div class="the_from_and_to_inner" style="font-size: 20px; background-image: url('../assets/size_small.png');">
-  <div class="inner_title">
-    <b>Size</b>
-  </div>
-  <div class="delivery_size">
-    <%= @request_delivery.size %>
-  </div>
-</div>
-<% if @show_bounty %>
-    <div class="the_money_and_the_deadline_inner" style="background-image: url('../assets/money_small.png');">
-    <div class="inner_title">
-      <b>Bounty</b>
-    </div>
-<% else %>
-    <% if @request_delivery.delivery_type.blank? || @request_delivery.to.blank? %>
-        <div class="the_money_and_the_deadline_inner" style="background-color:#757575; background-image: url('../assets/delivery_small.png');">
+  <div class="show_title">
+    <% if ((current_user?(@request_delivery.user)) || (current_user.try(:admin?))) && @request_delivery.status == "Open" %>
+        <%= render 'request_deliveries/renders/delete_post' %>
     <% else  %>
-        <div class="the_money_and_the_deadline_inner" style="background-image: url('../assets/delivery_small.png');">
+        <%= render 'request_deliveries/renders/has_all_details' %>
     <% end %>
-    <div class="inner_title">
-      <b>Delivery</b>
+    <b style="padding-left: 20px;"><%= @request_delivery.what %></b>
+  </div>
+  <div class="giveaway_picture">
+    <% if @request_delivery.attachment.present? %>
+        <%= image_tag @request_delivery.attachment_url(:actual).to_s  %>
+    <% else  %>
+        <div class="no_picture">
+          <% if @request_delivery.user == current_user %>
+              You haven't uploaded a <b style="color:#f2ff5e">Picture</b> of your Giveaway yet.
+          <% else %>
+              A <b style="color:#f2ff5e">Picture</b> of this Giveaway hasn't been uploaded yet.
+          <% end  %>
+        </div>
+    <% end  %>
+    <% if @request_delivery.user == current_user %>
+        <div class="missing_detail" style="top:1px">
+          <div class="bubbleInfo">
+            <% if @request_delivery.attachment.present? %>
+                <%= link_to image_tag("edit_detail.png"), edit_request_picture_path(@request_delivery.id), class:"modal-link trigger",
+                            "data-target" => "#myModal",
+                            "data-toggle" => "modal",
+                            "data-backdrop" => "static" %>
+            <% else  %>
+                <%= link_to image_tag("missing_detail.png"), edit_request_picture_path(@request_delivery.id), class:"modal-link trigger",
+                            "data-target" => "#myModal",
+                            "data-toggle" => "modal",
+                            "data-backdrop" => "static" %>
+            <% end  %>
+            <div class="popup" style="height:15px; width:285px; margin-top:65px;text-align: center;">
+              <% if @request_delivery.attachment.present? %>
+                  Click to change <b style="color:#f2ff5e">Picture</b> for this giveaway.
+              <% else  %>
+                  Click to add a <b style="color:#f2ff5e">Picture</b> for this giveaway.
+              <% end  %>
+              <div id="tail1" style="left:33px"></div>
+              <div id="tail2" style="left:33px"></div>
+            </div>
+          </div>
+        </div>
+    <% end  %>
+  </div>
+  <div class="the_from_and_to">
+    <%= render 'request_deliveries/renders/from_for_everyone' %>
+    <%= render 'request_deliveries/renders/to_for_everyone' %>
+  </div>
+  <div class="the_deadline_and_money">
+    <div class="the_money_and_the_deadline_inner" style="font-size: 20px; background-image: url('../assets/size_small.png');">
+      <div class="inner_title">
+        <b>Size</b>
+      </div>
+      <div class="delivery_size">
+        <%= @request_delivery.size %>
+      </div>
     </div>
-<% end  %>
-<% if @taking_user == current_user %>
-    <%= render 'request_deliveries/renders/delivery_for_taking_user' %>
-<% elsif @request_delivery.user == current_user  %>
-    <%= render 'request_deliveries/renders/delivery_for_giver' %>
-<% else  %>
-    <%= render 'request_deliveries/renders/money_for_transporters' %>
-<% end %>
-</div>
-</div>
-<div class="the_from_and_to">
-<%= render 'request_deliveries/renders/from_for_everyone' %>
-<%= render 'request_deliveries/renders/to_for_everyone' %>
-<div class="the_sender_and_receiver">
-  <%= render 'request_deliveries/renders/giving_for_everyone' %>
-  <%= render 'request_deliveries/renders/receiving_for_everyone' %>
-</div>
-<% if @taking_user == current_user %>
-      <%= render 'request_deliveries/renders/ar_taking_user' %>
-<% elsif @transporter == current_user && !current_user.nil? %>
-      <%= render 'request_deliveries/renders/ar_transporter' %>
-<% elsif @request_delivery.user == current_user  %>
-      <%= render 'request_deliveries/renders/ar_giving_user' %>
-  <% else  %>
-      <%= render 'request_deliveries/renders/ar_potential_transporter' %>
-  <% end  %>
-</div>
+    <% if @show_bounty %>
+        <div class="the_money_and_the_deadline_inner" style="background-image: url('../assets/money_small.png');">
+          <div class="inner_title">
+            <b>Bounty</b>
+          </div>
+    <% else %>
+        <% if @request_delivery.delivery_type.blank? || @request_delivery.to.blank? %>
+            <div class="the_money_and_the_deadline_inner" style="margin-right:2px;width:254px;background-color:#757575; background-image: url('../assets/delivery_small.png');">
+        <% else  %>
+            <div class="the_money_and_the_deadline_inner" style="background-image: url('../assets/delivery_small.png');">
+        <% end %>
+        <div class="inner_title">
+          <b>Delivery</b>
+        </div>
+    <% end  %>
+    <% if @taking_user == current_user %>
+        <%= render 'request_deliveries/renders/delivery_for_taking_user' %>
+    <% elsif @request_delivery.user == current_user  %>
+        <%= render 'request_deliveries/renders/delivery_for_giver' %>
+    <% else  %>
+        <%= render 'request_deliveries/renders/money_for_transporters' %>
+    <% end %>
+    </div>
+    </div>
+    <div class="the_sender_and_receiver">
+      <%= render 'request_deliveries/renders/giving_for_everyone' %>
+      <%= render 'request_deliveries/renders/receiving_for_everyone' %>
+    </div>
+    <% if @taking_user == current_user %>
+        <%= render 'request_deliveries/renders/ar_taking_user' %>
+    <% elsif @transporter == current_user && !current_user.nil? %>
+        <%= render 'request_deliveries/renders/ar_transporter' %>
+    <% elsif @request_delivery.user == current_user  %>
+        <%= render 'request_deliveries/renders/ar_giving_user' %>
+    <% else  %>
+        <%= render 'request_deliveries/renders/ar_potential_transporter' %>
+    <% end  %>
+    </div>

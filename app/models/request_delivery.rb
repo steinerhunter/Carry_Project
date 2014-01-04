@@ -1,11 +1,13 @@
 class RequestDelivery < ActiveRecord::Base
-  attr_accessible :from, :to, :what, :when, :more_details, :cost, :currency, :size, :sending_person, :receiving_person, :sending_phone, :receiving_phone, :delivery_type
+  attr_accessible :from, :to, :what, :when, :more_details, :cost, :currency, :size, :sending_person, :receiving_person, :sending_phone, :receiving_phone, :delivery_type, :attachment
   has_many :comments, :as => :commentable
   has_many :accepted_requests
   has_many :accepted_by, through: :accepted_requests, source: :user
   has_many :taken_giveaways
   has_many :taken_by, through: :taken_giveaways, source: :user
   belongs_to :user
+
+  mount_uploader :attachment, AttachmentUploader
 
   validates :what, :presence => { :message => "You forgot to mention what you were giving..."}
   validates :what, :length => { maximum: 20, :message => "Surely it can be described in less than 20 chars."}

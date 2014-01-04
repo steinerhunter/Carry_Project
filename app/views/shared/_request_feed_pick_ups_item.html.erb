@@ -54,16 +54,28 @@
       <b><%= link_to request_feed_pick_ups_item.what, request_delivery_path(request_feed_pick_ups_item)  %></b>
     </div>
     <div class="feed_request_data">
-      <div class="feed_item_money">
+      <% if request_feed_pick_ups_item.attachment.present? %>
+        <div class="feed_item_money" style="bottom:186px;left:36px;">
         <%= request_feed_pick_ups_item.cost %> <%= request_feed_pick_ups_item.currency %>
       </div>
+      <% else  %>
+            <div class="feed_item_money">
+            <%= request_feed_pick_ups_item.cost %> <%= request_feed_pick_ups_item.currency %>
+          </div>
+      <% end  %>
       <b>From</b> <%= request_feed_pick_ups_item.from %><br>
       <b>To</b> <%= request_feed_pick_ups_item.to %><br>
       <b>Size</b> <%= request_feed_pick_ups_item.size %><br>
       <b>Needed By</b> <%= link_to request_feed_pick_ups_item.confirmed_taker.name, request_feed_pick_ups_item.confirmed_taker %><br>
-      <div class="feed_item_map" onclick="location.href='<%=request_delivery_path(request_feed_pick_ups_item)%>'">
-        <img src="http://maps.google.com/maps/api/staticmap?size=250x180&maptype=roadmap&sensor=false&markers=color:green|label:A|<%= request_feed_pick_ups_item.from %>&markers=color:red|label:B|<%= request_feed_pick_ups_item.to %>"></img>
-      </div>
+      <% if request_feed_pick_ups_item.attachment.present? %>
+          <div class="feed_item_thumb" onclick="location.href='<%=request_delivery_path(request_feed_pick_ups_item)%>'">
+            <%= image_tag request_feed_pick_ups_item.attachment_url(:thumb).to_s  %>
+          </div>
+      <% else  %>
+          <div class="feed_item_map" onclick="location.href='<%=request_delivery_path(request_feed_pick_ups_item)%>'">
+            <img src="http://maps.google.com/maps/api/staticmap?size=250x180&maptype=roadmap&sensor=false&markers=color:green|label:A|<%= request_feed_pick_ups_item.from %>&markers=color:red|label:B|<%= request_feed_pick_ups_item.to %>"></img>
+          </div>
+      <% end  %>
     </div>
   </div>
 </div>

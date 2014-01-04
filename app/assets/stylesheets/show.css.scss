@@ -255,9 +255,8 @@
 }
 
 .the_deadline_and_money {
-  margin-top: 5px;
-  width: 100%;
-  margin-bottom: 5px;
+  width:100%;
+  margin-bottom: 8px;
   text-align: center;
   margin-right: auto;
   margin-left: auto;
@@ -268,8 +267,8 @@
   display: inline-block;
   vertical-align: top;
   font-size: 17px;
-  width: 46%;
-  height:100px;
+  width:245px;
+  height:112px;
   text-align: center;
   background-color: #10529b;
   background-repeat: no-repeat;
@@ -278,6 +277,7 @@
   border-radius:4px;
   -moz-border-radius:10px; /* Old Firefox */
   padding: 5px;
+  margin-right:4px;
   color: #ffffff;
   border-color: #000000;
   a {
@@ -340,10 +340,30 @@
   font-size: 17px;;
 }
 
+.no_picture {
+  width:255px;
+  height:185px;
+  padding-top:70px;
+  text-align: center;
+  font-size:23px;
+  line-height: 30px;
+}
+
+.giveaway_picture {
+  position:relative;
+  display: inline-block;
+  vertical-align: top;
+  margin:5px;
+  margin-right:3px;
+  border:1px solid;
+  border-color: #000000;
+}
+
 .the_from_and_to {
-  width: 100%;
+  display: inline-block;
+  width:255px;
   margin-top: 5px;
-  margin-bottom: 5px;
+  margin-right: 5px;
   line-height: 30px;
   text-align: center;
   margin-right: auto;
@@ -352,22 +372,22 @@
 
 .the_from_and_to_inner {
   position:relative;
-  display: inline-block;
-  height:100px;
+  width:255px;
+  height:112px;
   vertical-align: top;
   font-size: 17px;
   line-height: 110%;
-  width:46%;
   text-align: center;
   background-color: #10529b;
   background-repeat: no-repeat;
   background-position: top left;
   border:1px solid;
+  border-color: #000000;
   border-radius:4px;
   -moz-border-radius:10px; /* Old Firefox */
   padding: 5px;
+  margin-bottom: 8px;
   color: #ffffff;
-  border-color: #000000;
   a {
     color: #f2ff5e !important;
     text-decoration: none !important;
@@ -841,11 +861,11 @@
 
 .the_sender_and_receiver_inner {
   position:relative;
-  height:100px;
   display: inline-block;
   vertical-align: top;
   font-size:17px;
-  width: 46%;
+  width:245px;
+  height:112px;
   text-align: center;
   background-color: #10529b;
   background-repeat: no-repeat;
@@ -854,6 +874,7 @@
   border-radius:4px;
   -moz-border-radius:10px; /* Old Firefox */
   padding: 5px;
+  margin-right:4px;
   color: #ffffff;
   border-color: #000000;
 }

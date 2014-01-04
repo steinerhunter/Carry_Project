@@ -155,7 +155,67 @@
     <% end %>
     <b style="padding-left: 20px;"><%= @request_delivery.what %></b>
   </div>
+  <div class="giveaway_picture">
+    <% if @request_delivery.attachment.present? %>
+        <%= image_tag @request_delivery.attachment_url(:actual).to_s  %>
+    <% else  %>
+        <div class="no_picture">
+          <% if @request_delivery.user == current_user %>
+              You haven't uploaded a <b style="color:#f2ff5e">Picture</b> of your Giveaway yet.
+          <% else %>
+              A Picture of this Giveaway hasn't been uploaded yet.
+          <% end  %>
+        </div>
+    <% end  %>
+    <% if @request_delivery.user == current_user %>
+        <div class="missing_detail" style="top:1px">
+          <div class="bubbleInfo">
+            <% if @request_delivery.attachment.present? %>
+                <%= link_to image_tag("edit_detail.png"), edit_request_picture_path(@request_delivery.id), class:"modal-link trigger",
+                            "data-target" => "#myModal",
+                            "data-toggle" => "modal",
+                            "data-backdrop" => "static" %>
+            <% else  %>
+                <%= link_to image_tag("missing_detail.png"), edit_request_picture_path(@request_delivery.id), class:"modal-link trigger",
+                            "data-target" => "#myModal",
+                            "data-toggle" => "modal",
+                            "data-backdrop" => "static" %>
+            <% end  %>
+            <div class="popup" style="height:15px; width:285px; margin-top:65px;text-align: center;">
+              <% if @request_delivery.attachment.present? %>
+                  Click to change <b style="color:#f2ff5e">Picture</b> for this giveaway.
+              <% else  %>
+                  Click to add a <b style="color:#f2ff5e">Picture</b> for this giveaway.
+              <% end  %>
+              <div id="tail1" style="left:33px"></div>
+              <div id="tail2" style="left:33px"></div>
+            </div>
+          </div>
+        </div>
+    <% end  %>
+  </div>
   <div class="the_from_and_to">
+    <div class="the_from_and_to_inner" style="background-image: url('../assets/LocationA_small.png');">
+      <div class="inner_title">
+        <b>From</b>
+      </div>
+      <%= @request_delivery.from %>
+      <% if @request_delivery.user == current_user %>
+          <div class="missing_detail" style="top:1px">
+            <div class="bubbleInfo">
+              <%= link_to image_tag("edit_detail.png"), edit_request_from_path(@request_delivery.id), class:"modal-link trigger",
+                          "data-target" => "#myModal",
+                          "data-toggle" => "modal",
+                          "data-backdrop" => "static" %>
+              <div class="popup" style="height:15px; width:245px; margin-top:65px;text-align: center;">
+                Click to edit <b style="color:#f2ff5e">From</b> for this giveaway.
+                <div id="tail1" style="left:33px"></div>
+                <div id="tail2" style="left:33px"></div>
+              </div>
+            </div>
+          </div>
+      <% end  %>
+    </div>
     <div class="the_from_and_to_inner" style="font-size: 20px; background-image: url('../assets/size_small.png');">
       <div class="inner_title">
         <b>Size</b>
@@ -172,27 +232,6 @@
                           "data-backdrop" => "static" %>
               <div class="popup" style="height:15px; width:245px; margin-top:65px;text-align: center;">
                 Click to edit <b style="color:#f2ff5e">Size</b> for this giveaway.
-                <div id="tail1" style="left:33px"></div>
-                <div id="tail2" style="left:33px"></div>
-              </div>
-            </div>
-          </div>
-      <% end  %>
-    </div>
-    <div class="the_from_and_to_inner" style="background-image: url('../assets/LocationA_small.png');">
-      <div class="inner_title">
-        <b>From</b>
-      </div>
-      <%= @request_delivery.from %>
-      <% if @request_delivery.user == current_user %>
-          <div class="missing_detail" style="top:1px">
-            <div class="bubbleInfo">
-              <%= link_to image_tag("edit_detail.png"), edit_request_from_path(@request_delivery.id), class:"modal-link trigger",
-                          "data-target" => "#myModal",
-                          "data-toggle" => "modal",
-                          "data-backdrop" => "static" %>
-              <div class="popup" style="height:15px; width:245px; margin-top:65px;text-align: center;">
-                Click to edit <b style="color:#f2ff5e">From</b> for this giveaway.
                 <div id="tail1" style="left:33px"></div>
                 <div id="tail2" style="left:33px"></div>
               </div>

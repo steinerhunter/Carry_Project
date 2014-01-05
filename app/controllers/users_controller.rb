@@ -25,6 +25,7 @@ class UsersController < ApplicationController
         @request_delivery.what = session[:request_delivery_what]
         @request_delivery.from = session[:request_delivery_from]
         @request_delivery.size = session[:request_delivery_size]
+        @request_delivery.attachment = session[:request_delivery_attachment]
         @request_delivery.user = @user
         @request_delivery.save
         session[:request_delivery_id] = @request_delivery.id
@@ -53,6 +54,7 @@ class UsersController < ApplicationController
       session[:request_delivery_what] = nil
       session[:request_delivery_from]  = nil
       session[:request_delivery_size]  = nil
+      session[:request_delivery_attachment]  = nil
       @request_delivery = RequestDelivery.find_by_id(session[:request_delivery_id])
       @request_delivery.set_giver
       session[:request_delivery_id] = nil

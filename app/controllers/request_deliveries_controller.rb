@@ -101,6 +101,7 @@ class RequestDeliveriesController < ApplicationController
        session[:request_delivery_what] = @request_delivery.what
        session[:request_delivery_from] = @request_delivery.from
        session[:request_delivery_size] = @request_delivery.size
+       session[:request_delivery_attachment] = @request_delivery.attachment
       end
     else
       @phone = Phone.find_by_user_id(current_user.id)

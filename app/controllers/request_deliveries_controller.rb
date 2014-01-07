@@ -73,11 +73,11 @@ class RequestDeliveriesController < ApplicationController
       @facebook_summary_pick_up_other = "&p[summary]=Someone needs to pick up "+@request_delivery.what+", and they're willing to pay "+@request_delivery.cost+" "+@request_delivery.currency+" for it. Can you think of anyone who might be interested?"
     end
 
-    @facebook_share_giveaway_owner = @facebook_sharer_url+request_delivery_url(@request_delivery)+@facebook_image+@facebook_title_giveaway+@facebook_summary_giveaway_owner
-    @facebook_share_giveaway_other = @facebook_sharer_url+request_delivery_url(@request_delivery)+@facebook_image+@facebook_title_giveaway+@facebook_summary_giveaway_other
+    @facebook_share_giveaway_owner = replace_spaces(@facebook_sharer_url+request_delivery_url(@request_delivery)+@facebook_image+@facebook_title_giveaway+@facebook_summary_giveaway_owner)
+    @facebook_share_giveaway_other = replace_spaces(@facebook_sharer_url+request_delivery_url(@request_delivery)+@facebook_image+@facebook_title_giveaway+@facebook_summary_giveaway_other)
     if @request_delivery.cost.present?
-      @facebook_share_pick_up_owner = @facebook_sharer_url+request_delivery_url(@request_delivery)+@facebook_image+@facebook_title_pick_up+@facebook_summary_pick_up_owner
-      @facebook_share_pick_up_other = @facebook_sharer_url+request_delivery_url(@request_delivery)+@facebook_image+@facebook_title_pick_up+@facebook_summary_pick_up_other
+      @facebook_share_pick_up_owner = replace_spaces(@facebook_sharer_url+request_delivery_url(@request_delivery)+@facebook_image+@facebook_title_pick_up+@facebook_summary_pick_up_owner)
+      @facebook_share_pick_up_other = replace_spaces(@facebook_sharer_url+request_delivery_url(@request_delivery)+@facebook_image+@facebook_title_pick_up+@facebook_summary_pick_up_other)
     end
 
     @phone = Phone.find_by_user_id(@request_delivery.user.id)
@@ -457,6 +457,10 @@ class RequestDeliveriesController < ApplicationController
     @taken_giveaway = current_user.request_takes.find_by_id(params[:id])
     @waiting_for_transporter = RequestDelivery.find_by_id_and_status(params[:id],"WaitingForTransporter")
     redirect_to :back if @request_delivery.nil? && @taken_giveaway.nil? && @waiting_for_transporter.nil? && !current_user.try(:admin?)
+  end
+
+  def replace_spaces(str)
+    str.gsub(",","").gsub(/\s/,'+')
   end
 
 end

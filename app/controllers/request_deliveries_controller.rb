@@ -58,26 +58,31 @@ class RequestDeliveriesController < ApplicationController
 
     @facebook_authentication = Authentication.find_by_user_id(@request_delivery.user.id)
 
-    @facebook_sharer_url = "https://www.facebook.com/sharer/sharer.php?s=100&p[url]="
+    @facebook_feed_dialog_url = "https://www.facebook.com/dialog/feed?"
+    @facebook_page_link = request_delivery_url(@request_delivery).to_s+"&"
+    @facebook_app_id = ENV['FACEBOOK_APP_ID'].to_s+"&"
+    @facebook_name = "sendd.me Giveaway&"
     if @request_delivery.attachment.present?
-      @facebook_image = @request_delivery.attachment_url(:facebook_share).to_s
+      @facebook_picture = "picture="+@request_delivery.attachment_url(:facebook_share).to_s+"&"
     else
-      @facebook_image = "&p[images][0]=https://www.sendd.me/assets/ForFB-059d53c08b275cbc2e2735200318c25a.png"
+      @facebook_picture = ""
     end
-    @facebook_title_giveaway = "&p[title]=sendd.me Giveaway"
-    @facebook_title_pick_up = "&p[title]=sendd.me Pick Up"
-    @facebook_summary_giveaway_owner = "&p[summary]=I'm giving away "+@request_delivery.what+". Can you think of anyone who might be interested?"
-    @facebook_summary_giveaway_other = "&p[summary]=Someone is giving away "+@request_delivery.what+". Can you think of anyone who might be interested?"
+    @facebook_caption = @request_delivery.what.to_s+"&"
+    @facebook_description = "I'm giving away "+@request_delivery.what.to_s+". Interested?&"
+    @facebook_redirect_uri = @facebook_page_link
+    @facebook_display = "popup"
+
     if @request_delivery.cost.present?
       @facebook_summary_pick_up_owner = "&p[summary]=I need to pick up "+@request_delivery.what+", willing to pay "+@request_delivery.cost+" "+@request_delivery.currency+" for it. Can you think of anyone who might be interested?"
       @facebook_summary_pick_up_other = "&p[summary]=Someone needs to pick up "+@request_delivery.what+", and they're willing to pay "+@request_delivery.cost+" "+@request_delivery.currency+" for it. Can you think of anyone who might be interested?"
     end
 
-    @facebook_share_giveaway_owner = replace_spaces(@facebook_sharer_url+request_delivery_url(@request_delivery)+@facebook_image+@facebook_title_giveaway+@facebook_summary_giveaway_owner)
-    @facebook_share_giveaway_other = replace_spaces(@facebook_sharer_url+request_delivery_url(@request_delivery)+@facebook_image+@facebook_title_giveaway+@facebook_summary_giveaway_other)
+    @facebook_share_giveaway_owner = replace_spaces(@facebook_feed_dialog_url+@facebook_page_link+@facebook_app_id+
+                                                                                                                @facebook_name+@facebook_picture+@facebook_caption+@facebook_description+
+                                                                                                                @facebook_redirect_uri+@facebook_display)
     if @request_delivery.cost.present?
-      @facebook_share_pick_up_owner = replace_spaces(@facebook_sharer_url+request_delivery_url(@request_delivery)+@facebook_image+@facebook_title_pick_up+@facebook_summary_pick_up_owner)
-      @facebook_share_pick_up_other = replace_spaces(@facebook_sharer_url+request_delivery_url(@request_delivery)+@facebook_image+@facebook_title_pick_up+@facebook_summary_pick_up_other)
+      @facebook_share_pick_up_owner = replace_spaces(@facebook_feed_dialog_url+request_delivery_url(@request_delivery)+@facebook_image+@facebook_title_pick_up+@facebook_summary_pick_up_owner)
+      @facebook_share_pick_up_other = replace_spaces(@facebook_feed_dialog_url+request_delivery_url(@request_delivery)+@facebook_image+@facebook_title_pick_up+@facebook_summary_pick_up_other)
     end
 
     @phone = Phone.find_by_user_id(@request_delivery.user.id)

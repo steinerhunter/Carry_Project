@@ -1,0 +1,132 @@
+<a name="how_it_works"></a>
+<div class="home_container3">
+  <div class="how_it_works_container">
+    <div class="how_it_works_title" style="padding-top:100px; text-align: center;">
+      <b>How it works.</b>
+    </div>
+    <div class="how_it_works_right">
+      <div class="how_it_works_image">
+        <%= image_tag("HowItWorks1.png") %>
+      </div>
+      <div class="how_it_works_text" style="padding-left: 30px;">
+        <div class="how_it_works_text_title">
+          Find a Giveaway you want.
+        </div>
+        <div class="how_it_works_text_content">
+          Browse our lists of stuff people give away.<br>
+          Once you find something you like, go to its page and click this button:<br><br>
+          <div class="challenge_accepted" style="font-size: 33px;padding:0px;padding-bottom: 10px;padding-top: 13px;margin-left:70px;">
+            I'll take it!
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="how_it_works_right">
+      <div class="how_it_works_text" style=" padding-right: 30px;">
+        <div class="how_it_works_text_title">
+          Add your own location.
+        </div>
+        <div class="how_it_works_text_content">
+          We know where it's coming from.<br>
+          We need to know where to take it to.<br>
+          Add your destination address.
+        </div>
+      </div>
+      <div class="how_it_works_image">
+        <%= image_tag("HowItWorks2.png") %>
+      </div>
+    </div>
+    <div class="how_it_works_right">
+      <div class="how_it_works_image">
+        <%= image_tag("HowItWorks3.png") %>
+      </div>
+      <div class="how_it_works_text" style="padding-left: 20px;">
+        <div class="how_it_works_text_title">
+          Choose Delivery Type.
+        </div>
+        <div class="how_it_works_text_content">
+          Want to pick it up yourself? No problem.<br>
+          Need someone else to pick it up for you? We've got your back!<br>
+          Price for <b>sendd.me</b> delivery is auto-calculated by distance of pick up.
+        </div>
+      </div>
+    </div>
+    <div class="how_it_works_right">
+      <div class="how_it_works_text" style=" padding-right: -10px;">
+        <div class="how_it_works_text_title">
+          Self Delivery? Go get it!
+        </div>
+        <div class="how_it_works_text_content">
+          Picking it up yourself? Good for you!<br>
+          Your mobile number and Giver's mobile number become visible (strictly to the 2 of you), so you can set a time for the pick up.
+        </div>
+      </div>
+      <div class="how_it_works_image">
+        <%= image_tag("HowItWorks4.png") %>
+      </div>
+    </div>
+    <div class="how_it_works_right">
+      <div class="how_it_works_image">
+        <%= image_tag("HowItWorks5.png") %>
+      </div>
+      <div class="how_it_works_text" style="padding-left: 20px;">
+        <div class="how_it_works_text_title">
+          Need Pick up? You got it!
+        </div>
+        <div class="how_it_works_text_content">
+          Prefer someone else to get it for you?<br>
+          No problem!<br>
+          Choose a Transporter to handle the Pick up for you.
+        </div>
+      </div>
+    </div>
+    <div class="how_it_works_right">
+      <div class="how_it_works_text" style=" padding-right: -10px;">
+        <div class="how_it_works_text_title">
+          Authorize PayPal payment.
+        </div>
+        <div class="how_it_works_text_content">
+          Chosen Transporter is confirmed  once you authorize PayPal payment.<br>
+          The transaction is executed only after the Giveaway is in your hands.
+        </div>
+      </div>
+      <div class="how_it_works_image">
+        <%= image_tag("HowItWorks6.png") %>
+      </div>
+    </div>
+    <div class="how_it_works_right">
+      <div class="how_it_works_image">
+        <%= image_tag("HowItWorks7.png") %>
+      </div>
+      <div class="how_it_works_text" style="padding-left: 20px;">
+        <div class="how_it_works_text_title">
+          Set Pick up details.
+        </div>
+        <div class="how_it_works_text_content">
+          After confirming your Transporter, all that's left is to set the details of the Pick up.<br>
+          Your mobile number, Transporter's mobile number  and Giver's mobile number become visible (strictly to the 3 of you), so you can set a time for the pick up.
+        </div>
+      </div>
+    </div>
+    <div class="how_it_works_right">
+      <div class="how_it_works_text" style=" padding-right: -10px;">
+        <div class="how_it_works_text_title">
+          Enjoy your new thing :)
+        </div>
+        <div class="how_it_works_text_content">
+          Got your item? Glad to hear it!<br>
+          Now's the time to say something nice about your Transporter.<br>
+          Help us build a better community by adding a review.
+        </div>
+      </div>
+      <div class="how_it_works_image">
+        <%= image_tag("HowItWorks8.png") %>
+      </div>
+    </div>
+  </div>
+  <% if current_user.nil? %>
+      <div class="signup_now" onclick="location.href='/signup'">
+        <b>Get your own account!</b>
+      </div>
+  <% end  %>
+</div>

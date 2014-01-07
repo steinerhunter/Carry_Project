@@ -1,3 +1,33 @@
+.launching_soon {
+  background-image: url('main_background.jpg');
+  background-size: 100%;
+  background-repeat: no-repeat;
+  background-position: top top;
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+.launching_soon_title {
+  color:#ffffff;
+  text-shadow: 1px 0 0 #000, 0 -1px 0 #000, 0 1px 0 #000, -1px 0 0 #000;
+  font-size: 90px;
+  font-weight: bold;
+  margin-top: 23%;
+  text-align: center;
+}
+
+.launching_soon_text {
+  color:#ffffff;
+  text-shadow: 1px 0 0 #000, 0 -1px 0 #000, 0 1px 0 #000, -1px 0 0 #000;
+  font-size: 25px;
+  font-weight: bold;
+  margin-top: 30px;
+  text-align: center;
+}
+
 .home_container1 {
   position: relative;
   width: 100%;

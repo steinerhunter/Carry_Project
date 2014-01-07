@@ -1,0 +1,51 @@
+<div class="home_container2">
+  <div class="middle_tagline">
+    <b>Your package is in good hands.</b>
+  </div>
+  <div class="good_hands_right">
+    <div class="good_hands_image">
+      <%= image_tag("verified_members.png") %>
+    </div>
+    <div class="good_hands_text" style="padding-left: 30px;">
+      <div class="good_hands_text_title">
+        Our members are verified.
+      </div>
+      <div class="good_hands_text_content">
+        Our transporters and senders validate their mobile phone number, their Facebook account and their contact email address. <br>
+      </div>
+    </div>
+  </div>
+  <div class="good_hands_right">
+    <div class="good_hands_image">
+      <%= image_tag("secure_details.png") %>
+    </div>
+    <div class="good_hands_text" style="padding-left: 30px;">
+      <div class="good_hands_text_title">
+        Your privacy is guaranteed.
+      </div>
+      <div class="good_hands_text_content">
+        We will never expose your personal details, <br>
+        and are committed to ensuring that your information is secure.
+      </div>
+    </div>
+  </div>
+  <div class="good_hands_right">
+    <div class="good_hands_image">
+      <%= image_tag("secure_payment.png") %>
+    </div>
+    <div class="good_hands_text" style="padding-left: 30px;">
+      <div class="good_hands_text_title">
+        Payment is secure, simple.
+      </div>
+      <div class="good_hands_text_content">
+        Payment is done through PayPal, <br>
+        in a secure, SSL-Encrypted fashion.
+      </div>
+    </div>
+  </div>
+  <% if current_user.nil? %>
+      <div class="signup_now" onclick="location.href='/signup'">
+        <b>Get your own account!</b>
+      </div>
+  <% end  %>
+</div>

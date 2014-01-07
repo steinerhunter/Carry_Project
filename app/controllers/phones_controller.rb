@@ -1,5 +1,6 @@
 class PhonesController < ApplicationController
   respond_to :html, :js
+  require 'twilio-ruby'
 
   def new
     @phone = Phone.new

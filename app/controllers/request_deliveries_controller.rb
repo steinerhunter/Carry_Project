@@ -61,28 +61,39 @@ class RequestDeliveriesController < ApplicationController
     @facebook_feed_dialog_url = "https://www.facebook.com/dialog/feed?"
     @facebook_page_link = "link="+request_delivery_url(@request_delivery).to_s+"&"
     @facebook_app_id = "app_id="+ENV['FACEBOOK_APP_ID'].to_s+"&"
-    @facebook_name = "name=sendd.me Giveaway&"
+    @facebook_name_giveaway = "name=sendd.me Giveaway&"
+    @facebook_name_pick_up = "name=sendd.me Pick Up&"
     if @request_delivery.attachment.present?
       @facebook_picture = "picture="+@request_delivery.attachment_url(:facebook_share).to_s+"&"
     else
       @facebook_picture = ""
     end
     @facebook_caption = "caption="+@request_delivery.what.to_s+"&"
-    @facebook_description = "description=I'm giving away "+@request_delivery.what.to_s+". Interested?&"
+    @facebook_description_giveaway_owner = "description=I'm giving away "+@request_delivery.what.to_s+". Interested?&"
+    @facebook_description_giveaway_other = "description=Someone is giving away "+@request_delivery.what.to_s+". Interested?&"
+    if @request_delivery.cost.present?
+      @facebook_description_pick_up_owner = "description=I need to pick up "+@request_delivery.what.to_s+", willing to pay "+@request_delivery.cost.to_s+" "+@request_delivery.currency.to_s+" for it. Interested?&"
+      @facebook_description_pick_up_other = "description=Someone needs to pick up "+@request_delivery.what.to_s+", and they're willing to pay "+@request_delivery.cost.to_s+" "+@request_delivery.currency.to_s+" for it. Interested?&"
+    end
     @facebook_redirect_uri = "redirect_uri="+request_delivery_url(@request_delivery).to_s+"&"
     @facebook_display = "popup"
 
-    if @request_delivery.cost.present?
-      @facebook_summary_pick_up_owner = "&p[summary]=I need to pick up "+@request_delivery.what+", willing to pay "+@request_delivery.cost+" "+@request_delivery.currency+" for it. Can you think of anyone who might be interested?"
-      @facebook_summary_pick_up_other = "&p[summary]=Someone needs to pick up "+@request_delivery.what+", and they're willing to pay "+@request_delivery.cost+" "+@request_delivery.currency+" for it. Can you think of anyone who might be interested?"
-    end
-
     @facebook_share_giveaway_owner = replace_spaces(@facebook_feed_dialog_url+@facebook_page_link+@facebook_app_id+
-                                                                                                                @facebook_name+@facebook_picture+@facebook_caption+@facebook_description+
+                                                                                                                @facebook_name_giveaway+@facebook_picture+@facebook_caption+@facebook_description_giveaway_owner+
                                                                                                                 @facebook_redirect_uri+@facebook_display)
+
+    @facebook_share_giveaway_other = replace_spaces(@facebook_feed_dialog_url+@facebook_page_link+@facebook_app_id+
+                                                                                                                @facebook_name_giveaway+@facebook_picture+@facebook_caption+@facebook_description_giveaway_other+
+                                                                                                                @facebook_redirect_uri+@facebook_display)
+
     if @request_delivery.cost.present?
-      @facebook_share_pick_up_owner = replace_spaces(@facebook_feed_dialog_url+request_delivery_url(@request_delivery)+@facebook_image+@facebook_title_pick_up+@facebook_summary_pick_up_owner)
-      @facebook_share_pick_up_other = replace_spaces(@facebook_feed_dialog_url+request_delivery_url(@request_delivery)+@facebook_image+@facebook_title_pick_up+@facebook_summary_pick_up_other)
+    @facebook_share_pick_up_owner = replace_spaces(@facebook_feed_dialog_url+@facebook_page_link+@facebook_app_id+
+                                                                                                             @facebook_name_pick_up+@facebook_picture+@facebook_caption+@facebook_description_pick_up_owner+
+                                                                                                             @facebook_redirect_uri+@facebook_display)
+
+    @facebook_share_pick_up_other = replace_spaces(@facebook_feed_dialog_url+@facebook_page_link+@facebook_app_id+
+                                                                                                             @facebook_name_pick_up+@facebook_picture+@facebook_caption+@facebook_description_pick_up_other+
+                                                                                                             @facebook_redirect_uri+@facebook_display)
     end
 
     @phone = Phone.find_by_user_id(@request_delivery.user.id)

@@ -1,6 +1,5 @@
 class PhonesController < ApplicationController
   respond_to :html, :js
-  require 'twilio-ruby'
 
   def new
     @phone = Phone.new
@@ -36,8 +35,8 @@ class PhonesController < ApplicationController
     @twilio_token = ENV['TWILIO_TOKEN']
 
     #Create and send an SMS message
-    client = Twilio::REST::Client.new @twilio_sid, @twilio_token
-    client.account.messages.create(
+    @client = Twilio::REST::Client.new @twilio_sid, @twilio_token
+    @client.account.messages.create(
         :body  =>  "Your sendd.me verification code is #{@phone.verification_code}.",
         :to       => @phone.normalized_phone,
         :from  => @twilio_from

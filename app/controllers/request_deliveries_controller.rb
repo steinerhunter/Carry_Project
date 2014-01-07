@@ -59,17 +59,17 @@ class RequestDeliveriesController < ApplicationController
     @facebook_authentication = Authentication.find_by_user_id(@request_delivery.user.id)
 
     @facebook_feed_dialog_url = "https://www.facebook.com/dialog/feed?"
-    @facebook_page_link = request_delivery_url(@request_delivery).to_s+"&"
-    @facebook_app_id = ENV['FACEBOOK_APP_ID'].to_s+"&"
-    @facebook_name = "sendd.me Giveaway&"
+    @facebook_page_link = "link="+request_delivery_url(@request_delivery).to_s+"&"
+    @facebook_app_id = "app_id="+ENV['FACEBOOK_APP_ID'].to_s+"&"
+    @facebook_name = "name=sendd.me Giveaway&"
     if @request_delivery.attachment.present?
       @facebook_picture = "picture="+@request_delivery.attachment_url(:facebook_share).to_s+"&"
     else
       @facebook_picture = ""
     end
-    @facebook_caption = @request_delivery.what.to_s+"&"
-    @facebook_description = "I'm giving away "+@request_delivery.what.to_s+". Interested?&"
-    @facebook_redirect_uri = @facebook_page_link
+    @facebook_caption = "caption="+@request_delivery.what.to_s+"&"
+    @facebook_description = "description=I'm giving away "+@request_delivery.what.to_s+". Interested?&"
+    @facebook_redirect_uri = "redirect_uri="+request_delivery_url(@request_delivery).to_s+"&"
     @facebook_display = "popup"
 
     if @request_delivery.cost.present?

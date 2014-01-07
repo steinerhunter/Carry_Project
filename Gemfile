@@ -12,11 +12,11 @@ gem 'meta_search'
 gem 'omniauth'
 gem 'omniauth-facebook'
 gem 'paypal_adaptive'
-gem 'twilio-ruby'
+gem 'twilio-ruby', "~> 3.11.4"
 gem 'httparty'
 gem 'carrierwave'
 gem "mini_magick", "~> 3.7.0"
-gem 'fog', '~> 1.0.0'
+gem 'fog'
 gem 'remotipart', '~> 1.2'
 
 group :development, :test do

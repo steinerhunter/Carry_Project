@@ -33,6 +33,7 @@ class RequestDeliveriesController < ApplicationController
       @non_editable = @request_delivery.status == "ReceiverConfirmed" ||
                                          @request_delivery.status == "WaitingForTransporter" ||
                                          @request_delivery.status == "Pending Confirmation" ||
+                                         @request_delivery.status == "Confirmed" ||
                                          @request_delivery.status == "Complete" ||
                                          @request_delivery.status == "TransporterReviewed"
 
@@ -336,10 +337,16 @@ class RequestDeliveriesController < ApplicationController
         @request_delivery.wait_for_transporter
         flash[:success] = "Thank you!<br><div class='sub_flash_text'>You're now confirmed for this giveaway.<br>
         Now it's time to set you up with a Transporter.</div>".html_safe
+        if Rails.env.production?
+          NotifMailer.new_taken_confirmed_senddme(@creating_user,@taking_user,@request_delivery).deliver
+        end
       elsif @request_delivery.delivery_type == "myself"
         @request_delivery.get_the_item
         flash[:success] = "Thank you!<br><div class='sub_flash_text'>You're now confirmed for this giveaway.<br>
         You can call <b style=\"color:#1a2cff\">#{@request_delivery.user.name}</b>, the giving person, and set a time for a pick up.</div>".html_safe
+        if Rails.env.production?
+          NotifMailer.new_taken_confirmed_self(@creating_user,@taking_user,@request_delivery).deliver
+        end
       end
     end
     redirect_to :back

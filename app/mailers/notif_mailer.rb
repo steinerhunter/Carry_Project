@@ -25,6 +25,20 @@ class NotifMailer < ActionMailer::Base
     mail(:to => @creating_user.email, :subject => "#{taking_user.name} is interested in your giveaway!")
   end
 
+  def new_taken_confirmed_senddme(creating_user,taking_user,request_delivery)
+    @creating_user = creating_user
+    @taking_user = taking_user
+    @request_delivery = request_delivery
+    mail(:to => @creating_user.email, :subject => "#{taking_user.name} has confirmed their details!")
+  end
+
+  def new_taken_confirmed_self(creating_user,taking_user,request_delivery)
+    @creating_user = creating_user
+    @taking_user = taking_user
+    @request_delivery = request_delivery
+    mail(:to => @creating_user.email, :subject => "#{taking_user.name} has confirmed their details!")
+  end
+
   def new_accepted_request(creating_user,accepting_user,request_delivery)
     @creating_user = creating_user
     @accepting_user = accepting_user

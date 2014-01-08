@@ -1,6 +1,7 @@
 Hi there <%= @creating_user.name %>,
 It seems <%= @taking_user.name  %> is interested in your giveaway - "<%= @request_delivery.what %>"!
-Go to your <%= link_to "Activity Page", :controller => "activities", :action => "index", :host => "www.sendd.me" %> in order to confirm!
+He/she must now add their location, and choose a delivery option.
+Go to your <%= link_to "Giveaway's Page", :controller => "request_deliveries", :action => "show", :id => @request_delivery.id,  :host => "www.sendd.me" %> to view its status.
 
 Thank you,
 Best Regards,

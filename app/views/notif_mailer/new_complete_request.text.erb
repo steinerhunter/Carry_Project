@@ -1,7 +1,7 @@
 Hi there <%= @creating_user.name %>,
-It seems <%= @accepting_user.name  %> has completed your request - "<%= @request_delivery.what %>"!
-That means your delivery has reached its destination!
-Go to your <%= link_to "Activity Page", :controller => "activities", :action => "index", :host => "www.sendd.me" %> and rate <%= @accepting_user.name  %> as a transporter.
+It seems <%= @accepting_user.name  %> has delivered "<%= @request_delivery.what %>" to you!
+Did you have a good sendd.me experience?
+Go to the <%= link_to "Giveaway's Page", :controller => "request_deliveries", :action => "show", :id => @request_delivery.id,  :host => "www.sendd.me" %> and rate <%= @accepting_user.name  %> as a transporter.
 
 Thank you,
 Best Regards,

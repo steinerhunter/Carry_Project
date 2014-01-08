@@ -1,6 +1,7 @@
     Hi there <%= @creating_user.name %>,
-    It seems <%= @accepting_user.name  %> has accepted your request - "<%= @request_delivery.what %>"!
-    Go to your <%= link_to "Activity Page", :controller => "activities", :action => "index", :host => "www.sendd.me" %> in order to confirm!
+    It seems <%= @accepting_user.name  %> has offered to pick up "<%= @request_delivery.what %>" for you!
+    You may confirm him/her for the Pick Up, or any other Transporter.
+    Go to the <%= link_to "Giveaway's Page", :controller => "request_deliveries", :action => "show", :id => @request_delivery.id,  :host => "www.sendd.me" %> in order to proceed.
 
     Thank you,
     Best Regards,

@@ -1,0 +1,9 @@
+Hi there <%= @creating_user.name %>,
+It seems <%= @taking_user.name  %> has confirmed his/her details regarding your Giveaway - "<%= @request_delivery.what %>".
+They have added their location, and decided to pick up your Giveaway themselves.
+Their phone number has been revealed strictly to you, and your phone number has been revealed strictly to them.
+Go to your <%= link_to "Giveaway's Page", :controller => "request_deliveries", :action => "show", :id => @request_delivery.id,  :host => "www.sendd.me" %> to view its status.
+
+Thank you,
+Best Regards,
+sendd.me Support

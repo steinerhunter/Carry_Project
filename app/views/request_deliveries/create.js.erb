@@ -19,6 +19,9 @@ var errors = $('<ul />');
 
 // Display errors before the form
 $('<div />').addClass('request_suggest_delivery_errors').html(errors).appendTo("#new_request_delivery").hide().fadeIn('slow');
+$('input[type="submit"]').removeAttr('disabled');
+$('input[type="submit"]').removeClass('please_wait')
+$('input[type="submit"]').addClass('update_details')
 
 <% else %>
     <% if current_user.nil? %>

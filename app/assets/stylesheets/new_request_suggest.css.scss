@@ -93,6 +93,58 @@ legend {
   border:solid 1px #000;
 }
 
+.update_details {
+  text-align: center;
+  width: 340px;
+  height: 55px;
+  line-height: 200%;
+  background-color: #d67a31;
+  background-repeat: no-repeat;
+  background-position: bottom center;
+  -moz-box-shadow: 3px 3px 3px #3d3d3d; /* Old Firefox */
+  box-shadow: 3px 3px 3px #3d3d3d;
+  border:solid 1px;
+  border-radius:7px;
+  -moz-border-radius:10px; /* Old Firefox */
+  color: #ffffff;
+  border-color: #000000;
+  margin-top:10px;
+  margin-bottom:10px;
+  margin-left: auto;
+  margin-right: auto;
+  padding:55px;
+  padding-top:5px;
+  padding-bottom:5px;
+  font-size:25px;
+}
+
+.update_details:hover {
+  background-color: #1d79e2;
+}
+
+.please_wait {
+  text-align: center;
+  width: 340px;
+  height: 55px;
+  line-height: 200%;
+  background-color: #5d5d5d;
+  background-repeat: no-repeat;
+  background-position: bottom center;
+  border:solid 1px;
+  border-radius:7px;
+  -moz-border-radius:10px; /* Old Firefox */
+  color: #0c0c0c;
+  border-color: #000000;
+  margin-top:10px;
+  margin-bottom:10px;
+  margin-left: auto;
+  margin-right: auto;
+  padding:55px;
+  padding-top:5px;
+  padding-bottom:5px;
+  font-size:25px;
+}
+
 #submit_delivery {
   text-align: center;
   width: 340px;

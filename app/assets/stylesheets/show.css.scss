@@ -313,11 +313,13 @@
   cursor:pointer;
   text-align: right;
   background-image: url('SignUpWithFacebook.png');
-  background-color: #19264f;
+  background-color: #15854b;
   background-repeat: no-repeat;
   background-position: middle left;
   border:solid 1px;
   border-radius:5px;
+  -moz-box-shadow: 3px 3px 3px #3d3d3d; /* Old Firefox */
+  box-shadow: 3px 3px 3px #3d3d3d;
   -moz-border-radius:3px; /* Old Firefox */
   color: #ffffff;
   border-color: #000000;

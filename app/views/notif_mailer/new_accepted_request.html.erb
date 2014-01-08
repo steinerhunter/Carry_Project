@@ -4,6 +4,7 @@
     <meta content="text/html; charset=UTF-8" http-equiv="Content-Type" />
 </head>
 <body>
+<%= render 'notif_mailer/mail_include' %>
     <h2>Hi there <%= @creating_user.name %>,</h2><br>
     <h3>It seems <b style="color:#279227"><%= @accepting_user.name  %></b> has offered to pick up "<b style="color:#63a2ff"><%= @request_delivery.what %></b>" for you!</h3>
     <h3>You may confirm him/her for the Pick Up, or any other Transporter.</h3>

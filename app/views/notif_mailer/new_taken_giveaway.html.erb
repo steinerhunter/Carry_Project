@@ -4,6 +4,7 @@
     <meta content="text/html; charset=UTF-8" http-equiv="Content-Type" />
 </head>
 <body>
+<%= render 'notif_mailer/mail_include' %>
     <h2>Hi there <%= @creating_user.name %>,</h2><br>
     <h3>It seems <b style="color:#279227"><%= @taking_user.name  %></b> is interested in your Giveaway - "<b style="color:#63a2ff"><%= @request_delivery.what %></b>"!</h3>
     <h3>He/she must now add their location, and choose a delivery option.</h3>

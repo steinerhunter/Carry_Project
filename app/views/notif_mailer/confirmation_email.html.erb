@@ -4,6 +4,7 @@
   <meta content="text/html; charset=UTF-8" http-equiv="Content-Type" />
 </head>
 <body>
+<%= render 'notif_mailer/mail_include' %>
 <h2>Hi there <%= @user.name %>,</h2><br>
 <h3>We've sent you this email in order to verify your email address.</h3>
 <h3>In order to do just that, <%= link_to "click here", confirm_url(@user.email_confirmation_token) %>.</h3>

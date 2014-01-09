@@ -22,8 +22,12 @@ $('<div />').addClass('request_suggest_delivery_errors').html(errors).appendTo("
 $('input[type="submit"]').removeAttr('disabled');
 $('input[type="submit"]').removeClass('please_wait')
 $('input[type="submit"]').addClass('update_details')
-
 <% else %>
+    $('input[type="submit"]').removeClass('update_details')
+    $('input[type="submit"]').addClass('please_wait')
+    $('input[type="submit"]').prop("value", "Please wait...");
+    $('input[type="submit"]').prop("disabled", true);
+    $('#new_request_delivery').submit()
     <% if current_user.nil? %>
     <% store_location %>
         window.location.href = "<%=signin_path %>"

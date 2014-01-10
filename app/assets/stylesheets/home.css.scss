@@ -29,11 +29,19 @@
 }
 
 .home_container1 {
-  position: relative;
+  display: block;
+  position: absolute;
+  background-image: url('back14.jpg');
+  background-size: 100%;
+  background-repeat: no-repeat;
+  background-position: top top;
   width: 100%;
+  top:47px;
+  bottom:0;
   margin-left: auto;
   margin-right: auto;
   margin-bottom:20px;
+
 }
 
 .home_container2 {
@@ -51,15 +59,15 @@
 
 .home_container3 {
   background-size: 100%;
-  background-image: url('InBetween.png');
+  background-image: url('back7.jpg');
+  background-color: #f7e4b9;
   background-repeat: no-repeat;
   background-position: top top;
-  position: relative;
-  margin-top: -160px;
+  position: absolute;
+  width:100%;
   margin-left: auto;
   margin-right: auto;
-  padding-bottom: 70px;
-  z-index: 13;
+  top:100%;
 }
 
 .how_it_works_container {
@@ -78,6 +86,7 @@
 }
 
 .main_logo {
+  margin-top:3%;
   width: 950px;
   text-align: center;
   margin-left: auto;
@@ -107,11 +116,11 @@
 }
 
 .subtop_tagline {
-  width: 595px;
+  width: 675px;
   text-align: left;
-  font-size:22px;
+  font-size:25px;
   line-height:100%;
-  margin-top:20px;
+  margin-top:4%;
   margin-left: auto;
   margin-right: auto;
 }
@@ -130,7 +139,7 @@
 
 .two_main_buttons {
   line-height:350px;
-  margin-top: 30px;
+  margin-top: 4%;
   font-size: 29px;
   width: 850px;
   margin-left: auto;

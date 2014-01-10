@@ -47,9 +47,11 @@
   <div class="push"></div>
   </div>
 </div>
-<div class="footer">
-<%= render 'layouts/footer' %>
-</div>
+  <% if  !(controller.controller_name == 'static_pages' && controller.action_name == 'home') %>
+    <div class="footer">
+      <%= render 'layouts/footer' %>
+    </div>
+  <% end  %>
   <%= render 'modals/modal' %>
 </body>
 </html>

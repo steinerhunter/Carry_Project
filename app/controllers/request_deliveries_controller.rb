@@ -70,11 +70,11 @@ class RequestDeliveriesController < ApplicationController
       @facebook_picture = ""
     end
     @facebook_caption = "caption="+@request_delivery.what.to_s+"&"
-    @facebook_description_giveaway_owner = "description=I'm giving away "+@request_delivery.what.to_s+". Interested?&"
-    @facebook_description_giveaway_other = "description=Someone is giving away "+@request_delivery.what.to_s+". Interested?&"
+    @facebook_description_giveaway_owner = "description=I'm giving away "+@request_delivery.what.to_s+". Pick up is from "+@request_delivery.from.to_s+". Interested?&"
+    @facebook_description_giveaway_other = "description=Someone is giving away "+@request_delivery.what.to_s+". Pick up is from "+@request_delivery.from.to_s+". Interested?&"
     if @request_delivery.cost.present?
-      @facebook_description_pick_up_owner = "description=I need to pick up "+@request_delivery.what.to_s+", willing to pay "+@request_delivery.cost.to_s+" "+@request_delivery.currency.to_s+" for it. Interested?&"
-      @facebook_description_pick_up_other = "description=Someone needs to pick up "+@request_delivery.what.to_s+", and they're willing to pay "+@request_delivery.cost.to_s+" "+@request_delivery.currency.to_s+" for it. Interested?&"
+      @facebook_description_pick_up_owner = "description=I need to pick up "+@request_delivery.what.to_s+" from "+@request_delivery.from+", and I'm willing to pay "+@request_delivery.cost.to_s+" "+@request_delivery.currency.to_s+" for it. Interested?&"
+      @facebook_description_pick_up_other = "description=Someone needs to pick up "+@request_delivery.what.to_s+" from "+@request_delivery.from+", and they're willing to pay "+@request_delivery.cost.to_s+" "+@request_delivery.currency.to_s+" for it. Interested?&"
     end
     @facebook_redirect_uri = "redirect_uri="+request_delivery_url(@request_delivery).to_s+"&"
     @facebook_display = "popup"

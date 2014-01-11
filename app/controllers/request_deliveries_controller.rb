@@ -349,7 +349,7 @@ class RequestDeliveriesController < ApplicationController
         end
       end
     end
-    redirect_to :back
+    redirect_to request_delivery_url(@request_delivery)
   end
 
   def got_the_item
@@ -383,7 +383,7 @@ class RequestDeliveriesController < ApplicationController
             @creating_user = User.find_by_id(@request_delivery.user_id)
             @accepting_user = User.find_by_id(@accepted_request.user_id)
             if Rails.env.production?
-              NotifMailer.new_accepted_request(@creating_user,@accepting_user,@request_delivery).deliver
+              NotifMailer.new_accepted_request(@taking_user,@accepting_user,@request_delivery).deliver
             end
           end
         end

@@ -4,11 +4,14 @@ $(document).ready(function(){
         $(this).addClass('please_wait');
         $(this).prop("value", "Please wait...");
         $(this).prop("disabled", true);
-        if($('#new_request_delivery').length) {
-            $('#new_request_delivery').submit()
-        }
-        else if($('#edit_picture').length) {
-            $('#edit_picture').submit()
+        $.browser.chrome = /chrom(e|ium)/.test(navigator.userAgent.toLowerCase());
+        if($.browser.chrome){
+            if($('#new_request_delivery').length) {
+                $('#new_request_delivery').submit()
+            }
+            else if($('#edit_picture').length) {
+                $('#edit_picture').submit()
+            }
         }
     });
 });

@@ -331,6 +331,7 @@ class RequestDeliveriesController < ApplicationController
   def get_the_item
     @request_delivery = RequestDelivery.find(params[:request_delivery_id])
     @taken_giveaway = TakenGiveaway.find_by_request_delivery_id(@request_delivery.id)
+    @creating_user = @request_delivery.user
     @taking_user = User.find_by_id(@taken_giveaway.user_id)
     if @taking_user == current_user && @request_delivery.status == "Taken" && @request_delivery.has_all_details
       if @request_delivery.delivery_type == "senddme" && @request_delivery.cost.to_i > 0

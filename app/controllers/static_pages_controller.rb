@@ -8,6 +8,9 @@ class StaticPagesController < ApplicationController
   end
 
   def faq
+    if !current_user.try(:admin?)
+      redirect_to root_path
+    end
   end
 
   def terms_of_use

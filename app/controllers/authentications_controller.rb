@@ -31,8 +31,10 @@ class AuthenticationsController < ApplicationController
         session[:request_delivery_from] = nil
         session[:request_delivery_size] = nil
         session[:request_delivery_attachment] = nil
+        redirect_to request_delivery_url(@request_delivery)
+      else
+        redirect_after_login
       end
-      redirect_after_login
     elsif current_user || user
       # an already logged in user connects its account with Facebook
       @user = current_user ? current_user : user
@@ -51,8 +53,10 @@ class AuthenticationsController < ApplicationController
         session[:request_delivery_from] = nil
         session[:request_delivery_size] = nil
         session[:request_delivery_attachment] = nil
+        redirect_to request_delivery_url(@request_delivery)
+      else
+        redirect_after_login
       end
-      redirect_after_login
     else
       # a new user registers with Facebook
       msg = "Random message3 for connecting a given account to these Facebook OAuth2 credentials"
@@ -72,8 +76,10 @@ class AuthenticationsController < ApplicationController
         session[:request_delivery_from] = nil
         session[:request_delivery_size] = nil
         session[:request_delivery_attachment] = nil
+        redirect_to request_delivery_url(@request_delivery)
+      else
+        redirect_after_login
       end
-      redirect_after_login
     end
   end
 

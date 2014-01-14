@@ -1,16 +1,14 @@
 <div class="signup_form_class">
-  <div class="form_title" style="background-image: url('../assets/signup.png');">
-    <b>Create Your Account</b>
-  </div>
   <%= form_for(@user, :remote => true) do |f| %>
       <%=  render 'shared/error_messages', object: f.object  %>
       <div class="signup_fields">
+        <legend><b>Sign up.</b></legend>
         <div class="myfield_signup">
-          <%= f.label :name, "What's your name?" %>
+          <%= f.label :name, "Your name?" %>
           <%= f.text_field :name %>
         </div>
         <div class="myfield_signup">
-          <%= f.label :email, "What's your Email Address?" %>
+          <%= f.label :email, "Your Email Address?" %>
           <%= f.text_field :email, :placeholder => "someone@example.com" %>
         </div>
         <div class="myfield_signup">
@@ -22,11 +20,11 @@
           <%= f.password_field :password_confirmation %>
         </div>
       </div>
+      <div class="signup_using_facebook" onclick="location.href='/auth/facebook'">
+        Sign Up with Facebook
+      </div>
       <div class="button_signup">
         <%=  f.submit "Create Account" , :id => 'submit'%>
-      </div>
-      <div class="signup_using_facebook" onclick="location.href='/auth/facebook'">
-          Sign Up with Facebook
       </div>
       <div class="by_signing_up">
         By signing up, you agree to our <%= link_to "Terms of Use", terms_of_use_path  %> and <%= link_to "Privacy Policy", privacy_policy_path %>

@@ -1,7 +1,6 @@
 
 .new_delivery_request_class {
-  margin-top: 1%;
-  width:600px;
+  width:500px;
   margin-left: auto;
   margin-right: auto;
 }
@@ -16,7 +15,7 @@
 .single_step label {
   display:inline-block;
   text-align: left;
-  width:320px;
+  width:250px;
   font-size:28px;
   font-weight: bold;
   line-height:40%;
@@ -25,22 +24,9 @@
 
 legend {
   text-align: left;
-  height:40px;
-  padding-top: 10px;
-  padding-bottom: 10px;
-  font-size: 3em;
-  border-bottom:solid 2px;
-  border-color: #000000;
-  background-color:#00008b;
-  background-repeat: no-repeat;
-  background-position: bottom left;
-  -moz-border-radius: 0px;
-  -webkit-border-radius: 3px 3px 0px 0px;
-  border-radius: 3px 3px 0px 0px;
+  border-bottom: 0px;
+  font-size: 40px;
   color: #ffffff;
-  b {
-    padding-left: 70px;
-  }
 }
 
 .new_size {
@@ -174,14 +160,8 @@ legend {
 fieldset {
   text-align: center;
   background-color: #1d79e2;
-  -moz-box-shadow: 5px 5px 5px #6b6b6b; /* Old Firefox */
-  box-shadow: 5px 5px 5px #6b6b6b;
-  border:solid 1px;
-  border-radius:8px;
-  -moz-border-radius:10px; /* Old Firefox */
   padding-bottom: 10px;
   color: #ffffff;
-  border-color: #18212e;
 }
 
 fieldset label {
@@ -200,6 +180,11 @@ fieldset input[type=text] {
   font-size: 1.6em;
   border:solid 1px #000;
 }
+
+fieldset input[type=file] {
+   width:220px;
+   padding:10px;
+ }
 
 .request_suggest_delivery_errors {
   margin: 0 auto;

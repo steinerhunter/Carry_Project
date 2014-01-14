@@ -5,15 +5,15 @@
     <% if @request_delivery.user != current_user %>
         <% if @request_delivery.status == "Open" %>
             <% if @my_phone.present? && @my_phone.verified %>
-                <b><%= link_to "I'll take it!", take_request_delivery_path(@request_delivery, type: "take"), method: :put, class: "challenge_accepted",
+                <b><%= link_to "I want it!", take_request_delivery_path(@request_delivery, type: "take"), method: :put, class: "challenge_accepted",
                                style: "background-color:#257b2a; background-image: url('../assets/challenge_accepted.png');" %></b>
             <% else  %>
                 <% if current_user.nil? %>
                     <% store_location %>
-                    <b><%= link_to "I'll take it!", signin_path, class: "challenge_accepted" %></b>
+                    <b><%= link_to "I want it!", signin_path, class: "challenge_accepted" %></b>
                 <% else %>
                     <% store_location %>
-                    <b><%=  link_to "I'll take it!", pre_verify_request_path(@request_delivery.id,"take"), class:"challenge_accepted modal-link trigger",
+                    <b><%=  link_to "I want it!", pre_verify_request_path(@request_delivery.id,"take"), class:"challenge_accepted modal-link trigger",
                                     "data-target" => "#myModal",
                                     "data-toggle" => "modal",
                                     "data-backdrop" => "static" %></b>

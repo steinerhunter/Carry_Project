@@ -201,11 +201,14 @@
   -moz-border-radius:10px; /* Old Firefox */
   color: #ffffff;
   border-color: #4b4b4b;
+
 }
 
 .left_button:hover, .right_button:hover{
   background-color: #1d79e2;
   cursor:pointer;
+  color: #ffffff;
+  text-decoration:none;
 }
 
 .good_hands_right {

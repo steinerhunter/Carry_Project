@@ -66,20 +66,11 @@ p {
 }
 
 .signup_form_class {
-  width: 700px;
-  height: 380px;
+  width: 500px;
   text-align: center;
-  background-color: #1d79e2;
-  -moz-box-shadow: 5px 5px 5px #6b6b6b; /* Old Firefox */
-  box-shadow: 5px 5px 5px #6b6b6b;
-  border:solid 1px;
-  border-radius:8px;
-  -moz-border-radius:10px; /* Old Firefox */
   color: #ffffff;
-  border-color: #18212e;
   margin-right: auto;
   margin-left: auto;
-  padding-bottom: 20px;
 }
 
 .edit_form_class {
@@ -111,25 +102,18 @@ p {
 }
 
 .signin_form_class {
-  width: 600px;
-  height: 340px;
+  width: 450px;
   text-align: center;
   background-color: #1d79e2;
-  -moz-box-shadow: 5px 5px 5px #6b6b6b; /* Old Firefox */
-  box-shadow: 5px 5px 5px #6b6b6b;
-  border:solid 1px;
-  border-radius:8px;
-  -moz-border-radius:10px; /* Old Firefox */
   color: #ffffff;
-  border-color: #18212e;
   margin-right: auto;
   margin-left: auto;
 }
 
 #submit {
   text-align: center;
-  width: 240px;
-  height: 35px;
+  width: 220px;
+  height: 43px;
   vertical-align: middle;
   background-color: #d67a31;
   background-repeat: no-repeat;
@@ -137,14 +121,13 @@ p {
   -moz-box-shadow: 3px 3px 3px #3d3d3d; /* Old Firefox */
   box-shadow: 3px 3px 3px #3d3d3d;
   border:solid 1px;
-  border-radius:7px;
+  border-radius:5px;
   -moz-border-radius:10px; /* Old Firefox */
   color: #ffffff;
   border-color: #000000;
-  margin-top:10px;
+  margin-top:3px;
   margin-bottom:10px;
-  margin-left: auto;
-  margin-right: auto;
+  margin-left: 10px;
   font-size:1.5em;
 }
 
@@ -176,14 +159,17 @@ p {
 }
 
 .myfield_signin input {
-  width:230px;
+  width:180px;
 }
 
 .myfield_signin label {
   text-align: left;
   vertical-align: middle;
   width: 170px;
-  font-size: 2.0em;
+  font-size:28px;
+  font-weight: bold;
+  line-height:40%;
+  color: #f2ff5e;
 }
 
 .myfield_signup label, .myfield_signup input {
@@ -191,19 +177,35 @@ p {
 }
 
 .myfield_signup input {
-  width:250px;
+  width:150px;
 }
 
 .myfield_signup label {
   text-align: left;
   vertical-align: middle;
-  width: 370px;
-  font-size: 2.0em;
-  padding-bottom:8px;
+  width: 310px;
+  font-size:26px;
+  font-weight: bold;
+  line-height:40%;
+  color: #f2ff5e;
 }
 
 .button_signin {
-  a {
+  display: inline-block;
+}
+
+.button_signup {
+  display: inline-block;
+}
+
+.signin_form_class  ul
+  {
+  margin:0px;
+  padding:0px;
+  margin-top:10px;
+  list-style-type: none;
+  text-align: center;
+    a {
     color: #f2ff5e;
     text-decoration: none;
     &:hover {
@@ -212,14 +214,6 @@ p {
   }
 }
 
-.button_signin  ul
-  {
-  margin:0px;
-  padding:0px;
-  margin-top:10px;
-  list-style-type: none;
-  text-align: center;
-}
 
 .signin_item {
   padding-right:15px;
@@ -229,16 +223,16 @@ p {
 }
 
 .signup_fields {
-   width: 700px;
-   height: 170px;
+   width: 500px;
+   height: 210px;
    margin-right: auto;
    margin-left: auto;
    margin-top: 20px;
  }
 
 .signin_fields {
-  width: 550px;
-  height: 100px;
+  width: 450px;
+  height: 150px;
   margin-right: auto;
   margin-left: auto;
   margin-top: 20px;
@@ -344,7 +338,7 @@ textarea {
   padding: 5px;
   padding-top:12px;
   line-height: 30px;
-  width: 600px;
+  width: 450px;
   background-color: #c80000;
   border: 1px solid #111111;
   border-radius:5px;
@@ -358,7 +352,7 @@ textarea {
   margin-top: 8%;
   padding: 5px;
   line-height: 30px;
-  width: 480px;
+  width: 450px;
   background-color: #c80000;
   border: 1px solid #111111;
   border-radius:5px;
@@ -376,6 +370,7 @@ textarea {
 }
 
 .signup_using_facebook {
+  display: inline-block;
   cursor:pointer;
   width: 220px;
   text-align: right;
@@ -383,6 +378,8 @@ textarea {
   background-color: #19264f;
   background-repeat: no-repeat;
   background-position: middle left;
+  -moz-box-shadow: 3px 3px 3px #3d3d3d; /* Old Firefox */
+  box-shadow: 3px 3px 3px #3d3d3d;
   border:solid 1px;
   border-radius:5px;
   -moz-border-radius:3px; /* Old Firefox */
@@ -392,8 +389,12 @@ textarea {
   padding-bottom:10px;
   padding-left: 10px;
   padding-right: 10px;
-  margin-top:10px;
+  margin-top:20px;
   margin-right: auto;
   margin-left: auto;
   font-size: 1.3em;
+}
+
+.signup_using_facebook:hover {
+  background-color: #1d79e2;
 }

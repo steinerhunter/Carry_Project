@@ -1,6 +1,6 @@
 $(function() {
     $(".modal-link").click(function(event) {
-        event.preventDefault()
-        $('#myModal').removeData("modal")
+        event.preventDefault();
+        $('#myModal').removeData("modal");
     })
 })

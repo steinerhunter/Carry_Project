@@ -14,6 +14,7 @@ class UsersController < ApplicationController
       redirect_to root_path
     end
     @user = User.new
+    render "new.html.erb", :layout => "empty"
   end
 
   def create

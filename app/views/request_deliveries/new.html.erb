@@ -1,9 +1,8 @@
-<div class="new_delivery_request_class">
   <%= form_for(@request_delivery, :remote => true,:html => {:multipart => true }) do |f| %>
       <fieldset>
         <div class="single_step">
-          <legend style="background-image: url('../assets/give_legend.png');"><b>I have something to give.</b></legend>
-          <%= f.label :what, "What can you give?" %>
+          <legend><b>Add a new Giveaway.</b></legend>
+          <%= f.label :what, "What is it?" %>
           <% if session[:request_delivery_what].present? %>
                 <%= f.text_field :what, :placeholder => "A Microwave", :value => session[:request_delivery_what]   %>
           <% else  %>
@@ -44,7 +43,7 @@
               Large
             </div>
           </div>
-          <%= f.label :attachment, "What does it look like?" %>
+          <%= f.label :attachment, "Upload a picture:" %>
           <%= f.file_field :attachment %>
           <div class="edit_update" style="margin-top:20px;">
             <%=  f.submit "Add My Item" , :class => 'update_details'%>
@@ -52,4 +51,3 @@
         </div>
       </fieldset>
   <% end  %>
-</div>

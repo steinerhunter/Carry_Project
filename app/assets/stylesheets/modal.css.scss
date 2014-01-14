@@ -32,7 +32,8 @@
 }
 
 .modal-body {
-  max-height: 800px;
+  margin-top:-40px;
+  max-height: 600px;
   max-width: 700px;
   margin-left: auto;
   margin-right: auto;
@@ -40,6 +41,7 @@
 
 .modal {
   background-color: #1d79e2;
+  margin-top: -360px;
   z-index: 30;
 }
 

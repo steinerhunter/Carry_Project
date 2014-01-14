@@ -25,9 +25,12 @@ $('input[type="submit"]').addClass('update_details');
 <% else %>
     <% if current_user.nil? %>
     <% store_location %>
-        window.location.href = "<%=signin_path %>"
+    $('#myModal').modal('hide');
+    $("#signinModal .modal-body").load("<%=signin_path%>", function() {
+        $('#signinModal').modal('show');
+    });
     <% else %>
-        // On successful creation of new user, redirect to main page
+        $('#myModal').modal('hide');
         window.location.href = "<%=request_delivery_url(@request_delivery) %>"
     <% end %>
 

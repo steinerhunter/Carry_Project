@@ -6,8 +6,8 @@ class Phone < ActiveRecord::Base
   validates :user_id, :presence => true
   validates :phone,   :presence => {:message => "It seems you forgot to add your number..."}
 
-  VALID_PHONE_REGEX = /\A^05\d([-]{1})\d{7}$\z/i
-  validates :phone, :format => { with: VALID_PHONE_REGEX, :message =>"Phone number should be like '052-1234567'"}, :on => :create
+  VALID_PHONE_REGEX = /\A^05\d{8}$\z/i
+  validates :phone, :format => { with: VALID_PHONE_REGEX, :message =>"Phone number should be like '0521234567'"}, :on => :create
 
   def generate_verification_code
     self.verification_code = VERIFICATION_CODE_LENGTH.times.map{ Random.rand(9) + 1 }.join

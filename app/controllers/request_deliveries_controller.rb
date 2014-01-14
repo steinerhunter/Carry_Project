@@ -130,8 +130,6 @@ class RequestDeliveriesController < ApplicationController
         flash[:success] = "Thank you!<br>
                                               <div class='sub_flash_text'>Your giveaway was successfully added to our lists. <br>
                                               Let's see who wants to take it!</div>".html_safe
-
-
         respond_with(@request_delivery) do |format|
           format.html { redirect_to request_delivery_url(@request_delivery)}
         end

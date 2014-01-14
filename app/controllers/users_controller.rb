@@ -59,28 +59,10 @@ class UsersController < ApplicationController
       @request_delivery = RequestDelivery.find_by_id(session[:request_delivery_id])
       @request_delivery.set_giver
       session[:request_delivery_id] = nil
-      if @phone.present?
-        if @phone.verified
-          @request_delivery.publish
-          flash[:success] = "Thank you!<br>
-                                              <div class='sub_flash_text'>Your giveaway was successfully added to our lists. <br>
+      @request_delivery.publish
+      flash[:success] = "Thank you!<br>
+                                              <div class='sub_flash_text'>Your Giveaway was successfully added to our lists. <br>
                                               Let's see who wants to take it!</div>".html_safe
-        else
-          @request_delivery.unpublish
-          flash[:success] = "Thank you!<br>
-                                              <div class='sub_flash_text'>Your giveaway was successfully added to our lists. <br><br>
-                                              Before publishing it, we require that you verify your <b style=\"color:#1a2cff\">phone number</b>.<br>
-                                              It shall remain confidential to everyone, until someone comes to pick up the item from you.<br><br>
-                                              <a class='verify_item' href=\"/phone_verify/#{current_user.id}\">Verify Phone</a></div>".html_safe
-        end
-      else
-        @request_delivery.unpublish
-        flash[:success] = "Thank you!<br>
-                                              <div class='sub_flash_text'>Your giveaway was successfully added to our lists. <br><br>
-                                              Before publishing it, we require that you <br>add your <b style=\"color:#1a2cff\">phone number</b> and verify it.<br><br>
-                                              It shall remain confidential to everyone, <br>except for the person who picks up the item from you.<br><br>
-                                              <a class='verify_item' href=\"/phones/new?user_id=#{current_user.id}\">Add Phone</a></div>".html_safe
-      end
       redirect_to request_delivery_url(@request_delivery)
     elsif session[:suggest_delivery_size].present?
       session[:suggest_delivery_from]  = nil

@@ -107,7 +107,7 @@ class RequestDelivery < ActiveRecord::Base
 
   def publish
     self.update_attribute(:status,"Open")
-    self.set_giver_phone
+    #self.set_giver_phone
   end
 
   def accept_request

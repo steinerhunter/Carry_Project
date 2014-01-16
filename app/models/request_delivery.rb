@@ -19,9 +19,9 @@ class RequestDelivery < ActiveRecord::Base
   #validates :currency, :presence => { :message => "It seems you left out currency..."}
   #validate :date_not_in_past
 
-  VALID_PHONE_REGEX = /\A^05\d([-]{1})\d{7}$\z/i
-  validates :sending_phone, :format => { with: VALID_PHONE_REGEX, :message =>"Phone number should be like '052-1234567'"}, allow_blank: true
-  validates :receiving_phone, :format => { with: VALID_PHONE_REGEX, :message =>"Phone number should be like '052-1234567'"}, allow_blank: true
+  VALID_PHONE_REGEX = /\A^05\d{8}$\z/i
+  validates :sending_phone, :format => { with: VALID_PHONE_REGEX, :message =>"Phone number should be like '0521234567'"}, allow_blank: true
+  validates :receiving_phone, :format => { with: VALID_PHONE_REGEX, :message =>"Phone number should be like '0521234567'"}, allow_blank: true
 
   default_scope order: 'request_deliveries.created_at DESC'
 

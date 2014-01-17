@@ -53,7 +53,7 @@ class RequestDeliveriesController < ApplicationController
           @any_taken_giveaway.present? &&
           @any_taken_giveaway.taken &&
           @any_taken_giveaway.user_id != current_user.id
-        redirect_to root_path
+        @non_involved_user = true
       end
     end
 

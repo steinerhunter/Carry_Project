@@ -1,5 +1,5 @@
 <% if controller.controller_name == 'request_deliveries' && controller.action_name == 'show' %>
-    <% if @request_delivery.to.present? %>
+    <% if @request_delivery.to.present? && !@non_involved_user %>
         <%= render 'shared/route' %>
     <% else  %>
         <%= render 'shared/location' %>

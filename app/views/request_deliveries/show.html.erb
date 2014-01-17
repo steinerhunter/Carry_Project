@@ -1,5 +1,9 @@
 <% if @request_delivery.status != "Open" && @request_delivery.status != "Unpublished" %>
-    <%= render 'show_taken' %>
+    <% if @non_involved_user  %>
+        <%= render 'show_already_taken' %>
+    <% else  %>
+        <%= render 'show_taken' %>
+    <% end  %>
 <% else  %>
     <%= render 'show_non_taken' %>
 <% end  %>

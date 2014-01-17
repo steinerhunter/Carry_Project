@@ -10,7 +10,7 @@ class RequestDeliveriesController < ApplicationController
     end
     if current_user.nil?
       if @request_delivery.status != "Open" && @request_delivery.status != "WaitingForTransporter" && @request_delivery.status != "Pending Confirmation"
-        redirect_to root_path
+        @non_involved_user = true
       end
     else
       @my_taken_giveaway = TakenGiveaway.find_by_user_id_and_request_delivery_id(current_user.id,@request_delivery.id)

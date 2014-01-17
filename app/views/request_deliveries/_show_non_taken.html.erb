@@ -10,7 +10,10 @@
             <% else  %>
                 <% if current_user.nil? %>
                     <% store_location %>
-                    <b><%= link_to "I want it!", signin_path, class: "challenge_accepted" %></b>
+                    <b><%=  link_to "I want it!", signin_path, class:"modal-link challenge_accepted",
+                                                         "data-target" => "#myModal",
+                                                         "data-toggle" => "modal",
+                                                         "data-backdrop" => "static" %></b>
                 <% else %>
                     <% store_location %>
                     <b><%=  link_to "I want it!", pre_verify_request_path(@request_delivery.id,"take"), class:"challenge_accepted modal-link trigger",

@@ -27,6 +27,13 @@
         line-height: 110%;
         margin-top: 10px;
         margin-bottom: 10px;
+      a {
+        text-decoration: none;
+        color: #ffffff;
+        &:hover {
+          color: #f2ff5e;
+        }
+      }
   }
 }
 

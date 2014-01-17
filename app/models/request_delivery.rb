@@ -208,13 +208,13 @@ class RequestDelivery < ActiveRecord::Base
 
   def facebook_description_pick_up_owner
     if self.cost.present?
-      "description=I need to pick up "+self.what.to_s+" from "+self.from+", and I'm willing to pay "+self.cost.to_s+" "+self.currency.to_s+" for it. Interested?&"
+      "description=I need to pick up "+self.what.to_s+" from "+self.from+" to "+self.to+", and I'm willing to pay "+self.cost.to_s+" "+self.currency.to_s+" for it. Interested?&"
     end
   end
 
   def facebook_description_pick_up_other
     if self.cost.present?
-      "description=Someone needs to pick up "+self.what.to_s+" from "+self.from+", and they're willing to pay "+self.cost.to_s+" "+self.currency.to_s+" for it. Interested?&"
+      "description=Someone needs to pick up "+self.what.to_s+" from "+self.from+" to "+self.to+", and they're willing to pay "+self.cost.to_s+" "+self.currency.to_s+" for it. Interested?&"
     end
   end
 

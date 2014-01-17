@@ -59,44 +59,6 @@ class RequestDeliveriesController < ApplicationController
 
     @facebook_authentication = Authentication.find_by_user_id(@request_delivery.user.id)
 
-    @facebook_feed_dialog_url = "https://www.facebook.com/dialog/feed?"
-    @facebook_page_link = "link="+request_delivery_url(@request_delivery).to_s+"&"
-    @facebook_app_id = "app_id="+ENV['FACEBOOK_APP_ID'].to_s+"&"
-    @facebook_name_giveaway = "name=sendd.me Giveaway&"
-    @facebook_name_pick_up = "name=sendd.me Pick Up&"
-    if @request_delivery.attachment.present?
-      @facebook_picture = "picture="+@request_delivery.attachment_url(:facebook_share).to_s+"&"
-    else
-      @facebook_picture = ""
-    end
-    @facebook_caption = "caption="+@request_delivery.what.to_s+"&"
-    @facebook_description_giveaway_owner = "description=I'm giving away "+@request_delivery.what.to_s+". Pick up is from "+@request_delivery.from.to_s+". Interested?&"
-    @facebook_description_giveaway_other = "description=Someone is giving away "+@request_delivery.what.to_s+". Pick up is from "+@request_delivery.from.to_s+". Interested?&"
-    if @request_delivery.cost.present?
-      @facebook_description_pick_up_owner = "description=I need to pick up "+@request_delivery.what.to_s+" from "+@request_delivery.from+", and I'm willing to pay "+@request_delivery.cost.to_s+" "+@request_delivery.currency.to_s+" for it. Interested?&"
-      @facebook_description_pick_up_other = "description=Someone needs to pick up "+@request_delivery.what.to_s+" from "+@request_delivery.from+", and they're willing to pay "+@request_delivery.cost.to_s+" "+@request_delivery.currency.to_s+" for it. Interested?&"
-    end
-    @facebook_redirect_uri = "redirect_uri="+request_delivery_url(@request_delivery).to_s+"&"
-    @facebook_display = "popup"
-
-    @facebook_share_giveaway_owner = replace_spaces(@facebook_feed_dialog_url+@facebook_page_link+@facebook_app_id+
-                                                        @facebook_name_giveaway+@facebook_picture+@facebook_caption+@facebook_description_giveaway_owner+
-                                                        @facebook_redirect_uri+@facebook_display)
-
-    @facebook_share_giveaway_other = replace_spaces(@facebook_feed_dialog_url+@facebook_page_link+@facebook_app_id+
-                                                        @facebook_name_giveaway+@facebook_picture+@facebook_caption+@facebook_description_giveaway_other+
-                                                        @facebook_redirect_uri+@facebook_display)
-
-    if @request_delivery.cost.present?
-      @facebook_share_pick_up_owner = replace_spaces(@facebook_feed_dialog_url+@facebook_page_link+@facebook_app_id+
-                                                         @facebook_name_pick_up+@facebook_picture+@facebook_caption+@facebook_description_pick_up_owner+
-                                                         @facebook_redirect_uri+@facebook_display)
-
-      @facebook_share_pick_up_other = replace_spaces(@facebook_feed_dialog_url+@facebook_page_link+@facebook_app_id+
-                                                         @facebook_name_pick_up+@facebook_picture+@facebook_caption+@facebook_description_pick_up_other+
-                                                         @facebook_redirect_uri+@facebook_display)
-    end
-
     @phone = Phone.find_by_user_id(@request_delivery.user.id)
     @commentable = @request_delivery
     @comments = @commentable.comments
@@ -128,8 +90,9 @@ class RequestDeliveriesController < ApplicationController
         @request_delivery.set_giver
         @request_delivery.publish
         flash[:success] = "Thank you!<br>
-                                              <div class='sub_flash_text'>Your giveaway was successfully added to our lists. <br>
-                                              Let's see who wants to take it!</div>".html_safe
+                                              <div class='sub_flash_text'>Your Giveaway was successfully added to our lists. <br>
+                                              Perhaps some of your friends might be interested in it?<br><br>
+                                             <a href=#{@request_delivery.facebook_share_giveaway_owner} target='_blank' class='facebook_share'>Share your Giveaway on Facebook!</a></div>".html_safe
         respond_with(@request_delivery) do |format|
           format.html { redirect_to request_delivery_url(@request_delivery)}
         end
@@ -320,6 +283,10 @@ class RequestDeliveriesController < ApplicationController
         @request_delivery.wait_for_transporter
         flash[:success] = "Thank you!<br><div class='sub_flash_text'>You're now confirmed for this giveaway.<br>
         Now it's time to set you up with a Transporter.</div>".html_safe
+        flash[:success] = "Thank you!<br>
+                                             <div class='sub_flash_text'>You're now confirmed for this giveaway.<br>
+                                              Perhaps some of your friends can pick it up for you?<br><br>
+                                             <a href=#{@request_delivery.facebook_share_pick_up_owner} target='_blank' class='facebook_share'>Find Pick Up on Facebook!</a></div>".html_safe
         if Rails.env.production?
           NotifMailer.new_taken_confirmed_senddme(@creating_user,@taking_user,@request_delivery).deliver
         end
@@ -463,10 +430,6 @@ class RequestDeliveriesController < ApplicationController
     @taken_giveaway = current_user.request_takes.find_by_id(params[:id])
     @waiting_for_transporter = RequestDelivery.find_by_id_and_status(params[:id],"WaitingForTransporter")
     redirect_to :back if @request_delivery.nil? && @taken_giveaway.nil? && @waiting_for_transporter.nil? && !current_user.try(:admin?)
-  end
-
-  def replace_spaces(str)
-    str.gsub(",","").gsub(/\s/,'+')
   end
 
 end

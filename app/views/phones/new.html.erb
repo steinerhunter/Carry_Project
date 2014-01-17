@@ -2,10 +2,7 @@
   <%= form_for(@phone, :remote => true) do |f| %>
       <fieldset>
         <div class="single_step">
-          <legend style="background-image: url('../assets/phone_title.png');"><b>Add your phone number</b></legend>
-          <div class="phone_text">
-            Please add your Phone number:
-          </div>
+          <legend><b>Add your phone number</b></legend>
           <%= f.hidden_field :user_id, :value => params[:user_id] %>
           <div class="myfield_phone">
             <%= f.label :phone, "+972" %>

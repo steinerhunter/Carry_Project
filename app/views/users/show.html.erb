@@ -7,13 +7,13 @@
           </div>
           <div class="right_box_data">
             <% if current_user.only_facebook == false %>
-              <%= link_to "Edit Profile", edit_user_path(current_user), class: "control_panel_item", style: "background-color: #d67a31" %>
-             <% end  %>
-              <% if facebook_authorization(current_user)  %>
-                  <%= link_to "Sign Out", logout_authentication_path, class: "control_panel_item", style: "background-color: #e84c4d"  %>
-              <% else  %>
-                  <%= link_to "Sign Out", signout_path, method: "delete", class: "control_panel_item", style: "background-color: #e84c4d"  %>
-              <% end  %>
+                <%= link_to "Edit Profile", edit_user_path(current_user), class: "control_panel_item", style: "background-color: #d67a31" %>
+            <% end  %>
+            <% if facebook_authorization(current_user)  %>
+                <%= link_to "Sign Out", logout_authentication_path, class: "control_panel_item", style: "background-color: #e84c4d"  %>
+            <% else  %>
+                <%= link_to "Sign Out", signout_path, method: "delete", class: "control_panel_item", style: "background-color: #e84c4d"  %>
+            <% end  %>
           </div>
         </div>
     <% end  %>
@@ -55,7 +55,7 @@
                   </div>
                 </div>
             <% end  %>
-            <% else  %>
+        <% else  %>
             <% if @user == current_user  %>
                 You haven't
             <% else  %>
@@ -71,9 +71,9 @@
       </div>
       <div class="right_box_data" style="line-height: 100%;">
         <% if @user == current_user  %>
-        You haven't
+            You haven't
         <% else  %>
-        User hasn't
+            User hasn't
         <% end  %>
         earned any badges yet.
       </div>
@@ -139,9 +139,9 @@
     </div>
     <div class="profile_verified_item">
       <% if @user == current_user  %>
-      Your
+          Your
       <% else  %>
-      User's
+          User's
       <% end  %>
       Facebook Account
     </div>
@@ -185,7 +185,7 @@
           <% if @phone.nil? %>
               Your Mobile Phone Number
           <% else %>
-            <%= @phone.phone  %>
+              <%= @phone.phone  %>
           <% end  %>
       <% else  %>
           User's Mobile Phone Number
@@ -198,13 +198,21 @@
               <%=  link_to "Add Phone",
                            {:controller => "phones",
                             :action => "new",
-                            :user_id => current_user.id }, class:"verify_item" %>
-              <% elsif @phone.verified == false %>
+                            :user_id => current_user.id },
+                           class:"modal-link verify_item",
+                           "data-target" => "#myModal",
+                           "data-toggle" => "modal",
+                           "data-backdrop" => "static" %>
+          <% elsif @phone.verified == false %>
               <% store_location %>
               <%=  link_to "Verify Phone",
                            {:controller => "phones",
                             :action => "verify",
-                            :user_id => current_user.id },  class: "verify_item" %>
+                            :user_id => current_user.id },
+                           class: "modal-link verify_item",
+                           "data-target" => "#myModal",
+                           "data-toggle" => "modal",
+                           "data-backdrop" => "static" %>
           <% elsif @phone.verified == true %>
               <div class="bubbleInfo">
                 <%= image_tag("profile_item_verified.png", class: "trigger") %>
@@ -247,11 +255,11 @@
 <div class="show_reviews_data">
   <div class="show_reviews_title" style="background-image: url('../assets/others_say.png');padding-left:15px">
     <b style="padding-left: 20px;">What others are saying about</b>
-      <% if @user == current_user  %>
-          <b style="color:#f2ff5e">You</b>
-      <% else  %>
+    <% if @user == current_user  %>
+        <b style="color:#f2ff5e">You</b>
+    <% else  %>
         <b style="color:#f2ff5e"><%= @user.name %></b>
-      <% end  %>
+    <% end  %>
   </div>
   <div class="review_content_wrapper">
     <% if @user.transporter_reviews.any? || @user.sender_reviews.any? %>
@@ -259,24 +267,24 @@
             <div class="review_content">
               <div class="as_a_something">
                 <b>As a Transporter</b>
-                </div>
-                <% @user.transporter_reviews.each do |user_transporter_review| %>
-                    <div class="mini_review">
-                      <div class="mini_review_image">
-                        <% if user_transporter_review.pos_or_neg == "POSITIVE" %>
-                            <%= image_tag("profile_happy.png") %>
-                        <% elsif user_transporter_review.pos_or_neg == "NEGATIVE" %>
-                            <%= image_tag("profile_sad.png") %>
-                        <% end  %>
-                      </div>
-                      <div class="mini_review_content">
-                        "<%= user_transporter_review.review_content %>"
-                      </div>
-                      <div class="mini_review_from">
-                        <%= link_to "-"+user_transporter_review.from_user.name, user_transporter_review.from_user  %>
-                      </div>
+              </div>
+              <% @user.transporter_reviews.each do |user_transporter_review| %>
+                  <div class="mini_review">
+                    <div class="mini_review_image">
+                      <% if user_transporter_review.pos_or_neg == "POSITIVE" %>
+                          <%= image_tag("profile_happy.png") %>
+                      <% elsif user_transporter_review.pos_or_neg == "NEGATIVE" %>
+                          <%= image_tag("profile_sad.png") %>
+                      <% end  %>
                     </div>
-                <% end  %>
+                    <div class="mini_review_content">
+                      "<%= user_transporter_review.review_content %>"
+                    </div>
+                    <div class="mini_review_from">
+                      <%= link_to "-"+user_transporter_review.from_user.name, user_transporter_review.from_user  %>
+                    </div>
+                  </div>
+              <% end  %>
             </div>
         <% end  %>
         <% if @user.sender_reviews.any? %>
@@ -284,23 +292,23 @@
               <div class="as_a_something">
                 <b> As a Sender</b>
               </div>
-                <% @user.sender_reviews.each do |user_sender_review| %>
-                    <div class="mini_review">
-                      <div class="mini_review_image">
-                        <% if user_sender_review.pos_or_neg == "POSITIVE" %>
-                            <%= image_tag("profile_happy.png") %>
-                        <% elsif user_sender_review.pos_or_neg == "NEGATIVE" %>
-                            <%= image_tag("profile_sad.png") %>
-                        <% end  %>
-                      </div>
-                      <div class="mini_review_content">
-                        "<%= user_sender_review.review_content %>"
-                      </div>
-                      <div class="mini_review_from">
-                        <%= link_to "-"+user_sender_review.from_user.name, user_sender_review.from_user  %>
-                      </div>
+              <% @user.sender_reviews.each do |user_sender_review| %>
+                  <div class="mini_review">
+                    <div class="mini_review_image">
+                      <% if user_sender_review.pos_or_neg == "POSITIVE" %>
+                          <%= image_tag("profile_happy.png") %>
+                      <% elsif user_sender_review.pos_or_neg == "NEGATIVE" %>
+                          <%= image_tag("profile_sad.png") %>
+                      <% end  %>
                     </div>
-                <% end  %>
+                    <div class="mini_review_content">
+                      "<%= user_sender_review.review_content %>"
+                    </div>
+                    <div class="mini_review_from">
+                      <%= link_to "-"+user_sender_review.from_user.name, user_sender_review.from_user  %>
+                    </div>
+                  </div>
+              <% end  %>
         <% end  %>
     <% else  %>
         <div class="no_reviews_yet">

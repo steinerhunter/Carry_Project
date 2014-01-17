@@ -8,14 +8,15 @@ class PhonesController < ApplicationController
     if @user != current_user || @user_has_phone.present?
       redirect_to user_path(current_user.id)
     end
+    render "new.html.erb", :layout => "empty"
   end
 
   def create
-      @phone = Phone.new(params[:phone])
-      if @phone.save
-        @phone.normalize_number
-        respond_with(@phone, :location => root_path)
-      end
+    @phone = Phone.new(params[:phone])
+    if @phone.save
+      @phone.normalize_number
+      respond_with(@phone, :location => root_path)
+    end
   end
 
   def send_code
@@ -35,12 +36,14 @@ class PhonesController < ApplicationController
     @twilio_token = ENV['TWILIO_TOKEN']
 
     #Create and send an SMS message
-    @client = Twilio::REST::Client.new @twilio_sid, @twilio_token
-    @client.account.messages.create(
-        :body  =>  "Your sendd.me verification code is #{@phone.verification_code}.",
-        :to       => @phone.normalized_phone,
-        :from  => @twilio_from
-    )
+    if Rails.env.production?
+      @client = Twilio::REST::Client.new @twilio_sid, @twilio_token
+      @client.account.messages.create(
+          :body  =>  "Your sendd.me verification code is #{@phone.verification_code}.",
+          :to       => @phone.normalized_phone,
+          :from  => @twilio_from
+      )
+    end
     redirect_to phone_verify_path(@phone.user_id)
   end
 
@@ -72,6 +75,26 @@ class PhonesController < ApplicationController
     if @user != current_user || @phone.nil? || @phone.verified
       redirect_to user_path(current_user.id)
     end
+    @phone.generate_verification_code
+
+    if Rails.env.development?
+      @twilio_from = ENV['TWILIO_DEMO_NUMBER']
+    elsif Rails.env.production?
+      @twilio_from = ENV['TWILIO_PURCHASED_NUMBER']
+    end
+    @twilio_sid = ENV['TWILIO_SID']
+    @twilio_token = ENV['TWILIO_TOKEN']
+
+    #Create and send an SMS message
+    if Rails.env.production?
+      @client = Twilio::REST::Client.new @twilio_sid, @twilio_token
+      @client.account.messages.create(
+          :body  =>  "Your sendd.me verification code is #{@phone.verification_code}.",
+          :to       => @phone.normalized_phone,
+          :from  => @twilio_from
+      )
+    end
+    render "verify.html.erb", :layout => "empty"
   end
 
 

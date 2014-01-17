@@ -36,4 +36,5 @@ TheCarryProject::Application.configure do
   config.assets.debug = true
 
   config.action_mailer.default_url_options = { :host => "localhost:3000" }
+  config.domain = 'localhost:3000'
 end

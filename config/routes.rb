@@ -1,4 +1,5 @@
 TheCarryProject::Application.routes.draw do
+  default_url_options host: Rails.application.config.domain
   resources :users
   resources :user_reviews
   resources :phones

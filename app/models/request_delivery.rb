@@ -171,7 +171,7 @@ class RequestDelivery < ActiveRecord::Base
   end
 
   def facebook_page_link
-    "link="+Rails.application.routes.url_helpers.request_delivery_path(self).to_s+"&"
+    "link="+Rails.application.routes.url_helpers.request_delivery_url(self).to_s+"&"
   end
 
   def facebook_app_id
@@ -219,7 +219,7 @@ class RequestDelivery < ActiveRecord::Base
   end
 
   def facebook_redirect_uri
-    "redirect_uri="+Rails.application.routes.url_helpers.request_delivery_path(self).to_s+"&"
+    "redirect_uri="+Rails.application.routes.url_helpers.request_delivery_url(self).to_s+"&"
   end
 
   def facebook_display

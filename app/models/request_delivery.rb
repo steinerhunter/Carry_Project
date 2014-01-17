@@ -35,13 +35,13 @@ class RequestDelivery < ActiveRecord::Base
 
   def check_all_details
     if self.what.present? &&
-          self.from.present? &&
-          self.to.present? &&
-          self.delivery_type.present? &&
-          self.sending_person.present? &&
-          self.receiving_person.present? &&
-          self.sending_phone.present? &&
-          self.receiving_phone.present?
+        self.from.present? &&
+        self.to.present? &&
+        self.delivery_type.present? &&
+        self.sending_person.present? &&
+        self.receiving_person.present? &&
+        self.sending_phone.present? &&
+        self.receiving_phone.present?
       self.update_attribute(:has_all_details,true)
     else
       self.update_attribute(:has_all_details,false)
@@ -166,4 +166,95 @@ class RequestDelivery < ActiveRecord::Base
     AcceptedRequest.where("request_delivery_id = ? AND confirmed = ?",self.id,false).pluck(:user_id)
   end
 
+  def facebook_feed_dialog_url
+    "https://www.facebook.com/dialog/feed?"
+  end
+
+  def facebook_page_link
+    "link="+Rails.application.routes.url_helpers.request_delivery_path(self).to_s+"&"
+  end
+
+  def facebook_app_id
+    "app_id="+ENV['FACEBOOK_APP_ID'].to_s+"&"
+  end
+
+  def facebook_name_giveaway
+    "name=sendd.me Giveaway&"
+  end
+
+  def facebook_name_pick_up
+    "name=sendd.me Pick Up&"
+  end
+
+    def facebook_picture
+      if self.attachment.present?
+      "picture="+self.attachment_url(:facebook_share).to_s+"&"
+      else
+        ""
+      end
+    end
+
+  def facebook_caption
+    "caption="+self.what.to_s+"&"
+  end
+
+  def facebook_description_giveaway_owner
+    "description=I'm giving away "+self.what.to_s+". Pick up is from "+self.from.to_s+". Interested?&"
+  end
+
+  def facebook_description_giveaway_other
+    "description=Someone is giving away "+self.what.to_s+". Pick up is from "+self.from.to_s+". Interested?&"
+  end
+
+  def facebook_description_pick_up_owner
+    if self.cost.present?
+      "description=I need to pick up "+self.what.to_s+" from "+self.from+", and I'm willing to pay "+self.cost.to_s+" "+self.currency.to_s+" for it. Interested?&"
+    end
+  end
+
+  def facebook_description_pick_up_other
+    if self.cost.present?
+      "description=Someone needs to pick up "+self.what.to_s+" from "+self.from+", and they're willing to pay "+self.cost.to_s+" "+self.currency.to_s+" for it. Interested?&"
+    end
+  end
+
+  def facebook_redirect_uri
+    "redirect_uri="+Rails.application.routes.url_helpers.request_delivery_path(self).to_s+"&"
+  end
+
+  def facebook_display
+    "popup"
+  end
+
+  def facebook_share_giveaway_owner
+    replace_spaces(self.facebook_feed_dialog_url+self.facebook_page_link+self.facebook_app_id+
+                       self.facebook_name_giveaway+self.facebook_picture+self.facebook_caption+self.facebook_description_giveaway_owner+
+                       self.facebook_redirect_uri+self.facebook_display)
+  end
+
+  def facebook_share_giveaway_other
+    replace_spaces(self.facebook_feed_dialog_url+self.facebook_page_link+self.facebook_app_id+
+                       self.facebook_name_giveaway+self.facebook_picture+self.facebook_caption+self.facebook_description_giveaway_other+
+                       self.facebook_redirect_uri+self.facebook_display)
+  end
+
+  def facebook_share_pick_up_owner
+    if self.cost.present?
+      replace_spaces(self.facebook_feed_dialog_url+self.facebook_page_link+self.facebook_app_id+
+                         self.facebook_name_pick_up+self.facebook_picture+self.facebook_caption+self.facebook_description_pick_up_owner+
+                         self.facebook_redirect_uri+self.facebook_display)
+    end
+  end
+
+  def facebook_share_pick_up_other
+    if self.cost.present?
+      replace_spaces(self.facebook_feed_dialog_url+self.facebook_page_link+self.facebook_app_id+
+                         self.facebook_name_pick_up+self.facebook_picture+self.facebook_caption+self.facebook_description_pick_up_other+
+                         self.facebook_redirect_uri+self.facebook_display)
+    end
+  end
+
+  def replace_spaces(str)
+    str.gsub(",","").gsub(/\s/,'+')
+  end
 end

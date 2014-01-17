@@ -18,7 +18,7 @@
     </div>
 <% elsif @request_delivery.status == "WaitingForTransporter" || @request_delivery.status == "Pending Confirmation" %>
     <div class="ready_to_go_wrapper" style="margin-bottom: 10px;margin-top: 20px;">
-      <a href="<%= @facebook_share_pick_up_other %>" target="_blank" class="facebook_share">
+      <a href="<%= @request_delivery.facebook_share_pick_up_other %>" target="_blank" class="facebook_share">
         Help finding a Transporter - Share on Facebook
       </a>
     </div>

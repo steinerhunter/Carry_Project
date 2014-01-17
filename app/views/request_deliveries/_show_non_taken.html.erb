@@ -243,11 +243,11 @@
   <% if @request_delivery.status == "Open" %>
       <div class="ready_to_go_wrapper" style="margin-bottom: 20px;">
         <% if @request_delivery.user == current_user  %>
-            <a href="<%= @facebook_share_giveaway_owner %>" target="_blank" class="facebook_share">
+            <a href="<%= @request_delivery.facebook_share_giveaway_owner %>" target="_blank" class="facebook_share">
               Find this Giveaway a home - Share on Facebook
             </a>
         <% else %>
-            <a href="<%= @facebook_share_giveaway_other %>" target="_blank" class="facebook_share">
+            <a href="<%= @request_delivery.facebook_share_giveaway_other %>" target="_blank" class="facebook_share">
               Find this Giveaway a home - Share on Facebook
             </a>
         <% end  %>

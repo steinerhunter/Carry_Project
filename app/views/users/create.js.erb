@@ -27,7 +27,14 @@ $('<div />').addClass('signup_errors').html(errors).appendTo("#new_user").hide()
 
 <% else %>
 
-// On successful creation of new user, redirect to email verification action
     <% sign_in @user %>
+<% if session[:take_after_signin_request_delivery_id].present? %>
+$('#signupModal').modal('hide');
+$("#phoneAddModal .modal-body").load("<%=new_phone_path %>?user_id=<%= @user.id %>", function() {
+    $('#phoneAddModal').modal('show');
+});
+<% else %>
+// On successful creation of new user, redirect to email verification action
     window.location.href = "<%= verify_path(@user.id) %>"
+<% end %>
 <% end %>

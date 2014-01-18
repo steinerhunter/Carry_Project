@@ -3,6 +3,16 @@
       <fieldset>
         <div class="single_step">
           <legend><b>Add your phone number</b></legend>
+          <div class="add_phone">
+            <div class="add_phone_title">
+              Why do you need my number?
+            </div>
+            <ul>
+              <li>We need to verify you are a real person.</li>
+              <li>When giving away an item, the receiver needs your number to set up a time for the pick up.</li>
+              <li>When asking for an item, the giver needs your number to set up a time for the pick up.</li>
+            </ul>
+          </div>
           <%= f.hidden_field :user_id, :value => params[:user_id] %>
           <div class="myfield_phone">
             <%= f.label :phone, "+972" %>

@@ -22,7 +22,7 @@ $('<div />').addClass('phone_errors').html(errors).appendTo("#new_phone").hide()
 
 <% else %>
         // On successful creation of new user, redirect to main page
-$('#myModal').modal('hide');
+$('#phoneAddModal').modal('hide');
 $("#phoneVerifyModal .modal-body").load("<%= phone_verify_path(@phone.user_id) %>", function() {
     $('#phoneVerifyModal').modal('show');
 });

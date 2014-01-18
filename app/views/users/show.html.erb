@@ -200,7 +200,7 @@
                             :action => "new",
                             :user_id => current_user.id },
                            class:"modal-link verify_item",
-                           "data-target" => "#myModal",
+                           "data-target" => "#phoneAddModal",
                            "data-toggle" => "modal",
                            "data-backdrop" => "static" %>
           <% elsif @phone.verified == false %>
@@ -210,7 +210,7 @@
                             :action => "verify",
                             :user_id => current_user.id },
                            class: "modal-link verify_item",
-                           "data-target" => "#myModal",
+                           "data-target" => "#phoneVerifyModal",
                            "data-toggle" => "modal",
                            "data-backdrop" => "static" %>
           <% elsif @phone.verified == true %>

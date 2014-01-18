@@ -25,15 +25,10 @@ class SessionsController < ApplicationController
         @request_delivery.attachment = session[:request_delivery_attachment]
         @request_delivery.user = user
         @request_delivery.save
-      elsif session[:suggest_delivery_size].present?
-        @suggest_delivery = SuggestDelivery.new
-        @suggest_delivery.size = session[:suggest_delivery_size]
-        @suggest_delivery.from = session[:suggest_delivery_from]
-        @suggest_delivery.to = session[:suggest_delivery_to]
-        @suggest_delivery.cost = session[:suggest_delivery_cost]
-        @suggest_delivery.currency = session[:suggest_delivery_currency]
-        @suggest_delivery.user = user
-        @suggest_delivery.save
+      elsif session[:take_after_signin_request_delivery_id].present?
+        @request_delivery = RequestDelivery.find_by_id(session[:take_after_signin_request_delivery_id])
+      elsif session[:pick_up_after_signin_request_delivery_id].present?
+        @request_delivery = RequestDelivery.find_by_id(session[:pick_up_after_signin_request_delivery_id])
       end
       sign_in user
       respond_with(user, :location => root_path)

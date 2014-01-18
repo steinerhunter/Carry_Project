@@ -10,7 +10,7 @@
           <li id="header_transporters"><%= link_to "Pick Up", pickups_path  %></li>
           <li id="header_takers"><%= link_to "Find Item", giveaways_path  %></li>
           <li id="header_givers"><%=  link_to "Give Away", request_path, class:"modal-link",
-                          "data-target" => "#myModal",
+                          "data-target" => "#giveAwayModal",
                           "data-toggle" => "modal",
                           "data-backdrop" => "static" %></li>
           <% if signed_in?  %>
@@ -23,11 +23,11 @@
           <% else  %>
               <li id="header_how_it_works"><%= link_to "How It Works", root_path(:anchor =>'how_it_works'), class:"smoothScroll" %></li>
               <li id="header_sign_in"><%=  link_to "Sign in", signin_path, class:"modal-link",
-                                                  "data-target" => "#myModal",
+                                                  "data-target" => "#signinModal",
                                                   "data-toggle" => "modal",
                                                   "data-backdrop" => "static" %></li>
               <li id="header_register"><%=  link_to "Sign up", signup_path, class:"modal-link",
-                                                   "data-target" => "#myModal",
+                                                   "data-target" => "#signupModal",
                                                    "data-toggle" => "modal",
                                                    "data-backdrop" => "static" %></li>
           <% end %>

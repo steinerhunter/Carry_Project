@@ -13,6 +13,7 @@
         <% else  %>
             <% if current_user.nil? %>
                 <% store_location %>
+                <% session[:pick_up_after_signin_request_delivery_id] = @request_delivery.id %>
                 <b><%=  link_to "I'll pick it up!", signin_path, class:"modal-link challenge_accepted",
                                 "data-target" => "#myModal",
                                 "data-toggle" => "modal",

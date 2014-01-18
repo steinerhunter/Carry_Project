@@ -93,43 +93,6 @@
 </div>
 <div class="show_data">
   <div class="show_title">
-    <% if (current_user?(@request_delivery.user)) || (current_user.try(:admin?)) %>
-        <div class="delete_post_big">
-          <div class="bubbleInfo">
-            <%=  link_to image_tag("delete_post_big.png"), @request_delivery, method: :delete, class: "trigger" %>
-            <div class="popup" style="height:15px; width:160px; margin-top:67px;text-align: center;">
-              <b style="color:#FF0523">Delete</b> your giveaway.
-              <div id="tail1" style="left:37px"></div>
-              <div id="tail2" style="left:37px"></div>
-            </div>
-          </div>
-        </div>
-        <% if @request_delivery.has_all_details %>
-            <div class="has_all_details_big">
-              <div class="bubbleInfo">
-                <%= image_tag("has_all_details_big.png", class: "trigger") %>
-                <div class="popup" style="height:20px; width:315px; margin-top:57px;">
-                  Your request post has <b style="color:#279227">all</b> the necessary details!
-                  <div id="tail1" style="left:37px"></div>
-                  <div id="tail2" style="left:37px"></div>
-                </div>
-              </div>
-            </div>
-        <% end %>
-    <% else  %>
-        <% if @request_delivery.has_all_details %>
-            <div class="has_all_details_big" style="right:3px;">
-              <div class="bubbleInfo">
-                <%= image_tag("has_all_details_big.png", class: "trigger") %>
-                <div class="popup" style="height:20px; width:320px; margin-top:57px;">
-                  This request post has <b style="color:#279227">all</b> the necessary details!
-                  <div id="tail1" style="left:37px"></div>
-                  <div id="tail2" style="left:37px"></div>
-                </div>
-              </div>
-            </div>
-        <% end %>
-    <% end %>
     <b style="padding-left: 20px;"><%= @request_delivery.what %></b>
   </div>
   <div class="giveaway_picture">
@@ -137,37 +100,7 @@
         <%= image_tag @request_delivery.attachment_url(:actual).to_s  %>
     <% else  %>
         <div class="no_picture">
-          <% if @request_delivery.user == current_user %>
-              You haven't uploaded a <b style="color:#f2ff5e">Picture</b> of your Giveaway yet.
-          <% else %>
-              A Picture of this Giveaway hasn't been uploaded yet.
-          <% end  %>
-        </div>
-    <% end  %>
-    <% if @request_delivery.user == current_user %>
-        <div class="missing_detail" style="top:1px">
-          <div class="bubbleInfo">
-            <% if @request_delivery.attachment.present? %>
-                <%= link_to image_tag("edit_detail.png"), edit_request_picture_path(@request_delivery.id), class:"modal-link trigger",
-                            "data-target" => "#myModal",
-                            "data-toggle" => "modal",
-                            "data-backdrop" => "static" %>
-            <% else  %>
-                <%= link_to image_tag("missing_detail.png"), edit_request_picture_path(@request_delivery.id), class:"modal-link trigger",
-                            "data-target" => "#myModal",
-                            "data-toggle" => "modal",
-                            "data-backdrop" => "static" %>
-            <% end  %>
-            <div class="popup" style="height:15px; width:285px; margin-top:65px;text-align: center;">
-              <% if @request_delivery.attachment.present? %>
-                  Click to change <b style="color:#f2ff5e">Picture</b> for this giveaway.
-              <% else  %>
-                  Click to add a <b style="color:#f2ff5e">Picture</b> for this giveaway.
-              <% end  %>
-              <div id="tail1" style="left:33px"></div>
-              <div id="tail2" style="left:33px"></div>
-            </div>
-          </div>
+          A Picture of this Giveaway hasn't been uploaded yet.
         </div>
     <% end  %>
   </div>
@@ -177,21 +110,6 @@
         <b>From</b>
       </div>
       <%= @request_delivery.from %>
-      <% if @request_delivery.user == current_user %>
-          <div class="missing_detail" style="top:1px">
-            <div class="bubbleInfo">
-              <%= link_to image_tag("edit_detail.png"), edit_request_from_path(@request_delivery.id), class:"modal-link trigger",
-                          "data-target" => "#myModal",
-                          "data-toggle" => "modal",
-                          "data-backdrop" => "static" %>
-              <div class="popup" style="height:15px; width:245px; margin-top:65px;text-align: center;">
-                Click to edit <b style="color:#f2ff5e">From</b> for this giveaway.
-                <div id="tail1" style="left:33px"></div>
-                <div id="tail2" style="left:33px"></div>
-              </div>
-            </div>
-          </div>
-      <% end  %>
     </div>
     <div class="the_from_and_to_inner" style="font-size: 20px; background-image: url('../assets/size_small.png');">
       <div class="inner_title">
@@ -200,33 +118,18 @@
       <div class="delivery_size">
         <%= @request_delivery.size %>
       </div>
-      <% if @request_delivery.user == current_user %>
-          <div class="missing_detail" style="top:1px">
-            <div class="bubbleInfo">
-              <%= link_to image_tag("edit_detail.png"), edit_request_size_path(@request_delivery.id), class:"modal-link trigger",
-                          "data-target" => "#myModal",
-                          "data-toggle" => "modal",
-                          "data-backdrop" => "static" %>
-              <div class="popup" style="height:15px; width:245px; margin-top:65px;text-align: center;">
-                Click to edit <b style="color:#f2ff5e">Size</b> for this giveaway.
-                <div id="tail1" style="left:33px"></div>
-                <div id="tail2" style="left:33px"></div>
-              </div>
-            </div>
-          </div>
-      <% end  %>
     </div>
   </div>
-      <div class="giveaway_status_wrapper">
-      <div class="giveaway_status_title">
-        Giveaway Taken
-        <div class="giveaway_status_data">
-          We're sorry! <br>
-          It seems someone else has already taken this Giveaway.<br>
-          Go find something else you want!
-        </div>
+  <div class="giveaway_status_wrapper">
+    <div class="giveaway_status_title">
+      Giveaway Taken
+      <div class="giveaway_status_data">
+        We're sorry! <br>
+        It seems someone else has already taken this Giveaway.<br>
+        Go find something else you want!
       </div>
     </div>
+  </div>
   <div class="ready_to_go_wrapper" style="margin-bottom: 20px;">
     <%=  link_to "Go get more stuff", giveaways_path, class: "go_get_other" %>
   </div>

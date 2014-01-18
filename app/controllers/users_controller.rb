@@ -19,6 +19,9 @@ class UsersController < ApplicationController
 
   def create
     @user = User.new(params[:user])
+    if session[:take_after_signin_request_delivery_id].present?
+      @request_delivery = RequestDelivery.find_by_id(session[:take_after_signin_request_delivery_id])
+    end
     @user.only_facebook = false
     if @user.save
       if session[:request_delivery_what].present?
@@ -30,16 +33,6 @@ class UsersController < ApplicationController
         @request_delivery.user = @user
         @request_delivery.save
         session[:request_delivery_id] = @request_delivery.id
-      elsif session[:suggest_delivery_size].present?
-        @suggest_delivery = SuggestDelivery.new
-        @suggest_delivery.size = session[:suggest_delivery_size]
-        @suggest_delivery.from = session[:suggest_delivery_from]
-        @suggest_delivery.to = session[:suggest_delivery_to]
-        @suggest_delivery.cost = session[:suggest_delivery_cost]
-        @suggest_delivery.currency = session[:suggest_delivery_currency]
-        @suggest_delivery.user = @user
-        @suggest_delivery.save
-        session[:suggest_delivery_id] = @suggest_delivery.id
       end
       respond_with(@user, :location => root_path)
     end
@@ -62,20 +55,9 @@ class UsersController < ApplicationController
       @request_delivery.publish
       flash[:success] = "Thank you!<br>
                                               <div class='sub_flash_text'>Your Giveaway was successfully added to our lists. <br>
-                                              Let's see who wants to take it!</div>".html_safe
+                                              Perhaps some of your friends might be interested in it?<br><br>
+                                             <a href=#{@request_delivery.facebook_share_giveaway_owner} target='_blank' class='facebook_share'>Share your Giveaway on Facebook!</a></div>".html_safe
       redirect_to request_delivery_url(@request_delivery)
-    elsif session[:suggest_delivery_size].present?
-      session[:suggest_delivery_from]  = nil
-      session[:suggest_delivery_to] = nil
-      session[:suggest_delivery_cost] = nil
-      session[:suggest_delivery_currency] = nil
-      @suggest_delivery = SuggestDelivery.find_by_id(session[:suggest_delivery_id])
-      session[:suggest_delivery_id] = nil
-      flash[:success] = "Thank you!<br>
-                                              <div class='sub_flash_text'>Your delivery suggestion was successfully added to our lists. <br>
-                                              There are some more details to add though.<br>
-                                              <b style=\"color:#ff9054\">Add</b> <img src=\"../assets/missing_detail.png\"> all details and get priority in our lists!</div>".html_safe
-      redirect_to suggest_delivery_url(@suggest_delivery)
     else
       url = session[:return_to] || root_path
       session[:return_to] = nil if session[:return_to].present?

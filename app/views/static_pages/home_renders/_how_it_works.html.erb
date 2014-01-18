@@ -125,9 +125,11 @@
     </div>
   </div>
   <% if current_user.nil? %>
-      <div class="signup_now" onclick="location.href='/signup'">
-        <b>Get your own account!</b>
-      </div>
+        <center><b><%=  link_to "Get your own account!", signup_path, class:"modal-link signup_now",
+                                              style:"padding:20px;padding-top:10px;padding-bottom:10px;",
+                                              "data-target" => "#signupModal",
+                                              "data-toggle" => "modal",
+                                              "data-backdrop" => "static" %></b></center>
   <% end  %>
   <div class="footer" style="margin-top:50px;">
     <%= render 'layouts/footer' %>

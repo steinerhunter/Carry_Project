@@ -2,10 +2,12 @@
 <html>
 <head>
   <title><%= full_title(yield(:title)) %></title>
+  <%= include_gon %>
   <%= stylesheet_link_tag  "application", media: "all" %>
   <script src="https://maps.googleapis.com/maps/api/js?v=3.exp&sensor=false&libraries=places"></script>
   <%= javascript_include_tag "application" %>
   <%= javascript_include_tag "maps_and_date" %>
+  <%= javascript_include_tag "verify_phone" %>
   <%= javascript_include_tag "no_enter" %>
   <%= javascript_include_tag "div_fade" %>
   <%= javascript_include_tag "flash_fade" %>
@@ -27,7 +29,7 @@
 <% if  controller.controller_name == 'static_pages' && controller.action_name == 'home' %>
     <div class="wrapper" style="margin-bottom:-6em;">
 <% else  %>
-    <div class="wrapper" style="background-image: url('../assets/back6.jpg');">
+    <div class="wrapper" style="background-image: url('../assets/back6.jpg');background-color: #abbacf;">
 <% end  %>
 <%= render 'layouts/header' %>
 <% if  controller.controller_name == 'static_pages' && controller.action_name == 'home' %>
@@ -53,8 +55,10 @@
     </div>
   <% end  %>
   <%= render 'modals/modal' %>
+  <%= render 'modals/give_away' %>
   <%= render 'modals/signin' %>
   <%= render 'modals/signup' %>
+  <%= render 'modals/phone_add' %>
   <%= render 'modals/phone_verify' %>
 </body>
 </html>

@@ -28,17 +28,17 @@ class User < ActiveRecord::Base
   before_save { |user| user.email = email.downcase }
   before_save :create_remember_token
 
-  validates :name, :presence => { :message => "OOPS! Looks like you didn't tell us your name..."}
-  validates :name, :length => { maximum: 30 , :message => "OOPS! Your name seems a bit too long..."}
+  validates :name, :presence => { :message => "Looks like you didn't tell us your name..."}
+  validates :name, :length => { maximum: 30 , :message => "Your name seems a bit too long..."}
 
   VALID_EMAIL_REGEX = /\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i
-  validates :email, :presence => { :message => "OOPS! We're going to need your Email Address..."}
-  validates :email, :format => { with: VALID_EMAIL_REGEX, :message => "OOPS! Email Address should be like 'user@example.com'..." }
-  validates :email, :uniqueness => { case_sensitive: false, :message => "OOPS! Looks like someone has already registered with this address..." }
+  validates :email, :presence => { :message => "We're going to need your Email Address..."}
+  validates :email, :format => { with: VALID_EMAIL_REGEX, :message => "Email Address should be like 'user@example.com'..." }
+  validates :email, :uniqueness => { case_sensitive: false, :message => "Looks like someone has already registered with this address..." }
 
-  validates :password, :presence => { :message => "OOPS! Looks like you didn't pick a password..."}
-  validates :password, :length => { minimum: 8, :message => "OOPS! Looks like your password is a bit too short..."}
-  validates :password_confirmation, :presence => { :message => "OOPS! Looks like you didn't confirm your password..."}
+  validates :password, :presence => { :message => "Looks like you didn't pick a password..."}
+  validates :password, :length => { minimum: 8, :message => "Looks like your password is a bit too short..."}
+  validates :password_confirmation, :presence => { :message => "Looks like you didn't confirm your password..."}
 
   def user_request_feed
     RequestDelivery.where("user_id = ?", id)

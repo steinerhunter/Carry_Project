@@ -273,6 +273,22 @@ class RequestDeliveriesController < ApplicationController
     end
   end
 
+  def another_taker
+    @request_delivery = RequestDelivery.find(params[:request_delivery_id])
+    if @request_delivery.user == current_user
+      if Rails.env.production?
+        NotifMailer.another_user(@creating_user,@taking_user,@request_delivery).deliver
+      end
+      @request_delivery.confirmed_taker.request_takes.delete(@request_delivery)
+      redirect_to :back
+      @request_delivery.untake_request
+      flash[:success] = "Thank you!<br><div class='sub_flash_text'>You've decided to let someone else have your Giveaway.</div>".html_safe
+    else
+      redirect_to :back
+      flash[:failure] = "Sorry!<br><div class='sub_flash_text'>You cannot do that.</div>".html_safe
+    end
+  end
+
   def get_the_item
     @request_delivery = RequestDelivery.find(params[:request_delivery_id])
     @taken_giveaway = TakenGiveaway.find_by_request_delivery_id(@request_delivery.id)

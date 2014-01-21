@@ -1,7 +1,12 @@
 Hi there <%= @creating_user.name %>,
 It seems <%= @taking_user.name  %> is interested in your giveaway - "<%= @request_delivery.what %>"!
 He/she must now add their location, and choose a delivery option.
-Go to your <%= link_to "Giveaway's Page", :controller => "request_deliveries", :action => "show", :id => @request_delivery.id,  :host => "www.sendd.me" %> to view its status.
+<% if @creating_user.phone.present? %>
+    Go to your <%= link_to "Giveaway's Page", :controller => "request_deliveries", :action => "show", :id => @request_delivery.id,  :host => "www.sendd.me" %> to view its status.
+<% else  %>
+    We need your phone number, so that <%= @taking_user.name  %> could contact you for the pick up.
+    Go to your <%= link_to "Giveaway's Page", :controller => "request_deliveries", :action => "show", :id => @request_delivery.id,  :host => "www.sendd.me" %> and add your phone number.
+<% end  %>
 
 Thank you,
 Best Regards,

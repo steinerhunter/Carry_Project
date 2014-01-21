@@ -1,7 +1,11 @@
 <% if @big_sender_receiver %>
     <div class="the_sender_and_receiver_inner" style="background-image: url('../assets/SendingPerson_small.png');height:150px;">
 <% else %>
-    <div class="the_sender_and_receiver_inner" style="background-image: url('../assets/SendingPerson_small.png');">
+    <% if @request_delivery.sending_phone.present? %>
+        <div class="the_sender_and_receiver_inner" style="background-image: url('../assets/SendingPerson_small.png');">
+    <% else  %>
+        <div class="the_sender_and_receiver_inner" style="background-color:#757575; background-image: url('../assets/SendingPerson_small.png');">
+    <% end  %>
 <% end  %>
 <div class="inner_title">
   <b>Giving</b>
@@ -21,13 +25,21 @@
           <% if @after_delivery %>
               <b>We've had </b><b style="color:#f2ff5e">You</b><b> giving this item in </b><b style="color:#6fba33">Point A</b><b>!</b>
           <% else %>
-              <b>We have </b><b style="color:#f2ff5e">You</b><b> giving this item in </b><b style="color:#6fba33">Point A</b><b>!</b>
+              <% if @request_delivery.sending_phone.present? %>
+                  <b>We have </b><b style="color:#f2ff5e">You</b><b> giving this item in </b><b style="color:#6fba33">Point A</b><b>!</b>
+              <% else  %>
+                  <b style="color:#f2ff5e">You</b><b> still haven't verified your </b><b style="color:#f2ff5e">Phone Number</b><b>.</b>
+              <% end  %>
           <% end  %>
       <% else %>
           <% if @after_delivery %>
               <b>We've had </b><b style="color:#f2ff5e"><%= link_to @request_delivery.user.name, @request_delivery.user %></b><b> giving this item in </b><b style="color:#6fba33">Point A</b><b>!</b>
           <% else %>
-              <b>We have </b><b style="color:#f2ff5e"><%= link_to @request_delivery.user.name, @request_delivery.user %></b><b> giving this item in </b><b style="color:#6fba33">Point A</b><b>!</b>
+              <% if @request_delivery.sending_phone.present? %>
+                  <b>We have </b><b style="color:#f2ff5e"><%= link_to @request_delivery.user.name, @request_delivery.user %></b><b> giving this item in </b><b style="color:#6fba33">Point A</b><b>!</b>
+              <% else  %>
+                  <b style="color:#f2ff5e"><%= link_to @request_delivery.user.name, @request_delivery.user %></b><b> still hasn't verified their </b><b style="color:#f2ff5e">Phone Number</b><b>.</b>
+              <% end  %>
           <% end  %>
       <% end %>
   <% end  %>

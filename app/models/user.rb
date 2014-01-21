@@ -99,6 +99,11 @@ class User < ActiveRecord::Base
     UserReview.find_all_by_to_user_id_and_job_type(self.id,"TRANSPORTER")
   end
 
+  def verified_phone
+    phone = Phone.find_by_user_id(self.id)
+    phone.verified
+  end
+
   def phone
      Phone.find_by_user_id(self.id).phone
   end

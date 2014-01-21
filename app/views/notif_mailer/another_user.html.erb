@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta content="text/html; charset=UTF-8" http-equiv="Content-Type" />
+</head>
+<body>
+    <%= render 'notif_mailer/mail_include' %>
+    <h2>Hi there <%= @taking_user.name %>,</h2><br>
+    <h3>It seems <b style="color:#279227"><%= @creating_user.name  %></b> has decided to let someone else have their Giveaway - "<b style="color:#63a2ff"><%= @request_delivery.what %></b>".</h3>
+    <h3>Perhaps you'll be interested in another Giveaway? </h3>
+    <h3>Go to our <%= link_to "Giveaways Page", giveaways_path %> and find out!</h3>
+    <p>
+    <h3>Thank you,</h3>
+    <h3>Best Regards,</h3>
+    <h3>sendd.me Support</h3>
+    </p>
+</body>
+</html>

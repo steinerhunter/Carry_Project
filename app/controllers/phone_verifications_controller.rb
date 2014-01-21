@@ -9,8 +9,13 @@ class PhoneVerificationsController < ApplicationController
       else
         flash[:success] = "Thank you!<br><div class='sub_flash_text'>Your phone number has been successfully verified.</div>".html_safe
         @phone.confirm_phone
-        RequestDelivery.update_all({:status => "Open"}, {:user_id => @user.id})
+        gon.phone_confirmed = true
         RequestDelivery.update_all({:sending_phone => @phone.phone}, {:user_id => @user.id})
+        if session[:verify_from_request_delivery].present?
+          @request_delivery.find_by_id = session[:verify_from_request_delivery]
+          @request_delivery.check_all_details
+          session[:verify_from_request_delivery] = nil
+        end
         redirect_to  session[:return_to] || root_path
       end
     else

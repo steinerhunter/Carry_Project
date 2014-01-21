@@ -40,6 +40,7 @@ TheCarryProject::Application.routes.draw do
 
   match '/get_the_item/:request_delivery_id', to:'request_deliveries#get_the_item', as: 'get_the_item'
   match '/got_the_item/:request_delivery_id', to:'request_deliveries#got_the_item', as: 'got_the_item'
+  match '/another/:request_delivery_id', to:'request_deliveries#another_taker', as: 'another'
   match '/edit_request_cost/:request_delivery_id', to:'request_deliveries#edit_cost', as:'edit_request_cost'
   match '/edit_request_what/:request_delivery_id', to:'request_deliveries#edit_what', as:'edit_request_what'
   match '/edit_request_picture/:request_delivery_id', to:'request_deliveries#edit_picture', as:'edit_request_picture'

@@ -18,6 +18,7 @@ gem 'carrierwave'
 gem "mini_magick", "~> 3.7.0"
 gem 'fog'
 gem 'remotipart', '~> 1.2'
+gem 'gon', '~> 5.0.1'
 
 group :development, :test do
   gem 'sqlite3', '1.3.5'

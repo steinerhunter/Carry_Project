@@ -13,5 +13,9 @@
         <div id="current-delivery-map" style="height:387px;margin-top: 70px;"></div>
     <% end  %>
 <% else %>
-    <div id="current-delivery-map" style="height: 452px; margin-top: 0px;"></div>
+    <% if  @request_delivery.status == "Taken" %>
+        <div id="current-delivery-map" style="height:387px;margin-top: 70px;"></div>
+    <% else  %>
+        <div id="current-delivery-map" style="height: 452px; margin-top: 0px;"></div>
+    <% end  %>
 <% end  %>

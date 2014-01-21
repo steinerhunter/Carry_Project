@@ -88,6 +88,9 @@ class RequestDeliveriesController < ApplicationController
       @request_delivery = current_user.request_deliveries.build(params[:request_delivery])
       if @request_delivery.save
         @request_delivery.set_giver
+        if @phone.present?
+          @request_delivery.set_giver_phone
+        end
         @request_delivery.publish
         flash[:success] = "Thank you!<br>
                                               <div class='sub_flash_text'>Your Giveaway was successfully added to our lists. <br>

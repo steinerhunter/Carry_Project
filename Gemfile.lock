@@ -80,6 +80,7 @@ GEM
     foreigner (1.6.1)
       activerecord (>= 3.0.0)
     formatador (0.2.4)
+    geocoder (1.1.9)
     gon (5.0.1)
       actionpack (>= 2.3.0)
       json
@@ -235,6 +236,7 @@ DEPENDENCIES
   factory_girl_rails
   faker (= 1.0.1)
   fog
+  geocoder (~> 1.1.9)
   gon (~> 5.0.1)
   httparty
   jquery-rails (= 2.0.2)

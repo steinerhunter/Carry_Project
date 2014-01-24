@@ -43,7 +43,7 @@ class NotifMailer < ActionMailer::Base
     @creating_user = creating_user
     @taking_user = taking_user
     @request_delivery = request_delivery
-    mail(:to => @creating_user.email, :subject => "#{@creating_user.name} wants to give their item to someone else.")
+    mail(:to => @taking_user.email, :subject => "#{@creating_user.name} wants to give their item to someone else.")
   end
 
   def new_accepted_request(creating_user,accepting_user,request_delivery)

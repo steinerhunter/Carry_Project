@@ -4,6 +4,9 @@
     </div>
     <div class="top_tagline">
       <b>Everyone deserves a second hand chance.</b>
+      <% if (current_user.try(:admin?)) %>
+          <%= request.location.country %>
+      <% end  %>
     </div>
     <div class="two_main_buttons" id="main_div">
       <b><%=  link_to "Give Something Away.", request_path, class:"right_button modal-link",

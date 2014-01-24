@@ -278,6 +278,8 @@ class RequestDeliveriesController < ApplicationController
 
   def another_taker
     @request_delivery = RequestDelivery.find(params[:request_delivery_id])
+    @creating_user = @request_delivery.user
+    @taking_user = @request_delivery.confirmed_taker
     if @request_delivery.user == current_user
       if Rails.env.production?
         NotifMailer.another_user(@creating_user,@taking_user,@request_delivery).deliver

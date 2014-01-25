@@ -23,6 +23,7 @@ class UsersController < ApplicationController
       @request_delivery = RequestDelivery.find_by_id(session[:take_after_signin_request_delivery_id])
     end
     @user.only_facebook = false
+    @user.origin = request.location.country
     if @user.save
       if session[:request_delivery_what].present?
         @request_delivery = RequestDelivery.new

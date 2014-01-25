@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20140103213002) do
+ActiveRecord::Schema.define(:version => 20140125080057) do
 
   create_table "accepted_requests", :force => true do |t|
     t.integer  "request_delivery_id"
@@ -237,6 +237,7 @@ ActiveRecord::Schema.define(:version => 20140103213002) do
     t.boolean  "only_facebook"
     t.integer  "sender_rating"
     t.integer  "transporter_rating"
+    t.string   "origin"
   end
 
   add_index "users", ["email"], :name => "index_users_on_email", :unique => true

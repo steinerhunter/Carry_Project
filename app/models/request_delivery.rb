@@ -164,8 +164,8 @@ class RequestDelivery < ActiveRecord::Base
     AcceptedRequest.where("request_delivery_id = ? AND confirmed = ?",self.id,false).pluck(:user_id)
   end
 
-  def facebook_feed_dialog_url
-    "https://www.facebook.com/dialog/feed?"
+  def facebook_send_dialog_url
+    "https://www.facebook.com/dialog/send?"
   end
 
   def facebook_page_link
@@ -225,20 +225,20 @@ class RequestDelivery < ActiveRecord::Base
   end
 
   def facebook_share_giveaway_owner
-    replace_spaces(self.facebook_feed_dialog_url+self.facebook_page_link+self.facebook_app_id+
+    replace_spaces(self.facebook_send_dialog_url+self.facebook_page_link+self.facebook_app_id+
                        self.facebook_name_giveaway+self.facebook_picture+self.facebook_caption+self.facebook_description_giveaway_owner+
                        self.facebook_redirect_uri+self.facebook_display)
   end
 
   def facebook_share_giveaway_other
-    replace_spaces(self.facebook_feed_dialog_url+self.facebook_page_link+self.facebook_app_id+
+    replace_spaces(self.facebook_send_dialog_url+self.facebook_page_link+self.facebook_app_id+
                        self.facebook_name_giveaway+self.facebook_picture+self.facebook_caption+self.facebook_description_giveaway_other+
                        self.facebook_redirect_uri+self.facebook_display)
   end
 
   def facebook_share_pick_up_owner
     if self.cost.present?
-      replace_spaces(self.facebook_feed_dialog_url+self.facebook_page_link+self.facebook_app_id+
+      replace_spaces(self.facebook_send_dialog_url+self.facebook_page_link+self.facebook_app_id+
                          self.facebook_name_pick_up+self.facebook_picture+self.facebook_caption+self.facebook_description_pick_up_owner+
                          self.facebook_redirect_uri+self.facebook_display)
     end
@@ -246,7 +246,7 @@ class RequestDelivery < ActiveRecord::Base
 
   def facebook_share_pick_up_other
     if self.cost.present?
-      replace_spaces(self.facebook_feed_dialog_url+self.facebook_page_link+self.facebook_app_id+
+      replace_spaces(self.facebook_send_dialog_url+self.facebook_page_link+self.facebook_app_id+
                          self.facebook_name_pick_up+self.facebook_picture+self.facebook_caption+self.facebook_description_pick_up_other+
                          self.facebook_redirect_uri+self.facebook_display)
     end

@@ -1,7 +1,7 @@
 <div class="signin_form_class">
   <%= form_for(:session, url: sessions_path, :remote => true, :html => { :id => "new_session" } ) do |f|  %>
       <div class="signin_fields">
-        <legend style="font-size: 43px;margin-bottom: 30px;"><b>Hello, welcome back!</b></legend>
+        <legend><b>Hello, welcome back!</b></legend>
         <div class="signup_using_facebook" onclick="location.href='/auth/facebook'">
           Sign In with Facebook
         </div>

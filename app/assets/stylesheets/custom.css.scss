@@ -92,19 +92,8 @@ p {
   padding-bottom: 20px;
 }
 
-.by_signing_up {
-  margin-top:20px;
-  a {
-    color: #f2ff5e;
-    text-decoration: none;
-    &:hover {
-      color: #ffffff;
-    }
-  }
-}
-
 .signin_form_class {
-  width: 450px;
+  width: 500px;
   text-align: center;
   background-color: #1d79e2;
   color: #ffffff;
@@ -197,15 +186,14 @@ p {
 }
 
 .button_signup {
-  display: inline-block;
 }
 
-.signin_form_class  ul
+.signin_form_class ul , .signup_form_class ul
   {
   margin:0px;
   padding:0px;
   margin-top:10px;
-  list-style-type: none;
+  list-style: none;
   text-align: center;
     a {
     color: #f2ff5e;
@@ -216,6 +204,10 @@ p {
   }
 }
 
+.or_class {
+  font-size:25px;
+  font-weight: bold;
+}
 
 .signin_item {
   padding-right:15px;
@@ -226,7 +218,6 @@ p {
 
 .signup_fields {
    width: 500px;
-   height: 210px;
    margin-right: auto;
    margin-left: auto;
    margin-top: 20px;
@@ -234,7 +225,6 @@ p {
 
 .signin_fields {
   width: 450px;
-  height: 150px;
   margin-right: auto;
   margin-left: auto;
   margin-top: 20px;
@@ -320,7 +310,6 @@ textarea {
   width: 50%;
   height: 30px;
   margin: 0 auto;
-  padding-top: 7px;
   line-height: 30px;
   text-align: center;
   line-height: 30px;
@@ -336,9 +325,9 @@ textarea {
 
 .signup_errors {
   margin: 0 auto;
-  margin-top: 6%;
+  margin-top: 1%;
   padding: 5px;
-  padding-top:12px;
+  padding-bottom:12px;
   line-height: 30px;
   width: 450px;
   background-color: #c80000;
@@ -391,7 +380,8 @@ textarea {
   padding-bottom:10px;
   padding-left: 10px;
   padding-right: 10px;
-  margin-top:20px;
+  margin-top:-20px;
+  margin-bottom: 20px;
   margin-right: auto;
   margin-left: auto;
   font-size: 1.3em;

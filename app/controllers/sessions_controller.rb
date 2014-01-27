@@ -25,10 +25,10 @@ class SessionsController < ApplicationController
         @request_delivery.attachment = session[:request_delivery_attachment]
         @request_delivery.user = user
         @request_delivery.save
-      elsif session[:take_after_signin_request_delivery_id].present?
-        @request_delivery = RequestDelivery.find_by_id(session[:take_after_signin_request_delivery_id])
-      elsif session[:pick_up_after_signin_request_delivery_id].present?
-        @request_delivery = RequestDelivery.find_by_id(session[:pick_up_after_signin_request_delivery_id])
+      elsif session[:take_after_not_signed_in_request_delivery_id].present?
+        @request_delivery = RequestDelivery.find_by_id(session[:take_after_not_signed_in_request_delivery_id])
+      elsif session[:pick_up_after_not_signed_in_request_delivery_id].present?
+        @request_delivery = RequestDelivery.find_by_id(session[:pick_up_after_not_signed_in_request_delivery_id])
       end
       sign_in user
       respond_with(user, :location => root_path)

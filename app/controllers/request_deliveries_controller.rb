@@ -233,23 +233,19 @@ class RequestDeliveriesController < ApplicationController
     type = params[:type]
     if current_user != @request_delivery.user
       if type == "take" && @request_delivery.status == "Open"
-        if @phone.present?
-          if @phone.verified
-            current_user.request_takes << @request_delivery
-            @request_delivery.take_request
-            redirect_to :back
-            flash[:success] = "Thank you!<br>
+        current_user.request_takes << @request_delivery
+        @request_delivery.take_request
+        redirect_to :back
+        flash[:success] = "Thank you!<br>
                                               <div class='sub_flash_text'>You've chosen to take <b style=\"color:#1a2cff\">#{@request_delivery.what}</b> item giveaway.<br>
                                               <b style=\"color:#1a2cff\">#{@request_delivery.user.name}</b>, the giving person, will be notified. <br>
                                               In order to proceed, there are some details that we need.<br>
                                               <b style=\"color:#ff9054\">Add</b> <img src=\"../assets/missing_detail.png\"> them and <b style=\"color:#1a2cff\">#{@request_delivery.what}</b> is coming your way!</div>".html_safe
-            @taken_giveaway = TakenGiveaway.find_all_by_request_delivery_id(@request_delivery.id).last
-            @creating_user = User.find_by_id(@request_delivery.user_id)
-            @taking_user = User.find_by_id(@taken_giveaway.user_id)
-            if Rails.env.production?
-              NotifMailer.new_taken_giveaway(@creating_user,@taking_user,@request_delivery).deliver
-            end
-          end
+        @taken_giveaway = TakenGiveaway.find_all_by_request_delivery_id(@request_delivery.id).last
+        @creating_user = User.find_by_id(@request_delivery.user_id)
+        @taking_user = User.find_by_id(@taken_giveaway.user_id)
+        if Rails.env.production?
+          NotifMailer.new_taken_giveaway(@creating_user,@taking_user,@request_delivery).deliver
         end
       elsif type == "cancel"
         if @request_delivery.status == "Open"
@@ -341,22 +337,18 @@ class RequestDeliveriesController < ApplicationController
     type = params[:type]
     if current_user != @request_delivery.user
       if type == "accept"
-        if @phone.present?
-          if @phone.verified
-            current_user.request_accepts << @request_delivery
-            @request_delivery.accept_request
-            redirect_to :back
-            flash[:success] = "Thank you!<br>
+        current_user.request_accepts << @request_delivery
+        @request_delivery.accept_request
+        redirect_to :back
+        flash[:success] = "Thank you!<br>
                                               <div class='sub_flash_text'>You've chosen to accept <b style=\"color:#1a2cff\">#{@request_delivery.what}</b> pick up.<br>
                                               <b style=\"color:#1a2cff\">#{@taking_user.name}</b>, the person interested in the pick up, will be notified. <br>
                                               Now <b style=\"color:#1a2cff\">#{@taking_user.name}</b> must confirm you.</div>".html_safe
-            @accepted_request = AcceptedRequest.find_all_by_request_delivery_id(@request_delivery.id).last
-            @creating_user = User.find_by_id(@request_delivery.user_id)
-            @accepting_user = User.find_by_id(@accepted_request.user_id)
-            if Rails.env.production?
-              NotifMailer.new_accepted_request(@taking_user,@accepting_user,@request_delivery).deliver
-            end
-          end
+        @accepted_request = AcceptedRequest.find_all_by_request_delivery_id(@request_delivery.id).last
+        @creating_user = User.find_by_id(@request_delivery.user_id)
+        @accepting_user = User.find_by_id(@accepted_request.user_id)
+        if Rails.env.production?
+          NotifMailer.new_accepted_request(@taking_user,@accepting_user,@request_delivery).deliver
         end
       elsif type == "cancel"
         if @request_delivery.status == "Open"

@@ -13,23 +13,15 @@
         <b><%= link_to "I won't pick it up!", accept_request_delivery_path(@request_delivery, type: "cancel"), method: :put, class: "challenge_accepted",
                        style: "background-color: #d67a31; font-size: 35px; background-image: url('../assets/challenge_cancelled.png');" %></b>
     <% elsif @request_delivery.status == "WaitingForTransporter" || @request_delivery.status == "Pending Confirmation" %>
-        <% if @my_phone.present? && @my_phone.verified %>
+        <% if current_user.nil? %>
+            <% store_location %>
+            <% session[:pick_up_after_not_signed_in_request_delivery_id] = @request_delivery.id %>
+            <b><%=  link_to "I'll pick it up!", signup_path, class:"modal-link challenge_accepted",
+                            "data-target" => "#signupModal",
+                            "data-toggle" => "modal",
+                            "data-backdrop" => "static" %></b>
+        <% else %>
             <b><%= link_to "I'll pick it up!", accept_request_delivery_path(@request_delivery, type: "accept"), method: :put, class: "challenge_accepted" %></b>
-        <% else  %>
-            <% if current_user.nil? %>
-                <% store_location %>
-                <% session[:pick_up_after_signin_request_delivery_id] = @request_delivery.id %>
-                <b><%=  link_to "I'll pick it up!", signin_path, class:"modal-link challenge_accepted",
-                                "data-target" => "#myModal",
-                                "data-toggle" => "modal",
-                                "data-backdrop" => "static" %></b>
-            <% else %>
-                <% store_location %>
-                <b><%=  link_to "I'll pick it up!", pre_verify_request_path(@request_delivery.id,"accept"), class:"challenge_accepted modal-link trigger",
-                                "data-target" => "#myModal",
-                                "data-toggle" => "modal",
-                                "data-backdrop" => "static" %></b>
-            <% end %>
-        <% end  %>
+        <% end %>
     <% end %>
 <% end  %>

@@ -4,39 +4,17 @@
   <div class="right_side">
     <% if @request_delivery.user != current_user %>
         <% if @request_delivery.status == "Open" %>
-            <% if @my_phone.present? && @my_phone.verified %>
+            <% if current_user.nil? %>
+                <% store_location %>
+                <% session[:take_after_not_signed_in_request_delivery_id] = @request_delivery.id %>
+                <b><%=  link_to "I want it!", signup_path, class:"modal-link challenge_accepted",
+                                "data-target" => "#myModal",
+                                "data-toggle" => "modal",
+                                "data-backdrop" => "static" %></b>
+            <% else  %>
                 <b><%= link_to "I want it!", take_request_delivery_path(@request_delivery, type: "take"), method: :put, class: "challenge_accepted",
                                style: "background-color:#257b2a; background-image: url('../assets/challenge_accepted.png');" %></b>
-            <% else  %>
-                <% if current_user.nil? %>
-                    <% store_location %>
-                    <% session[:take_after_signin_request_delivery_id] = @request_delivery.id %>
-                    <b><%=  link_to "I want it!", signin_path, class:"modal-link challenge_accepted",
-                                                         "data-target" => "#myModal",
-                                                         "data-toggle" => "modal",
-                                                         "data-backdrop" => "static" %></b>
-                <% elsif @my_phone.nil? %>
-                    <% store_location %>
-                   <b><%=  link_to "I want it!",
-                                 {:controller => "phones",
-                                  :action => "new",
-                                  :user_id => current_user.id },
-                                 class:"challenge_accepted modal-link",
-                                 "data-target" => "#phoneAddModal",
-                                 "data-toggle" => "modal",
-                                 "data-backdrop" => "static" %></b>
-                    <% elsif @my_phone.verified == false %>
-                        <% store_location %>
-                             <b><%=  link_to "I want it!",
-                                     {:controller => "phones",
-                                      :action => "verify",
-                                      :user_id => current_user.id },
-                                     class: "challenge_accepted modal-link",
-                                     "data-target" => "#phoneVerifyModal",
-                                     "data-toggle" => "modal",
-                                     "data-backdrop" => "static" %></b>
-                <% end %>
-            <% end  %>
+            <% end %>
         <% end %>
     <% end  %>
     <% if @request_delivery.user != current_user %>

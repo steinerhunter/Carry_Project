@@ -34,7 +34,7 @@ class User < ActiveRecord::Base
   VALID_EMAIL_REGEX = /\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i
   validates :email, :presence => { :message => "We're going to need your Email Address..."}
   validates :email, :format => { with: VALID_EMAIL_REGEX, :message => "Email Address should be like 'user@example.com'..." }
-  validates :email, :uniqueness => { case_sensitive: false, :message => "Looks like someone has already registered with this address..." }
+  validates :email, :uniqueness => { case_sensitive: false, :message => "Looks like someone has already registered with this Email Address..." }
 
   validates :password, :presence => { :message => "Looks like you didn't pick a password..."}
   validates :password, :length => { minimum: 8, :message => "Looks like your password is a bit too short..."}

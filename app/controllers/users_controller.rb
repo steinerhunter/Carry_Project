@@ -19,8 +19,10 @@ class UsersController < ApplicationController
 
   def create
     @user = User.new(params[:user])
-    if session[:take_after_signin_request_delivery_id].present?
-      @request_delivery = RequestDelivery.find_by_id(session[:take_after_signin_request_delivery_id])
+    if session[:take_after_not_signed_in_request_delivery_id].present?
+      @request_delivery = RequestDelivery.find_by_id(session[:take_after_not_signed_in_request_delivery_id])
+    elsif session[:pick_up_after_not_signed_in_request_delivery_id].present?
+      @request_delivery = RequestDelivery.find_by_id(session[:pick_up_after_not_signed_in_request_delivery_id])
     end
     @user.only_facebook = false
     @user.origin = request.location.country

@@ -1,8 +1,14 @@
 <div class="signin_form_class">
   <%= form_for(:session, url: sessions_path, :remote => true, :html => { :id => "new_session" } ) do |f|  %>
       <div class="signin_fields">
-        <legend><b>Sign in.</b></legend>
-        <div class="myfield_signin">
+        <legend style="font-size: 43px;margin-bottom: 30px;"><b>Hello, welcome back!</b></legend>
+        <div class="signup_using_facebook" onclick="location.href='/auth/facebook'">
+          Sign In with Facebook
+        </div>
+        <div class="or_class">
+          OR
+        </div>
+        <div class="myfield_signin" style="margin-top:20px;">
           <%=  f.label :email, "Email"   %>
           <%=  f.text_field :email  %>
         </div>
@@ -10,9 +16,6 @@
           <%=  f.label :password, "Password"  %>
           <%=  f.password_field :password  %>
         </div>
-      </div>
-      <div class="signup_using_facebook" onclick="location.href='/auth/facebook'">
-        Sign In with Facebook
       </div>
       <div class="button_signin">
         <%=  f.submit "Sign In" , :id => 'submit', :style => "width:150px" %><br>

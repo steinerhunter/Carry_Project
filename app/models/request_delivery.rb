@@ -61,8 +61,6 @@ class RequestDelivery < ActiveRecord::Base
   def take_request
     take_giveaway = TakenGiveaway.find_by_request_delivery_id(self.id)
     taking_user = User.find_by_id(take_giveaway.user_id)
-    taking_phone = Phone.find_by_user_id(taking_user.id)
-    self.update_attribute(:receiving_phone, taking_phone.phone)
     self.update_attribute(:receiving_person, taking_user.name)
     self.update_attribute(:status, "Taken")
     take_giveaway.update_attribute(:taken, true)

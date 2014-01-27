@@ -2,32 +2,40 @@
   <%= form_for(@user, :remote => true) do |f| %>
       <%=  render 'shared/error_messages', object: f.object  %>
       <div class="signup_fields">
-        <legend><b>Sign up.</b></legend>
+        <legend><b>We'd like you to become a member.</b></legend>
+        <div class="signup_using_facebook" onclick="location.href='/auth/facebook'">
+          Sign Up with Facebook
+        </div>
+        <div class="or_class">
+          OR
+        </div>
         <div class="myfield_signup">
           <%= f.label :name, "Your name?" %>
           <%= f.text_field :name %>
         </div>
         <div class="myfield_signup">
           <%= f.label :email, "Your Email Address?" %>
-          <%= f.text_field :email, :placeholder => "someone@example.com" %>
+          <%= f.text_field :email, :placeholder => "john@example.com" %>
         </div>
         <div class="myfield_signup">
           <%= f.label :password, "Choose a Password:" %>
-          <%= f.password_field :password, :placeholder => "At least 8 characters"  %>
+          <%= f.password_field :password, :placeholder => "8 characters minimum"  %>
         </div>
         <div class="myfield_signup">
           <%= f.label :password_confirmation, "Confirm your Password:" %>
           <%= f.password_field :password_confirmation %>
         </div>
       </div>
-      <div class="signup_using_facebook" onclick="location.href='/auth/facebook'">
-        Sign Up with Facebook
-      </div>
       <div class="button_signup">
         <%=  f.submit "Create Account" , :id => 'submit'%>
       </div>
-      <div class="by_signing_up">
-        By signing up, you agree to our <%= link_to "Terms of Use", terms_of_use_path  %> and <%= link_to "Privacy Policy", privacy_policy_path %>
-      </div>
+      <ul>
+        <li>Already have an account? <%=  link_to "Sign in", signin_path, id: "signin-signup", class:"modal-link",
+                                                  "data-target" => "#signinModal",
+                                                  "data-dismiss" => "modal",
+                                                  "data-toggle" => "modal" %>.</li>
+
+        <li>By signing up, you agree to our <%= link_to "Terms of Use", terms_of_use_path  %> and <%= link_to "Privacy Policy", privacy_policy_path %></li>
+      </ul>
   <% end  %>
 </div>

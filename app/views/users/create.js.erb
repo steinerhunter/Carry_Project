@@ -12,14 +12,14 @@ var errors = $('<ul />');
 
 // Delete password_digest error is such exists
 <% if @user.errors.has_key?(:password_digest) %>
-    <% @user.errors.delete(:password_digest) %>
+<% @user.errors.delete(:password_digest) %>
 <% end %>
 
 // Display only first error for each field
 <% @user.errors.each do |attribute, message| %>
-    <% if @user.errors[attribute].first == message %>
-        errors.append('<li><%= escape_javascript(message) %></li>');
-    <% end %>
+<% if @user.errors[attribute].first == message %>
+errors.append('<li><%= escape_javascript(message) %></li>');
+<% end %>
 <% end %>
 
 // Display errors before the form
@@ -27,14 +27,24 @@ $('<div />').addClass('signup_errors').html(errors).appendTo("#new_user").hide()
 
 <% else %>
 
-    <% sign_in @user %>
-<% if session[:take_after_signin_request_delivery_id].present? %>
-$('#signupModal').modal('hide');
-$("#phoneAddModal .modal-body").load("<%=new_phone_path %>?user_id=<%= @user.id %>", function() {
-    $('#phoneAddModal').modal('show');
+<% sign_in @user %>
+<% if session[:take_after_not_signed_in_request_delivery_id].present? %>
+$.ajax({
+    url: '/request_deliveries/<%= @request_delivery.id %>/take?type=take',
+    type: 'PUT',
+    success: function(result) {
+        <% session[:take_after_not_signed_in_request_delivery_id]  = nil %>
+    }
 });
-<% else %>
+<% elsif session[:pick_up_after_not_signed_in_request_delivery_id].present? %>
+$.ajax({
+    url: '/request_deliveries/<%= @request_delivery.id %>/accept?type=accept',
+    type: 'PUT',
+    success: function(result) {
+        <% session[:pick_up_after_not_signed_in_request_delivery_id]  = nil %>
+    }
+});
+<% end %>
 // On successful creation of new user, redirect to email verification action
     window.location.href = "<%= verify_path(@user.id) %>"
-<% end %>
 <% end %>

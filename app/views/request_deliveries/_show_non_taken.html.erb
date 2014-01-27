@@ -6,7 +6,7 @@
         <% if @request_delivery.status == "Open" %>
             <% if current_user.nil? %>
                 <% store_location %>
-                <% session[:take_after_not_signed_in_request_delivery_id] = @request_delivery.id %>
+                <% session[:back_after_not_signed_in_request_delivery_id] = @request_delivery.id %>
                 <b><%=  link_to "I want it!", signup_path, class:"modal-link challenge_accepted",
                                 "data-target" => "#myModal",
                                 "data-toggle" => "modal",

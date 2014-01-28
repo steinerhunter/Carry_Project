@@ -9,10 +9,7 @@
         <ul class="nav pull-right" id="header_items">
           <li id="header_transporters"><%= link_to "Pick Up", pickups_path  %></li>
           <li id="header_takers"><%= link_to "Find Item", giveaways_path  %></li>
-          <li id="header_givers"><%=  link_to "Give Away", request_path, class:"modal-link",
-                          "data-target" => "#giveAwayModal",
-                          "data-toggle" => "modal",
-                          "data-backdrop" => "static" %></li>
+          <li id="header_givers"><%=  link_to "Give Away", request_path, remote: true %></li>
           <% if signed_in?  %>
               <li id="header_activity"><%= link_to "Activity", activity_path %></li>
               <% if facebook_authorization(current_user)  %>

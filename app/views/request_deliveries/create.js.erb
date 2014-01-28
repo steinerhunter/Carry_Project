@@ -25,12 +25,12 @@ $('input[type="submit"]').addClass('update_details');
 <% else %>
     <% if current_user.nil? %>
     <% store_location %>
-    $('#myModal').modal('hide');
-    $("#signinModal .modal-body").load("<%=signin_path%>", function() {
-        $('#signinModal').modal('show');
+    $('#giveAwayModal').modal('hide');
+    $("#signupModal .modal-body").load("<%=signup_path%>", function() {
+        $('#signupModal').modal('show');
     });
     <% else %>
-        $('#myModal').modal('hide');
+        $('#giveAwayModal').modal('hide');
         window.location.href = "<%=request_delivery_url(@request_delivery) %>"
     <% end %>
 

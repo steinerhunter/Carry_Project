@@ -1,0 +1,53 @@
+  <%= form_for(@request_delivery, :remote => true,:html => {:multipart => true }) do |f| %>
+      <fieldset>
+        <div class="single_step" style="margin-top:20px;">
+          <legend><b>Add a new Giveaway.</b></legend>
+          <%= f.label :what, "What is it?" %>
+          <% if session[:request_delivery_what].present? %>
+                <%= f.text_field :what, :placeholder => "A Microwave", :value => session[:request_delivery_what]   %>
+          <% else  %>
+                <%= f.text_field :what, :placeholder => "A Microwave"   %>
+          <% end %>
+          <%= f.label :from, "Where is it?" %>
+          <% if session[:request_delivery_from].present? %>
+                <%= f.text_field :from, :placeholder => "5 Lincoln Rd, NY", :class => "address_field", :value => session[:request_delivery_from] %>
+          <% else %>
+              <%= f.text_field :from, :placeholder => "5 Lincoln Rd, NY", :class => "address_field" %>
+          <% end  %>
+          <%= f.label :size, "How big is it?" %>
+          <% if session[:request_delivery_size].present? %>
+              <%= f.hidden_field :size, :value => session[:request_delivery_size]%>
+          <% else  %>
+              <%= f.hidden_field :size %>
+          <% end  %>
+          <div class="new_size">
+            <div class="size_box" id="small" style="background-image: url('../assets/mouse.png');"
+                 onclick="style.backgroundColor='#d05e0b';
+                         document.getElementById('medium').style.backgroundColor = '#a03eff';
+                         document.getElementById('large').style.backgroundColor = '#a03eff';
+                         document.getElementById('new_request_delivery').request_delivery_size.value = 'Small';">
+              Small
+            </div>
+            <div class="size_box" id="medium" style="background-image: url('../assets/lamp.png'); margin-left:20px;"
+                 onclick="style.backgroundColor='#d05e0b';
+                         document.getElementById('small').style.backgroundColor = '#a03eff';
+                         document.getElementById('large').style.backgroundColor = '#a03eff';
+                         document.getElementById('new_request_delivery').request_delivery_size.value = 'Medium';">
+              Medium
+            </div>
+            <div class="size_box" id="large" style="background-image: url('../assets/table.png'); margin-left:20px;"
+                 onclick="style.backgroundColor='#d05e0b';
+                         document.getElementById('small').style.backgroundColor = '#a03eff';
+                         document.getElementById('medium').style.backgroundColor = '#a03eff';
+                         document.getElementById('new_request_delivery').request_delivery_size.value = 'Large';">
+              Large
+            </div>
+          </div>
+          <%= f.label :attachment, "Upload a picture:" %>
+          <%= f.file_field :attachment %>
+          <div class="edit_update" style="margin-top:20px;">
+            <%=  f.submit "Add My Item" , :class => 'update_details'%>
+          </div>
+        </div>
+      </fieldset>
+  <% end  %>

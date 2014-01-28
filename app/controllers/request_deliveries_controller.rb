@@ -71,7 +71,6 @@ class RequestDeliveriesController < ApplicationController
     else
       @request_delivery = current_user.request_deliveries.build
     end
-    render "new.html.erb", :layout => "empty"
   end
 
   def create

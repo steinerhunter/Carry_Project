@@ -60,13 +60,10 @@
         </div>
     <% end  %>
     <div class="feed_title" onclick="location.href='<%=request_delivery_path(request_feed_takers_item)%>'">
-      <b><%= link_to request_feed_takers_item.what, request_delivery_path(request_feed_takers_item)  %></b>
+      <b><%= request_feed_takers_item.what %></b>
     </div>
     <div class="feed_request_data">
-      <b>From</b> <%= request_feed_takers_item.from %><br>
-      <b>Size</b> <%= request_feed_takers_item.size %><br>
-      <b>Given By</b> <%= link_to request_feed_takers_item.user.name, request_feed_takers_item.user %><br>
-
+      <%= request_feed_takers_item.from %>
     </div>
   </div>
 </div>

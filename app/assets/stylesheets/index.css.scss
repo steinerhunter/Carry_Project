@@ -146,14 +146,11 @@
   display: inline-block;
   vertical-align: top;
   position: relative;
-  background-color: #1d79e2;
+  background-color: #b58e51;
   -moz-box-shadow: 5px 5px 5px #6b6b6b; /* Old Firefox */
   box-shadow: 5px 5px 5px #6b6b6b;
   border:1px solid;
-  border-radius:2px;
-  -moz-border-radius: 0px;
-  -webkit-border-radius: 6px 6px 6px 6px;
-  border-radius: 6px 6px 6px 6px;
+  border-radius:4px;
   padding-top: 0px;
   padding-bottom: 10px;
   margin-right: 10px;
@@ -176,22 +173,16 @@
 }
 
 .feed_item:hover {
-  background-color: #1a61ba;
+  background-color: #cea15a;
   cursor:pointer;
 }
 
 .feed_title {
   position:relative;
-  text-align: left;
-  padding:7px;
-  font-size: 1.4em;
-  border-color: #000000;
-  background-color:#00008b;
+  text-align: center;
+  font-size: 20px;
   background-repeat: no-repeat;
   background-position: bottom left;
-  -moz-border-radius: 0px;
-  -webkit-border-radius: 6px 6px 0px 0px;
-  border-radius: 6px 6px 0px 0px;
   a {
     color: #ffffff;
     text-decoration: none;
@@ -220,18 +211,6 @@
     &:hover {
       color: #ffffff;
     }
-  }
-}
-
-.index_rating {
-  text-align: center;
-}
-
-.feed_request_data {
-  padding-right:10px;
-  padding-left:10px;
-  b {
-    color:#f2ff5e;
   }
 }
 

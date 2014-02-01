@@ -1,9 +1,13 @@
-<div class="modal fade hide" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" >
-  <div class="modal-header">
-    <button type="button" class="close" data-dismiss="modal" aria-hidden="true"><%= image_tag("CloseThis.png")%></button>
-    <h3 id="myModalLabel"></h3>
-  </div>
-  <div class="modal-body">
-    <center><%= image_tag("Logo.png") %></center>
-  </div>
-</div>
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+        <h4 class="modal-title" id="myModalLabel">Modal title</h4>
+      </div>
+      <div class="modal-body my-body">
+        ...
+      </div>
+    </div><!-- /.modal-content -->
+  </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->

@@ -1,7 +1,7 @@
 source 'https://rubygems.org'
 
 gem 'rails', '3.2.13'
-gem 'bootstrap-sass', '2.1'
+gem 'bootstrap-sass', '2.3.2.0'
 gem "client_side_validations", "~> 3.2.5"
 gem 'jquery-validation-rails'
 gem 'bcrypt-ruby', '~> 3.0.0'

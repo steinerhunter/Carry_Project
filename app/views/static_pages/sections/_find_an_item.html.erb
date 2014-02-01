@@ -1,0 +1,19 @@
+<section id="find_an_item">
+  <div class="container">
+    <div class="row text-center">
+      <div class="col-md-12">
+        <h1>See anything you like?</h1>
+        <p class="sub_title">These Giveaways are currently up for grabs:</p>
+      </div>
+    </div>
+    <div class="row text-center">
+    <div class="col-md-12">
+      <% if @request_feed_items.any? %>
+          <%= render partial: 'shared/request_feed_takers_item', collection: @request_feed_items %>
+      <% else  %>
+          <h3><center>No Giveaways available at the moment!</center></h3>
+      <% end  %>
+      </div>
+    </div>
+  </div>
+</section>

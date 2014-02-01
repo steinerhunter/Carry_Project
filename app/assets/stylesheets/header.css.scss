@@ -7,39 +7,6 @@ header {
   }
 }
 
-.navbar {
-  .navbar-inner {
-    vertical-align: middle;
-    border: 1px solid #000000;
-    border-radius: 0px;
-    background-color: #1d79e2;
-    background-image: none;
-
-    .dropdown .dropdown-toggle {
-      height: 23px;
-    }
-
-    .dropdown .dropdown-menu::before,
-    .dropdown .dropdown-menu::after {
-      border: none;
-      content: none;
-    }
-
-    .dropdown .dropdown-menu {
-      border: 1px solid #000000;
-      background-color: #1d79e2;
-      .divider {
-        border: black;
-        background-color: black;
-      }
-    }
-  }
-  .border{
-    border-right: 1px solid black;
-    height: 43px;
-  }
-}
-
 #header_items {
   padding-top: 4px;
   font-weight: bold;
@@ -103,7 +70,7 @@ header {
 
 #header_takers {
   position:relative;
-  width:125px;
+  width:135px;
   margin-left:15px;
   text-align: left;
   font-size: 0.9em;

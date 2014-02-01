@@ -10,7 +10,6 @@ class SessionsController < ApplicationController
       flash.now[:success] = "Thank you!<br><div class='sub_flash_text'>We will store your delivery suggestion details temporarily,
                                                     and post them to our database once you sign in.</div>".html_safe
     end
-    render "new.html.erb", :layout => "empty"
   end
 
   def create

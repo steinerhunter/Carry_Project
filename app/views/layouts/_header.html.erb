@@ -1,35 +1,34 @@
-<header class="navbar navbar-inverse">
-  <div class="navbar-inner">
-    <div class="container" style="width:970px">
-      <%= link_to "sendd.me", root_path, id: "logo" %>
-      <div class="header_beta">
-        beta
+<nav class="navbar navbar-default" role="navigation">
+  <div class="container" id="header_container">
+    <div class="row">
+      <!-- Brand and toggle get grouped for better mobile display -->
+      <div class="col-sm-4">
+        <div class="navbar-header">
+          <a class="navbar-brand" href="#">sendd.me</a>
+        </div>
       </div>
-      <nav>
-        <ul class="nav pull-right" id="header_items">
-          <li id="header_transporters"><%= link_to "Pick Up", pickups_path  %></li>
-          <li id="header_takers"><%= link_to "Find Item", giveaways_path  %></li>
-          <li id="header_givers"><%=  link_to "Give Away", request_path, remote: true %></li>
-          <% if signed_in?  %>
-              <li id="header_activity"><%= link_to "Activity", activity_path %></li>
-              <% if facebook_authorization(current_user)  %>
-                  <li id="header_user"><%= link_to facebook_profile_photo(current_user,"header")+current_user.name, current_user  %></li>
-              <% else  %>
-                  <li id="header_user"><%= link_to header_gravatar_for(current_user)+current_user.name, current_user  %></li>
-              <% end  %>
-          <% else  %>
-              <li id="header_how_it_works"><%= link_to "How It Works", root_path(:anchor =>'how_it_works'), class:"smoothScroll" %></li>
-              <li id="header_sign_in"><%=  link_to "Sign in", signin_path, class:"modal-link",
-                                                  "data-target" => "#signinModal",
-                                                  "data-toggle" => "modal",
-                                                  "data-backdrop" => "static" %></li>
-              <li id="header_register"><%=  link_to "Sign up", signup_path, class:"modal-link",
-                                                   "data-target" => "#signupModal",
-                                                   "data-toggle" => "modal",
-                                                   "data-backdrop" => "static" %></li>
-          <% end %>
-        </ul>
-      </nav>
+      <div class="col-sm-7">
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+          <ul class="nav navbar-nav">
+            <li class="header_link"><a href="#">Link</a></li>
+            <li class="header_link"><a href="#">Link</a></li>
+            <li class="header_link"><a href="#">Link</a></li>
+          </ul>
+          <ul class="nav navbar-nav navbar-right">
+            <li class="dropdown">
+              <a href="#" class="dropdown-toggle" data-toggle="dropdown">Dropdown <b class="caret"></b></a>
+              <ul class="dropdown-menu">
+                <li><a href="#">Action</a></li>
+                <li><a href="#">Another action</a></li>
+                <li><a href="#">Something else here</a></li>
+                <li class="divider"></li>
+                <li><a href="#">Sign Out</a></li>
+              </ul>
+            </li>
+          </ul>
+        </div><!-- /.navbar-collapse -->
+      </div>
     </div>
-  </div>
-</header>
+  </div><!-- /.container-fluid -->
+</nav>

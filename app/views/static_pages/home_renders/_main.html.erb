@@ -6,10 +6,7 @@
       <b>Everyone deserves a second hand chance.</b>
     </div>
     <div class="two_main_buttons" id="main_div">
-      <b><%=  link_to "Give Something Away.", request_path, class:"right_button modal-link",
-                      "data-target" => "#giveAwayModal",
-                      "data-toggle" => "modal",
-                      "data-backdrop" => "static" %></b>
+      <b><%=  link_to "Give Something Away.", request_path, class:"right_button", remote:true %></b>
       <div class="left_button" onclick="location.href='/giveaways'">
         <b>Find an Item You Want.</b>
       </div>

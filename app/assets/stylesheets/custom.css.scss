@@ -28,11 +28,12 @@ body {
   height: 100%;
 }
 
-.top_container {
-  margin-right: auto;
-  margin-left: auto;
-  height: 100%;
-  margin: 0 auto;
+.container {
+  width: 100%;
+}
+
+#header_container {
+  width: 80%;
 }
 
 .footer {
@@ -63,8 +64,52 @@ p {
   line-height: 1.7em;
 }
 
-.nav li {
-  display:inline;
+#top_section {
+  background-color: #b4b4b4;
+  h1 {
+    font-size: 65px;
+  }
+}
+
+#good_for_everyone {
+  background-color: #e8d8c3;
+  h1 {
+    font-size: 45px;
+  }
+  .sub_title {
+    font-size:25px;
+  }
+}
+
+#find_an_item {
+  background-color: #fffad6;
+  h1 {
+    font-size: 45px;
+  }
+  .sub_title {
+    font-size:25px;
+  }
+}
+
+.hero-unit {
+  border-radius: 0;
+  background-color: #b4b4b4;
+  text-align: center;
+  input[type=text] {
+    width:420px;
+    height:60px;
+    font-size: 25px;
+    vertical-align: top;
+  }
+  .btn {
+    padding:15px;
+    font-size: 20px;
+  }
+  .search-form-input {
+    margin-top:60px;
+    margin-right: auto;
+    margin-left: auto;
+  }
 }
 
 .signup_form_class {

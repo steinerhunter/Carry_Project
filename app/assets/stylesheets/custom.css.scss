@@ -65,14 +65,20 @@ p {
 }
 
 #top_section {
-  background-color: #b4b4b4;
+  background: url('top_section_back.jpg') no-repeat center top;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+  border-bottom: 1px solid #000000;
   h1 {
-    font-size: 65px;
+    font-size: 50px;
   }
 }
 
 #good_for_everyone {
   background-color: #e8d8c3;
+  border-bottom: 1px solid #000000;
   h1 {
     font-size: 45px;
   }
@@ -93,10 +99,12 @@ p {
 
 .hero-unit {
   border-radius: 0;
-  background-color: #b4b4b4;
+  text-shadow: 1px 0 0 #000, 0 -1px 0 #000, 0 1px 0 #000, -1px 0 0 #000;
+  background-color: rgba(0, 0, 0, 0);
   text-align: center;
+  color:#ffffff;
   input[type=text] {
-    width:420px;
+    width:220px;
     height:60px;
     font-size: 25px;
     vertical-align: top;
@@ -106,7 +114,7 @@ p {
     font-size: 20px;
   }
   .search-form-input {
-    margin-top:60px;
+    margin-top:90px;
     margin-right: auto;
     margin-left: auto;
   }

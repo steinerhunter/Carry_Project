@@ -1,28 +1,24 @@
-<div class="signin_form_class">
-  <%= form_for(:session, url: sessions_path, :remote => true, :html => { :id => "new_session" } ) do |f|  %>
-      <div class="signin_fields">
-        <legend><b>Hello, welcome back!</b></legend>
-        <div class="signup_using_facebook" onclick="location.href='/auth/facebook'">
-          Sign In with Facebook
-        </div>
-        <div class="or_class">
-          OR
-        </div>
-        <div class="myfield_signin" style="margin-top:20px;">
-          <%=  f.label :email, "Email"   %>
-          <%=  f.text_field :email  %>
-        </div>
-        <div class="myfield_signin">
-          <%=  f.label :password, "Password"  %>
-          <%=  f.password_field :password  %>
-        </div>
+  <div class="container">
+    <div class="row text-center">
+      <div class="col-md-4 col-md-offset-4">
+        <h1>SaferVPN Login</h1>
+        <p class="sub-head">
+          Not a user?
+          <a href="signup">Sign Up</a>
+          Now.
+        </p>
+        <form action="/login.php" method="post" role="form">
+          <div class="form-group">
+            <div class="form-group">
+              <input type="hidden" value="c76cebc18d552a7b89dc75cb97a63a37f65e0f61" name="csrf">
+              <input id="fname" class="form-control" type="text" placeholder="First Name" style="display:none;" name="fname">
+              <input id="lname" class="form-control" type="text" placeholder="Last Name" style="display:none;" name="lname">
+              <button class="btn btn-primary btn-block btn-lg" type="submit">Login</button>
+        </form>
+        <hr>
+        <p>
+          <a href="https://www.safervpn.com/members/pwreset.php">Forgot your password?</a>
+        </p>
       </div>
-      <div class="button_signin">
-        <%=  f.submit "Sign In" , :id => 'submit', :style => "width:150px" %><br>
-      </div>
-      <ul>
-        <li>No account yet? <%=  link_to "Sign up", signup_path, id: "signin-signup", remote:true %></li>
-        <li>Forgot your password? <%= link_to "Reset it",reset_password_path %> now!</li>
-      </ul>
-  <% end  %>
-</div>
+    </div>
+  </div>

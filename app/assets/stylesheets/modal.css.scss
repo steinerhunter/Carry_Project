@@ -23,14 +23,6 @@
   outline: 0 none;
 }
 
-.modal-header {
-  height: 25px;
-  border-bottom: 0px;
-}
-
-.modal-footer {
-}
-
 .modal-body {
   max-height: 600px;
   margin-left: auto;
@@ -40,8 +32,6 @@
 .modal {
   background-color: #f3f4e7;
   margin-bottom:25%;
-  margin-right: auto;
-  margin-left: auto;
   z-index: 30;
 }
 

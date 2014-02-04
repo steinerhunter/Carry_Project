@@ -6020,8 +6020,8 @@ button.close {
 }
 
 .modal-body {
-  position: relative;
-  padding: 20px;
+    position: relative;
+    padding: 20px;
 }
 
 .modal-footer {

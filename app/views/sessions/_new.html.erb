@@ -1,11 +1,12 @@
 <div class="col-md-12">
-    <%= form_for(:session, url: sessions_path, :remote => true, :html => { :id => "new_session" } ) do |f|  %>
-    <h1 class="nice_form_title">Welcome Back!</h1>
+  <%= form_for(:session, url: sessions_path, :remote => true, :html => { :id => "new_session" } ) do |f|  %>
+      <h1 class="nice_form_title">Welcome Back!</h1>
+      <h3 class="nice_form_subtitle">No account yet? <%=  link_to "Sign up", signup_path, remote: true %> now.</h3>
       <div class="nice_form_input">
         <%= f.text_field :email, :placeholder => "Email"%>
         <%= f.password_field :password, :placeholder => "Password"%>
       </div>
-    <button class="nice_form_btn btn-danger">Sign In</button>
-    <div class="btn btn-facebook btn-btn-facebook" onclick="location.href='/auth/facebook'"><i class="fa fa-facebook"></i> | Connect with <strong>Facebook</strong></div>
+      <button class="nice_form_btn btn-danger">Sign In</button>
+      <div class="btn btn-facebook btn-btn-facebook" onclick="location.href='/auth/facebook'"><i class="fa fa-facebook"></i> | Connect with <strong>Facebook</strong></div>
   <% end  %>
 </div>

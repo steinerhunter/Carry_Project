@@ -377,12 +377,10 @@ textarea {
 }
 
 .signup_errors {
-  margin: 0 auto;
-  margin-top: 1%;
+  margin-top: 2%;
   padding: 5px;
-  padding-bottom:12px;
-  line-height: 30px;
-  width: 450px;
+  padding-top: 15px;
+  width: auto;
   background-color: #c80000;
   border: 1px solid #111111;
   border-radius:5px;
@@ -393,7 +391,7 @@ textarea {
 
 .signin_errors {
   margin: 0 auto;
-  margin-top: 8%;
+  margin-top: 2%;
   padding: 5px;
   line-height: 30px;
   width: auto;

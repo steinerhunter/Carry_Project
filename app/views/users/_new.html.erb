@@ -1,37 +1,14 @@
-<div class="signup_form_class">
-  <%= form_for(@user, :remote => true) do |f| %>
-      <%=  render 'shared/error_messages', object: f.object  %>
-      <div class="signup_fields">
-        <legend><b>We'd like you to join us!</b></legend>
-        <div class="signup_using_facebook" onclick="location.href='/auth/facebook'">
-          Sign Up with Facebook
-        </div>
-        <div class="or_class">
-          OR
-        </div>
-        <div class="myfield_signup">
-          <%= f.label :name, "Your name?" %>
-          <%= f.text_field :name %>
-        </div>
-        <div class="myfield_signup">
-          <%= f.label :email, "Your Email Address?" %>
-          <%= f.text_field :email, :placeholder => "john@example.com" %>
-        </div>
-        <div class="myfield_signup">
-          <%= f.label :password, "Choose a Password:" %>
-          <%= f.password_field :password, :placeholder => "8 characters minimum"  %>
-        </div>
-        <div class="myfield_signup">
-          <%= f.label :password_confirmation, "Confirm your Password:" %>
-          <%= f.password_field :password_confirmation %>
-        </div>
+<div class="col-md-12">
+      <%= form_for(@user, :remote => true) do |f| %>
+      <h1 class="nice_form_title">Join <strong>sendd.me</strong>!</h1>
+      <h3 class="nice_form_subtitle">Already a member? <%=  link_to "Sign in", signin_path, remote: true %> now.</h3>
+      <div class="nice_form_input">
+        <%= f.text_field :name, :placeholder => "Name" %>
+        <%= f.text_field :email, :placeholder => "Email"%>
+        <%= f.password_field :password, :placeholder => "Choose Password"%>
+        <%= f.password_field :password, :placeholder => "Retype Password"%>
       </div>
-      <div class="button_signup">
-        <%=  f.submit "Create Account" , :id => 'submit'%>
-      </div>
-      <ul>
-        <li>Already have an account? <%=  link_to "Sign in", signin_path, id: "signin-signup", remote: true %></li>
-        <li>By signing up, you agree to our <%= link_to "Terms of Use", terms_of_use_path  %> and <%= link_to "Privacy Policy", privacy_policy_path %></li>
-      </ul>
+      <button class="nice_form_btn btn-danger">Sign Up</button>
+      <div class="btn btn-facebook btn-btn-facebook" onclick="location.href='/auth/facebook'"><i class="fa fa-facebook"></i> | Connect with <strong>Facebook</strong></div>
   <% end  %>
 </div>

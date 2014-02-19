@@ -35,7 +35,11 @@
                   <li><%= link_to "Profile", current_user %></li>
                   <li><%= link_to "Activity", activity_path %></li>
                   <li class="divider"></li>
-                  <li><a href="#">Sign Out</a></li>
+                  <% if facebook_authorization(current_user)  %>
+                      <li><%= link_to "Sign Out", logout_authentication_path %></li>
+                  <% else  %>
+                      <li><%= link_to "Sign Out", signout_path, method: "delete" %></li>
+                  <% end  %>
                 </ul>
           <% else  %>
               <li><%=  link_to "Sign up", signup_path, remote: true %></li>

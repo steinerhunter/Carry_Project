@@ -6,7 +6,7 @@
         <% if @request_delivery.status == "Open" %>
             <% if current_user.nil? %>
                 <% store_location %>
-                <% session[:back_after_not_signed_in_request_delivery_id] = @request_delivery.id %>
+                <% session[:take_after_not_signed_in_request_delivery_id] = @request_delivery.id %>
                 <b><%=  link_to "I want it!", signup_path, class:"challenge_accepted", remote: true %></b>
             <% else  %>
                 <b><%= link_to "I want it!", take_request_delivery_path(@request_delivery, type: "take"), method: :put, class: "challenge_accepted",

@@ -1,0 +1,21 @@
+#slideshow {
+  position:relative;
+  height:500px;
+}
+
+#slideshow section {
+  position: absolute;
+  top:0;
+  left:0;
+  z-index:8;
+  opacity:0.0;
+}
+
+#slideshow section.active {
+  z-index:10;
+  opacity:1.0;
+}
+
+#slideshow section.last-active {
+  z-index:9;
+}

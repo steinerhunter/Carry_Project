@@ -1,26 +1,37 @@
-<section id="top_section">
-  <div class="container">
-    <div class="hero-unit">
-      <div class="row">
-        <div class="col-md-12" style="margin-top:50px;">
-          <h1>It's better to give, <br>
-            and to receive.</h1>
-          <p>Give, receive and deliver 2nd-hand items - easily and safely.</p>
-          <div class="search-form">
-            <form id="homepage-filters" method="get" action="/fi/homepage" accept-charset="UTF-8">
-              <div style="margin:0;padding:0;display:inline">
-                <input type="hidden" value="✓" name="utf8">
-              </div>
-              <div class="search-form-input search-form-text-field">
-                <input id="q" type="text" placeholder="Got items to give?" name="q">
-                <button id="search-button" class="btn btn-danger" type="submit">
-                  Add Giveaway
-                </button>
-              </div>
-            </form>
+<%= render 'static_pages/home_renders/slider' %>
+<div id="slideshow">
+  <section id="top_section1" class="active">
+    <div class="container">
+      <div class="hero-unit">
+        <div class="row">
+          <div class="col-md-12">
+            <h1>Some stuff.</h1>
           </div>
         </div>
       </div>
     </div>
-  </div>
-</section>
+  </section>
+  <section id="top_section2">
+    <div class="container">
+      <div class="hero-unit">
+        <div class="row">
+          <div class="col-md-12">
+            <h1>Some other stuff.</h1>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  <section id="top_section3">
+    <div class="container">
+      <div class="hero-unit">
+        <div class="row">
+          <div class="col-md-12">
+            <h1>Nothing to see here.</h1>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+</div>
+

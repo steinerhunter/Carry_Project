@@ -1,23 +1,48 @@
 <script type="text/javascript">
-    function slideSwitch() {
-        var $active = $('#slideshow section.active');
+    function slider() {
 
-        if ( $active.length == 0 ) $active = $('#slideshow section:last');
+        function animate_slider(){
+            $('.slider #'+shown).animate({
+                opacity:0 // fade out
+            },1000);
+            $('.slider #'+next_slide).animate({
+                opacity:1.0 // fade in
+            },1000);
+            //console.log(shown, next_slide);
+            shown = next_slide;
+        }
 
-        var $next =  $active.next().length ? $active.next()
-                : $('#slideshow section:first');
+        function choose_next() {
+            next_slide = (shown == sc)? 1:shown+1;
+            animate_slider();
+        }
 
-        $active.addClass('last-active');
-
-        $next.css({opacity: 0.0})
-                .addClass('active')
-                .animate({opacity: 1.0}, 1000, function() {
-                    $active.removeClass('active last-active');
-                }
-        );
+        $('.slider #1').css({opacity:1}); //show 1st image
+        var shown = 1;
+        var next_slide;
+        var sc = $('.slider section').length; // total images
+        var iv = setInterval(choose_next,3500);
+        $('.slider_nav').hover(function(){
+            clearInterval(iv); // stop animation
+        }, function() {
+            iv = setInterval(choose_next,3500); // resume animation
+        });
+        $('.slider_nav span').click(function(e){
+            var n = e.target.getAttribute('name');
+            //console.log(e.target.outerHTML, n);
+            if (n=='givers') {
+                next_slide = 1;
+            } else if(n=='receivers') {
+                next_slide = 2;
+            } else if(n=='transporters') {
+                next_slide = 3;
+            } else {
+                return;
+            }
+            animate_slider();
+        });
     }
 
-    $(function() {
-        setInterval( "slideSwitch()", 3000 );
-    });
+    window.onload = slider;
+
 </script>

@@ -21,11 +21,11 @@
         var shown = 1;
         var next_slide;
         var sc = $('.slider section').length; // total images
-        var iv = setInterval(choose_next,3500);
+        var iv = setInterval(choose_next,5000);
         $('.slider_nav').hover(function(){
             clearInterval(iv); // stop animation
         }, function() {
-            iv = setInterval(choose_next,3500); // resume animation
+            iv = setInterval(choose_next,5000); // resume animation
         });
         $('.slider_nav span').click(function(e){
             var n = e.target.getAttribute('name');

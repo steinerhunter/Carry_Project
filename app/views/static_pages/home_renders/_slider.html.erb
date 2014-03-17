@@ -8,6 +8,12 @@
             $('.slider #'+next_slide).animate({
                 opacity:1.0 // fade in
             },1000);
+            $('.slider_nav #'+(shown+3)).animate({
+                opacity:0 // fade out
+            },1000);
+            $('.slider_nav #'+(next_slide+3)).animate({
+                opacity:1.0 // fade in
+            },1000);
             //console.log(shown, next_slide);
             shown = next_slide;
         }
@@ -18,6 +24,7 @@
         }
 
         $('.slider #1').css({opacity:1}); //show 1st image
+        $('.slider_nav #4').css({opacity:1}); //show 1st image
         var shown = 1;
         var next_slide;
         var sc = $('.slider section').length; // total images

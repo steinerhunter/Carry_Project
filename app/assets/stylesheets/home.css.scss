@@ -63,7 +63,7 @@
   background-size: 100%;
   background-repeat: no-repeat;
   background-position: top top;
-  border-bottom: 1px solid #000000;
+  border-bottom: 3px solid #8bc63a;
   height:500px;
   width:100%;
   h1 {
@@ -77,7 +77,7 @@
   background-size: 100%;
   background-repeat: no-repeat;
   background-position: top top;
-  border-bottom: 1px solid #000000;
+  border-bottom: 3px solid #8bc63a;
   height:500px;
   width:100%;
   h1 {
@@ -91,12 +91,21 @@
   background-size: 100%;
   background-repeat: no-repeat;
   background-position: top top;
-  border-bottom: 1px solid #000000;
+  border-bottom: 3px solid #8bc63a;
   height:500px;
   width:100%;
   h1 {
     font-size: 50px;
   }
+}
+
+.user_type {
+  display: inline-block;
+  width:33%;
+  padding-top:15px;
+  padding-bottom: 15px;
+  background-color: #4c4c4e;
+
 }
 
 #good_for_everyone {

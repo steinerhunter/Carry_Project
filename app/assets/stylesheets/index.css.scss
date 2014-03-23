@@ -146,9 +146,7 @@
   display: inline-block;
   vertical-align: top;
   position: relative;
-  background-color: #b58e51;
-  -moz-box-shadow: 5px 5px 5px #6b6b6b; /* Old Firefox */
-  box-shadow: 5px 5px 5px #6b6b6b;
+  background-color: #ffffff;
   border:1px solid;
   border-radius:4px;
   padding-top: 0px;
@@ -156,7 +154,7 @@
   margin-right: 10px;
   margin-left: 10px;
   color: #ffffff;
-  border-color: #000000;
+  border-color: #dedede;
   margin-top:2%;
   margin-bottom: 2%;
   a {
@@ -173,32 +171,22 @@
 }
 
 .feed_item:hover {
-  background-color: #cea15a;
+  background-color: #eeeeee;
   cursor:pointer;
 }
 
 .feed_title {
   position:relative;
   text-align: center;
-  font-size: 20px;
+  font-size: 17px;
   background-repeat: no-repeat;
   background-position: bottom left;
-  a {
-    color: #ffffff;
-    text-decoration: none;
-    &:hover {
-      color: #f2ff5e;
-    }
-  }
+  color:#4c4c4e;
 }
 
 .feed_mini_title {
-  font-size:1.8em;
-  text-align: left;
-  margin-bottom: 10px;
-  b {
-    color: #8bceff
-  }
+  font-size:14px;
+  color:#5c9abf;
 }
 
 .by_whom {
@@ -298,7 +286,7 @@
   margin-left: auto;
   margin-top:5px;
   border:1px solid;
-  border-color: #000000;
+  border-color: #dedede;
 }
 
 .delete_post {
